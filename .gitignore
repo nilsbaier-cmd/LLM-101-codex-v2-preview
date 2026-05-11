@@ -1,0 +1,25 @@
+# Node / Vitest
+node_modules/
+coverage/
+.vite/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# iCloud-Placeholders (sollten nicht ins Repo)
+*.icloud
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs / temp
+*.log
+*.tmp
