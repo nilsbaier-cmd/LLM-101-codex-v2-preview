@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Einführung Claude</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="presentation.css">
+</head>
+<body data-layout="slide">
+  <header class="app-header">
+    <div class="app-title">Einführung Claude</div>
+    <div class="app-toggles">
+      <button class="toggle" data-mode="layout" data-value="slide">Vortrag</button>
+      <button class="toggle" data-mode="layout" data-value="scroll">Lesen</button>
+      <span class="toggle-divider"></span>
+      <button class="toggle" data-mode="theme" data-value="light" title="Hell"></button>
+      <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel"></button>
+      <span class="toggle-divider"></span>
+      <button class="toggle" data-mode="llm" data-toggle>LLM-Tabs</button>
+      <button class="toggle" data-mode="exercises" data-toggle>Übungen</button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <nav class="app-toc" aria-label="Inhaltsverzeichnis">
+      <!-- TOC wird in Task 3.3 gefüllt -->
+    </nav>
+
+    <div class="app-deck">
+      <!-- Folien-Container — gefüllt in Phase 4 -->
+      <section class="slide" data-slide-id="cover">
+        <div class="slide-inner">
+          <h1>Einführung Claude</h1>
+          <p class="pull-quote">Platzhalter — Inhalt folgt in Phase 4</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="app-controls">
+      <button class="btn btn-ghost" id="prev-slide" aria-label="Vorherige Folie">‹</button>
+      <span class="slide-counter"><span id="current">1</span> / <span id="total">1</span></span>
+      <button class="btn btn-ghost" id="next-slide" aria-label="Nächste Folie">›</button>
+    </div>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
