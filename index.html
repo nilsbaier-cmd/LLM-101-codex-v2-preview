@@ -764,6 +764,144 @@
           <div class="demo-footer-note">(Folie dient als Übergang zur Live-Demo im Workshop.)</div>
         </div>
       </section>
+
+      <section class="slide" data-slide-id="next-1" data-chapter="next-level">
+        <div class="slide-inner">
+          <div class="chapter-label">Kapitel 7 — Next Level</div>
+          <h2>Team-Repo als zentrale Wissensbasis</h2>
+
+          <div class="repo-diagram">
+            <div class="repo-header">github.com/team/wissen (privat)</div>
+            <div class="repo-sub-grid">
+              <div class="repo-sub tone-violet">
+                <h4>Skills</h4>
+                <div class="repo-sub-meta">Custom SKILL.md-Dateien</div>
+                <code class="repo-path">/skills/humanizer/</code>
+                <code class="repo-path">/skills/berichtswesen/</code>
+              </div>
+              <div class="repo-sub tone-blue">
+                <h4>Kontextdateien</h4>
+                <div class="repo-sub-meta">CLAUDE.md & Projekt-Kontext</div>
+                <code class="repo-path">/context/CLAUDE.md</code>
+                <code class="repo-path">/context/projekt-x.md</code>
+              </div>
+              <div class="repo-sub tone-orange">
+                <h4>Projektdateien</h4>
+                <div class="repo-sub-meta">Templates & Vorlagen</div>
+                <code class="repo-path">/templates/statusbericht.md</code>
+                <code class="repo-path">/templates/e-mail-vorlage.md</code>
+              </div>
+              <div class="repo-sub tone-sand">
+                <h4>Prompt-Bibliothek</h4>
+                <div class="repo-sub-meta">Best Practices & Patterns</div>
+                <code class="repo-path">/prompts/analyse.md</code>
+                <code class="repo-path">/prompts/redaktion.md</code>
+              </div>
+            </div>
+            <ul class="repo-benefits">
+              <li>Versioniert & nachvollziehbar</li>
+              <li>Konsistenz im Team</li>
+              <li>Wissen geht nicht verloren</li>
+              <li>Jeder kann beitragen</li>
+              <li>Sync via git pull</li>
+              <li>Claude Code-Integration</li>
+              <li>Skaliert mit dem Team</li>
+            </ul>
+          </div>
+
+          <div class="repo-workflow">
+            <h4>So funktioniert es im Alltag</h4>
+            <ol>
+              <li><span><strong>Erstellen</strong> — Skill oder Vorlage lokal entwickeln und ins Repo pushen</span></li>
+              <li><span><strong>Teilen</strong> — Team pullt das Repo — alle haben sofort Zugriff auf neue Skills</span></li>
+              <li><span><strong>Nutzen</strong> — Claude Code liest CLAUDE.md und Skills automatisch aus dem Repo</span></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide-id="next-2" data-chapter="next-level">
+        <div class="slide-inner">
+          <div class="chapter-label">Kapitel 7 — Next Level</div>
+          <h2>GitHub 101</h2>
+
+          <div class="git-glossary-intro">
+            <strong>Repository (Repo)</strong> — Der gemeinsame Projektordner in der Cloud. Enthält alle Dateien, die gesamte Änderungshistorie und ist für das Team zugänglich.
+          </div>
+
+          <div class="git-flow">
+            <pre>main (Hauptversion) &#9679;&#9472;&#9472;&#9472;&#9679;&#9472;&#9472;&#9472;&#9679;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9679;  &#8592;Merge
+                                \           /
+                feature-branch   &#9679;&#9472;&#9472;&#9472;&#9679;&#9472;&#9472;&#9472;&#9679; &#8592;Pull Request
+                                 1   2   3</pre>
+            <div class="git-flow-steps">
+              <div class="git-flow-step"><span class="step-num">1</span><strong>Branch erstellen</strong>Arbeitskopie abzweigen</div>
+              <div class="git-flow-step"><span class="step-num">2</span><strong>Commits machen</strong>Änderungen speichern</div>
+              <div class="git-flow-step"><span class="step-num">3</span><strong>Pull Request öffnen</strong>Team um Review bitten</div>
+              <div class="git-flow-step"><span class="step-num">4</span><strong>Merge</strong>In Hauptversion übernehmen</div>
+            </div>
+          </div>
+
+          <div class="git-terms">
+            <div class="git-term"><strong>Main Branch</strong><p>Die offizielle Hauptversion des Projekts. Hier landen nur geprüfte Änderungen.</p></div>
+            <div class="git-term"><strong>Branch</strong><p>Eine Arbeitskopie, in der du Änderungen machst, ohne die Hauptversion zu berühren.</p></div>
+            <div class="git-term"><strong>Commit</strong><p>Ein gespeicherter Zwischenstand. Wie „Speichern unter" mit Kommentar.</p></div>
+            <div class="git-term"><strong>Pull Request (PR)</strong><p>„Bitte schaut euch meine Änderung an." Das Team prüft, bevor es übernommen wird.</p></div>
+            <div class="git-term"><strong>Merge</strong><p>Änderungen aus dem Branch werden in die Hauptversion (main) übernommen.</p></div>
+            <div class="git-term"><strong>Clone / Pull / Push</strong><p>Clone = Repo herunterladen. Pull = Updates holen. Push = eigene Änderungen hochladen.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide-id="next-3" data-chapter="next-level">
+        <div class="slide-inner">
+          <div class="chapter-label">Kapitel 7 — Next Level</div>
+          <h2>Claude Code & Cowork</h2>
+
+          <div class="code-variants">
+            <div class="code-variant">
+              <div class="code-variant-symbol">&gt;_</div>
+              <h4>CLI (Terminal)</h4>
+              <p>Das Original. Lokal auf deinem Rechner. Volle Kontrolle.</p>
+              <span class="code-variant-pill-bottom">npm install</span>
+            </div>
+            <div class="code-variant featured">
+              <span class="code-variant-pill-top">Kurs-Fokus</span>
+              <div class="code-variant-symbol">WEB</div>
+              <h4>Web (Browser)</h4>
+              <p>Im Browser unter claude.ai/code. Kein Setup. Cloud-Sandbox.</p>
+              <span class="code-variant-pill-bottom">Pro / Max</span>
+            </div>
+            <div class="code-variant">
+              <div class="code-variant-symbol">VS</div>
+              <h4>VS Code</h4>
+              <p>Native Extension. Claude direkt in deiner IDE.</p>
+              <span class="code-variant-pill-bottom">Extension</span>
+            </div>
+            <div class="code-variant">
+              <div class="code-variant-symbol">iOS</div>
+              <h4>Mobile</h4>
+              <p>Claude Code in der iOS-App. Coding unterwegs.</p>
+              <span class="code-variant-pill-bottom">Preview</span>
+            </div>
+          </div>
+
+          <div class="code-info-blocks">
+            <div class="code-info-block">
+              <h4>Schritt 1 — GitHub verbinden</h4>
+              <p>Unter claude.ai/code verknüpfst du dein GitHub-Konto. Claude erhält Lesezugriff auf deine Repositories. Du wählst aus, welche Repos Claude sehen darf.</p>
+            </div>
+            <div class="code-info-block">
+              <h4>Was passiert technisch?</h4>
+              <p>Authentifizierung via GitHub OAuth. Claude kann nur auf autorisierte Repos zugreifen — über einen sicheren Proxy, nie direkt auf deine Credentials.</p>
+            </div>
+            <div class="code-info-block" style="grid-column: span 2;">
+              <h4>Web vs. CLI — wann was?</h4>
+              <p>Die Web-Version ist ideal, wenn du schnell einen Task delegieren willst, ohne lokales Setup. Mehrere Repos parallel bearbeiten, Bug-Backlogs abarbeiten, oder Routineaufgaben auslagern. Das CLI hingegen bietet volle lokale Kontrolle, Zugriff auf dein Dateisystem und Integration mit deiner bestehenden Toolchain. Beide ergänzen sich — Web für Delegation, CLI für tiefe lokale Arbeit.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
     <div class="app-controls">
