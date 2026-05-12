@@ -79,8 +79,8 @@ function rebuildTOC() {
   const ol = document.createElement('ol');
   list.forEach((slide) => {
     const id = slide.dataset.slideId || '';
-    const label = slide.querySelector('.chapter-label')?.textContent
-                || slide.querySelector('h1, h2, h3')?.textContent
+    const label = slide.querySelector('h1, h2, h3')?.textContent
+                || slide.querySelector('.chapter-label')?.textContent
                 || `Folie ${id}`;
     const li = document.createElement('li');
     const a = document.createElement('a');
