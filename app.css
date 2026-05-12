@@ -94,6 +94,14 @@ p, li { font-size: 14px; line-height: 1.6; }
 .btn.btn-primary:hover { background: var(--accent-strong); }
 .btn.btn-ghost { background: transparent; border-color: transparent; color: var(--text-secondary); }
 
+/* Focus-States — Tastatur-Accessibility */
+.btn:focus-visible,
+.toggle:focus-visible,
+.code-block .copy-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* Code-Block mit Copy */
 .code-block {
   background: var(--bg-card);
