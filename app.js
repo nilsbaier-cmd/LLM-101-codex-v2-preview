@@ -71,3 +71,49 @@ mode.on('change', ({ key }) => {
 });
 
 showSlide(0);
+
+// TOC im Scroll-Modus aus den Folien generieren
+function rebuildTOC() {
+  const toc = document.querySelector('.app-toc');
+  const list = slides();
+  const ol = document.createElement('ol');
+  list.forEach((slide) => {
+    const id = slide.dataset.slideId || '';
+    const label = slide.querySelector('.chapter-label')?.textContent
+                || slide.querySelector('h1, h2, h3')?.textContent
+                || `Folie ${id}`;
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `#${id}`;
+    a.textContent = label;
+    a.dataset.slideId = id;
+    li.appendChild(a);
+    ol.appendChild(li);
+  });
+  toc.innerHTML = '';
+  toc.appendChild(ol);
+}
+
+// Scroll-Spy: markiere aktive Sektion im TOC
+function setupScrollSpy() {
+  const obs = new IntersectionObserver((entries) => {
+    if (mode.get('layout') !== 'scroll') return;
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.slideId;
+        document.querySelectorAll('.app-toc a').forEach(a => {
+          a.classList.toggle('is-current', a.dataset.slideId === id);
+        });
+      }
+    }
+  }, { threshold: 0.4 });
+  slides().forEach(s => obs.observe(s));
+}
+
+rebuildTOC();
+setupScrollSpy();
+
+// IDs als Anker setzen für Hash-Navigation
+slides().forEach(s => {
+  if (s.dataset.slideId && !s.id) s.id = s.dataset.slideId;
+});
