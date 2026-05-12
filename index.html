@@ -656,6 +656,114 @@
           </ol>
         </div>
       </section>
+
+      <section class="slide" data-slide-id="skills-1" data-chapter="skills">
+        <div class="slide-inner">
+          <div class="chapter-label">Kapitel 6 — Skills</div>
+          <h2>Was ist ein Skill?</h2>
+
+          <div class="skill-arch-section">
+            <div class="skill-arch-text">
+              <p><strong>Was ist ein Skill?</strong> Ein Skill ist ein Ordner mit Instruktionen (primär eine SKILL.md-Datei), der Claude beibringt, wie bestimmte Aufgaben oder Workflows zu erledigen sind.</p>
+              <p><strong>Testing.</strong> Drei Ebenen — Trigger-Tests (lädt der Skill zum richtigen Zeitpunkt?), Funktionale Tests (stimmt der Output?) und Performance-Vergleiche (besser als ohne Skill?).</p>
+              <p><strong>Distribution.</strong> Skills werden als ZIP über Claude.ai hochgeladen oder im Claude Code Skills-Verzeichnis abgelegt.</p>
+            </div>
+
+            <div class="skill-stack">
+              <div class="skill-stack-header">Skill-Architektur: progressive disclosure — Drei Ebenen minimieren Token-Verbrauch bei maximaler Expertise</div>
+
+              <div class="skill-layer skill-layer-1">
+                <div class="skill-layer-title">Ebene 1 — YAML frontmatter</div>
+                <div class="skill-layer-sub">Immer im System-Prompt geladen</div>
+                <div class="skill-layer-content">
+                  name (kebab-case) · description (Was + Wann) · metadata (author, version…)
+                </div>
+              </div>
+              <div class="skill-layer-arrow">↓ Skill relevant? → laden</div>
+
+              <div class="skill-layer skill-layer-2">
+                <div class="skill-layer-title">Ebene 2 — SKILL.md body</div>
+                <div class="skill-layer-content">Vollständige Instruktionen, Steps, Beispiele, Troubleshooting</div>
+              </div>
+              <div class="skill-layer-arrow">↓ Bei Bedarf navigieren</div>
+
+              <div class="skill-layer skill-layer-3">
+                <div class="skill-layer-title">Ebene 3 — Verlinkte Dateien</div>
+                <div class="skill-layer-content">scripts/ · references/ · assets/</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="explainer-hint">→ Interaktiver Explainer mit Token-Counter: <a href="explainer/c-skills-architektur.html">Concept-Explainer C — Skills Progressive Disclosure</a></div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide-id="skills-2" data-chapter="skills">
+        <div class="slide-inner">
+          <div class="chapter-label">Kapitel 6 — Skills</div>
+          <h2>Skills entwickeln & verwenden</h2>
+
+          <div class="uc-section-label">Entwicklungs-Lifecycle</div>
+          <div class="lifecycle-flow">
+            <div class="lifecycle-step"><strong>Planen</strong><small>Use Cases</small></div>
+            <div class="lifecycle-arrow">→</div>
+            <div class="lifecycle-step"><strong>Bauen</strong><small>SKILL.md</small></div>
+            <div class="lifecycle-arrow">→</div>
+            <div class="lifecycle-step"><strong>Testen</strong><small>3 Testebenen</small></div>
+            <div class="lifecycle-arrow">→</div>
+            <div class="lifecycle-step"><strong>Ship</strong><small>&nbsp;</small></div>
+          </div>
+          <div class="lifecycle-loopback">⤴ Iterieren basierend auf Feedback</div>
+
+          <div class="uc-section-label">Fünf Workflow-Patterns</div>
+          <div class="patterns-grid">
+            <div class="pattern-card">
+              <div class="pattern-num">1</div>
+              <strong>Sequentiell</strong>
+              <p>Schritte in Reihenfolge</p>
+            </div>
+            <div class="pattern-card">
+              <div class="pattern-num">2</div>
+              <strong>Multi-MCP</strong>
+              <p>Über Services hinweg</p>
+            </div>
+            <div class="pattern-card">
+              <div class="pattern-num">3</div>
+              <strong>Iterativ</strong>
+              <p>Qualität durch Schleifen</p>
+            </div>
+            <div class="pattern-card">
+              <div class="pattern-num">4</div>
+              <strong>Context-aware</strong>
+              <p>Tool je nach Kontext wählen</p>
+            </div>
+            <div class="pattern-card">
+              <div class="pattern-num">5</div>
+              <strong>Domain-Wissen</strong>
+              <p>Expertise eingebettet</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide-id="skills-3" data-chapter="skills">
+        <div class="slide-inner">
+          <div class="chapter-label">Kapitel 6 — Skills</div>
+          <h2>Demo Time!</h2>
+
+          <blockquote class="pull-quote">„Vom Problem zum fertigen Skill — live."</blockquote>
+
+          <ul class="demo-time-list">
+            <li>Aufgabe identifizieren</li>
+            <li>Skill Creator starten</li>
+            <li>SKILL.md prüfen, anpassen</li>
+            <li>Im echten Chat testen</li>
+            <li>Iterieren</li>
+          </ul>
+
+          <div class="demo-footer-note">(Folie dient als Übergang zur Live-Demo im Workshop.)</div>
+        </div>
+      </section>
     </div>
 
     <div class="app-controls">

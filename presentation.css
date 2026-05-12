@@ -631,3 +631,155 @@ body[data-layout="scroll"] .app-controls { display: none; }
 }
 .uc-steps { counter-reset: uc-step; }
 .uc-steps strong { font-weight: 600; }
+
+/* Kapitel 6: Skills */
+
+/* Skill-Architektur 3-Ebenen-Stack */
+.skill-arch-section {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+}
+.skill-arch-text p { margin-bottom: var(--space-3); font-size: 14px; }
+.skill-arch-text strong { color: var(--text-primary); }
+.skill-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.skill-stack-header {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  text-align: center;
+  margin-bottom: var(--space-2);
+  font-style: italic;
+}
+.skill-layer {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+}
+.skill-layer-1 { border-top: 3px solid #9d7bd9; } /* Lila Pastell */
+.skill-layer-2 { border-top: 3px solid var(--success); }
+.skill-layer-3 { border-top: 3px solid var(--accent); }
+.skill-layer-title {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.skill-layer-sub {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-style: italic;
+  margin-bottom: var(--space-2);
+}
+.skill-layer-content {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.skill-layer-arrow {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin: -8px 0 -4px 0;
+}
+
+/* Lifecycle Flow horizontal */
+.lifecycle-flow {
+  display: grid;
+  grid-template-columns: 1fr 20px 1fr 20px 1fr 20px 1fr;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 var(--space-3) 0;
+}
+.lifecycle-step {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  text-align: center;
+}
+.lifecycle-step strong { display: block; font-size: 14px; margin-bottom: 2px; }
+.lifecycle-step small { font-size: 11px; color: var(--text-tertiary); }
+.lifecycle-arrow {
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 14px;
+}
+.lifecycle-loopback {
+  text-align: center;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--text-tertiary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+/* Workflow-Patterns 5er-Grid */
+.patterns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+.pattern-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+.pattern-num {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+.pattern-card strong { font-size: 13px; }
+.pattern-card p { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+/* Demo Time */
+.demo-time-list {
+  list-style: none;
+  margin-top: var(--space-5);
+  max-width: 400px;
+}
+.demo-time-list li {
+  padding: var(--space-2) 0;
+  font-size: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.demo-time-list li:before {
+  content: '→ ';
+  color: var(--accent);
+  font-weight: 600;
+  margin-right: var(--space-2);
+}
+.demo-footer-note {
+  margin-top: var(--space-5);
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+/* Explainer-Hinweis und Pull-Quote (allgemein) */
+.explainer-hint {
+  margin-top: var(--space-4);
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+.explainer-hint a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.explainer-hint a:hover { text-decoration: underline; }
+.pull-quote {
+  margin-top: var(--space-4);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-primary);
+  border-left: 3px solid var(--accent);
+  padding-left: var(--space-4);
+  max-width: 600px;
+}
