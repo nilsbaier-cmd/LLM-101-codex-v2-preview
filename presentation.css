@@ -531,3 +531,103 @@ body[data-layout="scroll"] .app-controls { display: none; }
   margin-top: var(--space-2);
 }
 .strategy-when strong { color: var(--text-secondary); }
+
+/* Kapitel 5: Use Cases */
+.uc-section-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  margin: var(--space-4) 0 var(--space-2) 0;
+}
+
+/* Tab-Header (visuell only) */
+.uc-tabs-header {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  font-size: 11px;
+}
+.uc-tab {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tint);
+  color: var(--text-secondary);
+}
+.uc-tab.active {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+/* Chat-Bubbles */
+.uc-chat {
+  background: var(--bg-tint);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.uc-bubble {
+  max-width: 80%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  line-height: 1.5;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.uc-bubble.user {
+  align-self: flex-end;
+  background: var(--bg-card);
+}
+.uc-bubble.ai {
+  align-self: flex-start;
+  background: var(--accent-soft);
+  border-color: rgba(204, 120, 92, 0.2);
+}
+
+/* Beispiel-Prompts als Pseudo-Buttons */
+.uc-prompts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+.uc-prompt-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: default;
+}
+
+/* Interaktionsmuster (4 Schritte) */
+.uc-steps {
+  list-style: none;
+  margin-top: var(--space-3);
+}
+.uc-steps li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  font-size: 13px;
+  align-items: baseline;
+}
+.uc-steps li:before {
+  content: counter(uc-step);
+  counter-increment: uc-step;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 700;
+  font-size: 11px;
+  text-align: center;
+  border-radius: 999px;
+  padding: 2px 0;
+}
+.uc-steps { counter-reset: uc-step; }
+.uc-steps strong { font-weight: 600; }
