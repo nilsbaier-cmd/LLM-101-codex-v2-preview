@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Meine Notizen — Einführung Claude</title>
+  <link rel="stylesheet" href="tokens.css?v=2026-05-15b">
+  <link rel="stylesheet" href="app.css?v=2026-05-15b">
+  <style>
+    .notes-page { max-width: 760px; margin: 0 auto; padding: var(--space-7); }
+    .note-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-5); margin-bottom: var(--space-4); }
+    .note-meta { font-size: 11px; color: var(--text-tertiary); margin-bottom: var(--space-2); text-transform: uppercase; letter-spacing: 1px; }
+    .note-answer { color: var(--text-secondary); white-space: pre-wrap; line-height: 1.6; }
+    .note-actions { display: flex; gap: var(--space-2); margin-top: var(--space-3); }
+    .notes-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 1px solid var(--border); }
+    .notes-count { font-size: 14px; color: var(--text-secondary); }
+    .notes-empty { color: var(--text-tertiary); text-align: center; padding: var(--space-7); font-style: italic; }
+    .notes-footer { font-size: 11px; color: var(--text-tertiary); margin-top: var(--space-6); border-top: 1px solid var(--border); padding-top: var(--space-3); }
+    .app-title a { color: inherit; text-decoration: none; }
+    .app-title a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-title"><a href="index.html">← Zurück zur Präsentation</a></div>
+    <div class="app-toggles">
+      <button class="toggle" data-mode="theme" data-value="light" title="Hell"></button>
+      <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel"></button>
+      <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz">Auto</button>
+    </div>
+  </header>
+  <main class="notes-page">
+    <h1>Meine Notizen</h1>
+    <div class="notes-toolbar">
+      <span class="notes-count"><span id="count">0</span> Reflexionen</span>
+      <button id="export-md" class="btn btn-primary">Als Markdown herunterladen</button>
+    </div>
+    <div id="notes-list"></div>
+    <p class="notes-footer">
+      Diese Notizen liegen ausschließlich in deinem Browser (LocalStorage).
+      Browser-Cache leeren oder anderes Gerät = Notizen weg.
+      Lade sie regelmäßig als Markdown herunter, wenn du sie behalten willst.
+    </p>
+  </main>
+  <script type="module">
+    import { Storage } from './lib/storage.js?v=2026-05-15b';
+    import { ModeManager } from './lib/mode.js?v=2026-05-15b';
+    import { Exercises } from './lib/exercises.js?v=2026-05-15b';
+    import { icon } from './lib/icons.js?v=2026-05-15b';
+    import { renderNotesMarkdown, downloadMarkdown } from './lib/notes-export.js?v=2026-05-15b';
+
+    const storage = new Storage('srege-praesentation-v1');
+    const mode = new ModeManager(storage);
+    const exercises = new Exercises(storage);
+
+    // Theme-Buttons mit Icons befüllen
+    document.querySelector('[data-mode="theme"][data-value="light"]').innerHTML = icon('sun');
+    document.querySelector('[data-mode="theme"][data-value="dark"]').innerHTML = icon('moon');
+
+    // Toggle-Verkabelung
+    document.querySelectorAll('.toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        mode.set(btn.dataset.mode, btn.dataset.value);
+        refreshToggles();
+      });
+    });
+    function refreshToggles() {
+      document.querySelectorAll('.toggle').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.value === mode.get('theme'));
+      });
+    }
+    refreshToggles();
+
+    function escapeHtml(s) {
+      const div = document.createElement('div');
+      div.textContent = s;
+      return div.innerHTML;
+    }
+
+    function chapterLabel(c) {
+      const labels = {
+        verwaltung: 'Verwaltung & KI',
+        claude: 'Claude 101',
+        context: 'Context',
+        usecase: 'Use Cases',
+        skills: 'Skills',
+        ladder: 'Skill-Ladder',
+        chat: 'Chat vs. Project',
+        next: 'Next Level',
+        einstieg: 'Einstieg'
+      };
+      return labels[c] || c;
+    }
+
+    function renderList() {
+      const notes = exercises.allReflections();
+      document.getElementById('count').textContent = notes.length;
+      const list = document.getElementById('notes-list');
+      if (notes.length === 0) {
+        list.innerHTML = '<p class="notes-empty">Noch keine Reflexionsantworten. Beantworte eine Reflexionsübung in der Präsentation — sie landet hier.</p>';
+        return;
+      }
+      list.innerHTML = '';
+      for (const n of notes) {
+        const date = new Date(n.ts).toISOString().slice(0, 10);
+        list.insertAdjacentHTML('beforeend', `
+          <article class="note-item">
+            <div class="note-meta">${chapterLabel(n.chapter)} · Übung ${n.ex} · ${date}</div>
+            <div class="note-answer">${escapeHtml(n.antwort)}</div>
+            <div class="note-actions">
+              <button class="btn" data-delete="${n.chapter}/${n.ex}">Löschen</button>
+            </div>
+          </article>`);
+      }
+    }
+
+    document.getElementById('export-md').addEventListener('click', () => {
+      const notes = exercises.allReflections();
+      const md = renderNotesMarkdown(notes);
+      downloadMarkdown('meine-notizen.md', md);
+    });
+
+    document.getElementById('notes-list').addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-delete]');
+      if (!btn) return;
+      const [chapter, ex] = btn.dataset.delete.split('/');
+      exercises.deleteReflection(chapter, ex);
+      renderList();
+    });
+
+    renderList();
+  </script>
+</body>
+</html>
