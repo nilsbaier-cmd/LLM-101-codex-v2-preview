@@ -1493,3 +1493,275 @@ body[data-layout="scroll"] [data-step] {
   color: var(--text-tertiary);
   margin-top: var(--space-5);
 }
+
+/* ============================================================
+   Folie 17 — Skill-Anatomy (HTML-Nachbau, ersetzt SVG-img)
+   ============================================================ */
+.skill-anatomy {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-4);
+  margin: var(--space-5) 0;
+}
+.anatomy-column {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+.anatomy-column-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+  text-align: center;
+}
+
+/* Ordner-Struktur */
+.folder-tree {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.folder-root {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px dashed var(--border);
+}
+.folder-root .folder-icon { color: var(--accent); display: inline-flex; }
+.folder-root .folder-icon svg { width: 18px; height: 18px; }
+.folder-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  margin-left: var(--space-3);
+}
+.folder-required {
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+}
+.folder-optional {
+  background: var(--bg-tint);
+  border-left: 3px solid var(--border);
+}
+.folder-bullet {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 1px;
+}
+.folder-optional .folder-bullet { color: var(--text-tertiary); }
+.folder-item-name {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.folder-item-meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 1px;
+}
+.folder-section-label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-style: italic;
+  margin: var(--space-2) 0 0 var(--space-3);
+}
+.folder-optionals { display: flex; flex-direction: column; gap: var(--space-1); }
+
+/* SKILL.md Aufbau */
+.file-mockup {
+  background: var(--bg-tint);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.file-section { padding: var(--space-3); }
+.file-section + .file-section { border-top: 1px dashed var(--border); }
+.file-section-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-sans);
+}
+.file-line {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.file-key { color: var(--accent-strong); font-weight: 500; }
+.file-value { color: var(--text-secondary); }
+.file-body-list {
+  list-style: none;
+  padding-left: var(--space-2);
+  margin: 0;
+}
+.file-body-list li {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 2px 0;
+  color: var(--text-secondary);
+}
+.file-body-list li::before {
+  content: "▸ ";
+  color: var(--accent);
+}
+
+/* Lade-Mechanismus */
+.loading-stages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.loading-stage {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--bg-tint);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+.loading-stage.stage-1 { border-color: var(--accent); }
+.loading-stage-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+.loading-stage-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+.loading-stage-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+.loading-arrow {
+  text-align: center;
+  color: var(--accent);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.anatomy-footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  background: var(--bg-tint);
+  border-radius: var(--radius-md);
+}
+.anatomy-footer strong { color: var(--accent-strong); }
+
+/* ============================================================
+   Folie 18 — Agile-Style Lifecycle (ersetzt lifecycle-wheel)
+   ============================================================ */
+.agile-circle {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 1 / 1;
+  margin: var(--space-3) auto 0 auto;
+}
+.agile-arrows {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.agile-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1;
+}
+.agile-center-icon {
+  font-size: 36px;
+  color: var(--accent);
+  font-weight: 300;
+  line-height: 1;
+}
+.agile-center-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.agile-phase {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: 200px;
+  z-index: 2;
+}
+.phase-top    { top: 0; left: 50%; transform: translate(-50%, 0); }
+.phase-right  { top: 50%; right: 0; transform: translate(0, -50%); }
+.phase-bottom { bottom: 0; left: 50%; transform: translate(-50%, 0); }
+.phase-left   { top: 50%; left: 0; transform: translate(0, -50%); }
+
+.agile-icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--phase-color) 12%, var(--bg-card));
+  border: 3px solid var(--phase-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--phase-color);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--phase-color) 25%, transparent);
+}
+.agile-icon-circle .icon { display: inline-flex; }
+.agile-icon-circle svg { width: 28px; height: 28px; }
+
+.agile-phase-content { text-align: center; }
+.agile-phase-name {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+  color: var(--text-primary);
+}
+.agile-phase-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  max-width: 180px;
+  margin: 0 auto;
+}

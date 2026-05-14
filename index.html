@@ -723,10 +723,107 @@
         <div class="slide-inner">
           <div class="chapter-label">Kapitel 6 — Skills</div>
           <h2>Was ist ein Skill?</h2>
-          <p class="lead">Ein Skill ist ein Ordner mit Instruktionen, primär eine <code>SKILL.md</code>-Datei. Claude lädt ihn automatisch, wenn die Aufgabe zur description passt.</p>
-          <div class="skill-anatomy-frame">
-            <img src="assets/skill-anatomy.svg" alt="Aufbau einer SKILL-Datei — Ordner-Struktur, SKILL.md, dreistufiges Ladesystem" class="skill-anatomy-img">
+          <p class="lead">Ein Skill ist ein Ordner mit einer <code>SKILL.md</code>-Datei plus optional Skripten, Referenzen und Assets. Claude lädt nur das, was die jeweilige Aufgabe braucht.</p>
+
+          <div class="skill-anatomy">
+            <!-- COLUMN 1: Ordner-Struktur -->
+            <div class="anatomy-column">
+              <div class="anatomy-column-title">Ordner-Struktur</div>
+              <div class="folder-tree">
+                <div class="folder-root">
+                  <span class="folder-icon" data-icon="package"></span>
+                  <span class="folder-name">mein-skill/</span>
+                </div>
+                <div class="folder-item folder-required">
+                  <span class="folder-bullet">●</span>
+                  <div>
+                    <div class="folder-item-name">SKILL.md</div>
+                    <div class="folder-item-meta">Pflicht · Kerninhalt</div>
+                  </div>
+                </div>
+                <div class="folder-section-label">optional:</div>
+                <div class="folder-optionals">
+                  <div class="folder-item folder-optional">
+                    <span class="folder-bullet">○</span>
+                    <div>
+                      <div class="folder-item-name">scripts/</div>
+                      <div class="folder-item-meta">Code</div>
+                    </div>
+                  </div>
+                  <div class="folder-item folder-optional">
+                    <span class="folder-bullet">○</span>
+                    <div>
+                      <div class="folder-item-name">refs/</div>
+                      <div class="folder-item-meta">Dokumente</div>
+                    </div>
+                  </div>
+                  <div class="folder-item folder-optional">
+                    <span class="folder-bullet">○</span>
+                    <div>
+                      <div class="folder-item-name">assets/</div>
+                      <div class="folder-item-meta">Vorlagen</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUMN 2: SKILL.md Aufbau -->
+            <div class="anatomy-column">
+              <div class="anatomy-column-title">SKILL.md</div>
+              <div class="file-mockup">
+                <div class="file-section file-frontmatter">
+                  <div class="file-section-label">YAML-Frontmatter</div>
+                  <div class="file-line"><span class="file-key">name:</span> <span class="file-value">aktennotiz-helper</span></div>
+                  <div class="file-line"><span class="file-key">description:</span> <span class="file-value">Erstellt Aktennotizen im Hausstil</span></div>
+                  <div class="file-line"><span class="file-key">version:</span> <span class="file-value">1.0</span></div>
+                </div>
+                <div class="file-section file-body">
+                  <div class="file-section-label">Body</div>
+                  <ul class="file-body-list">
+                    <li>Anweisungen für Claude</li>
+                    <li>Output-Format</li>
+                    <li>Beispiele und Edge-Cases</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUMN 3: Lade-Mechanismus -->
+            <div class="anatomy-column">
+              <div class="anatomy-column-title">Lade-Mechanismus</div>
+              <div class="loading-stages">
+                <div class="loading-stage stage-1">
+                  <div class="loading-stage-num">1</div>
+                  <div class="loading-stage-content">
+                    <div class="loading-stage-name">YAML-Frontmatter</div>
+                    <div class="loading-stage-desc">Immer im System-Prompt geladen (~50 Tokens)</div>
+                  </div>
+                </div>
+                <div class="loading-arrow">↓</div>
+                <div class="loading-stage stage-2">
+                  <div class="loading-stage-num">2</div>
+                  <div class="loading-stage-content">
+                    <div class="loading-stage-name">SKILL.md Body</div>
+                    <div class="loading-stage-desc">Bei Aktivierung geladen (~2000 Tokens)</div>
+                  </div>
+                </div>
+                <div class="loading-arrow">↓</div>
+                <div class="loading-stage stage-3">
+                  <div class="loading-stage-num">3</div>
+                  <div class="loading-stage-content">
+                    <div class="loading-stage-name">Verlinkte Dateien</div>
+                    <div class="loading-stage-desc">Bei Bedarf nachgeladen (variabel)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <p class="anatomy-footer">
+            <strong>Progressive Disclosure:</strong> Claude lädt nur das, was die aktuelle Aufgabe braucht. Der Rest bleibt verfügbar, kostet aber keine Tokens.
+          </p>
+
           <div class="explainer-hint">→ Interaktiver Explainer mit Token-Counter: <a href="explainer/c-skills-architektur.html">Concept-Explainer C — Skills Progressive Disclosure</a></div>
         </div>
       </section>
@@ -735,45 +832,69 @@
         <div class="slide-inner">
           <div class="chapter-label">Kapitel 6 — Skills</div>
           <h2>Skill-Lifecycle</h2>
-          <p class="lead">Skills entstehen iterativ — keine einmalige Erstellung, sondern ein fortlaufender Loop aus Verstehen, Bauen, Testen, Verbessern.</p>
+          <p class="lead">Skills entstehen iterativ — kein einmaliger Schreibakt, sondern ein fortlaufender Loop.</p>
 
-          <div class="lifecycle-wheel">
-            <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" class="lifecycle-svg" aria-hidden="true">
+          <div class="agile-circle">
+            <!-- Center Label -->
+            <div class="agile-center">
+              <div class="agile-center-icon">↻</div>
+              <div class="agile-center-label">Loop</div>
+            </div>
+
+            <!-- 4 Phases positioned around circle -->
+            <div class="agile-phase phase-top">
+              <div class="agile-icon-circle" style="--phase-color: var(--accent);">
+                <span class="icon" data-icon="lightbulb"></span>
+              </div>
+              <div class="agile-phase-content">
+                <div class="agile-phase-name">1 · Planen</div>
+                <div class="agile-phase-desc">Welche Aufgabe wiederholt sich?</div>
+              </div>
+            </div>
+
+            <div class="agile-phase phase-right">
+              <div class="agile-icon-circle" style="--phase-color: var(--accent-strong);">
+                <span class="icon" data-icon="code"></span>
+              </div>
+              <div class="agile-phase-content">
+                <div class="agile-phase-name">2 · Bauen</div>
+                <div class="agile-phase-desc">SKILL.md schreiben, Beispiele ergänzen</div>
+              </div>
+            </div>
+
+            <div class="agile-phase phase-bottom">
+              <div class="agile-icon-circle" style="--phase-color: var(--success);">
+                <span class="icon" data-icon="check"></span>
+              </div>
+              <div class="agile-phase-content">
+                <div class="agile-phase-name">3 · Testen</div>
+                <div class="agile-phase-desc">Lädt der Skill richtig? Stimmt der Output?</div>
+              </div>
+            </div>
+
+            <div class="agile-phase phase-left">
+              <div class="agile-icon-circle" style="--phase-color: var(--accent);">
+                <span class="icon" data-icon="rotate-ccw"></span>
+              </div>
+              <div class="agile-phase-content">
+                <div class="agile-phase-name">4 · Verbessern</div>
+                <div class="agile-phase-desc">Feedback einarbeiten, description schärfen</div>
+              </div>
+            </div>
+
+            <!-- Curved arrows (background SVG) -->
+            <svg class="agile-arrows" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <defs>
-                <marker id="lifecycle-arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <marker id="ag-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
                   <path d="M0,0 L10,5 L0,10 Z" fill="var(--accent)"/>
                 </marker>
               </defs>
-              <circle cx="210" cy="210" r="62" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
-              <text x="210" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent-strong)" font-family="var(--font-sans)">ITERATION</text>
-              <text x="210" y="225" text-anchor="middle" font-size="11" fill="var(--text-secondary)" font-family="var(--font-sans)">Skills wachsen</text>
-
-              <path d="M 290 130 A 130 130 0 0 1 290 290" fill="none" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#lifecycle-arrowhead)" stroke-linecap="round"/>
-              <path d="M 290 290 A 130 130 0 0 1 130 290" fill="none" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#lifecycle-arrowhead)" stroke-linecap="round"/>
-              <path d="M 130 290 A 130 130 0 0 1 130 130" fill="none" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#lifecycle-arrowhead)" stroke-linecap="round"/>
-              <path d="M 130 130 A 130 130 0 0 1 290 130" fill="none" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#lifecycle-arrowhead)" stroke-linecap="round"/>
+              <!-- 4 quarter-arcs, each from one phase to the next, with arrowhead -->
+              <path d="M 380 130 A 180 180 0 0 1 470 220" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="4 4" stroke-linecap="round" marker-end="url(#ag-arrow)"/>
+              <path d="M 470 380 A 180 180 0 0 1 380 470" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="4 4" stroke-linecap="round" marker-end="url(#ag-arrow)"/>
+              <path d="M 220 470 A 180 180 0 0 1 130 380" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="4 4" stroke-linecap="round" marker-end="url(#ag-arrow)"/>
+              <path d="M 130 220 A 180 180 0 0 1 220 130" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="4 4" stroke-linecap="round" marker-end="url(#ag-arrow)"/>
             </svg>
-
-            <div class="lifecycle-phase lifecycle-phase-top">
-              <div class="lifecycle-phase-num">1</div>
-              <div class="lifecycle-phase-name">Planen</div>
-              <div class="lifecycle-phase-desc">Welche Aufgabe wiederholt sich? Welcher Output wird gebraucht?</div>
-            </div>
-            <div class="lifecycle-phase lifecycle-phase-right">
-              <div class="lifecycle-phase-num">2</div>
-              <div class="lifecycle-phase-name">Bauen</div>
-              <div class="lifecycle-phase-desc"><code>SKILL.md</code> mit klarer description, Anweisungen, Beispielen.</div>
-            </div>
-            <div class="lifecycle-phase lifecycle-phase-bottom">
-              <div class="lifecycle-phase-num">3</div>
-              <div class="lifecycle-phase-name">Testen</div>
-              <div class="lifecycle-phase-desc">Lädt der Skill zum richtigen Zeitpunkt? Stimmt der Output?</div>
-            </div>
-            <div class="lifecycle-phase lifecycle-phase-left">
-              <div class="lifecycle-phase-num">4</div>
-              <div class="lifecycle-phase-name">Verbessern</div>
-              <div class="lifecycle-phase-desc">Feedback einarbeiten, description schärfen, Beispiele ergänzen.</div>
-            </div>
           </div>
         </div>
       </section>
