@@ -398,18 +398,22 @@
             <div class="settings-section-label">Persönliche Einstellungen</div>
             <div class="settings-grid">
               <div class="settings-card">
+                <span class="settings-card-icon" data-icon="brain"></span>
                 <h4>Memory</h4>
                 <p>Claude merkt sich Kontext aus vergangenen Gesprächen (Name, Beruf, Vorlieben). Kann aktiviert/deaktiviert und bearbeitet werden.</p>
               </div>
               <div class="settings-card">
+                <span class="settings-card-icon" data-icon="file-text"></span>
                 <h4>Schreibstil</h4>
                 <p>Benutzerdefinierte Stile für Claudes Antworten — z.B. formell, knapp, technisch. Mehrere Stile speicherbar.</p>
               </div>
               <div class="settings-card">
+                <span class="settings-card-icon" data-icon="cog"></span>
                 <h4>User Preferences</h4>
                 <p>Freitext-Feld für persönliche Anweisungen: Tonalität, Formatierung, Sprache, bevorzugte Verhaltensweisen.</p>
               </div>
               <div class="settings-card">
+                <span class="settings-card-icon" data-icon="zap"></span>
                 <h4>Feature-Toggles</h4>
                 <p>Websuche, Artifacts, Code-Ausführung, Memory und Chat-Verlauf einzeln ein-/ausschalten — global oder pro Chat.</p>
               </div>
@@ -419,10 +423,12 @@
             <div class="settings-section-label">Datenschutz-Optionen</div>
             <div class="settings-grid cols-2">
               <div class="settings-card">
+                <span class="settings-card-icon" data-icon="moon"></span>
                 <h4>Incognito-Modus</h4>
                 <p>Chats werden nicht gespeichert und nicht für Memory oder Training verwendet.</p>
               </div>
               <div class="settings-card">
+                <span class="settings-card-icon" data-icon="messages-square"></span>
                 <h4>Chat-Verlauf</h4>
                 <p>Vergangene Chats durchsuchen und referenzieren. Gelöschte Chats werden auch aus Memory entfernt.</p>
               </div>
@@ -860,7 +866,7 @@
               <text x="80" y="40" font-size="13" font-weight="600" fill="var(--success)" font-family="var(--font-sans)">main</text>
 
               <g data-step="1">
-                <path d="M 240 60 Q 280 140, 340 200 L 580 200" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+                <path d="M 240 60 Q 280 140, 340 200 L 540 200" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
                 <text x="350" y="190" font-size="13" font-weight="600" fill="var(--accent)" font-family="var(--font-sans)">feature-branch</text>
               </g>
 
@@ -872,8 +878,10 @@
               </g>
 
               <g data-step="3">
-                <rect x="540" y="170" width="100" height="32" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
-                <text x="590" y="190" font-size="12" font-weight="600" fill="var(--accent-strong)" text-anchor="middle" font-family="var(--font-sans)">Pull Request</text>
+                <line x1="540" y1="200" x2="640" y2="200" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="640" cy="200" r="14" fill="var(--bg-base)" stroke="var(--accent)" stroke-width="3"/>
+                <text x="640" y="205" font-size="13" font-weight="700" fill="var(--accent-strong)" text-anchor="middle" font-family="var(--font-sans)">PR</text>
+                <text x="640" y="232" font-size="11" fill="var(--text-secondary)" text-anchor="middle" font-family="var(--font-sans)">Pull Request</text>
               </g>
 
               <g data-step="4">
@@ -886,33 +894,45 @@
 
           <div class="git-glossary">
             <div class="git-term">
-              <span class="icon" data-icon="git-branch"></span>
-              <div class="git-term-name">Main Branch</div>
+              <div class="git-term-header">
+                <span class="icon" data-icon="git-branch"></span>
+                <div class="git-term-name">Main Branch</div>
+              </div>
               <div class="git-term-desc">Die offizielle Hauptversion des Projekts. Hier landen nur geprüfte Änderungen.</div>
             </div>
             <div class="git-term">
-              <span class="icon" data-icon="git-branch"></span>
-              <div class="git-term-name">Branch</div>
+              <div class="git-term-header">
+                <span class="icon" data-icon="git-branch"></span>
+                <div class="git-term-name">Branch</div>
+              </div>
               <div class="git-term-desc">Eine Arbeitskopie, in der du Änderungen machst, ohne die Hauptversion zu berühren.</div>
             </div>
             <div class="git-term">
-              <span class="icon" data-icon="check"></span>
-              <div class="git-term-name">Commit</div>
+              <div class="git-term-header">
+                <span class="icon" data-icon="check"></span>
+                <div class="git-term-name">Commit</div>
+              </div>
               <div class="git-term-desc">Ein gespeicherter Zwischenstand. Wie „Speichern unter" mit Kommentar.</div>
             </div>
             <div class="git-term">
-              <span class="icon" data-icon="messages-square"></span>
-              <div class="git-term-name">Pull Request (PR)</div>
+              <div class="git-term-header">
+                <span class="icon" data-icon="messages-square"></span>
+                <div class="git-term-name">Pull Request (PR)</div>
+              </div>
               <div class="git-term-desc">„Bitte schaut euch meine Änderung an." Team prüft, bevor es übernommen wird.</div>
             </div>
             <div class="git-term">
-              <span class="icon" data-icon="layers"></span>
-              <div class="git-term-name">Merge</div>
+              <div class="git-term-header">
+                <span class="icon" data-icon="layers"></span>
+                <div class="git-term-name">Merge</div>
+              </div>
               <div class="git-term-desc">Änderungen aus dem Branch werden in die Hauptversion (main) übernommen.</div>
             </div>
             <div class="git-term">
-              <span class="icon" data-icon="rotate-ccw"></span>
-              <div class="git-term-name">Clone / Pull / Push</div>
+              <div class="git-term-header">
+                <span class="icon" data-icon="rotate-ccw"></span>
+                <div class="git-term-name">Clone / Pull / Push</div>
+              </div>
               <div class="git-term-desc">Clone = Repo herunterladen. Pull = Updates holen. Push = eigene Änderungen hochladen.</div>
             </div>
           </div>
@@ -936,7 +956,7 @@
             </div>
             <div class="platform-card" data-step="2">
               <div class="platform-logo">
-                <span class="icon platform-icon" data-icon="sparkles"></span>
+                <span class="icon platform-icon" data-icon="laptop"></span>
               </div>
               <div class="platform-name">Lokale App</div>
               <div class="platform-tag">Claude für Mac · Cowork · Claude Code</div>
@@ -952,7 +972,7 @@
             </div>
             <div class="platform-card" data-step="4">
               <div class="platform-logo">
-                <span class="icon platform-icon" data-icon="zap"></span>
+                <span class="icon platform-icon" data-icon="smartphone"></span>
               </div>
               <div class="platform-name">Mobile</div>
               <div class="platform-tag">iOS · Android</div>

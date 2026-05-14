@@ -456,6 +456,18 @@ body[data-layout="scroll"] .app-controls { display: none; }
   border-radius: var(--radius-md);
   padding: var(--space-4) var(--space-5);
 }
+.settings-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  margin-bottom: var(--space-2);
+}
+.settings-card-icon svg { width: 18px; height: 18px; }
 .settings-card h4 {
   font-size: 16px;
   font-weight: 600;
@@ -468,6 +480,18 @@ body[data-layout="scroll"] .app-controls { display: none; }
 }
 .settings-grid { gap: var(--space-4); }
 .settings-section { margin-top: var(--space-6); }
+
+/* Folie 10 (claude-4) — kompaktere Settings für Sidebar+Chat-Layout */
+[data-slide-id="claude-4"] .settings-section { margin-top: var(--space-4); }
+[data-slide-id="claude-4"] .settings-section-label { margin-bottom: var(--space-2); }
+[data-slide-id="claude-4"] .settings-grid { grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+[data-slide-id="claude-4"] .settings-card { padding: var(--space-3) var(--space-4); }
+[data-slide-id="claude-4"] .settings-card h4 { font-size: 14px; margin-bottom: 4px; }
+[data-slide-id="claude-4"] .settings-card p { font-size: 13px; line-height: 1.45; }
+[data-slide-id="claude-4"] .letter-list { margin-top: var(--space-2); }
+[data-slide-id="claude-4"] .letter-list-row { padding: var(--space-2) 0; }
+[data-slide-id="claude-4"] .letter-content p { font-size: 13px; line-height: 1.45; }
+[data-slide-id="claude-4"] .letter-content strong { font-size: 13px; margin-bottom: 1px; }
 
 /* Abos-Grid (Folie claude-5) */
 .pricing-grid {
@@ -691,33 +715,42 @@ body[data-layout="scroll"] .app-controls { display: none; }
   cursor: default;
 }
 
-/* Interaktionsmuster (4 Schritte) */
+/* Interaktionsmuster (4 Schritte) — horizontaler Strip */
 .uc-steps {
   list-style: none;
   margin-top: var(--space-3);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  counter-reset: uc-step;
 }
 .uc-steps li {
-  display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: var(--space-3);
-  padding: var(--space-2) 0;
-  font-size: 16px;
-  line-height: 1.5;
-  align-items: baseline;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-3);
+  font-size: 13px;
+  line-height: 1.4;
+  position: relative;
 }
 .uc-steps li:before {
   content: counter(uc-step);
   counter-increment: uc-step;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
   background: var(--accent-soft);
   color: var(--accent-strong);
   font-weight: 700;
   font-size: 11px;
   text-align: center;
   border-radius: 999px;
-  padding: 2px 0;
+  margin-bottom: 6px;
 }
-.uc-steps { counter-reset: uc-step; }
-.uc-steps strong { font-weight: 600; }
+.uc-steps strong { font-weight: 600; display: block; margin-bottom: 2px; font-size: 13px; }
+.uc-steps li > span { display: block; }
 
 /* Kapitel 6: Skills */
 
@@ -1292,10 +1325,11 @@ body[data-layout="scroll"] [data-step] {
 .lifecycle-wheel {
   position: relative;
   width: 100%;
-  max-width: 720px;
-  margin: var(--space-5) auto 0 auto;
+  max-width: 540px;
+  margin: var(--space-3) auto 0 auto;
   aspect-ratio: 1 / 1;
 }
+[data-slide-id="skills-2"] .lead { font-size: 14px; margin-bottom: var(--space-2); }
 .lifecycle-svg {
   width: 100%;
   height: 100%;
@@ -1327,16 +1361,16 @@ body[data-layout="scroll"] [data-step] {
 }
 .lifecycle-phase-name {
   font-weight: 700;
-  font-size: 17px;
+  font-size: 15px;
   letter-spacing: -0.015em;
   margin-bottom: 4px;
   color: var(--text-primary);
 }
 .lifecycle-phase-desc {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-secondary);
   line-height: 1.4;
-  max-width: 200px;
+  max-width: 160px;
   margin: 0 auto;
 }
 .lifecycle-phase-desc code {
@@ -1374,16 +1408,22 @@ body[data-layout="scroll"] [data-step] {
   padding: var(--space-3) var(--space-4);
   display: block;
 }
-.git-glossary .git-term .icon {
-  display: inline-flex;
-  margin-bottom: var(--space-2);
-  color: var(--accent);
+.git-term-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: 4px;
 }
-.git-glossary .git-term .icon svg { width: 20px; height: 20px; }
+.git-term-header .icon {
+  display: inline-flex;
+  color: var(--accent);
+  margin-bottom: 0;
+}
+.git-term-header .icon svg { width: 18px; height: 18px; }
 .git-term-name {
   font-weight: 700;
   font-size: 15px;
-  margin-bottom: 4px;
+  margin: 0;
   color: var(--text-primary);
 }
 .git-term-desc {
