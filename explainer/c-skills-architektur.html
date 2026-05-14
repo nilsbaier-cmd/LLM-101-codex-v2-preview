@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>Skills — Progressive Disclosure — Concept-Explainer C</title>
+  <link rel="stylesheet" href="../tokens.css?v=2026-05-15b">
+  <link rel="stylesheet" href="../app.css?v=2026-05-15b">
+  <link rel="stylesheet" href="explainer.css?v=2026-05-15b">
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-title"><a href="../index.html" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
+    <div class="app-toggles">
+      <button class="toggle" data-mode="theme" data-value="light"></button>
+      <button class="toggle" data-mode="theme" data-value="dark"></button>
+      <button class="toggle" data-mode="theme" data-value="auto">Auto</button>
+    </div>
+  </header>
+
+  <main class="explainer-page">
+    <div class="chapter-label">Concept-Explainer C</div>
+    <h2>Skill-Architektur — Progressive Disclosure</h2>
+    <p class="lead">Skills sind nicht alle gleich teuer. Claude lädt sie in drei Stufen — nur das Nötigste auf einmal.</p>
+
+    <div class="pd-token-summary">
+      <span>Token-Verbrauch aktuell:</span>
+      <strong id="pd-token-count">~50</strong>
+      <span class="pd-token-detail" id="pd-token-detail">nur die YAML-Frontmatter ist geladen</span>
+    </div>
+
+    <div class="pd-stack">
+      <div class="pd-layer pd-layer-1 active" data-layer="1">
+        <div class="pd-layer-header">
+          <div class="pd-layer-num">1</div>
+          <div class="pd-layer-title">YAML-Frontmatter</div>
+          <div class="pd-layer-tokens">~50 Tokens</div>
+        </div>
+        <div class="pd-layer-content">
+          <div class="code-label">Was Claude immer sieht:</div>
+          <pre><code>name: aktennotiz-helper
+description: Erstellt Aktennotizen
+  im Hausstil. Aktiv wenn der User
+  eine Aktennotiz, Memo oder Notiz
+  schreiben möchte.
+version: 1.0</code></pre>
+          <p class="pd-explainer">Diese Metadaten sind <strong>permanent im System-Prompt</strong> — bei jeder einzelnen Claude-Anfrage. Daher müssen sie sehr kompakt sein. Aus der <code>description</code> entscheidet Claude, ob der Skill für die aktuelle Aufgabe relevant ist.</p>
+        </div>
+      </div>
+
+      <div class="pd-arrow">↓ <em>Bei relevanz</em></div>
+
+      <div class="pd-layer pd-layer-2" data-layer="2">
+        <div class="pd-layer-header">
+          <div class="pd-layer-num">2</div>
+          <div class="pd-layer-title">SKILL.md Body</div>
+          <div class="pd-layer-tokens">~2000 Tokens</div>
+        </div>
+        <div class="pd-layer-content">
+          <div class="code-label">Wird geladen, wenn description matched:</div>
+          <pre><code># Aktennotiz-Helper
+
+## Wann verwenden
+- Wenn Nutzer „Aktennotiz", „Memo" oder „Notiz" erwähnt
+- Wenn ein Sachverhalt strukturiert dokumentiert werden soll
+
+## Output-Format
+1. Datum (TT. Monat JJJJ)
+2. Sachverhalt (1–2 Sätze, sachlich)
+3. Beurteilung (2–3 Sätze)
+4. Massnahmen (nummerierte Liste mit Fristen)
+
+## Tonfall-Regeln
+- Aktiv statt passiv
+- Keine Floskeln
+- ...</code></pre>
+          <p class="pd-explainer">Der Body enthält <strong>konkrete Anweisungen, Beispiele, Format-Regeln</strong>. Wird nur geladen, wenn Claude den Skill aktiviert.</p>
+        </div>
+      </div>
+
+      <div class="pd-arrow">↓ <em>Bei Bedarf</em></div>
+
+      <div class="pd-layer pd-layer-3" data-layer="3">
+        <div class="pd-layer-header">
+          <div class="pd-layer-num">3</div>
+          <div class="pd-layer-title">Verlinkte Dateien</div>
+          <div class="pd-layer-tokens">variabel</div>
+        </div>
+        <div class="pd-layer-content">
+          <div class="code-label">Werden nachgeladen wenn die SKILL.md sie referenziert:</div>
+          <div class="pd-files">
+            <div class="pd-file"><span class="icon" data-icon="file-text"></span>refs/hausstil-glossar.md (~800 Tokens)</div>
+            <div class="pd-file"><span class="icon" data-icon="file-text"></span>refs/beispiele.md (~1200 Tokens)</div>
+            <div class="pd-file"><span class="icon" data-icon="code"></span>scripts/format-validator.py (~500 Tokens)</div>
+          </div>
+          <p class="pd-explainer">Diese Dateien werden <strong>erst gelesen, wenn die SKILL.md sie aktiv referenziert</strong> (z.B. „siehe refs/hausstil-glossar.md"). Sonst bleiben sie verfügbar, aber kosten keine Tokens.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pd-comparison">
+      <h3>Effizienz: Skill vs. „Alles im System-Prompt"</h3>
+      <div class="pd-compare-grid">
+        <div class="pd-compare-side pd-compare-bad">
+          <div class="code-label">Ohne Skills</div>
+          <div class="pd-compare-tokens">~4000 Tokens</div>
+          <div class="pd-compare-detail">jede Anfrage trägt den vollen Hausstil + Beispiele + Validierer mit, auch wenn der Nutzer was ganz anderes will</div>
+        </div>
+        <div class="pd-compare-side pd-compare-good">
+          <div class="code-label">Mit Skills</div>
+          <div class="pd-compare-tokens">~50 Tokens</div>
+          <div class="pd-compare-detail">nur die YAML-Frontmatter — der Rest wird bei Bedarf nachgeladen, je nach Aufgabe</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="back-link">→ <a href="../index.html">Zurück zur Präsentation</a></p>
+  </main>
+
+  <script type="module">
+    import { ModeManager } from '../lib/mode.js?v=2026-05-15b';
+    import { Storage } from '../lib/storage.js?v=2026-05-15b';
+    import { icon } from '../lib/icons.js?v=2026-05-15b';
+
+    const storage = new Storage('srege-praesentation-v1');
+    const mode = new ModeManager(storage);
+    document.querySelector('[data-mode="theme"][data-value="light"]').innerHTML = icon('sun');
+    document.querySelector('[data-mode="theme"][data-value="dark"]').innerHTML = icon('moon');
+    document.querySelectorAll('.toggle').forEach(btn => btn.addEventListener('click', () => {
+      mode.set('theme', btn.dataset.value);
+      document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+    }));
+    document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+    document.querySelectorAll('[data-icon]').forEach(el => el.innerHTML = icon(el.dataset.icon));
+
+    // Layer click → expand + update token counter
+    const layers = document.querySelectorAll('.pd-layer');
+    const LAYER_TOKENS = { 1: 50, 2: 2000, 3: 2500 };
+
+    layers.forEach(layer => {
+      layer.querySelector('.pd-layer-header').addEventListener('click', () => {
+        layer.classList.toggle('active');
+        let total = 0;
+        const details = [];
+        layers.forEach(l => {
+          if (l.classList.contains('active')) {
+            const lvl = parseInt(l.dataset.layer);
+            total += LAYER_TOKENS[lvl];
+            details.push(`Ebene ${lvl}`);
+          }
+        });
+        document.getElementById('pd-token-count').textContent = `~${total}`;
+        document.getElementById('pd-token-detail').textContent = details.length === 0
+          ? 'nichts geladen'
+          : details.join(' + ') + (details.length === 1 ? ' ist geladen' : ' sind geladen');
+      });
+    });
+  </script>
+</body>
+</html>

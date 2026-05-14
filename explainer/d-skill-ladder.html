@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>Skill-Ladder Selbsttest — Concept-Explainer D</title>
+  <link rel="stylesheet" href="../tokens.css?v=2026-05-15b">
+  <link rel="stylesheet" href="../app.css?v=2026-05-15b">
+  <link rel="stylesheet" href="explainer.css?v=2026-05-15b">
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-title"><a href="../index.html" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
+    <div class="app-toggles">
+      <button class="toggle" data-mode="theme" data-value="light"></button>
+      <button class="toggle" data-mode="theme" data-value="dark"></button>
+      <button class="toggle" data-mode="theme" data-value="auto">Auto</button>
+    </div>
+  </header>
+
+  <main class="explainer-page">
+    <div class="chapter-label">Concept-Explainer D</div>
+    <h2>Skill-Ladder — Wo stehst du?</h2>
+    <p class="lead">Sieben Fragen über deine aktuelle Nutzung. Am Ende erfährst du, auf welchem Level du bist — und was der nächste konkrete Schritt wäre.</p>
+
+    <div class="quiz-progress">
+      <div class="quiz-progress-fill" id="quiz-progress-fill" style="width: 0%;"></div>
+    </div>
+    <div class="quiz-progress-label"><span id="quiz-q-current">1</span> / <span id="quiz-q-total">7</span></div>
+
+    <div class="ladder-quiz" id="ladder-quiz"></div>
+
+    <div class="ladder-result" id="ladder-result" hidden></div>
+
+    <p class="back-link">→ <a href="../index.html">Zurück zur Präsentation</a></p>
+  </main>
+
+  <script type="module">
+    import { ModeManager } from '../lib/mode.js?v=2026-05-15b';
+    import { Storage } from '../lib/storage.js?v=2026-05-15b';
+    import { icon } from '../lib/icons.js?v=2026-05-15b';
+
+    const storage = new Storage('srege-praesentation-v1');
+    const mode = new ModeManager(storage);
+    document.querySelector('[data-mode="theme"][data-value="light"]').innerHTML = icon('sun');
+    document.querySelector('[data-mode="theme"][data-value="dark"]').innerHTML = icon('moon');
+    document.querySelectorAll('.toggle').forEach(btn => btn.addEventListener('click', () => {
+      mode.set('theme', btn.dataset.value);
+      document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+    }));
+    document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+
+    const FRAGEN = [
+      {
+        q: '1. Wie startest du normalerweise einen Chat mit einem AI-Tool?',
+        a: [
+          { text: 'Ich tippe meine Frage direkt rein und nehme die erste Antwort.', score: 0 },
+          { text: 'Ich gebe Kontext mit und stelle Folgefragen, wenn etwas unklar bleibt.', score: 1 },
+          { text: 'Ich nutze einen vorbereiteten System-Prompt oder eine Vorlage.', score: 2 }
+        ]
+      },
+      {
+        q: '2. Hast du schon eigene wiederverwendbare Prompts oder Templates?',
+        a: [
+          { text: 'Nein, ich schreibe jeden Prompt frei.', score: 0 },
+          { text: 'Ich habe ein paar in einer Notizen-App.', score: 1 },
+          { text: 'Ja, organisiert in einem System (z.B. Snippet-Manager, Project, Git-Repo).', score: 2 }
+        ]
+      },
+      {
+        q: '3. Wie nutzt du Datei-Uploads?',
+        a: [
+          { text: 'Selten oder nie.', score: 0 },
+          { text: 'Gelegentlich für einzelne Dokumente.', score: 1 },
+          { text: 'Regelmäßig, mit klarer Struktur (z.B. als Projekt-Dateien für längeren Kontext).', score: 2 }
+        ]
+      },
+      {
+        q: '4. Hast du eigene Projects (Claude) / Custom GPTs / Gems angelegt?',
+        a: [
+          { text: 'Nein, ich nutze nur den normalen Chat.', score: 0 },
+          { text: 'Ein oder zwei, eher experimentell.', score: 1 },
+          { text: 'Ja, für mehrere wiederkehrende Aufgaben — mit Anweisungen und Wissensquellen.', score: 2 }
+        ]
+      },
+      {
+        q: '5. Hast du schon einen Skill, eine Custom Action oder einen MCP-Server konfiguriert?',
+        a: [
+          { text: 'Noch nie.', score: 0 },
+          { text: 'Einmal probiert, aber nicht im Alltag.', score: 1 },
+          { text: 'Ja, im Alltag eingesetzt.', score: 2 }
+        ]
+      },
+      {
+        q: '6. Wie misst du, ob deine AI-Workflows gut funktionieren?',
+        a: [
+          { text: 'Gar nicht — wenn die Antwort brauchbar wirkt, passt es.', score: 0 },
+          { text: 'Subjektiv: ich merke, wenn etwas nicht stimmt, und passe an.', score: 1 },
+          { text: 'Strukturiert: ich vergleiche Output gegen erwartete Qualität (z.B. Test-Inputs, Score-Kriterien).', score: 2 }
+        ]
+      },
+      {
+        q: '7. Hast du anderen schon beigebracht, wie sie AI-Tools effektiv nutzen?',
+        a: [
+          { text: 'Nein.', score: 0 },
+          { text: 'Informell, in Einzelgesprächen.', score: 1 },
+          { text: 'Ja, mit eigenen Templates / Schulungen / Frameworks für andere.', score: 2 }
+        ]
+      }
+    ];
+
+    const LEVELS = [
+      { min: 0, max: 2, num: 1, name: 'Prompter', desc: 'Du nutzt AI als Suchmaschine. Erste Antwort wird genommen, wie sie kommt.', next: 'Probiere bewusst Follow-ups — frage Claude, etwas zu präzisieren oder eine alternative Sicht zu liefern. Iterieren ist der Schlüssel.' },
+      { min: 3, max: 5, num: 2, name: 'Conversationalist', desc: 'Du iterierst über Ergebnisse, gibst Feedback, liefert Kontext mit.', next: 'Lerne System-Prompts und Projects. Sammle 3 wiederkehrende Aufgaben und baue für jede ein Project mit Custom Instructions.' },
+      { min: 6, max: 8, num: 3, name: 'Power User', desc: 'Du setzt System-Prompts, Projects, Datei-Uploads, Code Execution gezielt ein.', next: 'Strukturiere komplexe Workflows in Phasen. Probiere Skills aus — der nächste Sprung ist von „Einzelprompt" zu „wiederverwendbarer Baustein".' },
+      { min: 9, max: 10, num: 4, name: 'Workflow Designer', desc: 'Du baust Workflows statt Einzelprompts. Skills und Custom Instructions sind deine Bausteine.', next: 'Baue eine Skill-Architektur. Bündle mehrere Skills für ein Aufgabengebiet, dokumentiere Trigger und Output-Erwartungen.' },
+      { min: 11, max: 12, num: 5, name: 'System Builder', desc: 'Du baust Projects mit Skill-Architektur und automatisierte Pipelines.', next: 'Probiere Claude Code, MCP-Server und Subagents für mehrstufige autonome Aufgaben. Delegation wird zur Führungsaufgabe.' },
+      { min: 13, max: 13, num: 6, name: 'Agentic Operator', desc: 'Du delegierst mehrstufige Aufgaben an Subagents und MCP-gestützte Pipelines.', next: 'Baue Team-Templates und Governance-Frameworks. Vermittle dein System anderen — Multiplier-Effekt.' },
+      { min: 14, max: 14, num: 7, name: 'Platform Architect', desc: 'Du baust AI-Systeme für andere. Team-Templates, Governance, Schulungskonzepte.', next: 'Skaliere weiter. Schaffe Frameworks, die ohne dich weiterleben.' }
+    ];
+
+    let currentQ = 0;
+    let scores = [];
+
+    function renderQuestion() {
+      const q = FRAGEN[currentQ];
+      const container = document.getElementById('ladder-quiz');
+      document.getElementById('quiz-q-current').textContent = currentQ + 1;
+      document.getElementById('quiz-progress-fill').style.width = `${(currentQ / FRAGEN.length) * 100}%`;
+
+      container.innerHTML = `
+        <div class="ladder-quiz-q">
+          <h3>${q.q}</h3>
+          <div class="ladder-choices">
+            ${q.a.map((opt, i) => `
+              <button class="ladder-choice" data-score="${opt.score}" data-i="${i}" type="button">${opt.text}</button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      container.querySelectorAll('.ladder-choice').forEach(btn => {
+        btn.addEventListener('click', () => {
+          scores.push(parseInt(btn.dataset.score));
+          currentQ++;
+          if (currentQ >= FRAGEN.length) {
+            renderResult();
+          } else {
+            renderQuestion();
+          }
+        });
+      });
+    }
+
+    function renderResult() {
+      const total = scores.reduce((a, b) => a + b, 0);
+      const level = LEVELS.find(l => total >= l.min && total <= l.max);
+      document.getElementById('ladder-quiz').hidden = true;
+      document.getElementById('quiz-progress-fill').style.width = '100%';
+
+      const result = document.getElementById('ladder-result');
+      result.hidden = false;
+      result.innerHTML = `
+        <div class="ladder-result-card">
+          <div class="ladder-result-num">Level ${level.num}</div>
+          <h2 class="ladder-result-name">${level.name}</h2>
+          <p class="ladder-result-desc">${level.desc}</p>
+          <div class="ladder-result-next">
+            <strong>Nächster Schritt:</strong>
+            <p>${level.next}</p>
+          </div>
+          <p class="ladder-result-score">Score: ${total} / 14 Punkte</p>
+          <button class="btn" id="ladder-reset" type="button">Nochmal starten</button>
+        </div>
+      `;
+
+      document.getElementById('ladder-reset').addEventListener('click', () => {
+        currentQ = 0;
+        scores = [];
+        result.hidden = true;
+        document.getElementById('ladder-quiz').hidden = false;
+        renderQuestion();
+      });
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>

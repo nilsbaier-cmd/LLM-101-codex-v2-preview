@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>Chat vs. Project — Concept-Explainer B</title>
+  <link rel="stylesheet" href="../tokens.css?v=2026-05-15b">
+  <link rel="stylesheet" href="../app.css?v=2026-05-15b">
+  <link rel="stylesheet" href="explainer.css?v=2026-05-15b">
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-title"><a href="../index.html" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
+    <div class="app-toggles">
+      <button class="toggle" data-mode="theme" data-value="light" title="Hell"></button>
+      <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel"></button>
+      <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz">Auto</button>
+    </div>
+  </header>
+
+  <main class="explainer-page">
+    <div class="chapter-label">Concept-Explainer B</div>
+    <h2>Chat vs. Project</h2>
+    <p class="lead">Dieselbe Frage. Zwei Welten. Im normalen Chat fehlt der Kontext. Im Project ist er bereits da.</p>
+
+    <div class="cvp-toggle">
+      <button class="cvp-tab active" data-cvp="chat" type="button">Normaler Chat</button>
+      <button class="cvp-tab" data-cvp="project" type="button">Project mit Hausstil-Glossar</button>
+    </div>
+
+    <div class="cvp-prompt">
+      <div class="code-label">Prompt (in beiden Varianten identisch)</div>
+      <div class="cvp-prompt-text">Erstelle eine kurze Aktennotiz zu folgendem Sachverhalt: Ein Kunde meldet sich wegen einer verspäteten Lieferung. Wir haben den Versand am 12. Mai veranlasst, ein interner Bearbeitungsfehler hat die Zustellung um 3 Tage verzögert. Format: Datum, Sachverhalt, Beurteilung, Massnahmen.</div>
+    </div>
+
+    <div class="cvp-answer" data-cvp-panel="chat">
+      <div class="cvp-answer-header">
+        <span class="icon" data-icon="message-square"></span>
+        <strong>Antwort im normalen Chat</strong>
+      </div>
+      <div class="cvp-answer-body">
+        <p><strong>Aktennotiz</strong></p>
+        <p><strong>Datum:</strong> 15. Mai 2026</p>
+        <p><strong>Sachverhalt:</strong> Der Kunde hat sich bezüglich einer verspäteten Lieferung gemeldet. Die Sendung wurde am 12. Mai versandt, jedoch hat ein interner Bearbeitungsfehler zu einer Verzögerung der Zustellung um 3 Tage geführt.</p>
+        <p><strong>Beurteilung:</strong> Es handelt sich um einen internen Fehler, der zu einer ungewollten Verzögerung geführt hat. Der Kunde sollte entsprechend informiert werden.</p>
+        <p><strong>Massnahmen:</strong> Es wird empfohlen, dass eine Entschuldigung an den Kunden gesendet wird und die internen Prozesse überprüft werden sollten, um zukünftige Vorfälle zu vermeiden.</p>
+      </div>
+      <div class="cvp-issues">
+        <strong>Probleme:</strong>
+        <ul>
+          <li>Passivkonstruktionen („wurde versandt", „sollte gesendet werden")</li>
+          <li>Floskeln („Es handelt sich um", „Es wird empfohlen, dass")</li>
+          <li>Datumsformat nicht konsistent</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cvp-answer" data-cvp-panel="project" hidden>
+      <div class="cvp-answer-header">
+        <span class="icon" data-icon="package"></span>
+        <strong>Antwort im Project (mit Hausstil-Glossar)</strong>
+      </div>
+      <div class="cvp-answer-body">
+        <p><strong>Aktennotiz</strong></p>
+        <p><strong>Datum:</strong> 15. Mai 2026</p>
+        <p><strong>Sachverhalt:</strong> Der Kunde meldet eine verspätete Lieferung. Versand am 12. Mai veranlasst. Interner Bearbeitungsfehler verzögerte die Zustellung um 3 Tage.</p>
+        <p><strong>Beurteilung:</strong> Interner Fehler. Verzögerung gegenüber Kunden unangenehm, aber nicht schadensrelevant.</p>
+        <p><strong>Massnahmen:</strong> 1. Entschuldigung an Kunden senden (bis morgen). 2. Bearbeitungsprozess intern reviewen, Fehlerursache identifizieren. 3. Korrektur-Massnahme dokumentieren.</p>
+      </div>
+      <div class="cvp-good">
+        <strong>Im Hausstil:</strong>
+        <ul>
+          <li>Aktive Sprache, direkt formuliert</li>
+          <li>Keine Floskeln</li>
+          <li>Massnahmen als nummerierte Liste mit Fristen</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cvp-explanation">
+      <h3>Warum funktioniert das?</h3>
+      <p>Im Project hat Claude permanenten Zugriff auf:</p>
+      <ul>
+        <li>Das <strong>Hausstil-Glossar</strong> (was ist erlaubt/verboten, Tonfall, Strukturkonventionen)</li>
+        <li>Die <strong>Project-Anweisungen</strong> (System-Prompt mit Rollendefinition)</li>
+        <li>Frühere Beispiel-Aktennotizen als Referenz</li>
+      </ul>
+      <p>Die Frage selbst muss diese Informationen nicht mehr enthalten — Claude weiß bereits, in welchem Stil zu antworten ist.</p>
+    </div>
+
+    <p class="back-link">→ <a href="../index.html">Zurück zur Präsentation</a></p>
+  </main>
+
+  <script type="module">
+    import { ModeManager } from '../lib/mode.js?v=2026-05-15b';
+    import { Storage } from '../lib/storage.js?v=2026-05-15b';
+    import { icon } from '../lib/icons.js?v=2026-05-15b';
+
+    const storage = new Storage('srege-praesentation-v1');
+    const mode = new ModeManager(storage);
+    document.querySelector('[data-mode="theme"][data-value="light"]').innerHTML = icon('sun');
+    document.querySelector('[data-mode="theme"][data-value="dark"]').innerHTML = icon('moon');
+    document.querySelectorAll('.toggle').forEach(btn => btn.addEventListener('click', () => {
+      mode.set('theme', btn.dataset.value);
+      document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+    }));
+    document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+
+    // Inline icons
+    document.querySelectorAll('[data-icon]').forEach(el => el.innerHTML = icon(el.dataset.icon));
+
+    // CVP toggle
+    document.querySelectorAll('.cvp-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.cvp;
+        document.querySelectorAll('.cvp-tab').forEach(b => b.classList.toggle('active', b === btn));
+        document.querySelectorAll('[data-cvp-panel]').forEach(p => p.hidden = p.dataset.cvpPanel !== target);
+      });
+    });
+  </script>
+</body>
+</html>
