@@ -750,6 +750,105 @@ body[data-layout="scroll"] .app-controls { display: none; }
 .uc-steps strong { font-weight: 600; display: block; margin-bottom: 2px; font-size: 13px; }
 .uc-steps li > span { display: block; }
 
+/* Prompt wird Produkt */
+.prompt-product {
+  margin-top: var(--space-5);
+}
+.pp-controls {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.pp-mode.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.pp-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: var(--space-4);
+  align-items: stretch;
+}
+.pp-prompt-card,
+.pp-output-card {
+  background: var(--bg-tint);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.pp-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.pp-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.pp-goal { border-color: rgba(72, 128, 255, 0.45); background: rgba(72, 128, 255, 0.12); }
+.pp-context { border-color: rgba(60, 160, 120, 0.45); background: rgba(60, 160, 120, 0.12); }
+.pp-role { border-color: rgba(160, 110, 220, 0.45); background: rgba(160, 110, 220, 0.12); }
+.pp-constraints { border-color: rgba(220, 150, 40, 0.5); background: rgba(220, 150, 40, 0.13); }
+.pp-style { border-color: rgba(204, 120, 92, 0.45); background: rgba(204, 120, 92, 0.12); }
+.pp-output-type { border-color: rgba(90, 150, 170, 0.45); background: rgba(90, 150, 170, 0.12); }
+.pp-prompt {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  min-height: 142px;
+}
+.pp-prompt p {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: var(--space-2);
+}
+.pp-prompt p:last-child { margin-bottom: 0; }
+.pp-mark,
+.pp-prompt .pp-context,
+.pp-prompt .pp-role,
+.pp-prompt .pp-constraints,
+.pp-prompt .pp-style,
+.pp-prompt .pp-output-type {
+  border-radius: 3px;
+  padding: 1px 4px;
+}
+.pp-copy {
+  margin-top: var(--space-4);
+}
+.pp-output {
+  white-space: pre-wrap;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  min-height: 306px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.pp-product-note {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  background: var(--success-soft);
+  border-left: 3px solid var(--success);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.pp-product-note strong { color: var(--text-primary); }
+
 /* Kapitel 6: Skills */
 
 /* Demo Time */
@@ -1751,6 +1850,7 @@ body[data-exercises="off"] .exercise { display: none; }
 
   .uc-steps,
   .uc-prompts,
+  .pp-grid,
   .next-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1800,11 +1900,21 @@ body[data-exercises="off"] .exercise { display: none; }
   .skill-anatomy-grid,
   .uc-steps,
   .uc-prompts,
+  .pp-grid,
   .next-grid,
   .github-terms-grid,
   [data-slide-id="claude-4"] .settings-grid,
   [data-slide-id="claude-3"] .settings-grid {
     grid-template-columns: 1fr;
+  }
+
+  .pp-controls {
+    flex-wrap: wrap;
+  }
+
+  .pp-prompt-card,
+  .pp-output-card {
+    padding: var(--space-4);
   }
 
   .myth-table {

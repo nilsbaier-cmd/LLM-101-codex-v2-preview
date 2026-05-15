@@ -1,9 +1,9 @@
 // app.js — Haupteinstieg
-import { Storage } from './lib/storage.js?v=2026-05-16c';
-import { ModeManager } from './lib/mode.js?v=2026-05-16c';
-import { icon } from './lib/icons.js?v=2026-05-16c';
-import { initTabs } from './lib/tabs.js?v=2026-05-16c';
-import { Exercises } from './lib/exercises.js?v=2026-05-16c';
+import { Storage } from './lib/storage.js?v=2026-05-16d';
+import { ModeManager } from './lib/mode.js?v=2026-05-16d';
+import { icon } from './lib/icons.js?v=2026-05-16d';
+import { initTabs } from './lib/tabs.js?v=2026-05-16d';
+import { Exercises } from './lib/exercises.js?v=2026-05-16d';
 
 const NS = 'llm-101-v1';
 const storage = new Storage(NS);
@@ -86,6 +86,36 @@ function updateNotesCount() {
 }
 
 initExercises();
+
+function initPromptProduct(root = document) {
+  root.querySelectorAll('[data-prompt-product]').forEach(demo => {
+    const output = demo.querySelector('.pp-output');
+    const views = demo.querySelectorAll('[data-prompt-view]');
+
+    function setMode(modeName) {
+      demo.querySelectorAll('[data-prompt-product-mode]').forEach(btn => {
+        const active = btn.dataset.promptProductMode === modeName;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      views.forEach(view => {
+        const active = view.dataset.promptView === modeName;
+        view.hidden = !active;
+        view.classList.toggle('is-active', active);
+      });
+      const outputAttr = modeName === 'strong' ? 'data-output-strong' : 'data-output-weak';
+      if (output) output.textContent = output.getAttribute(outputAttr) || '';
+    }
+
+    demo.querySelectorAll('[data-prompt-product-mode]').forEach(btn => {
+      btn.addEventListener('click', () => setMode(btn.dataset.promptProductMode));
+    });
+
+    setMode('weak');
+  });
+}
+
+initPromptProduct();
 
 // Toggle-Verkabelung
 document.querySelectorAll('.toggle').forEach(btn => {

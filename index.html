@@ -7,9 +7,9 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Einführung Claude</title>
-  <link rel="stylesheet" href="tokens.css?v=2026-05-16c">
-  <link rel="stylesheet" href="app.css?v=2026-05-16c">
-  <link rel="stylesheet" href="presentation.css?v=2026-05-16c">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-16d">
+  <link rel="stylesheet" href="app.css?v=2026-05-16d">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-16d">
 </head>
 <body data-layout="slide">
   <header class="app-header">
@@ -1220,6 +1220,67 @@
         </div>
       </section>
 
+      <section class="slide" data-slide-id="usecase-4" data-chapter="usecases">
+        <div class="slide-inner">
+          <div class="chapter-label">Kapitel 5 — Use Cases</div>
+          <h2>Prompt wird Produkt</h2>
+          <p class="pull-quote">Ein guter Prompt ist kein Zauberspruch. Er ist ein kleiner Arbeitsauftrag mit klaren Bauteilen.</p>
+
+          <div class="prompt-product" data-prompt-product>
+            <div class="pp-controls" role="toolbar" aria-label="Prompt-Qualität">
+              <button class="btn pp-mode active" data-prompt-product-mode="weak" type="button" aria-pressed="true">Wunsch</button>
+              <button class="btn pp-mode" data-prompt-product-mode="strong" type="button" aria-pressed="false">Arbeitsauftrag</button>
+            </div>
+
+            <div class="pp-grid">
+              <div class="pp-prompt-card">
+                <div class="uc-section-label">Prompt-Anatomie</div>
+                <div class="pp-chip-row">
+                  <span class="pp-chip pp-goal">Ziel</span>
+                  <span class="pp-chip pp-context">Kontext</span>
+                  <span class="pp-chip pp-role">Rolle</span>
+                  <span class="pp-chip pp-constraints">Constraints</span>
+                  <span class="pp-chip pp-style">Stil</span>
+                  <span class="pp-chip pp-output-type">Output</span>
+                </div>
+
+                <div class="pp-prompt pp-prompt-weak is-active" data-prompt-view="weak">
+                  <p>Schreib mir eine gute E-Mail zum Projekt.</p>
+                </div>
+
+                <div class="pp-prompt pp-prompt-strong" data-prompt-view="strong" hidden>
+                  <p><span class="pp-mark pp-goal">Schreibe eine Entscheidungs-E-Mail</span> <span class="pp-context">an die Projektleitung zum Pilotabschluss.</span></p>
+                  <p><span class="pp-role">Handle als sachliche PMO-Sparringspartnerin.</span> <span class="pp-constraints">Nenne 3 Optionen, je 1 Risiko und eine Empfehlung.</span></p>
+                  <p><span class="pp-style">Ton: knapp, verwaltungstauglich, ohne Verkaufsfloskeln.</span> <span class="pp-output-type">Format: Betreff plus 5 kurze Absätze.</span></p>
+                </div>
+
+                <div class="code-block pp-copy" data-copy-source><button class="copy-btn">Kopieren</button>Schreibe eine Entscheidungs-E-Mail an die Projektleitung zum Pilotabschluss.
+Handle als sachliche PMO-Sparringspartnerin.
+Nenne 3 Optionen, je 1 Risiko und eine Empfehlung.
+Ton: knapp, verwaltungstauglich, ohne Verkaufsfloskeln.
+Format: Betreff plus 5 kurze Absätze.</div>
+              </div>
+
+              <div class="pp-output-card">
+                <div class="uc-section-label">Output-Preview</div>
+                <div class="pp-output"
+                     data-output-weak="Betreff: Projektupdate&#10;&#10;Hallo zusammen,&#10;&#10;das Projekt läuft gut. Es gab einige Erkenntnisse und wir sollten die nächsten Schritte besprechen. Bei Fragen stehe ich gerne zur Verfügung.&#10;&#10;Freundliche Grüße"
+                     data-output-strong="Betreff: Pilotabschluss — Entscheid zu nächstem Schritt&#10;&#10;Der Pilot ist fachlich abgeschlossen; die wichtigsten Annahmen wurden bestätigt.&#10;&#10;Option A: Rollout in Etappen. Risiko: längere Übergangsphase.&#10;Option B: Voller Rollout. Risiko: Supportspitzen in Woche 1.&#10;Option C: Vertiefter Pilot. Risiko: Nutzen verzögert sich.&#10;&#10;Empfehlung: Option A, weil sie Nutzen sichtbar macht und operative Risiken begrenzt.&#10;&#10;Nächster Entscheid: Freigabe der Etappenplanung bis Freitag.">Betreff: Projektupdate
+
+Hallo zusammen,
+
+das Projekt läuft gut. Es gab einige Erkenntnisse und wir sollten die nächsten Schritte besprechen. Bei Fragen stehe ich gerne zur Verfügung.
+
+Freundliche Grüße</div>
+                <div class="pp-product-note">
+                  <strong>Beobachtung:</strong> Mehr Struktur im Prompt erzeugt weniger Nacharbeit im Ergebnis.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="slide" data-slide-id="skills-1" data-chapter="skills">
         <div class="slide-inner">
           <div class="chapter-label">Kapitel 6 — Skills</div>
@@ -1950,6 +2011,6 @@ VERBOTEN
     </div>
   </main>
 
-  <script type="module" src="app.js?v=2026-05-16c"></script>
+  <script type="module" src="app.js?v=2026-05-16d"></script>
 </body>
 </html>
