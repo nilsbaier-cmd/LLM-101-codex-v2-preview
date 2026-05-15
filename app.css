@@ -172,3 +172,65 @@ p, li { font-size: 15px; line-height: 1.6; }
   border: none;
 }
 .toggle.active { color: var(--accent); background: var(--accent-soft); }
+
+@media (max-width: 900px) {
+  .app-header {
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .app-title {
+    width: 100%;
+  }
+
+  .app-toggles {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .toggle {
+    padding: 5px 9px;
+  }
+
+  h1 { font-size: 42px; }
+  h2 { font-size: 31px; }
+  h3 { font-size: 22px; }
+}
+
+@media (max-width: 700px) {
+  .app-header {
+    padding: var(--space-3);
+  }
+
+  .chapter-label {
+    letter-spacing: 1.4px;
+    margin-bottom: var(--space-3);
+  }
+
+  h1 { font-size: 34px; }
+  h2 { font-size: 27px; }
+  h3 { font-size: 20px; }
+
+  p, li {
+    font-size: 14px;
+  }
+
+  .card {
+    padding: var(--space-4);
+  }
+
+  .code-block {
+    padding: var(--space-4) var(--space-3) var(--space-3) var(--space-3);
+    font-size: 11px;
+    overflow-x: auto;
+  }
+
+  .code-block .copy-btn {
+    position: static;
+    display: inline-flex;
+    margin-bottom: var(--space-2);
+  }
+}

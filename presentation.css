@@ -1698,3 +1698,172 @@ body[data-exercises="off"] .exercise { display: none; }
   padding: var(--space-3);
 }
 [data-slide-id="usecase-3"] .uc-bubble { font-size: 14px; }
+
+@media (max-width: 900px) {
+  .app-main {
+    height: calc(100vh - 96px);
+  }
+
+  body[data-layout="scroll"] .app-main {
+    display: block;
+    height: auto;
+  }
+
+  body[data-layout="scroll"] .app-toc {
+    display: none;
+  }
+
+  body[data-layout="scroll"] .app-deck {
+    padding: var(--space-5);
+    overflow-y: visible;
+  }
+
+  body[data-layout="scroll"] .slide {
+    max-width: none;
+    width: 100%;
+  }
+
+  body[data-layout="slide"] .slide {
+    padding: var(--space-4);
+  }
+
+  .phases-grid,
+  .policy-grid,
+  .model-grid,
+  .pricing-grid,
+  .settings-grid,
+  .consequence-grid,
+  .strategy-grid,
+  .context-demo-grid,
+  .menu-grid,
+  .git-term-grid,
+  .platform-grid,
+  .repo-benefits,
+  .repo-how,
+  .skill-anatomy-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .model-grid .model-card-wide,
+  .pricing-card.enterprise {
+    grid-column: auto;
+  }
+
+  .uc-steps,
+  .uc-prompts,
+  .next-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  [data-slide-id="claude-4"] .settings-grid,
+  [data-slide-id="claude-3"] .settings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .app-main {
+    height: calc(100vh - 118px);
+  }
+
+  body[data-layout="scroll"] .app-deck {
+    padding: var(--space-4);
+  }
+
+  body[data-layout="scroll"] .slide {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-6);
+  }
+
+  body[data-layout="slide"] .slide {
+    padding: var(--space-3);
+    align-items: flex-start;
+  }
+
+  body[data-layout="slide"] .slide-inner {
+    max-width: 100%;
+  }
+
+  .phases-grid,
+  .policy-grid,
+  .model-grid,
+  .pricing-grid,
+  .settings-grid,
+  .consequence-grid,
+  .strategy-grid,
+  .context-demo-grid,
+  .menu-grid,
+  .git-term-grid,
+  .platform-grid,
+  .repo-benefits,
+  .repo-how,
+  .skill-anatomy-grid,
+  .uc-steps,
+  .uc-prompts,
+  .next-grid,
+  .github-terms-grid,
+  [data-slide-id="claude-4"] .settings-grid,
+  [data-slide-id="claude-3"] .settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .myth-table {
+    display: block;
+    border-radius: var(--radius-md);
+    overflow: visible;
+    background: transparent;
+    border: none;
+  }
+
+  .myth-table .myth-header {
+    display: none;
+  }
+
+  .myth-table > div {
+    border: 1px solid var(--border);
+    border-bottom: none;
+  }
+
+  .myth-table > div:nth-child(3n + 1) {
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+    font-weight: 600;
+  }
+
+  .myth-table > div:nth-child(3n) {
+    border-bottom: 1px solid var(--border);
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+    margin-bottom: var(--space-3);
+  }
+
+  .ladder-item,
+  .option-row,
+  .settings-card,
+  .git-term {
+    grid-template-columns: 1fr;
+  }
+
+  .ex-header {
+    grid-template-columns: max-content max-content;
+  }
+
+  .ex-objective {
+    max-width: none;
+  }
+
+  .uc-bubble {
+    max-width: 100%;
+  }
+
+  .llm-tabs-nav,
+  .uc-tabs-header {
+    overflow-x: auto;
+    padding-bottom: var(--space-1);
+  }
+
+  .llm-tabs-nav button,
+  .uc-tab {
+    flex: 0 0 auto;
+  }
+}

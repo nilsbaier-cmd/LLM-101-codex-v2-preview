@@ -787,3 +787,93 @@
   margin-bottom: var(--space-4);
 }
 .mw-result-recap em { color: var(--text-primary); font-style: normal; }
+
+@media (max-width: 700px) {
+  .explainer-page {
+    max-width: none;
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .explainer-page h2 {
+    font-size: 30px;
+  }
+
+  .explainer-page h3 {
+    font-size: 21px;
+    margin-top: var(--space-6);
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+
+  .path-viz {
+    grid-template-columns: 1fr;
+  }
+
+  .path-arrow {
+    width: 48px;
+    height: 48px;
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+
+  .pd-token-summary,
+  .pd-layer-header,
+  .erlaubt-item {
+    align-items: flex-start;
+  }
+
+  .pd-token-summary,
+  .pd-layer-header {
+    flex-wrap: wrap;
+  }
+
+  .pd-token-detail {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .pd-compare-grid,
+  .phase-timeline,
+  .timeline-track {
+    grid-template-columns: 1fr;
+  }
+
+  .phase-line {
+    display: none;
+  }
+
+  .phase-marker {
+    text-align: left;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: var(--space-2);
+    align-items: center;
+  }
+
+  .phase-dot {
+    margin: 0;
+  }
+
+  .phase-label,
+  .phase-date {
+    margin-top: 0;
+  }
+
+  .cvp-toggle,
+  .erlaubt-filters {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--space-1);
+  }
+
+  .cvp-tab,
+  .erlaubt-filter {
+    flex: 0 0 auto;
+  }
+
+  .mw-result-model {
+    font-size: 34px;
+  }
+}
