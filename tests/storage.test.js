@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { Storage } from '../lib/storage.js';
 
 describe('Storage', () => {
-  const NS = 'srege-praesentation-v1';
+  const NS = 'llm-101-v1';
   let storage;
 
   beforeEach(() => {

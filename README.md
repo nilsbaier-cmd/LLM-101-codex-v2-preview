@@ -1,21 +1,29 @@
-# Claude-Einführung — Interaktive Präsentation
+# LLM 101 — Interaktive Präsentation
 
-Hybrid Slide/Scroll-Präsentation für Claude-Einführungs-Workshops. Wird ausschließlich als statische HTML/CSS/JS-Dateien ausgeliefert — kein Build-Step.
+Hybrid Slide/Scroll-Präsentation als Einführung in Large Language Models am Beispiel von Claude. Statisches HTML/CSS/JS, kein Build-Step, self-hosted Fonts, DSGVO-konform.
 
-## Stand
+## Inhalt
 
-In Vorbereitung. Spec und Implementation-Plan sind unter `docs/superpowers/` abgelegt.
+- `index.html` — Hauptpräsentation, 22 Folien in 7 Kapiteln, Vortrags- und Lesemodus, Hell/Dunkel/Auto-Theme, optional LLM-agnostische Tabs (Claude / ChatGPT / Gemini) und Übungen
+- `meine-notizen.html` — Sammelseite für eigene Reflexionsantworten mit Markdown-Export
+- `explainer/*.html` — Sieben standalone Concept-Explainer (A–G):
+  - A — Context Window Simulator
+  - B — Chat vs. Project
+  - C — Skill-Architektur (Progressive Disclosure)
+  - D — Skill-Ladder Selbsttest
+  - E — Fünf Phasen der KI-Nutzung
+  - F — Verwaltung & KI (erlaubt / bedingt / verboten)
+  - G — Welches Modell für deine Aufgabe?
 
-- [Design-Spec](docs/superpowers/specs/2026-05-12-srege-praesentation-design.md)
-- [Implementation-Plan](docs/superpowers/plans/2026-05-12-srege-praesentation-implementation.md)
+## Lokal starten
 
-## Spätere Nutzung
+ES-Module funktionieren nicht über `file://` — du brauchst einen lokalen HTTP-Server:
 
-`index.html` per Doppelklick öffnen — keine Server-Installation nötig.
-
-- `index.html` — Hauptpräsentation (v1 Claude-fokussiert / v2 LLM-agnostisch + Übungen)
-- `meine-notizen.html` — Sammelseite für Reflexionsantworten
-- `explainer/*.html` — Sieben standalone Concept-Explainer (A–G)
+```bash
+cd claude-praesentation
+python3 -m http.server 8765
+# dann http://localhost:8765 im Browser öffnen
+```
 
 ## Entwicklung
 
@@ -24,4 +32,21 @@ npm install   # Vitest installieren (nur für Unit-Tests)
 npm test      # Tests laufen lassen
 ```
 
-Auslieferung bleibt build-frei. `node_modules/` und Tests sind Dev-Artefakte.
+Auslieferung bleibt build-frei. `node_modules/` und `tests/` sind Dev-Artefakte.
+
+## Architektur
+
+- **Vanilla JS, ES-Module** — kein Bundler
+- **Design-Tokens** in `tokens.css`, Komponenten in `app.css` + `presentation.css`
+- **Lib-Module** unter `lib/` (Storage, ModeManager, Icons, Tabs, Exercises, Notes-Export)
+- **LocalStorage-Namespace** `llm-101-v1.*`
+- **Hash-Routing** für direkte Folien-Verlinkung (`#einstieg-3`)
+- **Self-hosted Fonts** in `assets/fonts/` (Hanken Grotesk, JetBrains Mono — latin + latin-ext)
+
+## Hintergrund
+
+Spec und Implementation-Plan unter [`docs/superpowers/`](docs/superpowers/) — historische Artefakte aus der Bauphase.
+
+## Lizenz
+
+Inhalte und Code zur freien Nutzung und Adaption für eigene Schulungs-Kontexte.

@@ -9,7 +9,7 @@ describe('ModeManager', () => {
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.dataset.theme = '';
-    mode = new ModeManager(new Storage('srege-test'));
+    mode = new ModeManager(new Storage('llm-101-test'));
   });
 
   it('default-zustand: slide-mode, theme auto, llm off, exercises off', () => {
@@ -22,7 +22,7 @@ describe('ModeManager', () => {
   it('setzt einen mode und persistiert', () => {
     mode.set('theme', 'dark');
     expect(mode.get('theme')).toBe('dark');
-    const mode2 = new ModeManager(new Storage('srege-test'));
+    const mode2 = new ModeManager(new Storage('llm-101-test'));
     expect(mode2.get('theme')).toBe('dark');
   });
 
@@ -76,7 +76,7 @@ describe('ModeManager', () => {
   });
 
   it('beim laden: ungültiger stored-value fällt auf default zurück', () => {
-    const storage = new Storage('srege-test');
+    const storage = new Storage('llm-101-test');
     storage.set('mode.theme', 'cyberpunk');
     const m = new ModeManager(storage);
     expect(m.get('theme')).toBe('auto');

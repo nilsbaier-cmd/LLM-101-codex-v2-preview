@@ -146,7 +146,7 @@ Drei Typen, eine pro Kapitel, insgesamt 7 Übungen.
 Kurze Frage am Kapitelende, `<textarea>` für freie Antwort, kein Multiple-Choice. Verknüpft Konzept mit eigenem Arbeitsalltag (Kolbsches Erfahrungslernen). Antwort wird in `localStorage` gespeichert.
 
 **Persistenz-Design:**
-- Speicherschlüssel: `srege-praesentation-v1.notiz.{kapitel-id}.{uebungs-id}`
+- Speicherschlüssel: `llm-101-v1.notiz.{kapitel-id}.{uebungs-id}`
 - Antwort bleibt erhalten, solange Browser-Cache nicht gelöscht wird
 - Zentrale **„Meine Notizen"-Seite** (eigene HTML-Datei `meine-notizen.html`) sammelt alle Antworten chronologisch, zeigt Kapitel + Frage + Antwort
 - Counter neben der Übung („Meine Notizen (3)") zeigt, wie viele Reflexionen bereits beantwortet sind
@@ -199,7 +199,7 @@ claude-praesentation/
 
 Alle Explainer-Dateien sind selbsttragend (importieren `../tokens.css` und `../app.css`, sonst keine Abhängigkeit zur Hauptpräsentation). Teilbar einzeln.
 
-**State-Management:** alles in `localStorage`. Keys-Namespace: `srege-praesentation-v1.*`. Vier Buckets:
+**State-Management:** alles in `localStorage`. Keys-Namespace: `llm-101-v1.*`. Vier Buckets:
 - `.mode.{slide-scroll|theme|llm|exercises}` — Modi und Theme-Wahl
 - `.notiz.{kapitel}.{uebung}` — Reflexionsantworten
 - `.quiz.{kapitel}.{uebung}.attempts` — Quiz-Versuche (optional, ohne Score-Aggregation)

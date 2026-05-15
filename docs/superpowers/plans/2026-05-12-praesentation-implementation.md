@@ -10,7 +10,7 @@
 
 **Project Root:** `claude-praesentation/` (im Workstation-Ordner).
 
-**Reference:** Spec unter `docs/superpowers/specs/2026-05-12-srege-praesentation-design.md`.
+**Reference:** Spec unter `docs/superpowers/specs/2026-05-12-praesentation-design.md`.
 
 ---
 
@@ -62,7 +62,7 @@ npm install      # Vitest installieren (nur für Tests)
 npm test         # Unit-Tests laufen lassen
 ```
 
-Quelle: `docs/superpowers/specs/2026-05-12-srege-praesentation-design.md`
+Quelle: `docs/superpowers/specs/2026-05-12-praesentation-design.md`
 ```
 
 - [ ] **Step 4: `package.json` schreiben**
@@ -444,7 +444,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { Storage } from '../lib/storage.js';
 
 describe('Storage', () => {
-  const NS = 'srege-praesentation-v1';
+  const NS = 'llm-101-v1';
   let storage;
 
   beforeEach(() => {
@@ -570,7 +570,7 @@ describe('ModeManager', () => {
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.dataset.theme = '';
-    mode = new ModeManager(new Storage('srege-test'));
+    mode = new ModeManager(new Storage('llm-101-test'));
   });
 
   it('default-zustand: slide-mode, theme auto, llm off, exercises off', () => {
@@ -583,7 +583,7 @@ describe('ModeManager', () => {
   it('setzt einen mode und persistiert', () => {
     mode.set('theme', 'dark');
     expect(mode.get('theme')).toBe('dark');
-    const mode2 = new ModeManager(new Storage('srege-test'));
+    const mode2 = new ModeManager(new Storage('llm-101-test'));
     expect(mode2.get('theme')).toBe('dark');
   });
 
@@ -841,7 +841,7 @@ import { Storage } from './lib/storage.js';
 import { ModeManager } from './lib/mode.js';
 import { icon } from './lib/icons.js';
 
-const NS = 'srege-praesentation-v1';
+const NS = 'llm-101-v1';
 const storage = new Storage(NS);
 const mode = new ModeManager(storage);
 
@@ -1797,7 +1797,7 @@ export function downloadMarkdown(filename, content) {
     import { icon } from './lib/icons.js';
     import { renderNotesMarkdown, downloadMarkdown } from './lib/notes-export.js';
 
-    const storage = new Storage('srege-praesentation-v1');
+    const storage = new Storage('llm-101-v1');
     const mode = new ModeManager(storage);
     const exercises = new Exercises(storage);
 
@@ -2142,7 +2142,7 @@ const MATRIX = {
 
 **Placeholders:** Im Phase-3-bis-8-Bereich sind einige Tasks (4.1–4.3, 4.5–4.7, 7.2–7.7) bewusst weniger ausführlich als 4.4 und 7.1 — dort werden Patterns/Beispiele angegeben statt vollständigem Code, weil die Tasks im Wesentlichen Markup-Wiederholungen sind und der Engineer das Pattern aus den ausführlichen Beispielen extrapolieren kann. Keine echten „TBD"/„TODO"-Marker.
 
-**Konsistenz:** Methoden-Signaturen sind konsistent (`Storage.set/get/remove/keysWithPrefix`, `ModeManager.get/set/toggle/on`, `Exercises.saveReflection/getReflection/deleteReflection/countReflections/allReflections/recordQuizAttempt/getQuizAttempts`, `renderNotesMarkdown/downloadMarkdown`, `icon/ICONS`). Storage-Keys-Namespace `srege-praesentation-v1.*` einheitlich. Theme-Werte `auto|light|dark` einheitlich.
+**Konsistenz:** Methoden-Signaturen sind konsistent (`Storage.set/get/remove/keysWithPrefix`, `ModeManager.get/set/toggle/on`, `Exercises.saveReflection/getReflection/deleteReflection/countReflections/allReflections/recordQuizAttempt/getQuizAttempts`, `renderNotesMarkdown/downloadMarkdown`, `icon/ICONS`). Storage-Keys-Namespace `llm-101-v1.*` einheitlich. Theme-Werte `auto|light|dark` einheitlich.
 
 **Ambiguität:** Wo die Spec offene Punkte hatte (z.B. konkrete Übungstexte, Coral-Wert), wird im Plan auf Spec-Verweise gesetzt (§6.4) oder Default-Werte genutzt — keine versteckten Annahmen.
 

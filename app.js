@@ -1,11 +1,11 @@
 // app.js — Haupteinstieg
-import { Storage } from './lib/storage.js?v=2026-05-15e';
-import { ModeManager } from './lib/mode.js?v=2026-05-15e';
-import { icon } from './lib/icons.js?v=2026-05-15e';
-import { initTabs } from './lib/tabs.js?v=2026-05-15e';
-import { Exercises } from './lib/exercises.js?v=2026-05-15e';
+import { Storage } from './lib/storage.js?v=2026-05-15f';
+import { ModeManager } from './lib/mode.js?v=2026-05-15f';
+import { icon } from './lib/icons.js?v=2026-05-15f';
+import { initTabs } from './lib/tabs.js?v=2026-05-15f';
+import { Exercises } from './lib/exercises.js?v=2026-05-15f';
 
-const NS = 'srege-praesentation-v1';
+const NS = 'llm-101-v1';
 const storage = new Storage(NS);
 const mode = new ModeManager(storage);
 const exercises = new Exercises(storage);
