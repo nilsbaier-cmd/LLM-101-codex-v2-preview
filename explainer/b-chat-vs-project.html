@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="Cache-Control" content="no-store">
   <title>Chat vs. Project — Concept-Explainer B</title>
-  <link rel="stylesheet" href="../tokens.css?v=2026-05-15b">
-  <link rel="stylesheet" href="../app.css?v=2026-05-15b">
-  <link rel="stylesheet" href="explainer.css?v=2026-05-15b">
+  <link rel="stylesheet" href="../tokens.css?v=2026-05-15c">
+  <link rel="stylesheet" href="../app.css?v=2026-05-15c">
+  <link rel="stylesheet" href="explainer.css?v=2026-05-15c">
 </head>
 <body>
   <header class="app-header">
-    <div class="app-title"><a href="../index.html" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
+    <div class="app-title"><a href="../index.html" id="back-link-top" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
     <div class="app-toggles">
       <button class="toggle" data-mode="theme" data-value="light" title="Hell"></button>
       <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel"></button>
@@ -25,7 +25,7 @@
 
     <div class="cvp-toggle">
       <button class="cvp-tab active" data-cvp="chat" type="button">Normaler Chat</button>
-      <button class="cvp-tab" data-cvp="project" type="button">Project mit Hausstil-Glossar</button>
+      <button class="cvp-tab" data-cvp="project" type="button">Project mit Stil- und Begriffskonventionen</button>
     </div>
 
     <div class="cvp-prompt">
@@ -58,7 +58,7 @@
     <div class="cvp-answer" data-cvp-panel="project" hidden>
       <div class="cvp-answer-header">
         <span class="icon" data-icon="package"></span>
-        <strong>Antwort im Project (mit Hausstil-Glossar)</strong>
+        <strong>Antwort im Project (mit Stil- und Begriffskonventionen)</strong>
       </div>
       <div class="cvp-answer-body">
         <p><strong>Aktennotiz</strong></p>
@@ -81,23 +81,34 @@
       <h3>Warum funktioniert das?</h3>
       <p>Im Project hat Claude permanenten Zugriff auf:</p>
       <ul>
-        <li>Das <strong>Hausstil-Glossar</strong> (was ist erlaubt/verboten, Tonfall, Strukturkonventionen)</li>
+        <li>Das <strong>Stil- und Begriffskonventionen</strong> (was ist erlaubt/verboten, Tonfall, Strukturkonventionen)</li>
         <li>Die <strong>Project-Anweisungen</strong> (System-Prompt mit Rollendefinition)</li>
         <li>Frühere Beispiel-Aktennotizen als Referenz</li>
       </ul>
       <p>Die Frage selbst muss diese Informationen nicht mehr enthalten — Claude weiß bereits, in welchem Stil zu antworten ist.</p>
     </div>
 
-    <p class="back-link">→ <a href="../index.html">Zurück zur Präsentation</a></p>
+    <p class="back-link">→ <a href="../index.html" id="back-link-bottom">Zurück zur Präsentation</a></p>
   </main>
 
   <script type="module">
-    import { ModeManager } from '../lib/mode.js?v=2026-05-15b';
-    import { Storage } from '../lib/storage.js?v=2026-05-15b';
-    import { icon } from '../lib/icons.js?v=2026-05-15b';
+    import { ModeManager } from '../lib/mode.js?v=2026-05-15c';
+    import { Storage } from '../lib/storage.js?v=2026-05-15c';
+    import { icon } from '../lib/icons.js?v=2026-05-15c';
 
     const storage = new Storage('srege-praesentation-v1');
     const mode = new ModeManager(storage);
+
+    // Backlink an Quell-Folie anpassen
+    const backParam = new URLSearchParams(window.location.search).get('back');
+    if (backParam) {
+      const targetHref = `../index.html#${backParam}`;
+      const topLink = document.getElementById('back-link-top');
+      const bottomLink = document.getElementById('back-link-bottom');
+      if (topLink) topLink.href = targetHref;
+      if (bottomLink) bottomLink.href = targetHref;
+    }
+
     document.querySelector('[data-mode="theme"][data-value="light"]').innerHTML = icon('sun');
     document.querySelector('[data-mode="theme"][data-value="dark"]').innerHTML = icon('moon');
     document.querySelectorAll('.toggle').forEach(btn => btn.addEventListener('click', () => {

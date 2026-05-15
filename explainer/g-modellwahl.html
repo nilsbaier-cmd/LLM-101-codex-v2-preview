@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="Cache-Control" content="no-store">
   <title>Welches Modell? — Concept-Explainer G</title>
-  <link rel="stylesheet" href="../tokens.css?v=2026-05-15b">
-  <link rel="stylesheet" href="../app.css?v=2026-05-15b">
-  <link rel="stylesheet" href="explainer.css?v=2026-05-15b">
+  <link rel="stylesheet" href="../tokens.css?v=2026-05-15c">
+  <link rel="stylesheet" href="../app.css?v=2026-05-15c">
+  <link rel="stylesheet" href="explainer.css?v=2026-05-15c">
 </head>
 <body>
   <header class="app-header">
-    <div class="app-title"><a href="../index.html" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
+    <div class="app-title"><a href="../index.html" id="back-link-top" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
     <div class="app-toggles">
       <button class="toggle" data-mode="theme" data-value="light"></button>
       <button class="toggle" data-mode="theme" data-value="dark"></button>
@@ -25,16 +25,27 @@
     <div class="mw-quiz" id="mw-quiz"></div>
     <div class="mw-result" id="mw-result" hidden></div>
 
-    <p class="back-link">→ <a href="../index.html">Zurück zur Präsentation</a></p>
+    <p class="back-link">→ <a href="../index.html" id="back-link-bottom">Zurück zur Präsentation</a></p>
   </main>
 
   <script type="module">
-    import { ModeManager } from '../lib/mode.js?v=2026-05-15b';
-    import { Storage } from '../lib/storage.js?v=2026-05-15b';
-    import { icon } from '../lib/icons.js?v=2026-05-15b';
+    import { ModeManager } from '../lib/mode.js?v=2026-05-15c';
+    import { Storage } from '../lib/storage.js?v=2026-05-15c';
+    import { icon } from '../lib/icons.js?v=2026-05-15c';
 
     const storage = new Storage('srege-praesentation-v1');
     const mode = new ModeManager(storage);
+
+    // Backlink an Quell-Folie anpassen
+    const backParam = new URLSearchParams(window.location.search).get('back');
+    if (backParam) {
+      const targetHref = `../index.html#${backParam}`;
+      const topLink = document.getElementById('back-link-top');
+      const bottomLink = document.getElementById('back-link-bottom');
+      if (topLink) topLink.href = targetHref;
+      if (bottomLink) bottomLink.href = targetHref;
+    }
+
     document.querySelector('[data-mode="theme"][data-value="light"]').innerHTML = icon('sun');
     document.querySelector('[data-mode="theme"][data-value="dark"]').innerHTML = icon('moon');
     document.querySelectorAll('.toggle').forEach(btn => btn.addEventListener('click', () => {

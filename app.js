@@ -1,9 +1,9 @@
 // app.js — Haupteinstieg
-import { Storage } from './lib/storage.js?v=2026-05-15b';
-import { ModeManager } from './lib/mode.js?v=2026-05-15b';
-import { icon } from './lib/icons.js?v=2026-05-15b';
-import { initTabs } from './lib/tabs.js?v=2026-05-15b';
-import { Exercises } from './lib/exercises.js?v=2026-05-15b';
+import { Storage } from './lib/storage.js?v=2026-05-15c';
+import { ModeManager } from './lib/mode.js?v=2026-05-15c';
+import { icon } from './lib/icons.js?v=2026-05-15c';
+import { initTabs } from './lib/tabs.js?v=2026-05-15c';
+import { Exercises } from './lib/exercises.js?v=2026-05-15c';
 
 const NS = 'srege-praesentation-v1';
 const storage = new Storage(NS);
@@ -197,7 +197,19 @@ mode.on('change', ({ key }) => {
   if (key === 'layout') showSlide(currentIdx);
 });
 
-showSlide(0);
+// Hash-Navigation: bei Page-Load oder Hash-Wechsel zur Folie mit data-slide-id springen
+function jumpToHash() {
+  const hash = window.location.hash.slice(1);
+  if (!hash) return false;
+  const list = slides();
+  const idx = list.findIndex(s => s.dataset.slideId === hash);
+  if (idx >= 0) { showSlide(idx); return true; }
+  return false;
+}
+
+window.addEventListener('hashchange', jumpToHash);
+
+if (!jumpToHash()) showSlide(0);
 
 // TOC im Scroll-Modus aus den Folien generieren
 function rebuildTOC() {

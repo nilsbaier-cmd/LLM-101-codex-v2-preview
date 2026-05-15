@@ -6,13 +6,13 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Context Window & Pflege — Concept-Explainer A</title>
-  <link rel="stylesheet" href="../tokens.css?v=2026-05-15b">
-  <link rel="stylesheet" href="../app.css?v=2026-05-15b">
-  <link rel="stylesheet" href="explainer.css?v=2026-05-15b">
+  <link rel="stylesheet" href="../tokens.css?v=2026-05-15c">
+  <link rel="stylesheet" href="../app.css?v=2026-05-15c">
+  <link rel="stylesheet" href="explainer.css?v=2026-05-15c">
 </head>
 <body>
   <header class="app-header">
-    <div class="app-title"><a href="../index.html" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
+    <div class="app-title"><a href="../index.html" id="back-link-top" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
     <div class="app-toggles">
       <button class="toggle" data-mode="theme" data-value="light" title="Hell"></button>
       <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel"></button>
@@ -27,6 +27,7 @@
 
     <section class="sim-section">
       <input class="sim-input" id="sim-input" placeholder="Tippe eine Nachricht und drück Enter ...">
+      <div class="sim-draft-info" id="draft-tokens" aria-live="polite"></div>
       <div class="sim-stats">
         <span><strong id="msg-count">0</strong> Nachrichten</span>
         <span><strong id="token-used">0</strong> / <span id="token-max">12000</span> Tokens</span>
@@ -84,16 +85,26 @@
       </p>
     </section>
 
-    <p class="back-link">→ <a href="../index.html">Zurück zur Präsentation</a></p>
+    <p class="back-link">→ <a href="../index.html" id="back-link-bottom">Zurück zur Präsentation</a></p>
   </main>
 
   <script type="module">
-    import { ModeManager } from '../lib/mode.js?v=2026-05-15b';
-    import { Storage } from '../lib/storage.js?v=2026-05-15b';
-    import { icon } from '../lib/icons.js?v=2026-05-15b';
+    import { ModeManager } from '../lib/mode.js?v=2026-05-15c';
+    import { Storage } from '../lib/storage.js?v=2026-05-15c';
+    import { icon } from '../lib/icons.js?v=2026-05-15c';
 
     const storage = new Storage('srege-praesentation-v1');
     const mode = new ModeManager(storage);
+
+    // Backlink an Quell-Folie anpassen
+    const backParam = new URLSearchParams(window.location.search).get('back');
+    if (backParam) {
+      const targetHref = `../index.html#${backParam}`;
+      const topLink = document.getElementById('back-link-top');
+      const bottomLink = document.getElementById('back-link-bottom');
+      if (topLink) topLink.href = targetHref;
+      if (bottomLink) bottomLink.href = targetHref;
+    }
 
     document.querySelector('[data-mode="theme"][data-value="light"]').innerHTML = icon('sun');
     document.querySelector('[data-mode="theme"][data-value="dark"]').innerHTML = icon('moon');
@@ -113,17 +124,31 @@
 
     // === SIMULATOR LOGIC ===
     const MAX_TOKENS = 12000;
-    const TOKEN_PER_MSG = 800;
     let messages = [];
 
     const input = document.getElementById('sim-input');
     const bar = document.getElementById('sim-bar');
     const msgList = document.getElementById('sim-msglist');
+    const draftInfo = document.getElementById('draft-tokens');
+
+    // Grobe Schätzung: 1 Token ≈ 4 Zeichen (englisch/deutsch durchschnittlich)
+    function estimateTokens(text) {
+      return Math.max(0, Math.ceil(text.trim().length / 4));
+    }
+
+    // Live-Token-Counter beim Tippen
+    input.addEventListener('input', () => {
+      const draft = estimateTokens(input.value);
+      draftInfo.textContent = draft > 0 ? `+ ${draft} Tokens für aktuellen Entwurf` : '';
+      renderWithDraft(draft);
+    });
 
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && input.value.trim()) {
-        messages.push({ text: input.value.trim(), tokens: TOKEN_PER_MSG });
+        const realTokens = Math.max(50, estimateTokens(input.value));
+        messages.push({ text: input.value.trim(), tokens: realTokens });
         input.value = '';
+        draftInfo.textContent = '';
         render();
       }
     });
@@ -131,6 +156,8 @@
     document.getElementById('btn-reset').addEventListener('click', () => {
       messages = [];
       document.getElementById('progressive-section').hidden = true;
+      input.value = '';
+      draftInfo.textContent = '';
       render();
     });
 
@@ -138,9 +165,10 @@
       const active = messages.filter(m => !m.archived && !m.dropped);
       if (active.length < 4) return;
       const oldThree = active.slice(0, 3);
+      const oldTokens = oldThree.reduce((s, m) => s + m.tokens, 0);
       // Remove the oldest 3, replace with a summary (smaller token count)
       messages = messages.filter(m => !oldThree.includes(m));
-      messages.unshift({ text: `[Zusammenfassung der ersten ${oldThree.length} Nachrichten]`, tokens: Math.floor(TOKEN_PER_MSG * 0.4), summary: true });
+      messages.unshift({ text: `[Zusammenfassung der ersten ${oldThree.length} Nachrichten]`, tokens: Math.max(80, Math.floor(oldTokens * 0.4)), summary: true });
       render();
     });
 
@@ -161,12 +189,12 @@
       }
     }
 
-    function render() {
+    function renderWithDraft(draftTokens = 0) {
       enforceLimit();
       const active = messages.filter(m => !m.dropped && !m.archived);
       const used = active.reduce((s, m) => s + m.tokens, 0);
       document.getElementById('msg-count').textContent = active.length;
-      document.getElementById('token-used').textContent = used;
+      document.getElementById('token-used').textContent = used + (draftTokens || 0);
 
       const droppedCount = messages.filter(m => m.dropped).length;
       const archivedCount = messages.filter(m => m.archived).length;
@@ -175,7 +203,7 @@
       if (archivedCount) infoParts.push(`${archivedCount} archiviert`);
       document.getElementById('dropped-info').textContent = infoParts.join(' · ');
 
-      // Bar
+      // Bar mit optionalem Draft-Segment am Ende
       bar.innerHTML = '';
       messages.forEach(m => {
         const seg = document.createElement('div');
@@ -186,6 +214,12 @@
         seg.style.flex = `0 0 ${(m.tokens / MAX_TOKENS) * 100}%`;
         bar.appendChild(seg);
       });
+      if (draftTokens > 0) {
+        const draftSeg = document.createElement('div');
+        draftSeg.className = 'sim-segment seg-draft';
+        draftSeg.style.flex = `0 0 ${(draftTokens / MAX_TOKENS) * 100}%`;
+        bar.appendChild(draftSeg);
+      }
 
       // List
       msgList.innerHTML = '';
@@ -200,6 +234,8 @@
         msgList.appendChild(li);
       });
     }
+
+    function render() { renderWithDraft(0); }
 
     render();
   </script>
