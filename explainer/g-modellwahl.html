@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="Cache-Control" content="no-store">
   <title>Welches Modell? — Concept-Explainer G</title>
-  <link rel="stylesheet" href="../tokens.css?v=2026-05-15c">
-  <link rel="stylesheet" href="../app.css?v=2026-05-15c">
-  <link rel="stylesheet" href="explainer.css?v=2026-05-15c">
+  <link rel="stylesheet" href="../tokens.css?v=2026-05-15d">
+  <link rel="stylesheet" href="../app.css?v=2026-05-15d">
+  <link rel="stylesheet" href="explainer.css?v=2026-05-15d">
 </head>
 <body>
   <header class="app-header">
     <div class="app-title"><a href="../index.html" id="back-link-top" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
-    <div class="app-toggles">
-      <button class="toggle" data-mode="theme" data-value="light"></button>
-      <button class="toggle" data-mode="theme" data-value="dark"></button>
-      <button class="toggle" data-mode="theme" data-value="auto">Auto</button>
+    <div class="app-toggles" role="toolbar" aria-label="Darstellungsmodus">
+      <button class="toggle" data-mode="theme" data-value="light" title="Hell" aria-label="Helles Theme" aria-pressed="false"></button>
+      <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel" aria-label="Dunkles Theme" aria-pressed="false"></button>
+      <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz" aria-pressed="false">Auto</button>
     </div>
   </header>
   <main class="explainer-page">
@@ -25,13 +25,15 @@
     <div class="mw-quiz" id="mw-quiz"></div>
     <div class="mw-result" id="mw-result" hidden></div>
 
+    <p class="mw-footer-note">Auf <strong>claude.ai</strong> wählst du das Modell selbst über das Dropdown links oberhalb des Eingabefelds. In Enterprise-Setups oder per API kann das Modell pro Projekt oder pro Anfrage gesetzt werden — die Empfehlung gilt sinngemäss.</p>
+
     <p class="back-link">→ <a href="../index.html" id="back-link-bottom">Zurück zur Präsentation</a></p>
   </main>
 
   <script type="module">
-    import { ModeManager } from '../lib/mode.js?v=2026-05-15c';
-    import { Storage } from '../lib/storage.js?v=2026-05-15c';
-    import { icon } from '../lib/icons.js?v=2026-05-15c';
+    import { ModeManager } from '../lib/mode.js?v=2026-05-15d';
+    import { Storage } from '../lib/storage.js?v=2026-05-15d';
+    import { icon } from '../lib/icons.js?v=2026-05-15d';
 
     const storage = new Storage('srege-praesentation-v1');
     const mode = new ModeManager(storage);
@@ -50,9 +52,9 @@
     document.querySelector('[data-mode="theme"][data-value="dark"]').innerHTML = icon('moon');
     document.querySelectorAll('.toggle').forEach(btn => btn.addEventListener('click', () => {
       mode.set('theme', btn.dataset.value);
-      document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+      document.querySelectorAll('.toggle').forEach(b => { const _p = b.dataset.value === mode.get('theme'); b.classList.toggle('active', _p); b.setAttribute('aria-pressed', _p ? 'true' : 'false'); });
     }));
-    document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+    document.querySelectorAll('.toggle').forEach(b => { const _p = b.dataset.value === mode.get('theme'); b.classList.toggle('active', _p); b.setAttribute('aria-pressed', _p ? 'true' : 'false'); });
 
     const STEPS = [
       {

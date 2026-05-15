@@ -244,14 +244,6 @@ body[data-layout="scroll"] .app-controls { display: none; }
   left: 0;
   color: var(--accent);
 }
-.policy-section-label {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--text-tertiary);
-  font-weight: 600;
-  margin: var(--space-3) 0 var(--space-2) 0;
-}
 
 /* Merkblatt 2024 — ERLAUBT / VERBOTEN visuell trennen */
 .merkblatt-section {
@@ -545,12 +537,6 @@ body[data-layout="scroll"] .app-controls { display: none; }
   grid-column: 1 / -1;
   background: var(--bg-tint);
 }
-.pricing-note {
-  font-size: 11px;
-  color: var(--text-tertiary);
-  margin-top: var(--space-3);
-  font-style: italic;
-}
 
 /* ─────────────────────────────────────────────
    Kapitel 4 — Context & Pflege
@@ -754,110 +740,6 @@ body[data-layout="scroll"] .app-controls { display: none; }
 
 /* Kapitel 6: Skills */
 
-/* Skill-Architektur 3-Ebenen-Stack */
-.skill-arch-section {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: var(--space-5);
-  margin-top: var(--space-4);
-}
-.skill-arch-text p { margin-bottom: var(--space-3); font-size: 14px; }
-.skill-arch-text strong { color: var(--text-primary); }
-.skill-stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-.skill-stack-header {
-  font-size: 11px;
-  color: var(--text-tertiary);
-  text-align: center;
-  margin-bottom: var(--space-2);
-  font-style: italic;
-}
-.skill-layer {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
-}
-.skill-layer-1 { border-top: 3px solid #9d7bd9; } /* Lila Pastell */
-.skill-layer-2 { border-top: 3px solid var(--success); }
-.skill-layer-3 { border-top: 3px solid var(--accent); }
-.skill-layer-title {
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-.skill-layer-sub {
-  font-size: 11px;
-  color: var(--text-tertiary);
-  font-style: italic;
-  margin-bottom: var(--space-2);
-}
-.skill-layer-content {
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-.skill-layer-arrow {
-  text-align: center;
-  font-size: 11px;
-  color: var(--text-tertiary);
-  margin: -8px 0 -4px 0;
-}
-
-/* Lifecycle Flow horizontal */
-.lifecycle-flow {
-  display: grid;
-  grid-template-columns: 1fr 20px 1fr 20px 1fr 20px 1fr;
-  align-items: center;
-  gap: var(--space-2);
-  margin: var(--space-4) 0 var(--space-3) 0;
-}
-.lifecycle-step {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--space-3);
-  text-align: center;
-}
-.lifecycle-step strong { display: block; font-size: 14px; margin-bottom: 2px; }
-.lifecycle-step small { font-size: 11px; color: var(--text-tertiary); }
-.lifecycle-arrow {
-  text-align: center;
-  color: var(--text-tertiary);
-  font-size: 14px;
-}
-.lifecycle-loopback {
-  text-align: center;
-  font-size: 11px;
-  font-style: italic;
-  color: var(--text-tertiary);
-  margin: 0 0 var(--space-4) 0;
-}
-
-/* Workflow-Patterns 5er-Grid */
-.patterns-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-2);
-  margin-top: var(--space-3);
-}
-.pattern-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--space-3);
-}
-.pattern-num {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--accent);
-  margin-bottom: 2px;
-}
-.pattern-card strong { font-size: 13px; }
-.pattern-card p { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
-
 /* Demo Time */
 .demo-time-list {
   list-style: none;
@@ -1016,14 +898,6 @@ body[data-layout="scroll"] .app-controls { display: none; }
 }
 
 /* Kapitel 7: GitHub 101 */
-.git-glossary-intro {
-  background: var(--bg-tint);
-  border-left: 3px solid var(--accent);
-  padding: var(--space-3) var(--space-4);
-  font-size: 14px;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  margin: var(--space-4) 0;
-}
 .git-flow {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -1039,39 +913,6 @@ body[data-layout="scroll"] .app-controls { display: none; }
   white-space: pre;
   overflow-x: auto;
 }
-.git-flow-steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-2);
-  margin-top: var(--space-3);
-}
-.git-flow-step {
-  text-align: center;
-  font-size: 12px;
-}
-.git-flow-step strong {
-  display: block;
-  font-size: 13px;
-  margin-bottom: 2px;
-}
-.git-flow-step .step-num {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 20px;
-  margin-bottom: 4px;
-}
-.git-terms {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-2);
-  margin-top: var(--space-3);
-}
 .git-term {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -1080,83 +921,6 @@ body[data-layout="scroll"] .app-controls { display: none; }
 }
 .git-term strong { font-size: 13px; }
 .git-term p { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
-
-/* Kapitel 7: Claude Code Varianten */
-.code-variants {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-3);
-  margin-top: var(--space-4);
-}
-.code-variant {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
-  text-align: center;
-}
-.code-variant.featured {
-  border-color: var(--accent);
-  border-width: 2px;
-}
-.code-variant-pill-top {
-  display: inline-block;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 2px 6px;
-  background: var(--accent-soft);
-  color: var(--accent-strong);
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-2);
-}
-.code-variant-symbol {
-  font-family: var(--font-mono);
-  font-size: 18px;
-  color: var(--accent);
-  background: var(--bg-tint);
-  width: 50px;
-  height: 50px;
-  border-radius: var(--radius-md);
-  margin: 0 auto var(--space-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-}
-.code-variant h4 { font-size: 14px; margin-bottom: 4px; }
-.code-variant p { font-size: 12px; color: var(--text-secondary); margin-bottom: var(--space-2); }
-.code-variant-pill-bottom {
-  display: inline-block;
-  font-size: 10px;
-  padding: 2px 8px;
-  border-radius: 99px;
-  background: var(--bg-tint);
-  color: var(--text-tertiary);
-  font-weight: 600;
-}
-.code-info-blocks {
-  margin-top: var(--space-5);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-3);
-}
-.code-info-block {
-  background: var(--bg-tint);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-.code-info-block h4 {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--accent);
-  font-weight: 700;
-  margin-bottom: var(--space-2);
-}
 
 /* Cover Stage — Titel + Icon-Cloud overlappen */
 .cover-stage {
@@ -1306,80 +1070,7 @@ body[data-layout="scroll"] [data-step] {
   border: 1px solid var(--border);
 }
 
-/* --- Folie 17 — skill-anatomy.svg --- */
-.skill-anatomy-frame {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: var(--space-4);
-}
-.skill-anatomy-img {
-  max-width: 100%;
-  max-height: 70vh;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  background: rgb(0, 0, 0);
-}
-
-/* --- Folie 18 — lifecycle wheel --- */
-.lifecycle-wheel {
-  position: relative;
-  width: 100%;
-  max-width: 540px;
-  margin: var(--space-3) auto 0 auto;
-  aspect-ratio: 1 / 1;
-}
 [data-slide-id="skills-2"] .lead { font-size: 14px; margin-bottom: var(--space-2); }
-.lifecycle-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.lifecycle-phase {
-  position: absolute;
-  text-align: center;
-  width: 200px;
-  z-index: 2;
-}
-.lifecycle-phase-top { top: 4%; left: 50%; transform: translate(-50%, 0); }
-.lifecycle-phase-right { top: 50%; right: 2%; transform: translate(0, -50%); }
-.lifecycle-phase-bottom { bottom: 4%; left: 50%; transform: translate(-50%, 0); }
-.lifecycle-phase-left { top: 50%; left: 2%; transform: translate(0, -50%); }
-.lifecycle-phase-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--bg-base);
-  border: 2px solid var(--accent);
-  color: var(--accent);
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-.lifecycle-phase-name {
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: -0.015em;
-  margin-bottom: 4px;
-  color: var(--text-primary);
-}
-.lifecycle-phase-desc {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.4;
-  max-width: 160px;
-  margin: 0 auto;
-}
-.lifecycle-phase-desc code {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  background: var(--bg-tint);
-  padding: 1px 4px;
-  border-radius: var(--radius-sm);
-}
 
 /* --- Folie 21 — GitHub 101 (überschreibt alte .git-flow / .git-term) --- */
 .git-flow {
@@ -1487,13 +1178,6 @@ body[data-layout="scroll"] [data-step] {
   color: var(--text-secondary);
   line-height: 1.5;
 }
-.platform-future-note {
-  text-align: center;
-  font-size: 12px;
-  color: var(--text-tertiary);
-  margin-top: var(--space-5);
-}
-
 /* ============================================================
    Folie 17 — Skill-Anatomy (HTML-Nachbau, ersetzt SVG-img)
    ============================================================ */

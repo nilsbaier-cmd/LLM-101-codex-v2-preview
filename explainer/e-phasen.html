@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="Cache-Control" content="no-store">
   <title>Phasen der KI-Nutzung — Concept-Explainer E</title>
-  <link rel="stylesheet" href="../tokens.css?v=2026-05-15c">
-  <link rel="stylesheet" href="../app.css?v=2026-05-15c">
-  <link rel="stylesheet" href="explainer.css?v=2026-05-15c">
+  <link rel="stylesheet" href="../tokens.css?v=2026-05-15d">
+  <link rel="stylesheet" href="../app.css?v=2026-05-15d">
+  <link rel="stylesheet" href="explainer.css?v=2026-05-15d">
 </head>
 <body>
   <header class="app-header">
     <div class="app-title"><a href="../index.html" id="back-link-top" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
-    <div class="app-toggles">
-      <button class="toggle" data-mode="theme" data-value="light"></button>
-      <button class="toggle" data-mode="theme" data-value="dark"></button>
-      <button class="toggle" data-mode="theme" data-value="auto">Auto</button>
+    <div class="app-toggles" role="toolbar" aria-label="Darstellungsmodus">
+      <button class="toggle" data-mode="theme" data-value="light" title="Hell" aria-label="Helles Theme" aria-pressed="false"></button>
+      <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel" aria-label="Dunkles Theme" aria-pressed="false"></button>
+      <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz" aria-pressed="false">Auto</button>
     </div>
   </header>
   <main class="explainer-page">
@@ -32,22 +32,22 @@
       <div class="phase-marker" data-phase="2">
         <div class="phase-dot">2</div>
         <div class="phase-label">Multimodalität</div>
-        <div class="phase-date">Mär 2023</div>
+        <div class="phase-date">ab 2023</div>
       </div>
       <div class="phase-marker" data-phase="3">
         <div class="phase-dot">3</div>
         <div class="phase-label">Personalisierung</div>
-        <div class="phase-date">Nov 2023</div>
+        <div class="phase-date">ab Nov 2023</div>
       </div>
       <div class="phase-marker" data-phase="4">
         <div class="phase-dot">4</div>
         <div class="phase-label">Agenten</div>
-        <div class="phase-date">Mitte 2024</div>
+        <div class="phase-date">ab Mitte 2024</div>
       </div>
       <div class="phase-marker" data-phase="5">
         <div class="phase-dot">5</div>
         <div class="phase-label">Integration</div>
-        <div class="phase-date">2025</div>
+        <div class="phase-date">ab 2025</div>
       </div>
     </div>
 
@@ -62,9 +62,9 @@
   </main>
 
   <script type="module">
-    import { ModeManager } from '../lib/mode.js?v=2026-05-15c';
-    import { Storage } from '../lib/storage.js?v=2026-05-15c';
-    import { icon } from '../lib/icons.js?v=2026-05-15c';
+    import { ModeManager } from '../lib/mode.js?v=2026-05-15d';
+    import { Storage } from '../lib/storage.js?v=2026-05-15d';
+    import { icon } from '../lib/icons.js?v=2026-05-15d';
 
     const storage = new Storage('srege-praesentation-v1');
     const mode = new ModeManager(storage);
@@ -83,42 +83,42 @@
     document.querySelector('[data-mode="theme"][data-value="dark"]').innerHTML = icon('moon');
     document.querySelectorAll('.toggle').forEach(btn => btn.addEventListener('click', () => {
       mode.set('theme', btn.dataset.value);
-      document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+      document.querySelectorAll('.toggle').forEach(b => { const _p = b.dataset.value === mode.get('theme'); b.classList.toggle('active', _p); b.setAttribute('aria-pressed', _p ? 'true' : 'false'); });
     }));
-    document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+    document.querySelectorAll('.toggle').forEach(b => { const _p = b.dataset.value === mode.get('theme'); b.classList.toggle('active', _p); b.setAttribute('aria-pressed', _p ? 'true' : 'false'); });
 
     const PHASES = {
       1: {
         name: 'Text & Halluzinationen',
-        time: 'November 2022 — ChatGPT 3.5',
+        time: 'November 2022 — ChatGPT (GPT-3.5)',
         new: 'Erstmals natürlichsprachliche Interaktion mit einem KI-System. Beeindruckend, aber unzuverlässig — Halluzinationen werden zum geflügelten Wort.',
         example: '„Schreib mir eine kurze Einführung in Quantencomputing für Laien."',
         exampleNote: 'Funktioniert oft erstaunlich gut. Aber: keine Garantie für Fakten, kein Kontext, keine Quellenangaben.'
       },
       2: {
         name: 'Multimodalität',
-        time: 'März 2023 — GPT-4, DALL·E 3, Claude 1/2',
+        time: 'ab 2023 — GPT-4 (März), DALL·E 3 (Okt), Claude 3 mit Vision (März 2024)',
         new: 'KI versteht und erzeugt Bilder, Audio, Code. Qualitätssprung im Reasoning.',
         example: '„Hier ein Foto eines Whiteboards mit handgeschriebenen Notizen — gib mir eine saubere Markdown-Mitschrift."',
         exampleNote: 'Vision war ein Game-Changer. Plötzlich konnte man Skizzen, Tabellen und Diagramme einfach einscannen.'
       },
       3: {
         name: 'Personalisierung',
-        time: 'November 2023 — Custom GPTs, Projects, Code Interpreter',
+        time: 'ab November 2023 — Custom GPTs, später Claude Projects (Juni 2024)',
         new: 'KI bekommt persistenten Kontext und kann konfiguriert werden. System Prompts werden zur Schlüsselkompetenz.',
         example: '„Erstelle eine Aktennotiz im Hausstil [Glossar als Project-Datei angehängt]."',
         exampleNote: 'Jetzt erst lohnt sich der einmalige Aufwand, einen Stil zu definieren. Wiederverwendbar in jedem Chat.'
       },
       4: {
         name: 'Agenten',
-        time: 'Mitte 2024 — Claude 3.5 Sonnet, Claude Code, MCP-Protokoll',
+        time: 'ab Mitte 2024 — Claude 3.5 Sonnet (Juni), Computer Use (Okt), MCP (Nov), Claude Code (Feb 2025)',
         new: 'Tool Use, Computer Use, MCP. KI führt Aufgaben autonom aus — schreibt Code, testet, debuggt, iteriert.',
         example: '„Geh durch das Repo, finde alle Stellen mit veraltetem API-Aufruf und ersetze sie mit der neuen Variante. Tests laufen lassen."',
         exampleNote: 'Mehrstufige Aufgaben ohne Hand-Holding. Subagents übernehmen Teilaufgaben.'
       },
       5: {
         name: 'Integration',
-        time: '2025 — Claude 4, Skills, Enterprise MCP',
+        time: 'ab 2025 — Claude 4 (Mai), Skills (Okt), Enterprise MCP',
         new: 'KI wird in bestehende Arbeitsabläufe eingebettet. Skills, Enterprise-Setups, reproduzierbare Pipelines.',
         example: '„Lies das eingegangene Schreiben, klassifiziere es nach Verwaltungsregister, leite an die zuständige Person weiter."',
         exampleNote: 'Skills werden zu wiederverwendbaren Bausteinen über das ganze Team. Governance, Audit, Reproduzierbarkeit kommen mit.'

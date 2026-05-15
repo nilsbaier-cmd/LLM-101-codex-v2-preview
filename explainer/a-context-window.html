@@ -6,17 +6,17 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Context Window & Pflege — Concept-Explainer A</title>
-  <link rel="stylesheet" href="../tokens.css?v=2026-05-15c">
-  <link rel="stylesheet" href="../app.css?v=2026-05-15c">
-  <link rel="stylesheet" href="explainer.css?v=2026-05-15c">
+  <link rel="stylesheet" href="../tokens.css?v=2026-05-15d">
+  <link rel="stylesheet" href="../app.css?v=2026-05-15d">
+  <link rel="stylesheet" href="explainer.css?v=2026-05-15d">
 </head>
 <body>
   <header class="app-header">
     <div class="app-title"><a href="../index.html" id="back-link-top" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
-    <div class="app-toggles">
-      <button class="toggle" data-mode="theme" data-value="light" title="Hell"></button>
-      <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel"></button>
-      <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz">Auto</button>
+    <div class="app-toggles" role="toolbar" aria-label="Darstellungsmodus">
+      <button class="toggle" data-mode="theme" data-value="light" title="Hell" aria-label="Helles Theme" aria-pressed="false"></button>
+      <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel" aria-label="Dunkles Theme" aria-pressed="false"></button>
+      <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz" aria-pressed="false">Auto</button>
     </div>
   </header>
 
@@ -89,9 +89,9 @@
   </main>
 
   <script type="module">
-    import { ModeManager } from '../lib/mode.js?v=2026-05-15c';
-    import { Storage } from '../lib/storage.js?v=2026-05-15c';
-    import { icon } from '../lib/icons.js?v=2026-05-15c';
+    import { ModeManager } from '../lib/mode.js?v=2026-05-15d';
+    import { Storage } from '../lib/storage.js?v=2026-05-15d';
+    import { icon } from '../lib/icons.js?v=2026-05-15d';
 
     const storage = new Storage('srege-praesentation-v1');
     const mode = new ModeManager(storage);
@@ -117,7 +117,7 @@
     });
     function refreshToggles() {
       document.querySelectorAll('.toggle').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.value === mode.get('theme'));
+        const _p = btn.dataset.value === mode.get('theme'); btn.classList.toggle('active', _p); btn.setAttribute('aria-pressed', _p ? 'true' : 'false');
       });
     }
     refreshToggles();

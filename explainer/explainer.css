@@ -691,7 +691,8 @@
 .erlaubt-item .erlaubt-dot { margin-top: 6px; flex-shrink: 0; }
 .erlaubt-task { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
 .erlaubt-reason { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
-.erlaubt-footer-note {
+.erlaubt-footer-note,
+.mw-footer-note {
   font-size: 13px;
   color: var(--text-secondary);
   margin-top: var(--space-5);

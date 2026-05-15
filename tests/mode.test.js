@@ -58,4 +58,27 @@ describe('ModeManager', () => {
     mode.set('llm', false);
     expect(callCount).toBe(1); // listener wurde entfernt, kein weiterer call
   });
+
+  it('set() ignoriert ungültige werte und behält den vorigen state', () => {
+    const warn = console.warn;
+    console.warn = () => {};
+    try {
+      mode.set('theme', 'dark');
+      const result = mode.set('theme', 'darkk');
+      expect(result).toBe(false);
+      expect(mode.get('theme')).toBe('dark');
+      expect(mode.set('llm', 'nope')).toBe(false);
+      expect(mode.get('llm')).toBe(false);
+      expect(mode.set('unbekannt', 'irgendwas')).toBe(false);
+    } finally {
+      console.warn = warn;
+    }
+  });
+
+  it('beim laden: ungültiger stored-value fällt auf default zurück', () => {
+    const storage = new Storage('srege-test');
+    storage.set('mode.theme', 'cyberpunk');
+    const m = new ModeManager(storage);
+    expect(m.get('theme')).toBe('auto');
+  });
 });

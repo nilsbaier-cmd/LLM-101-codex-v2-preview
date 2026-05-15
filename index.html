@@ -7,23 +7,23 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Einführung Claude</title>
-  <link rel="stylesheet" href="tokens.css?v=2026-05-15c">
-  <link rel="stylesheet" href="app.css?v=2026-05-15c">
-  <link rel="stylesheet" href="presentation.css?v=2026-05-15c">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-15d">
+  <link rel="stylesheet" href="app.css?v=2026-05-15d">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-15d">
 </head>
 <body data-layout="slide">
   <header class="app-header">
     <div class="app-title">Einführung Claude</div>
-    <div class="app-toggles">
-      <button class="toggle" data-mode="layout" data-value="slide">Vortrag</button>
-      <button class="toggle" data-mode="layout" data-value="scroll">Lesen</button>
-      <span class="toggle-divider"></span>
-      <button class="toggle" data-mode="theme" data-value="light" title="Hell"></button>
-      <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel"></button>
-      <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz">Auto</button>
-      <span class="toggle-divider"></span>
-      <button class="toggle" data-mode="llm" data-toggle>LLM-Tabs</button>
-      <button class="toggle" data-mode="exercises" data-toggle>Übungen</button>
+    <div class="app-toggles" role="toolbar" aria-label="Darstellungs- und Anzeigemodi">
+      <button class="toggle" data-mode="layout" data-value="slide" aria-pressed="false">Vortrag</button>
+      <button class="toggle" data-mode="layout" data-value="scroll" aria-pressed="false">Lesen</button>
+      <span class="toggle-divider" aria-hidden="true"></span>
+      <button class="toggle" data-mode="theme" data-value="light" title="Hell" aria-label="Helles Theme" aria-pressed="false"></button>
+      <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel" aria-label="Dunkles Theme" aria-pressed="false"></button>
+      <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz" aria-pressed="false">Auto</button>
+      <span class="toggle-divider" aria-hidden="true"></span>
+      <button class="toggle" data-mode="llm" data-toggle aria-pressed="false">LLM-Tabs</button>
+      <button class="toggle" data-mode="exercises" data-toggle aria-pressed="false">Übungen</button>
     </div>
   </header>
 
@@ -1599,6 +1599,10 @@ VERBOTEN
 - Pauschalfloskeln wie "im Rahmen von"</div>
             <p class="ex-hint"><strong>Was du erwarten kannst:</strong> Der reine Chat-Output trifft das Format, aber nicht deinen Tonfall. Im Project mit Glossar landen beide — der Unterschied wird ohne Wiederholungsanweisungen sichtbar.</p>
           </div>
+
+          <p class="see-more">
+            → Vorher/Nachher als visueller Vergleich: <a href="explainer/b-chat-vs-project.html?back=skills-3">Concept-Explainer B — Chat vs. Project</a>
+          </p>
         </div>
       </section>
 
@@ -1879,6 +1883,6 @@ VERBOTEN
     </div>
   </main>
 
-  <script type="module" src="app.js?v=2026-05-15c"></script>
+  <script type="module" src="app.js?v=2026-05-15d"></script>
 </body>
 </html>

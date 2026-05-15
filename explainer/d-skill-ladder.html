@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="Cache-Control" content="no-store">
   <title>Skill-Ladder Selbsttest — Concept-Explainer D</title>
-  <link rel="stylesheet" href="../tokens.css?v=2026-05-15c">
-  <link rel="stylesheet" href="../app.css?v=2026-05-15c">
-  <link rel="stylesheet" href="explainer.css?v=2026-05-15c">
+  <link rel="stylesheet" href="../tokens.css?v=2026-05-15d">
+  <link rel="stylesheet" href="../app.css?v=2026-05-15d">
+  <link rel="stylesheet" href="explainer.css?v=2026-05-15d">
 </head>
 <body>
   <header class="app-header">
     <div class="app-title"><a href="../index.html" id="back-link-top" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
-    <div class="app-toggles">
-      <button class="toggle" data-mode="theme" data-value="light"></button>
-      <button class="toggle" data-mode="theme" data-value="dark"></button>
-      <button class="toggle" data-mode="theme" data-value="auto">Auto</button>
+    <div class="app-toggles" role="toolbar" aria-label="Darstellungsmodus">
+      <button class="toggle" data-mode="theme" data-value="light" title="Hell" aria-label="Helles Theme" aria-pressed="false"></button>
+      <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel" aria-label="Dunkles Theme" aria-pressed="false"></button>
+      <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz" aria-pressed="false">Auto</button>
     </div>
   </header>
 
@@ -36,9 +36,9 @@
   </main>
 
   <script type="module">
-    import { ModeManager } from '../lib/mode.js?v=2026-05-15c';
-    import { Storage } from '../lib/storage.js?v=2026-05-15c';
-    import { icon } from '../lib/icons.js?v=2026-05-15c';
+    import { ModeManager } from '../lib/mode.js?v=2026-05-15d';
+    import { Storage } from '../lib/storage.js?v=2026-05-15d';
+    import { icon } from '../lib/icons.js?v=2026-05-15d';
 
     const storage = new Storage('srege-praesentation-v1');
     const mode = new ModeManager(storage);
@@ -57,9 +57,9 @@
     document.querySelector('[data-mode="theme"][data-value="dark"]').innerHTML = icon('moon');
     document.querySelectorAll('.toggle').forEach(btn => btn.addEventListener('click', () => {
       mode.set('theme', btn.dataset.value);
-      document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+      document.querySelectorAll('.toggle').forEach(b => { const _p = b.dataset.value === mode.get('theme'); b.classList.toggle('active', _p); b.setAttribute('aria-pressed', _p ? 'true' : 'false'); });
     }));
-    document.querySelectorAll('.toggle').forEach(b => b.classList.toggle('active', b.dataset.value === mode.get('theme')));
+    document.querySelectorAll('.toggle').forEach(b => { const _p = b.dataset.value === mode.get('theme'); b.classList.toggle('active', _p); b.setAttribute('aria-pressed', _p ? 'true' : 'false'); });
 
     const FRAGEN = [
       {
@@ -121,13 +121,13 @@
     ];
 
     const LEVELS = [
-      { min: 0, max: 2, num: 1, name: 'Prompter', desc: 'Du nutzt AI als Suchmaschine. Erste Antwort wird genommen, wie sie kommt.', next: 'Probiere bewusst Follow-ups — frage Claude, etwas zu präzisieren oder eine alternative Sicht zu liefern. Iterieren ist der Schlüssel.' },
-      { min: 3, max: 5, num: 2, name: 'Conversationalist', desc: 'Du iterierst über Ergebnisse, gibst Feedback, liefert Kontext mit.', next: 'Lerne System-Prompts und Projects. Sammle 3 wiederkehrende Aufgaben und baue für jede ein Project mit Custom Instructions.' },
-      { min: 6, max: 8, num: 3, name: 'Power User', desc: 'Du setzt System-Prompts, Projects, Datei-Uploads, Code Execution gezielt ein.', next: 'Strukturiere komplexe Workflows in Phasen. Probiere Skills aus — der nächste Sprung ist von „Einzelprompt" zu „wiederverwendbarer Baustein".' },
-      { min: 9, max: 10, num: 4, name: 'Workflow Designer', desc: 'Du baust Workflows statt Einzelprompts. Skills und Custom Instructions sind deine Bausteine.', next: 'Baue eine Skill-Architektur. Bündle mehrere Skills für ein Aufgabengebiet, dokumentiere Trigger und Output-Erwartungen.' },
-      { min: 11, max: 12, num: 5, name: 'System Builder', desc: 'Du baust Projects mit Skill-Architektur und automatisierte Pipelines.', next: 'Probiere Claude Code, MCP-Server und Subagents für mehrstufige autonome Aufgaben. Delegation wird zur Führungsaufgabe.' },
-      { min: 13, max: 13, num: 6, name: 'Agentic Operator', desc: 'Du delegierst mehrstufige Aufgaben an Subagents und MCP-gestützte Pipelines.', next: 'Baue Team-Templates und Governance-Frameworks. Vermittle dein System anderen — Multiplier-Effekt.' },
-      { min: 14, max: 14, num: 7, name: 'Platform Architect', desc: 'Du baust AI-Systeme für andere. Team-Templates, Governance, Schulungskonzepte.', next: 'Skaliere weiter. Schaffe Frameworks, die ohne dich weiterleben.' }
+      { min: 0, max: 2, num: 1, name: 'Sucher (Prompter)', desc: 'Du nutzt AI als Suchmaschine. Erste Antwort wird genommen, wie sie kommt.', next: 'Probiere bewusst Follow-ups — frage Claude, etwas zu präzisieren oder eine alternative Sicht zu liefern. Iterieren ist der Schlüssel.' },
+      { min: 3, max: 4, num: 2, name: 'Dialogpartner (Conversationalist)', desc: 'Du iterierst über Ergebnisse, gibst Feedback, lieferst Kontext mit.', next: 'Lerne System-Prompts und Projects. Sammle 3 wiederkehrende Aufgaben und baue für jede ein Project mit Custom Instructions.' },
+      { min: 5, max: 6, num: 3, name: 'Routinier (Power User)', desc: 'Du setzt System-Prompts, Projects, Datei-Uploads, Code Execution gezielt ein.', next: 'Strukturiere komplexe Workflows in Phasen. Probiere Skills aus — der nächste Sprung ist von „Einzelprompt" zu „wiederverwendbarer Baustein".' },
+      { min: 7, max: 8, num: 4, name: 'Gestalter (Workflow Designer)', desc: 'Du baust Workflows statt Einzelprompts. Skills und Custom Instructions sind deine Bausteine.', next: 'Baue eine Skill-Architektur. Bündle mehrere Skills für ein Aufgabengebiet, dokumentiere Trigger und Output-Erwartungen.' },
+      { min: 9, max: 10, num: 5, name: 'Erbauer (System Builder)', desc: 'Du baust Projects mit Skill-Architektur und automatisierten Pipelines.', next: 'Probiere Claude Code, MCP-Server und Subagents für mehrstufige autonome Aufgaben. Delegation wird zur Führungsaufgabe.' },
+      { min: 11, max: 12, num: 6, name: 'Dirigent (Agentic Operator)', desc: 'Du delegierst mehrstufige Aufgaben an Subagents und MCP-gestützte Pipelines.', next: 'Baue Team-Templates und Governance-Frameworks. Vermittle dein System anderen — Multiplier-Effekt.' },
+      { min: 13, max: 14, num: 7, name: 'Architekt (Platform Architect)', desc: 'Du baust AI-Systeme für andere. Team-Templates, Governance, Schulungskonzepte.', next: 'Skaliere weiter. Schaffe Frameworks, die ohne dich weiterleben.' }
     ];
 
     let currentQ = 0;
