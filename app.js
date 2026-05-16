@@ -5,7 +5,7 @@ import { icon } from './lib/icons.js?v=2026-05-16ab';
 import { initSprite } from './lib/icons-sprite.js?v=2026-05-16ab';
 import { initTabs } from './lib/tabs.js?v=2026-05-16ab';
 import { Exercises } from './lib/exercises.js?v=2026-05-16ab';
-import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS } from './lib/learning-paths.js?v=2026-05-16ab';
+import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS, getPathProgress } from './lib/learning-paths.js?v=2026-05-16ab';
 
 // Codex-Sprite so früh wie möglich inlined, damit nachgelagerte renderIcon()-
 // Aufrufe und <use href="#i-NAME"/>-Referenzen sofort auflösen. Fire-and-forget:
@@ -260,6 +260,21 @@ function savePathState() {
   storage.set('learningPaths', pathState);
 }
 
+// Spec §6.2 — Active-Path-Persistierung (separater Key vom Fortschritt).
+// Default beim First-Run: 'praxis'.
+const DEFAULT_PATH_ID = 'praxis';
+function loadActiveFooterPath() {
+  const raw = storage.get('path.active');
+  if (typeof raw === 'string' && LEARNING_PATHS.some(p => p.id === raw)) return raw;
+  return DEFAULT_PATH_ID;
+}
+let activeFooterPathId = loadActiveFooterPath();
+function setActiveFooterPath(pathId) {
+  if (!LEARNING_PATHS.some(p => p.id === pathId)) return;
+  activeFooterPathId = pathId;
+  storage.set('path.active', pathId);
+}
+
 function pathById(id) {
   return LEARNING_PATHS.find(path => path.id === id) || null;
 }
@@ -406,6 +421,8 @@ function startPath(pathId) {
   pathState.activePathId = path.id;
   if (!Array.isArray(pathState.completed[path.id])) pathState.completed[path.id] = [];
   savePathState();
+  // Spec §6.2 — Aktiven Footer-Pfad synchron mitführen.
+  setActiveFooterPath(path.id);
   mode.set('llm', true);
   mode.set('exercises', true);
   refreshToggleStates();
@@ -413,6 +430,9 @@ function startPath(pathId) {
   navigateToSlide(path.stations.find(id => !completedFor(path.id).has(id)) || path.stations[0]);
   renderPathPanel();
   updatePathStatus();
+  // Alle sichtbaren (und nicht-sichtbaren) Footer neu rendern, damit der
+  // Pfad-Switch sofort durchschlägt.
+  refreshAllSlideFooters();
 }
 
 function markActivePathSlide(slide) {
@@ -436,6 +456,63 @@ function updatePathStatus() {
   const progress = pathProgress(path);
   pathStatus.textContent = `${path.title}: ${progress.done}/${progress.total}`;
   pathStatus.hidden = false;
+}
+
+// Spec §6.3 — Slide-Footer-Rendering.
+// Setzt `.slide-progress` einer Slide komplett neu (robust gegen variierende Stubs
+// aus den D-Paketen). Markup-Pattern:
+//   <span class="slide-folio"><svg.ic><use #i-bookmark/></svg> Folie <b>{folio} / 30</b></span>
+//   <span class="slide-progress-sep" aria-hidden="true"></span>
+//   <span class="slide-path"><svg.ic><use #i-route/></svg> Lernpfad <b>{pathLabel}</b></span>
+//   <span class="slide-step">
+//     <span class="path-dots">…</span> Schritt <b>{n} von {m}</b>
+//   </span>
+// Cover (`einstieg-1`) → Lernpfad „Übersicht", kein Schritt.
+// Slide nicht im Pfad → Lernpfad „(nicht im Pfad)", kein Schritt.
+function renderSlideFooter(slideId) {
+  if (!slideId) return;
+  const slide = slideById(slideId);
+  if (!slide) return;
+  const progress = slide.querySelector('.slide-foot .slide-progress');
+  if (!progress) return;
+
+  const folio = slide.dataset.folio || '';
+  const isCover = slideId === 'einstieg-1';
+  const info = isCover ? null : getPathProgress(slideId, activeFooterPathId);
+
+  let pathLabel;
+  let stepHtml = '';
+  if (isCover) {
+    pathLabel = 'Übersicht';
+  } else if (!info) {
+    // Fallback (Pfad unbekannt) — sollte nicht passieren, da activeFooterPathId validiert ist.
+    pathLabel = '(nicht im Pfad)';
+  } else if (!info.inPath) {
+    pathLabel = '(nicht im Pfad)';
+  } else {
+    pathLabel = info.pathLabel;
+    const dots = [];
+    for (let i = 1; i <= info.total; i++) {
+      if (i < info.step) dots.push('<i class="done"></i>');
+      else if (i === info.step) dots.push('<i class="here"></i>');
+      else dots.push('<i></i>');
+    }
+    stepHtml = `<span class="slide-progress-sep" aria-hidden="true"></span>` +
+      `<span class="slide-step">` +
+        `<span class="path-dots" aria-hidden="true">${dots.join('')}</span> ` +
+        `Schritt <b>${info.step} von ${info.total}</b>` +
+      `</span>`;
+  }
+
+  progress.innerHTML =
+    `<span class="slide-folio"><svg class="ic" aria-hidden="true"><use href="#i-bookmark"/></svg> Folie <b>${escapeHtml(folio)} / 30</b></span>` +
+    `<span class="slide-progress-sep" aria-hidden="true"></span>` +
+    `<span class="slide-path"><svg class="ic" aria-hidden="true"><use href="#i-route"/></svg> Lernpfad <b>${escapeHtml(pathLabel)}</b></span>` +
+    stepHtml;
+}
+
+function refreshAllSlideFooters() {
+  slides().forEach(slide => renderSlideFooter(slide.dataset.slideId));
 }
 
 function updateChapterProgress(slide) {
@@ -563,6 +640,7 @@ function showSlide(idx) {
   updateTOCCurrent(newSlide?.dataset.slideId);
   updateChapterProgress(newSlide);
   markActivePathSlide(newSlide);
+  renderSlideFooter(newSlide?.dataset.slideId);
   renderPathPanel();
   updatePathStatus();
   renderTrainerPanel(newSlide);
@@ -625,6 +703,8 @@ function jumpToHash() {
 window.addEventListener('hashchange', jumpToHash);
 
 if (!jumpToHash()) showSlide(0);
+// Initial alle 30 Slide-Footer normieren (D-Pakete hinterliessen variierende Stubs).
+refreshAllSlideFooters();
 
 pathToggle?.addEventListener('click', () => {
   const open = pathPanel?.getAttribute('aria-hidden') !== 'false';
