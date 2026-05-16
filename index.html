@@ -16,22 +16,32 @@
   <link rel="stylesheet" href="print.css?v=2026-05-16ab" media="print">
 </head>
 <body data-layout="slide">
-  <header class="app-header">
-    <div class="app-title">LLM 101</div>
-    <div class="app-toggles" role="toolbar" aria-label="Darstellungs- und Anzeigemodi">
-      <button class="toggle" data-mode="layout" data-value="slide" aria-pressed="false">Vortrag</button>
-      <button class="toggle" data-mode="layout" data-value="scroll" aria-pressed="false">Lesen</button>
-      <span class="toggle-divider" aria-hidden="true"></span>
-      <button class="toggle" data-mode="theme" data-value="light" title="Hell" aria-label="Helles Theme" aria-pressed="false"></button>
-      <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel" aria-label="Dunkles Theme" aria-pressed="false"></button>
-      <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz" aria-pressed="false">Auto</button>
-      <span class="toggle-divider" aria-hidden="true"></span>
-      <button class="toggle" data-mode="llm" data-toggle aria-pressed="false">LLM-Tabs</button>
-      <button class="toggle" data-mode="exercises" data-toggle aria-pressed="false">Übungen</button>
-      <span class="toggle-divider" aria-hidden="true"></span>
-      <button class="toggle utility-toggle" id="path-toggle" type="button" aria-expanded="false" aria-controls="path-panel">Lernpfad</button>
-      <button class="toggle utility-toggle trainer-only" id="trainer-toggle" type="button" aria-expanded="false" aria-controls="trainer-panel">Cockpit</button>
+  <header class="app-header" role="banner">
+    <div class="app-brand">
+      <span class="app-title app-brand-id">LLM 101</span>
     </div>
+    <nav class="app-toggles" role="toolbar" aria-label="Schulungs-Steuerung">
+      <div class="toggle-group" role="group" aria-label="Layout">
+        <button class="toggle" data-mode="layout" data-value="slide" aria-pressed="false">Vortrag</button>
+        <button class="toggle" data-mode="layout" data-value="scroll" aria-pressed="false">Lesen</button>
+      </div>
+      <span class="toggle-divider" aria-hidden="true"></span>
+      <div class="toggle-group" role="group" aria-label="Theme">
+        <button class="toggle toggle-icon" data-mode="theme" data-value="light" title="Hell" aria-label="Helles Theme" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-sun"/></svg></button>
+        <button class="toggle toggle-icon" data-mode="theme" data-value="dark" title="Dunkel" aria-label="Dunkles Theme" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg></button>
+        <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz" aria-pressed="false">Auto</button>
+      </div>
+      <span class="toggle-divider" aria-hidden="true"></span>
+      <div class="toggle-group" role="group" aria-label="Inhalt">
+        <button class="toggle" data-mode="llm" data-toggle aria-pressed="false">LLM-Tabs</button>
+        <button class="toggle" data-mode="exercises" data-toggle aria-pressed="false">Übungen</button>
+      </div>
+      <span class="toggle-divider" aria-hidden="true"></span>
+      <div class="toggle-group" role="group" aria-label="Panels">
+        <button class="toggle utility-toggle" id="path-toggle" type="button" aria-expanded="false" aria-controls="path-panel">Lernpfad</button>
+        <button class="toggle utility-toggle trainer-only" id="trainer-toggle" type="button" aria-expanded="false" aria-controls="trainer-panel">Cockpit</button>
+      </div>
+    </nav>
   </header>
   <div class="update-banner" id="update-banner" role="status" hidden>
     <span>Neue Version verfügbar.</span>

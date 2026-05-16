@@ -150,7 +150,7 @@ p, li { font-size: 15px; line-height: 1.6; }
   margin-bottom: var(--space-1);
 }
 
-/* Icons */
+/* Icons (Legacy mask-image-Variante — bleibt für Bestands-Aufrufer aus lib/icons.js) */
 .icon {
   display: inline-flex;
   align-items: center;
@@ -161,33 +161,163 @@ p, li { font-size: 15px; line-height: 1.6; }
 .icon svg { stroke: currentColor; stroke-width: 1.75; fill: none; width: 14px; height: 14px; }
 .icon-svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 1.75; fill: none; }
 
-/* App-Shell */
+/* Icon-Helper-Class .ic — siehe Spec §4.3 (Sprite-basiert, Codex-DNA) */
+.ic {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: -3px;
+}
+.ic.sm { width: 12px; height: 12px; vertical-align: -2px; stroke-width: 1.8; }
+.ic.lg { width: 20px; height: 20px; vertical-align: -4px; }
+.ic.xl { width: 28px; height: 28px; vertical-align: -6px; stroke-width: 1.4; }
+
+/* ============================================================
+   App-Shell — Global Header (Spec §3.1)
+   ============================================================ */
 .app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-4) var(--space-6);
+  gap: var(--space-4);
+  padding: 12px clamp(20px, 4vw, 56px);
   border-bottom: 1px solid var(--border);
-  background: var(--bg-base);
+  background: color-mix(in srgb, var(--bg-base) 90%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
-.app-toggles { display: flex; gap: var(--space-2); align-items: center; }
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.app-brand-id {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  background: var(--text-primary);
+  color: var(--bg-base);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-label);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+.app-brand-id::before {
+  content: "▸ ";
+  color: var(--accent);
+  margin-right: 4px;
+}
+
+.app-brand-meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-label);
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+}
+
+/* Toolbar — Toggle-Gruppen */
+.app-toggles {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.toggle-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.toggle-divider {
+  display: inline-block;
+  width: 1px;
+  height: 18px;
+  background: var(--border);
+  margin: 0 var(--space-2);
+}
+
 .toggle {
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  border-radius: var(--radius-lg);
   cursor: pointer;
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
+  transition: color var(--duration-fast, 120ms) var(--ease-out, ease-out),
+              background var(--duration-fast, 120ms) var(--ease-out, ease-out),
+              border-color var(--duration-fast, 120ms) var(--ease-out, ease-out);
 }
-.toggle.active { color: var(--accent); background: var(--accent-soft); }
+
+.toggle:hover {
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border-color: var(--border);
+}
+
+/* Active-State: alle aktiven Toggles (boolean-toggles + generische .is-active) */
+.toggle[aria-pressed="true"],
+.toggle.is-active,
+.toggle.active {
+  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Theme-aware Active-States — die wirklich „selected"-Variante wird per CSS auf dem
+   <html data-theme="…"> Attribut bestimmt; das vermeidet, dass alle drei Theme-Buttons
+   gleichzeitig „aktiv" wirken, wenn der ModeManager nur einen aria-pressed-Wert hält. */
+[data-theme="light"] .toggle[data-mode="theme"][data-value="light"],
+[data-theme="dark"] .toggle[data-mode="theme"][data-value="dark"] {
+  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+/* Auto: weder data-theme=light noch dark gesetzt → Auto-Button leuchtet */
+html:not([data-theme="light"]):not([data-theme="dark"]) .toggle[data-mode="theme"][data-value="auto"] {
+  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.toggle-icon {
+  padding: 6px 8px;
+}
+.toggle-icon .ic {
+  width: 15px;
+  height: 15px;
+  vertical-align: -2px;
+}
+
 .utility-toggle {
   border: 1px solid transparent;
 }
+
 .trainer-only { display: none !important; }
 body[data-trainer="on"] .trainer-only { display: inline-flex !important; }
+
 .path-status {
   font-size: 11px;
   color: var(--accent-strong);
@@ -196,32 +326,37 @@ body[data-trainer="on"] .trainer-only { display: inline-flex !important; }
   padding: 3px 9px;
 }
 
-/* Seitliche Lern- und Trainerpanels */
+/* ============================================================
+   Side-Panels — Lernpfad + Trainer (Spec §3.8)
+   ============================================================ */
 .side-panel {
   position: fixed;
   z-index: 50;
-  top: 76px;
-  right: var(--space-4);
-  bottom: var(--space-4);
-  width: min(430px, calc(100vw - 32px));
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(420px, 100%);
   display: flex;
   flex-direction: column;
-  background: color-mix(in srgb, var(--bg-base) 94%, transparent);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 20px 70px rgba(31, 26, 23, 0.18);
-  backdrop-filter: blur(18px);
-  transform: translateX(calc(100% + 28px));
-  opacity: 0;
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  box-shadow: -16px 0 60px rgba(0, 0, 0, 0.08);
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+  transition: transform var(--duration-base, 200ms) var(--ease-out, ease-out);
+}
+.side-panel[aria-hidden="true"] {
+  transform: translateX(100%);
   pointer-events: none;
-  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 body[data-trainer="on"] .side-panel.trainer-only {
   display: flex !important;
 }
+/* Legacy-Hook: einige Codepfade in app.js togglen .is-open zusätzlich zu aria-hidden.
+   Wir behandeln das hier als Synonym — aria-hidden bleibt führend. */
 .side-panel.is-open {
   transform: translateX(0);
-  opacity: 1;
   pointer-events: auto;
 }
 .side-panel-header {
@@ -454,8 +589,9 @@ body[data-trainer="on"] .side-panel.trainer-only {
     flex-wrap: wrap;
   }
 
+  .app-brand,
   .app-title {
-    width: 100%;
+    width: auto;
   }
 
   .app-toggles {
@@ -466,10 +602,6 @@ body[data-trainer="on"] .side-panel.trainer-only {
 
   .toggle {
     padding: 5px 9px;
-  }
-
-  .side-panel {
-    top: 116px;
   }
 
   .update-banner {
@@ -486,6 +618,25 @@ body[data-trainer="on"] .side-panel.trainer-only {
   h1 { font-size: 42px; }
   h2 { font-size: 31px; }
   h3 { font-size: 22px; }
+}
+
+/* Mobile-Toolbar-Wrap — Spec §3.1 (< 720px) */
+@media (max-width: 720px) {
+  .app-header {
+    flex-wrap: wrap;
+    padding: 10px var(--space-4);
+  }
+  .app-brand { width: 100%; }
+  .app-toggles {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 4px;
+    overflow-x: visible;
+  }
+  .toggle-divider { display: none; }
+  .toggle-group {
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 700px) {
@@ -523,9 +674,7 @@ body[data-trainer="on"] .side-panel.trainer-only {
   }
 
   .side-panel {
-    inset: auto var(--space-3) var(--space-3) var(--space-3);
-    top: 128px;
-    width: auto;
+    width: 100%;
   }
 
   .chapter-progress {
