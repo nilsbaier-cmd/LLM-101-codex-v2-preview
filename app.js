@@ -1,11 +1,11 @@
 // app.js — Haupteinstieg
-import { Storage } from './lib/storage.js?v=2026-05-16ab';
-import { ModeManager } from './lib/mode.js?v=2026-05-16ab';
-import { icon } from './lib/icons.js?v=2026-05-16ab';
-import { initSprite } from './lib/icons-sprite.js?v=2026-05-16ab';
-import { initTabs } from './lib/tabs.js?v=2026-05-16ab';
-import { Exercises } from './lib/exercises.js?v=2026-05-16ab';
-import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS, getPathProgress } from './lib/learning-paths.js?v=2026-05-16ab';
+import { Storage } from './lib/storage.js?v=2026-05-17-codex-v2b';
+import { ModeManager } from './lib/mode.js?v=2026-05-17-codex-v2b';
+import { icon } from './lib/icons.js?v=2026-05-17-codex-v2b';
+import { initSprite } from './lib/icons-sprite.js?v=2026-05-17-codex-v2b';
+import { initTabs } from './lib/tabs.js?v=2026-05-17-codex-v2b';
+import { Exercises } from './lib/exercises.js?v=2026-05-17-codex-v2b';
+import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS, getPathProgress } from './lib/learning-paths.js?v=2026-05-17-codex-v2b';
 
 // Codex-Sprite so früh wie möglich inlined, damit nachgelagerte renderIcon()-
 // Aufrufe und <use href="#i-NAME"/>-Referenzen sofort auflösen. Fire-and-forget:
@@ -69,6 +69,54 @@ document.querySelectorAll('[data-icon]').forEach(el => {
 
 // LLM-Tabs initialisieren (nach Icon-Resolver, vor TOC-Aufbau)
 initTabs(document.body);
+
+function initSlideBodyFitWrappers(root = document) {
+  root.querySelectorAll('.slide.codex .slide-body').forEach(body => {
+    if (body.firstElementChild?.classList.contains('slide-body-fit')) return;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'slide-body-fit';
+    while (body.firstChild) wrapper.appendChild(body.firstChild);
+    body.appendChild(wrapper);
+  });
+}
+
+function fitSlideBody(slide) {
+  const body = slide?.querySelector('.slide-body');
+  const wrapper = body?.querySelector(':scope > .slide-body-fit');
+  if (!body || !wrapper || mode.get('layout') !== 'slide') return;
+
+  body.classList.remove('is-fit-scaled');
+  body.style.removeProperty('--slide-fit-scale');
+  wrapper.style.removeProperty('width');
+
+  const style = getComputedStyle(body);
+  const paddingY = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+  const available = body.clientHeight - paddingY;
+  const needed = wrapper.scrollHeight;
+  if (!available || !needed || needed <= available) return;
+
+  const minScale = window.matchMedia('(max-width: 700px)').matches ? 0.3 : 0.46;
+  let scale = Math.max(minScale, Math.min(0.98, (available - 2) / needed));
+  body.style.setProperty('--slide-fit-scale', scale.toFixed(3));
+  body.classList.add('is-fit-scaled');
+
+  for (let i = 0; i < 3; i += 1) {
+    const visualHeight = wrapper.getBoundingClientRect().height;
+    if (!visualHeight || visualHeight <= available) break;
+    scale = Math.max(minScale, scale * ((available - 2) / visualHeight));
+    body.style.setProperty('--slide-fit-scale', scale.toFixed(3));
+  }
+}
+
+function fitVisibleSlide() {
+  fitSlideBody(slides()[currentIdx]);
+}
+
+function queueSlideBodyFit(slide) {
+  requestAnimationFrame(() => fitSlideBody(slide));
+}
+
+initSlideBodyFitWrappers();
 
 // Übungs-Komponenten initialisieren
 function initExercises(root = document) {
@@ -615,6 +663,7 @@ function setRevealedCount(slide, n) {
     const stepN = parseInt(el.dataset.step, 10);
     el.classList.toggle('is-revealed', !isNaN(stepN) && stepN <= n);
   });
+  queueSlideBodyFit(slide);
 }
 
 function resetSteps(slide) { setRevealedCount(slide, 0); }
@@ -644,6 +693,7 @@ function showSlide(idx) {
   renderPathPanel();
   updatePathStatus();
   renderTrainerPanel(newSlide);
+  queueSlideBodyFit(newSlide);
 }
 
 function goNext() {
@@ -672,6 +722,15 @@ function goPrev() {
 document.getElementById('prev-slide').addEventListener('click', goPrev);
 document.getElementById('next-slide').addEventListener('click', goNext);
 
+document.addEventListener('click', (e) => {
+  const nav = e.target.closest('.slide-nav.prev, .slide-nav.next');
+  if (!nav || mode.get('layout') !== 'slide') return;
+  e.preventDefault();
+  if (nav.getAttribute('aria-disabled') === 'true') return;
+  if (nav.classList.contains('next')) goNext();
+  else goPrev();
+});
+
 document.addEventListener('keydown', (e) => {
   if (mode.get('layout') !== 'slide') return;
   const tag = e.target.tagName;
@@ -689,6 +748,8 @@ document.addEventListener('keydown', (e) => {
 mode.on('change', ({ key }) => {
   if (key === 'layout') showSlide(currentIdx);
 });
+
+window.addEventListener('resize', () => fitVisibleSlide());
 
 // Hash-Navigation: bei Page-Load oder Hash-Wechsel zur Folie mit data-slide-id springen
 function jumpToHash() {

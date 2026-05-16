@@ -12,6 +12,9 @@
 }
 
 /* SLIDE-MODUS */
+body[data-layout="slide"] {
+  overflow: hidden;
+}
 body[data-layout="slide"] .app-toc { display: none; }
 body[data-layout="slide"] .app-deck {
   overflow: hidden;
@@ -75,6 +78,9 @@ body[data-layout="scroll"] .app-controls { display: none; }
   gap: var(--space-3);
   padding: var(--space-3);
   border-top: 1px solid var(--border);
+}
+body[data-layout="slide"] .app-controls {
+  display: none;
 }
 .slide-counter { font-size: 12px; color: var(--text-tertiary); }
 
@@ -1665,11 +1671,13 @@ body[data-layout="scroll"] .icon-cloud-item {
 body[data-layout="slide"] .slide[data-stepped] [data-step] {
   opacity: 0;
   transform: translateY(10px);
+  pointer-events: none;
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 body[data-layout="slide"] .slide[data-stepped] [data-step].is-revealed {
   opacity: 1;
   transform: translateY(0);
+  pointer-events: auto;
 }
 /* Lesen-Modus: alles sofort sichtbar */
 body[data-layout="scroll"] [data-step] {
@@ -2906,13 +2914,12 @@ body[data-exercises="off"] .exercise { display: none; }
    §3.2 — Slide-Frame (Codex)
    ============================================================ */
 .slide.codex,
-body[data-layout="slide"] .slide.codex,
 body[data-layout="scroll"] .slide.codex {
   /* Reset positioning that legacy .slide gets from layout-mode */
   position: relative;
   inset: auto;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -2926,11 +2933,25 @@ body[data-layout="scroll"] .slide.codex {
 }
 
 body[data-layout="slide"] .slide.codex {
-  aspect-ratio: 16 / 9;
-  min-height: 620px;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   max-width: 1280px;
   width: 100%;
+  height: 100%;
+  min-height: 0;
   margin: 0 auto;
+  aspect-ratio: auto;
+  opacity: 0;
+  pointer-events: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+body[data-layout="slide"] .slide.codex.is-active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 body[data-layout="scroll"] .slide.codex,
@@ -3017,16 +3038,40 @@ body[data-layout="scroll"] .slide.codex,
 
 /* Slide-Body */
 .slide-body {
+  --slide-fit-scale: 1;
   padding: clamp(32px, 4.4vw, 64px) clamp(36px, 4.4vw, 72px);
   display: flex;
   flex-direction: column;
   gap: 24px;
   min-width: 0;
+  min-height: 0;
   overflow: hidden;
+}
+
+body[data-layout="slide"] .slide.codex .slide-body {
+  height: 100%;
+  max-height: 100%;
+  align-self: stretch;
+  padding: clamp(24px, 3vw, 40px) clamp(30px, 3.4vw, 54px);
+}
+
+.slide-body-fit {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+  min-width: 0;
+  transform-origin: top left;
+}
+
+.slide-body.is-fit-scaled .slide-body-fit {
+  width: calc(100% / var(--slide-fit-scale));
+  transform: scale(var(--slide-fit-scale));
 }
 
 /* Slide-Foot — Navigation + Progress */
 .slide-foot {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 24px;
@@ -3565,10 +3610,10 @@ h1.display em,
   }
 }
 @media (max-width: 700px) {
-  .slide-body {
+  .slide-body,
+  body[data-layout="slide"] .slide.codex .slide-body {
     padding: 24px 20px;
     gap: 16px;
   }
   .slide-crumb-topic { font-size: 14px; }
 }
-
