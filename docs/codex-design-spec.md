@@ -1210,6 +1210,17 @@ Resolutionen aus den Implementations-Paketen, die für Folgepakete relevant sind
 - **Cover-Colophon auf 3 generische Felder gekürzt.** Trainer-Name · [Team]/[Organisation] · [Datum]/Kursdatum. Run-Spalte entfällt. Trainer editiert pro Kurs drei Werte; HTML-Kommentar markiert den Hotspot.
 - **Volatile-Label final: „zu prüfen".** Statt „flüchtig" oder „veränderlich". Wording-Festlegung des Trainers — Paket D1/D2/D3 MUSS exakt diesen String setzen, kein Synonym.
 
+### Aus Paket D1 (Commit `b9869c9`) + D2 (`2ec8ef4`) + D3 (`4c5cc23`) + Konsolidierung
+
+- **`data-volatile="true"` nur auf `<section class="slide codex">`, NICHT auf `.slide-stand`-Span.** Begründung: `tests/volatile-facts.test.js` querte ursprünglich `[data-volatile="true"]` global und erwartete `data-slide-id` auf jedem Treffer. D3 löste das durch Weglassen am Span, D1 hatte zunächst beide gesetzt + Test verengt. Bei der Konsolidierung wurde D3's Markup-Lösung übernommen (Spans verlieren das Attribut); der defensiv verengte Test (`section.slide[data-volatile="true"]`) bleibt drin als Schutz vor zukünftigen Regressions. **Konsequenz für Paket E/F/H:** CSS-Effekt greift via Descendant-Selektor `.slide.codex[data-volatile="true"] .slide-stand`. Wenn neue Selektoren auf `.slide-stand[data-volatile]` zielen sollen, müssen sie auf die Ancestor-Property gehen.
+- **Test-Selektoren modernisiert** in `tests/llm-framing.test.js` und `tests/volatile-facts.test.js`: alte Markup-Selektoren (`.chapter-label`, `.cover-title`, `.cover-subtitle`) durch Codex-Selektoren ersetzt (`.slide-crumb-chap`, `h1.display`, `.cover-lead`). Spec §12.3 erlaubt dies bei gewolltem Verhaltens-Wechsel.
+- **`output-quality-and-cases.test.js` Constraint:** Tests erwarten `h2`-Text strikt „Output prüfen" / „Mini-Fallbibliothek". D2 verlagerte den Untertitel in den Kicker (statt `h2 + em`-Suffix), damit die Test-Assertions greifen. Paket H darf die Tests lockern, um die volle Codex-DNA (Lede mit `<em>`-Highlight) wiederherzustellen.
+- **`[data-prompt-product]` `.pp-chip`-Bausteine bleiben:** D2 hat die 6 Anatomie-Chips in `usecase-4` NICHT zu `.tok` umgebaut, weil `app.js`/`initPromptProduct` an `.pp-chip` mit eigenem Farb-Mapping hängt. Ein späterer Cleanup (Paket H) könnte die Logik portieren.
+- **Conversation-Tape für `usecase-5` aufgeschoben:** Aktuelles `.xray-stack`/`.xray-window`-Markup hat semantische Reichhaltigkeit (Signal-Diagnose, States), die das Mockup-Tape nicht hat. D2 hat das Markup unverändert gelassen; ein visueller Upgrade auf Tape-Optik wäre eigener Cleanup-Lauf.
+- **`.slide-progress`-Stub variiert zwischen D-Paketen:** D1 hat Platzhalter (`Lernpfad —`), D2 ähnlich, D3 nur `.slide-folio`. Paket E MUSS `renderSlideFooter()` so bauen, dass es das vorhandene Markup *ergänzt/ersetzt* (nicht voraussetzt). Empfehlung: vor Paket E einmal die 30 Slides auf ein einheitliches Stub-Muster bringen.
+- **`<div class="slide-inner">`-Wrapper entfernt** in D2-Slides (12–22). Paket G (Print) MUSS prüfen, ob `print.css` auf `.slide-inner` zielt; falls ja: anpassen oder Wrapper wiederherstellen.
+- **`next-4` Abschluss-Folie:** `.slide-nav.next` zeigt auf `meine-notizen.html` (D3-Entscheidung). Paket F (Outliers) sollte den Rückweg `?back=next-4` in `meine-notizen.html` ergänzen.
+
 ### Aus Paket C (Commit `ebb88d0`)
 
 - **`.slide.codex` Marker-Klasse:** Der neue Frame ist an `.slide.codex` gebunden, NICHT an `.slide` allein. In §3.2 dokumentiert. Paket D1–D3 MUSS `class="slide codex"` setzen.
