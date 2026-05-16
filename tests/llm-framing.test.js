@@ -10,7 +10,7 @@ describe('llm-agnostic framing', () => {
 
   it('frames the deck as LLM 101 while keeping Claude as an example', () => {
     expect(document.title).toBe('LLM 101');
-    expect(document.querySelector('.app-title')?.textContent).toBe('LLM 101');
+    expect(document.querySelector('.app-brand-id')?.textContent).toBe('LLM 101');
     // Codex cover: h1.display + p.cover-lead replace .cover-title/.cover-subtitle
     const cover = document.querySelector('[data-slide-id="einstieg-1"]');
     // Soft-hyphen (­) splits "Sprachmodelle" in the source — strip it before asserting.
