@@ -25,6 +25,9 @@ describe('offline delivery shell', () => {
     expect(app).toContain('navigator.serviceWorker.register');
     expect(app).toContain("window.location.protocol === 'file:'");
     expect(app).toContain('Offline-Support ist optional');
+    expect(index).toContain('id="update-banner"');
+    expect(app).toContain('updatefound');
+    expect(app).toContain('controllerchange');
   });
 
   it('pre-caches the offline-critical deck, notes, explainer and font assets', () => {

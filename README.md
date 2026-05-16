@@ -4,7 +4,7 @@ Hybrid Slide/Scroll-Präsentation als Einführung in Large Language Models mit k
 
 ## Inhalt
 
-- `index.html` — Hauptpräsentation, 26 Folien in 7 Kapiteln, Vortrags- und Lesemodus, Hell/Dunkel/Auto-Theme, optional LLM-agnostische Tabs (Claude, ChatGPT und Gemini) und Übungen
+- `index.html` — Hauptpräsentation, 28 Folien in 7 Kapiteln, Vortrags- und Lesemodus, Hell/Dunkel/Auto-Theme, optional LLM-agnostische Tabs (Claude, ChatGPT und Gemini) und Übungen
 - `meine-notizen.html` — Sammelseite für eigene Reflexionsantworten mit Markdown-Export
 - Lernpfad-Kompass — direkt in `index.html`, lokal gespeicherter Fortschritt für Einsteiger-, Praxis-, Power-User- und Governance-Pfad
 - Trainer-Cockpit — aktivierbar über `index.html?trainer=1`, mit Ablaufvarianten, Sprecherhinweisen, Fallbacks und Demo-Prompts
@@ -44,15 +44,17 @@ http://localhost:8765/index.html?trainer=1
 ## Entwicklung
 
 ```bash
-npm install   # Vitest installieren (nur für Unit-Tests)
+npm install   # Dev-Tools installieren (Vitest + Playwright)
 npm test      # Tests laufen lassen
+npm run visual:qa  # QA-Screenshots in .visual-qa/ erzeugen
 ```
 
 Auslieferung bleibt build-frei. `node_modules/` und `tests/` sind Dev-Artefakte.
 
 ## Visuelle QA
 
-- `lib/visual-qa-targets.js` definiert die wichtigsten Prüfansichten für manuelle oder browsergestützte Sichtkontrolle: Cover, X-Ray, Prompt-Labor auf Phone, Trainer-Cockpit, Lernpfad-Panel und Dark Mode.
+- `lib/visual-qa-targets.js` definiert die wichtigsten Prüfansichten für manuelle oder browsergestützte Sichtkontrolle: Cover, X-Ray, Prompt-Labor auf Phone, Output-Qualitätscheck, Mini-Fallbibliothek, Trainer-Cockpit, Lernpfad-Panel und Dark Mode.
+- `npm run visual:qa` startet lokal einen Server, öffnet alle Targets mit Playwright und schreibt Screenshots nach `.visual-qa/`. Beim ersten Mal ggf. `npx playwright install chromium` ausführen.
 - Vor wichtigen Workshops: lokalen Server starten, die Targets nacheinander öffnen und auf Überlappungen, Lesbarkeit, Kontrast und den jeweils erwarteten Interaktionszustand prüfen.
 
 ## Architektur

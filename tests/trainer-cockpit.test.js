@@ -29,6 +29,8 @@ describe('trainer cockpit', () => {
       'context-1',
       'usecase-4',
       'usecase-5',
+      'usecase-6',
+      'usecase-7',
       'usecase-lab',
       'skills-1',
       'skills-3',
@@ -46,6 +48,7 @@ describe('trainer cockpit', () => {
     TRAINER_VARIANTS.forEach(item => {
       expect(item.checkpoints.length).toBeGreaterThanOrEqual(5);
       expect(item.demoChecklist.length).toBeGreaterThanOrEqual(3);
+      expect(item.probeCues.length).toBeGreaterThanOrEqual(3);
     });
   });
 
@@ -56,6 +59,7 @@ describe('trainer cockpit', () => {
 
   it('surfaces a demo checklist in the trainer cockpit', () => {
     expect(app).toContain('trainer-demo-checklist');
+    expect(app).toContain('trainer-probe-cues');
     expect(css).toContain('.trainer-demo-checklist ul');
   });
 });

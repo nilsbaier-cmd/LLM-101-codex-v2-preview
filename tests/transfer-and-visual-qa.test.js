@@ -40,7 +40,7 @@ describe('transfer close and visual QA targets', () => {
   });
 
   it('defines stable visual QA targets for high-risk states', () => {
-    expect(VISUAL_QA_TARGETS.length).toBeGreaterThanOrEqual(6);
+    expect(VISUAL_QA_TARGETS.length).toBeGreaterThanOrEqual(8);
     expect(new Set(VISUAL_QA_TARGETS.map(target => target.id)).size).toBe(VISUAL_QA_TARGETS.length);
 
     VISUAL_QA_TARGETS.forEach(target => {

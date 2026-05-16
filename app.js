@@ -1,10 +1,10 @@
 // app.js — Haupteinstieg
-import { Storage } from './lib/storage.js?v=2026-05-16y';
-import { ModeManager } from './lib/mode.js?v=2026-05-16y';
-import { icon } from './lib/icons.js?v=2026-05-16y';
-import { initTabs } from './lib/tabs.js?v=2026-05-16y';
-import { Exercises } from './lib/exercises.js?v=2026-05-16y';
-import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS } from './lib/learning-paths.js?v=2026-05-16y';
+import { Storage } from './lib/storage.js?v=2026-05-16aa';
+import { ModeManager } from './lib/mode.js?v=2026-05-16aa';
+import { icon } from './lib/icons.js?v=2026-05-16aa';
+import { initTabs } from './lib/tabs.js?v=2026-05-16aa';
+import { Exercises } from './lib/exercises.js?v=2026-05-16aa';
+import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS } from './lib/learning-paths.js?v=2026-05-16aa';
 
 const NS = 'llm-101-v1';
 const storage = new Storage(NS);
@@ -12,15 +12,41 @@ const mode = new ModeManager(storage);
 const exercises = new Exercises(storage);
 const params = new URLSearchParams(window.location.search);
 const trainerEnabled = params.get('trainer') === '1';
+const updateBanner = document.getElementById('update-banner');
+const updateReload = document.getElementById('update-reload');
 
 if (trainerEnabled) document.body.dataset.trainer = 'on';
 
+function showUpdateBanner() {
+  if (!updateBanner) return;
+  updateBanner.hidden = false;
+}
+
+updateReload?.addEventListener('click', () => window.location.reload());
+
 function registerServiceWorker() {
   if (!('serviceWorker' in navigator) || window.location.protocol === 'file:') return;
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {
+  let controllerChanged = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (controllerChanged) return;
+    controllerChanged = true;
+    showUpdateBanner();
+  });
+  window.addEventListener('load', async () => {
+    try {
+      const registration = await navigator.serviceWorker.register('./sw.js');
+      if (registration.waiting && navigator.serviceWorker.controller) showUpdateBanner();
+      registration.addEventListener('updatefound', () => {
+        const worker = registration.installing;
+        worker?.addEventListener('statechange', () => {
+          if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+            showUpdateBanner();
+          }
+        });
+      });
+    } catch (error) {
       // Offline-Support ist optional; die Präsentation bleibt ohne Service Worker nutzbar.
-    });
+    }
   });
 }
 
@@ -459,6 +485,12 @@ function renderTrainerPanel(slide = slides()[currentIdx]) {
       <ul>
         ${variant.demoChecklist.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
       </ul>
+    </section>
+    <section class="panel-section trainer-probe-cues">
+      <h3>Probe-Modus</h3>
+      <ol>
+        ${variant.probeCues.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+      </ol>
     </section>
   `;
 

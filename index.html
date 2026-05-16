@@ -10,10 +10,10 @@
   <title>LLM 101</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="tokens.css?v=2026-05-16y">
-  <link rel="stylesheet" href="app.css?v=2026-05-16y">
-  <link rel="stylesheet" href="presentation.css?v=2026-05-16y">
-  <link rel="stylesheet" href="print.css?v=2026-05-16y" media="print">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-16aa">
+  <link rel="stylesheet" href="app.css?v=2026-05-16aa">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-16aa">
+  <link rel="stylesheet" href="print.css?v=2026-05-16aa" media="print">
 </head>
 <body data-layout="slide">
   <header class="app-header">
@@ -33,6 +33,10 @@
       <button class="toggle utility-toggle trainer-only" id="trainer-toggle" type="button" aria-expanded="false" aria-controls="trainer-panel">Cockpit</button>
     </div>
   </header>
+  <div class="update-banner" id="update-banner" role="status" hidden>
+    <span>Neue Version verfügbar.</span>
+    <button class="btn btn-primary" id="update-reload" type="button">Neu laden</button>
+  </div>
 
   <main class="app-main">
     <nav class="app-toc" aria-label="Inhaltsverzeichnis">
@@ -1453,6 +1457,109 @@ Freundliche Grüße</div>
         </div>
       </section>
 
+      <section class="slide" data-slide-id="usecase-6" data-chapter="usecases">
+        <div class="slide-inner">
+          <div class="chapter-label">Kapitel 5 — Use Cases</div>
+          <h2>Output prüfen</h2>
+          <p class="pull-quote">Gute KI-Nutzung endet nicht beim Prompt. Sie endet bei der bewussten Entscheidung: Was davon ist brauchbar?</p>
+
+          <div class="exercise reflection quality-station" data-learning-station data-chapter="usecases" data-exercise="r3">
+            <div class="ex-header">
+              <div>
+                <div class="ex-tag">Qualitätscheck</div>
+                <p class="ex-objective">Du lernst, KI-Antworten nicht nur nach Stil, sondern nach Prüfbarkeit und Verantwortung zu bewerten.</p>
+              </div>
+              <div class="ex-duration">7 min</div>
+            </div>
+            <p class="ex-prompt">Welche Antwort würdest du weiterverwenden — und was müsstest du vorher prüfen?</p>
+            <ol class="ex-steps">
+              <li>Vergleiche die beiden Antworten: Welche klingt besser, welche ist besser prüfbar?</li>
+              <li>Markiere mindestens zwei Prüfstellen: Fakten, Datenfreigabe, Ton, Verantwortung.</li>
+              <li>Formuliere eine kurze Freigabe- oder Nacharbeitsnotiz.</li>
+            </ol>
+
+            <div class="quality-review">
+              <div class="quality-answer-grid">
+                <article class="quality-answer is-risky">
+                  <div class="quality-label">Antwort A — glatt</div>
+                  <p>„Der Pilot war ein voller Erfolg. Ein sofortiger Rollout ist empfehlenswert, weil die Akzeptanz hoch ist und keine relevanten Risiken bestehen.“</p>
+                  <div class="quality-verdict">Risiko: klingt sicher, zeigt aber keine Evidenz.</div>
+                </article>
+                <article class="quality-answer is-usable">
+                  <div class="quality-label">Antwort B — prüfbar</div>
+                  <p>„Der Pilot zeigt positive Signale. Für einen Etappen-Rollout sprechen: weniger Supportspitzen, kontrollierbare Risiken, früher Nutzen. Zu prüfen: Akzeptanzdaten, Datenschutzfreigabe, Supportkapazität.“</p>
+                  <div class="quality-verdict">Brauchbar: macht Annahmen und Prüfstellen sichtbar.</div>
+                </article>
+              </div>
+              <div class="quality-checklist" aria-label="Prüfkriterien">
+                <span>Fakten</span>
+                <span>Daten</span>
+                <span>Ton</span>
+                <span>Risiken</span>
+                <span>Verantwortung</span>
+              </div>
+            </div>
+
+            <textarea class="ex-textarea" placeholder="z. B. Antwort B weiterverwenden, aber Akzeptanzdaten und Datenschutzfreigabe prüfen …"></textarea>
+            <div class="ex-outcome-grid">
+              <p class="ex-expected"><strong>Erwartbar:</strong> Eine kurze Qualitätsnotiz mit mindestens zwei konkreten Prüfstellen.</p>
+              <p class="ex-reflection"><strong>Reflexion:</strong> Wo verführt dich eine gut formulierte Antwort dazu, zu wenig nachzuprüfen?</p>
+            </div>
+            <div class="ex-meta">
+              <span class="ex-save-hint">✓ Lokal gespeichert — kein Server.</span>
+              <a class="ex-notes-link" href="meine-notizen.html">→ Meine Notizen (<span class="ex-notes-count">0</span>)</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-slide-id="usecase-7" data-chapter="usecases">
+        <div class="slide-inner">
+          <div class="chapter-label">Kapitel 5 — Use Cases</div>
+          <h2>Mini-Fallbibliothek</h2>
+          <p class="lead">Sechs typische Einstiege: klein genug zum Üben, konkret genug für den Arbeitsalltag.</p>
+
+          <div class="case-library-grid">
+            <article class="case-card">
+              <span class="case-status is-green">geeignet</span>
+              <h3>Sitzung vorbereiten</h3>
+              <p>Agenda, Entscheidfragen und offene Punkte aus öffentlichen oder internen, freigegebenen Notizen strukturieren.</p>
+              <strong>Prüffrage:</strong> Fehlen heikle Namen, Daten oder Entscheide?
+            </article>
+            <article class="case-card">
+              <span class="case-status is-green">geeignet</span>
+              <h3>Text vereinfachen</h3>
+              <p>Bestehenden Entwurf für eine breitere Zielgruppe kürzen, glätten oder in Varianten umformulieren.</p>
+              <strong>Prüffrage:</strong> Bleibt die Aussage rechtlich und fachlich gleich?
+            </article>
+            <article class="case-card">
+              <span class="case-status is-amber">bedingt</span>
+              <h3>Risiken sammeln</h3>
+              <p>Blinde Flecken, Gegenargumente oder offene Abhängigkeiten als Sparring vorbereiten.</p>
+              <strong>Prüffrage:</strong> Ist klar, dass die Bewertung beim Menschen bleibt?
+            </article>
+            <article class="case-card">
+              <span class="case-status is-amber">bedingt</span>
+              <h3>Tabellenlogik erklären</h3>
+              <p>Formeln, CSV-Strukturen oder Ausreißer beschreiben lassen, wenn Datenfreigabe und Anonymisierung passen.</p>
+              <strong>Prüffrage:</strong> Sind Personen- oder Falldaten entfernt?
+            </article>
+            <article class="case-card">
+              <span class="case-status is-amber">bedingt</span>
+              <h3>Status verdichten</h3>
+              <p>Aus freigegebenen Stichworten ein kurzes Projektupdate mit Risiken und nächstem Entscheidpunkt bauen.</p>
+              <strong>Prüffrage:</strong> Sind Annahmen und Fakten trennbar?
+            </article>
+            <article class="case-card">
+              <span class="case-status is-red">ungeeignet</span>
+              <h3>Personalfall beurteilen</h3>
+              <p>Bewertung, Empfehlung oder vertrauliche Analyse zu Personen, Dossiers oder klassifizierten Inhalten.</p>
+              <strong>Prüffrage:</strong> Würde ich diese Daten auch extern teilen dürfen?
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="slide" data-slide-id="skills-1" data-chapter="skills">
         <div class="slide-inner">
           <div class="chapter-label">Kapitel 6 — Skills</div>
@@ -2243,6 +2350,6 @@ VERBOTEN
     <div class="side-panel-body" id="trainer-panel-body"></div>
   </aside>
 
-  <script type="module" src="app.js?v=2026-05-16y"></script>
+  <script type="module" src="app.js?v=2026-05-16aa"></script>
 </body>
 </html>

@@ -248,6 +248,30 @@ body[data-trainer="on"] .side-panel.trainer-only {
   color: var(--text-primary);
   border-color: var(--accent);
 }
+.update-banner {
+  position: fixed;
+  left: 50%;
+  top: 74px;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  transform: translateX(-50%);
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--border));
+  border-radius: 999px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  padding: 8px 10px 8px 16px;
+  color: var(--text-primary);
+  font-size: 13px;
+}
+.update-banner[hidden] {
+  display: none;
+}
+.update-banner .btn {
+  min-height: 28px;
+  padding: 5px 10px;
+}
 .side-panel-body {
   padding: var(--space-4);
   overflow-y: auto;
@@ -376,7 +400,8 @@ body[data-trainer="on"] .side-panel.trainer-only {
 }
 .trainer-current ul,
 .trainer-timeline ol,
-.trainer-demo-checklist ul {
+.trainer-demo-checklist ul,
+.trainer-probe-cues ol {
   margin: var(--space-3) 0;
   padding-left: 1.2rem;
 }
@@ -413,6 +438,12 @@ body[data-trainer="on"] .side-panel.trainer-only {
 
   .side-panel {
     top: 116px;
+  }
+
+  .update-banner {
+    top: 124px;
+    width: calc(100% - 32px);
+    justify-content: space-between;
   }
 
   h1 { font-size: 42px; }
