@@ -31,10 +31,12 @@ describe('trainer cockpit', () => {
       'usecase-5',
       'usecase-6',
       'usecase-7',
+      'usecase-8',
       'usecase-lab',
       'skills-1',
       'skills-3',
       'next-3',
+      'next-5',
       'next-4'
     ].forEach(id => {
       expect(slideIds).toContain(id);

@@ -21,15 +21,14 @@ describe('transfer close and visual QA targets', () => {
     expect(link?.getAttribute('href')).toBe('explainer/a-context-window.html?back=context-2');
   });
 
-  it('adds a compact final transfer slide after the platform overview', () => {
+  it('adds a compact final transfer slide and resource links', () => {
     const transferSlide = document.querySelector('[data-slide-id="next-4"]');
     expect(transferSlide).toBeTruthy();
     expect(transferSlide.querySelector('h2')?.textContent).toBe('Dein nächster Schritt');
     expect(transferSlide.textContent).toContain('7-Tage-Experiment');
     expect(transferSlide.querySelector('a[href="meine-notizen.html"]')?.textContent).toContain('Meine Notizen');
-
-    const platformSlide = document.querySelector('[data-slide-id="next-3"]');
-    expect(platformSlide?.nextElementSibling?.dataset.slideId).toBe('next-4');
+    expect(transferSlide.querySelector('a[href="handout.html"]')?.textContent).toContain('Handout');
+    expect(document.querySelector('[data-slide-id="next-5"]')?.nextElementSibling?.dataset.slideId).toBe('next-4');
   });
 
   it('ships responsive styling for the transfer slide and trainer checklist', () => {
@@ -40,7 +39,7 @@ describe('transfer close and visual QA targets', () => {
   });
 
   it('defines stable visual QA targets for high-risk states', () => {
-    expect(VISUAL_QA_TARGETS.length).toBeGreaterThanOrEqual(8);
+    expect(VISUAL_QA_TARGETS.length).toBeGreaterThanOrEqual(12);
     expect(new Set(VISUAL_QA_TARGETS.map(target => target.id)).size).toBe(VISUAL_QA_TARGETS.length);
 
     VISUAL_QA_TARGETS.forEach(target => {

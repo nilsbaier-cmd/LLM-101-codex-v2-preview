@@ -5,6 +5,11 @@
   grid-template-rows: 1fr auto;
   height: calc(100vh - 60px);
 }
+@supports (height: 100svh) {
+  .app-main {
+    height: calc(100svh - 60px);
+  }
+}
 
 /* SLIDE-MODUS */
 body[data-layout="slide"] .app-toc { display: none; }
@@ -16,6 +21,7 @@ body[data-layout="slide"] .slide {
   position: absolute;
   inset: 0;
   display: flex;
+  align-items: center;
   align-items: safe center;
   justify-content: center;
   padding: var(--space-5) var(--space-6);
@@ -1222,6 +1228,110 @@ body[data-layout="scroll"] .app-controls { display: none; }
   background: rgba(210, 70, 70, 0.12);
 }
 
+/* Vorher/Nachher-Galerie */
+.before-after-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+.ba-card {
+  display: grid;
+  gap: var(--space-3);
+}
+.ba-side {
+  min-height: 152px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  padding: var(--space-4);
+}
+.ba-side span {
+  display: inline-flex;
+  margin-bottom: var(--space-2);
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.ba-side p {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.ba-side.is-before {
+  opacity: 0.76;
+  background: var(--bg-tint);
+}
+.ba-side.is-before span {
+  color: #9b2f2f;
+  background: rgba(210, 70, 70, 0.12);
+}
+.ba-side.is-after {
+  border-color: color-mix(in srgb, var(--success) 42%, var(--border));
+}
+.ba-side.is-after span {
+  color: var(--success);
+  background: var(--success-soft);
+}
+
+/* Chat → Project → Codex */
+.workflow-bridge {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+.bridge-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.bridge-card .icon {
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+.bridge-card .icon svg {
+  width: 32px;
+  height: 32px;
+}
+.bridge-card h3 {
+  font-size: 22px;
+  margin-bottom: var(--space-2);
+}
+.bridge-card p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+}
+.bridge-card strong {
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.bridge-rule {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--space-4);
+  align-items: center;
+  margin-top: var(--space-5);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+  border-radius: var(--radius-lg);
+  background: var(--accent-soft);
+  padding: var(--space-4);
+}
+.bridge-rule span {
+  color: var(--accent-strong);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+.bridge-rule p {
+  color: var(--text-secondary);
+}
+
 /* Transfer-Folie */
 .transfer-grid {
   display: grid;
@@ -1270,6 +1380,25 @@ body[data-layout="scroll"] .app-controls { display: none; }
 .transfer-commitment p {
   max-width: 780px;
   color: var(--text-secondary);
+}
+.resource-strip {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-4);
+}
+.resource-strip a {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--accent-strong);
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.resource-strip a:hover {
+  border-color: var(--accent);
 }
 
 /* Kapitel 6: Skills */
@@ -2410,6 +2539,8 @@ body[data-exercises="off"] .exercise { display: none; }
   .repo-how,
   .skill-anatomy-grid,
   .case-library-grid,
+  .before-after-grid,
+  .workflow-bridge,
   .transfer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2425,6 +2556,7 @@ body[data-exercises="off"] .exercise { display: none; }
   .xray-grid,
   .quality-answer-grid,
   .prompt-lab-grid,
+  .bridge-rule,
   .next-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2473,6 +2605,8 @@ body[data-exercises="off"] .exercise { display: none; }
   .repo-how,
   .skill-anatomy-grid,
   .case-library-grid,
+  .before-after-grid,
+  .workflow-bridge,
   .transfer-grid,
   .uc-steps,
   .uc-prompts,
@@ -2480,6 +2614,7 @@ body[data-exercises="off"] .exercise { display: none; }
   .xray-grid,
   .quality-answer-grid,
   .prompt-lab-grid,
+  .bridge-rule,
   .next-grid,
   .github-terms-grid,
   [data-slide-id="claude-4"] .settings-grid,
@@ -2610,6 +2745,34 @@ body[data-exercises="off"] .exercise { display: none; }
   .case-card strong {
     font-size: 12px;
     line-height: 1.35;
+  }
+
+  .before-after-grid,
+  .workflow-bridge {
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+
+  .ba-side {
+    min-height: auto;
+    padding: var(--space-3);
+  }
+
+  .ba-side p,
+  .bridge-card p,
+  .bridge-card strong {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .bridge-card {
+    padding: var(--space-3);
+  }
+
+  .bridge-rule {
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    padding: var(--space-3);
   }
 
   .transfer-grid {

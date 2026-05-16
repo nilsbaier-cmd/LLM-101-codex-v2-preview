@@ -10,10 +10,10 @@
   <title>LLM 101</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="tokens.css?v=2026-05-16aa">
-  <link rel="stylesheet" href="app.css?v=2026-05-16aa">
-  <link rel="stylesheet" href="presentation.css?v=2026-05-16aa">
-  <link rel="stylesheet" href="print.css?v=2026-05-16aa" media="print">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-16ab">
+  <link rel="stylesheet" href="app.css?v=2026-05-16ab">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-16ab">
+  <link rel="stylesheet" href="print.css?v=2026-05-16ab" media="print">
 </head>
 <body data-layout="slide">
   <header class="app-header">
@@ -36,6 +36,15 @@
   <div class="update-banner" id="update-banner" role="status" hidden>
     <span>Neue Version verfügbar.</span>
     <button class="btn btn-primary" id="update-reload" type="button">Neu laden</button>
+  </div>
+  <div class="chapter-progress" id="chapter-progress" aria-hidden="true">
+    <span data-progress-chapter="einstieg"></span>
+    <span data-progress-chapter="verwaltung"></span>
+    <span data-progress-chapter="claude"></span>
+    <span data-progress-chapter="context"></span>
+    <span data-progress-chapter="usecases"></span>
+    <span data-progress-chapter="skills"></span>
+    <span data-progress-chapter="next-level"></span>
   </div>
 
   <main class="app-main">
@@ -1560,6 +1569,47 @@ Freundliche Grüße</div>
         </div>
       </section>
 
+      <section class="slide" data-slide-id="usecase-8" data-chapter="usecases">
+        <div class="slide-inner">
+          <div class="chapter-label">Kapitel 5 — Use Cases</div>
+          <h2>Vorher / Nachher</h2>
+          <p class="lead">Muster erkennen ist schneller als Regeln auswendig lernen.</p>
+
+          <div class="before-after-grid">
+            <article class="ba-card">
+              <div class="ba-side is-before">
+                <span>Vorher</span>
+                <p>„Mach mir eine gute Zusammenfassung.“</p>
+              </div>
+              <div class="ba-side is-after">
+                <span>Nachher</span>
+                <p>„Fasse diese Notizen für eine Projektleitung in 5 Bulletpoints zusammen. Trenne Fakten, Risiken und offene Entscheide.“</p>
+              </div>
+            </article>
+            <article class="ba-card">
+              <div class="ba-side is-before">
+                <span>Vorher</span>
+                <p>„Ist das eine gute Idee?“</p>
+              </div>
+              <div class="ba-side is-after">
+                <span>Nachher</span>
+                <p>„Prüfe diese Idee als kritischer Sparringpartner. Nenne 3 Annahmen, 3 Risiken und einen kleinen Test ohne Personendaten.“</p>
+              </div>
+            </article>
+            <article class="ba-card">
+              <div class="ba-side is-before">
+                <span>Vorher</span>
+                <p>„Schreib das professioneller.“</p>
+              </div>
+              <div class="ba-side is-after">
+                <span>Nachher</span>
+                <p>„Überarbeite den Text verwaltungstauglich: klar, knapp, freundlich. Inhalt nicht verändern, Unsicherheiten markieren.“</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="slide" data-slide-id="skills-1" data-chapter="skills">
         <div class="slide-inner">
           <div class="chapter-label">Kapitel 6 — Skills</div>
@@ -2285,6 +2335,40 @@ VERBOTEN
         </div>
       </section>
 
+      <section class="slide" data-slide-id="next-5" data-chapter="next-level">
+        <div class="slide-inner">
+          <div class="chapter-label">Kapitel 7 — Next Level</div>
+          <h2>Chat, Project oder Codex?</h2>
+          <p class="lead">Die richtige Oberfläche hängt davon ab, wie wiederholbar, datenreich und ausführbar die Aufgabe ist.</p>
+
+          <div class="workflow-bridge">
+            <article class="bridge-card">
+              <span class="icon" data-icon="messages-square"></span>
+              <h3>Chat</h3>
+              <p>Einmalige Frage, kurzer Text, schnelles Sparring.</p>
+              <strong>Wenn Kontext klein und Risiko überschaubar ist.</strong>
+            </article>
+            <article class="bridge-card">
+              <span class="icon" data-icon="layers"></span>
+              <h3>Project</h3>
+              <p>Wiederkehrender Kontext, Stilregeln, Wissenssammlung.</p>
+              <strong>Wenn Material zusammenbleiben soll.</strong>
+            </article>
+            <article class="bridge-card">
+              <span class="icon" data-icon="code"></span>
+              <h3>Codex / Skill</h3>
+              <p>Dateien ändern, Tests laufen lassen, wiederholbaren Workflow bauen.</p>
+              <strong>Wenn KI nicht nur antworten, sondern arbeiten soll.</strong>
+            </article>
+          </div>
+
+          <div class="bridge-rule">
+            <span>Faustregel</span>
+            <p>Je mehr Kontext, Wiederholung und Qualitätskontrolle nötig sind, desto stärker lohnt sich der Schritt von Chat zu Project zu Codex.</p>
+          </div>
+        </div>
+      </section>
+
       <section class="slide" data-slide-id="next-4" data-chapter="next-level">
         <div class="slide-inner">
           <div class="chapter-label">Kapitel 7 — Transfer</div>
@@ -2315,6 +2399,11 @@ VERBOTEN
               <p>„Ich teste LLMs nächste Woche für <strong>eine</strong> klar begrenzte Aufgabe und notiere: Was wurde schneller, was musste ich prüfen, was bleibt tabu?"</p>
             </div>
             <a class="btn btn-primary" href="meine-notizen.html">Meine Notizen öffnen</a>
+          </div>
+          <div class="resource-strip">
+            <a href="handout.html">Handout</a>
+            <a href="trainer-export.html">Trainer-Export</a>
+            <a href="quellen-refresh.html">Quellencheck</a>
           </div>
         </div>
       </section>
@@ -2350,6 +2439,6 @@ VERBOTEN
     <div class="side-panel-body" id="trainer-panel-body"></div>
   </aside>
 
-  <script type="module" src="app.js?v=2026-05-16aa"></script>
+  <script type="module" src="app.js?v=2026-05-16ab"></script>
 </body>
 </html>

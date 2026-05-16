@@ -1,10 +1,10 @@
 // app.js — Haupteinstieg
-import { Storage } from './lib/storage.js?v=2026-05-16aa';
-import { ModeManager } from './lib/mode.js?v=2026-05-16aa';
-import { icon } from './lib/icons.js?v=2026-05-16aa';
-import { initTabs } from './lib/tabs.js?v=2026-05-16aa';
-import { Exercises } from './lib/exercises.js?v=2026-05-16aa';
-import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS } from './lib/learning-paths.js?v=2026-05-16aa';
+import { Storage } from './lib/storage.js?v=2026-05-16ab';
+import { ModeManager } from './lib/mode.js?v=2026-05-16ab';
+import { icon } from './lib/icons.js?v=2026-05-16ab';
+import { initTabs } from './lib/tabs.js?v=2026-05-16ab';
+import { Exercises } from './lib/exercises.js?v=2026-05-16ab';
+import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS } from './lib/learning-paths.js?v=2026-05-16ab';
 
 const NS = 'llm-101-v1';
 const storage = new Storage(NS);
@@ -238,6 +238,7 @@ const trainerPanel = document.getElementById('trainer-panel');
 const trainerToggle = document.getElementById('trainer-toggle');
 const trainerClose = document.getElementById('trainer-close');
 const trainerPanelBody = document.getElementById('trainer-panel-body');
+const chapterProgress = document.getElementById('chapter-progress');
 
 function normalizePathState(raw) {
   const state = raw && typeof raw === 'object' ? raw : {};
@@ -431,6 +432,14 @@ function updatePathStatus() {
   pathStatus.hidden = false;
 }
 
+function updateChapterProgress(slide) {
+  if (!chapterProgress) return;
+  const chapter = slide?.dataset.chapter || '';
+  chapterProgress.querySelectorAll('[data-progress-chapter]').forEach(item => {
+    item.classList.toggle('is-active', item.dataset.progressChapter === chapter);
+  });
+}
+
 function copyText(text, button) {
   if (!text) return;
   navigator.clipboard?.writeText(text).then(() => {
@@ -546,6 +555,7 @@ function showSlide(idx) {
   document.getElementById('current').textContent = idx + 1;
   document.getElementById('total').textContent = list.length;
   updateTOCCurrent(newSlide?.dataset.slideId);
+  updateChapterProgress(newSlide);
   markActivePathSlide(newSlide);
   renderPathPanel();
   updatePathStatus();

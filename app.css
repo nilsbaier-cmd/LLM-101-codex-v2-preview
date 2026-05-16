@@ -2,12 +2,23 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html {
+  min-height: -webkit-fill-available;
+}
+
 html, body {
   font-family: var(--font-sans);
   background: var(--bg-base);
   color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 /* Typografie */
@@ -272,6 +283,27 @@ body[data-trainer="on"] .side-panel.trainer-only {
   min-height: 28px;
   padding: 5px 10px;
 }
+.chapter-progress {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  z-index: 35;
+  display: grid;
+  grid-template-columns: repeat(7, 32px);
+  gap: 6px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.chapter-progress span {
+  height: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text-tertiary) 24%, transparent);
+  transition: background 180ms ease, transform 180ms ease;
+}
+.chapter-progress span.is-active {
+  background: var(--accent);
+  transform: scaleY(1.7);
+}
 .side-panel-body {
   padding: var(--space-4);
   overflow-y: auto;
@@ -446,6 +478,11 @@ body[data-trainer="on"] .side-panel.trainer-only {
     justify-content: space-between;
   }
 
+  .chapter-progress {
+    grid-template-columns: repeat(7, 22px);
+    bottom: 12px;
+  }
+
   h1 { font-size: 42px; }
   h2 { font-size: 31px; }
   h3 { font-size: 22px; }
@@ -489,6 +526,10 @@ body[data-trainer="on"] .side-panel.trainer-only {
     inset: auto var(--space-3) var(--space-3) var(--space-3);
     top: 128px;
     width: auto;
+  }
+
+  .chapter-progress {
+    display: none;
   }
 
   .path-card-top,

@@ -10,8 +10,8 @@
   <title>Meine Notizen — LLM 101</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="tokens.css?v=2026-05-16aa">
-  <link rel="stylesheet" href="app.css?v=2026-05-16aa">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-16ab">
+  <link rel="stylesheet" href="app.css?v=2026-05-16ab">
   <style>
     .notes-page { max-width: 760px; margin: 0 auto; padding: var(--space-7); }
     .note-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-5); margin-bottom: var(--space-4); }
@@ -22,8 +22,15 @@
     .notes-count { font-size: 14px; color: var(--text-secondary); }
     .notes-empty { color: var(--text-tertiary); text-align: center; padding: var(--space-7); font-style: italic; }
     .notes-footer { font-size: 11px; color: var(--text-tertiary); margin-top: var(--space-6); border-top: 1px solid var(--border); padding-top: var(--space-3); }
+    .analysis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); margin: var(--space-5) 0; }
+    .analysis-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-4); }
+    .analysis-card h2 { font-size: 16px; margin-bottom: var(--space-2); }
+    .analysis-card ul { padding-left: 1rem; color: var(--text-secondary); font-size: 13px; line-height: 1.45; }
+    .analysis-card li { margin-bottom: 6px; }
+    .analysis-card.is-empty { opacity: 0.65; }
     .app-title a { color: inherit; text-decoration: none; }
     .app-title a:hover { color: var(--accent); }
+    @media (max-width: 760px) { .analysis-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -41,6 +48,7 @@
       <span class="notes-count"><span id="count">0</span> Reflexionen</span>
       <button id="export-md" class="btn btn-primary">Als Markdown herunterladen</button>
     </div>
+    <section class="analysis-grid" id="analysis-grid" aria-label="Reflexionsmuster"></section>
     <div id="notes-list"></div>
     <p class="notes-footer">
       Diese Notizen liegen ausschließlich in deinem Browser (LocalStorage).
@@ -49,11 +57,11 @@
     </p>
   </main>
   <script type="module">
-    import { Storage } from './lib/storage.js?v=2026-05-16aa';
-    import { ModeManager } from './lib/mode.js?v=2026-05-16aa';
-    import { Exercises } from './lib/exercises.js?v=2026-05-16aa';
-    import { icon } from './lib/icons.js?v=2026-05-16aa';
-    import { renderNotesMarkdown, downloadMarkdown } from './lib/notes-export.js?v=2026-05-16aa';
+    import { Storage } from './lib/storage.js?v=2026-05-16ab';
+    import { ModeManager } from './lib/mode.js?v=2026-05-16ab';
+    import { Exercises } from './lib/exercises.js?v=2026-05-16ab';
+    import { icon } from './lib/icons.js?v=2026-05-16ab';
+    import { analyzeReflections, renderNotesMarkdown, downloadMarkdown } from './lib/notes-export.js?v=2026-05-16ab';
 
     const storage = new Storage('llm-101-v1');
     const mode = new ModeManager(storage);
@@ -102,6 +110,7 @@
     function renderList() {
       const notes = exercises.allReflections();
       document.getElementById('count').textContent = notes.length;
+      renderAnalysis(notes);
       const list = document.getElementById('notes-list');
       if (notes.length === 0) {
         list.innerHTML = '<p class="notes-empty">Noch keine Reflexionsantworten. Beantworte eine Reflexionsübung in der Präsentation — sie landet hier.</p>';
@@ -119,6 +128,19 @@
             </div>
           </article>`);
       }
+    }
+
+    function renderAnalysis(notes) {
+      const grid = document.getElementById('analysis-grid');
+      const buckets = analyzeReflections(notes);
+      grid.innerHTML = buckets.map(bucket => `
+        <article class="analysis-card ${bucket.items.length ? '' : 'is-empty'}">
+          <h2>${escapeHtml(bucket.title)}</h2>
+          ${bucket.items.length
+            ? `<ul>${bucket.items.map(item => `<li>${escapeHtml(item.antwort).slice(0, 140)}</li>`).join('')}</ul>`
+            : '<p class="note-answer">Noch kein Muster erkannt.</p>'}
+        </article>
+      `).join('');
     }
 
     document.getElementById('export-md').addEventListener('click', () => {

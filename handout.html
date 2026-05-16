@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#C45A43">
+  <title>LLM 101 — Handout</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-16ab">
+  <link rel="stylesheet" href="app.css?v=2026-05-16ab">
+  <style>
+    body { background: var(--bg); color: var(--text-primary); }
+    .sheet { max-width: 980px; margin: 0 auto; padding: var(--space-7); }
+    .sheet-head { display: flex; justify-content: space-between; gap: var(--space-4); align-items: flex-start; border-bottom: 2px solid var(--accent); padding-bottom: var(--space-4); margin-bottom: var(--space-5); }
+    .sheet-head h1 { font-size: 42px; margin: 0; }
+    .sheet-head p { color: var(--text-secondary); max-width: 520px; }
+    .sheet-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+    .sheet-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-4); }
+    .sheet-card h2 { font-size: 18px; margin-bottom: var(--space-3); }
+    .sheet-card ul, .sheet-card ol { padding-left: 1.2rem; color: var(--text-secondary); line-height: 1.55; }
+    .sheet-card li { margin-bottom: 6px; }
+    .wide { grid-column: 1 / -1; }
+    .prompt-parts { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-2); }
+    .prompt-parts span { border: 1px solid var(--border); border-radius: 999px; padding: 6px 8px; text-align: center; font-size: 12px; font-weight: 700; background: var(--bg-tint); }
+    .ampel { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+    .ampel div { border-radius: var(--radius-md); padding: var(--space-3); background: var(--bg-tint); }
+    .ampel strong { display: block; margin-bottom: 4px; }
+    .footer-note { margin-top: var(--space-5); color: var(--text-tertiary); font-size: 12px; }
+    @media print {
+      .app-header { display: none; }
+      .sheet { padding: 12mm; max-width: none; }
+      .sheet-card { break-inside: avoid; }
+    }
+    @media (max-width: 760px) {
+      .sheet { padding: var(--space-5); }
+      .sheet-head, .sheet-grid, .ampel, .prompt-parts { grid-template-columns: 1fr; display: grid; }
+      .sheet-head h1 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-title"><a href="index.html">← Zurück zur Präsentation</a></div>
+  </header>
+  <main class="sheet">
+    <div class="sheet-head">
+      <div>
+        <div class="panel-eyebrow">LLM 101</div>
+        <h1>Handout</h1>
+      </div>
+      <p>Ein kompaktes Nachschlageblatt für sichere, praktische LLM-Nutzung nach dem Workshop.</p>
+    </div>
+
+    <section class="sheet-grid">
+      <article class="sheet-card">
+        <h2>Prompt-Bausteine</h2>
+        <div class="prompt-parts">
+          <span>Ziel</span><span>Kontext</span><span>Rolle</span><span>Grenzen</span><span>Stil</span><span>Output</span>
+        </div>
+      </article>
+      <article class="sheet-card">
+        <h2>Output prüfen</h2>
+        <ul>
+          <li>Welche Fakten muss ich verifizieren?</li>
+          <li>Welche Daten oder Annahmen sind heikel?</li>
+          <li>Passt der Ton zur Zielgruppe?</li>
+          <li>Bleibt die Verantwortung beim Menschen?</li>
+        </ul>
+      </article>
+      <article class="sheet-card wide">
+        <h2>Datenampel</h2>
+        <div class="ampel">
+          <div><strong>Grün</strong> Öffentlich, unkritisch, bereits freigegeben.</div>
+          <div><strong>Gelb</strong> Intern oder fachlich sensibel: nur mit klarer Freigabe und guter Anonymisierung.</div>
+          <div><strong>Rot</strong> Personendaten, Dossiers, klassifizierte Inhalte, Entscheide über Menschen.</div>
+        </div>
+      </article>
+      <article class="sheet-card">
+        <h2>7-Tage-Experiment</h2>
+        <ol>
+          <li>Eine kleine echte Aufgabe wählen.</li>
+          <li>Prompt als Arbeitsauftrag formulieren.</li>
+          <li>Ergebnis bewusst prüfen.</li>
+          <li>Notieren: schneller, besser, riskanter?</li>
+        </ol>
+      </article>
+      <article class="sheet-card">
+        <h2>Gute Startfälle</h2>
+        <ul>
+          <li>Sitzung vorbereiten</li>
+          <li>Text vereinfachen</li>
+          <li>Risiken sammeln</li>
+          <li>Status verdichten</li>
+        </ul>
+      </article>
+    </section>
+
+    <p class="footer-note">Stand: 16.05.2026. Dieses Handout ersetzt keine internen Vorgaben zur Datenklassifikation oder Toolfreigabe.</p>
+  </main>
+</body>
+</html>

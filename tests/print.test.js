@@ -32,7 +32,7 @@ describe('print and pdf delivery', () => {
   });
 
   it('documents the browser pdf path', () => {
-    expect(readme).toContain('PDF/Handout');
+    expect(readme).toContain('PDF/Deck-Handout');
     expect(readme).toContain('print.css');
     expect(readme).toContain('16:9-Seiten');
   });

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#C45A43">
+  <title>LLM 101 — Trainer-Export</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-16ab">
+  <link rel="stylesheet" href="app.css?v=2026-05-16ab">
+  <style>
+    .trainer-sheet { max-width: 1040px; margin: 0 auto; padding: var(--space-7); }
+    .trainer-sheet h1 { font-size: 42px; }
+    .variant-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin: var(--space-5) 0; }
+    .variant-card, .note-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-4); }
+    .variant-card h2, .note-card h2 { font-size: 20px; margin-bottom: var(--space-3); }
+    .variant-card ol, .variant-card ul, .note-card ul { color: var(--text-secondary); padding-left: 1.2rem; line-height: 1.5; }
+    .notes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+    .note-meta { color: var(--text-tertiary); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--space-2); }
+    .prompt-box { margin-top: var(--space-3); padding: var(--space-3); border-left: 3px solid var(--accent); background: var(--bg-tint); color: var(--text-secondary); font-size: 12px; }
+    @media print {
+      .app-header { display: none; }
+      .trainer-sheet { padding: 10mm; max-width: none; }
+      .variant-card, .note-card { break-inside: avoid; }
+    }
+    @media (max-width: 820px) {
+      .trainer-sheet { padding: var(--space-5); }
+      .variant-grid, .notes-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-title"><a href="index.html?trainer=1">← Zurück zum Cockpit</a></div>
+  </header>
+  <main class="trainer-sheet">
+    <div class="panel-eyebrow">Trainer</div>
+    <h1>Moderationsblatt</h1>
+    <p class="lead">Abläufe, Fallbacks, Demo-Checklisten und Kernnotizen für die Workshop-Varianten.</p>
+    <section class="variant-grid" id="variants"></section>
+    <section class="notes-grid" id="notes"></section>
+  </main>
+  <script type="module">
+    import { TRAINER_NOTES, TRAINER_VARIANTS } from './lib/learning-paths.js?v=2026-05-16ab';
+
+    const escapeHtml = (value) => String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
+
+    document.getElementById('variants').innerHTML = TRAINER_VARIANTS.map(variant => `
+      <article class="variant-card">
+        <h2>${escapeHtml(variant.label)}</h2>
+        <ol>${variant.checkpoints.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ol>
+        <h3>Demo-Checkliste</h3>
+        <ul>${variant.demoChecklist.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        <h3>Probe-Modus</h3>
+        <ul>${variant.probeCues.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+      </article>
+    `).join('');
+
+    document.getElementById('notes').innerHTML = Object.entries(TRAINER_NOTES).map(([id, note]) => `
+      <article class="note-card">
+        <div class="note-meta">${escapeHtml(note.timing)} · ${escapeHtml(id)}</div>
+        <h2>${escapeHtml(note.focus)}</h2>
+        <ul>${note.notes.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+        <p><strong>Fallback:</strong> ${escapeHtml(note.fallback)}</p>
+        ${note.prompt ? `<div class="prompt-box">${escapeHtml(note.prompt)}</div>` : ''}
+      </article>
+    `).join('');
+  </script>
+</body>
+</html>

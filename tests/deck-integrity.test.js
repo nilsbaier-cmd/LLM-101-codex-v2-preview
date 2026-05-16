@@ -8,6 +8,9 @@ const read = (path) => readFileSync(join(root, path), 'utf8');
 const htmlFiles = [
   'index.html',
   'meine-notizen.html',
+  'handout.html',
+  'trainer-export.html',
+  'quellen-refresh.html',
   ...readdirSync(join(root, 'explainer'))
     .filter(file => file.endsWith('.html'))
     .map(file => `explainer/${file}`)
@@ -40,7 +43,7 @@ describe('deck integrity', () => {
   const slideIds = slides.map(slide => slide.dataset.slideId);
 
   it('keeps slide ids unique, navigable and titled', () => {
-    expect(slides).toHaveLength(28);
+    expect(slides).toHaveLength(30);
     expect(new Set(slideIds).size).toBe(slideIds.length);
 
     slides.forEach(slide => {

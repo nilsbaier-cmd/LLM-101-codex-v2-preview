@@ -34,6 +34,9 @@ describe('offline delivery shell', () => {
     [
       './index.html',
       './meine-notizen.html',
+      './handout.html',
+      './trainer-export.html',
+      './quellen-refresh.html',
       './assets/icon.svg',
       './tokens.css',
       './app.css',
