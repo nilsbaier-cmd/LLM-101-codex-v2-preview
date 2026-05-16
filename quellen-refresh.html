@@ -3,44 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#C45A43">
+  <meta name="theme-color" content="#c5e818">
   <title>LLM 101 — Quellencheck</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="tokens.css?v=2026-05-16ab">
   <link rel="stylesheet" href="app.css?v=2026-05-16ab">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-16ab">
   <style>
-    .refresh-page { max-width: 1040px; margin: 0 auto; padding: var(--space-7); }
-    .refresh-page h1 { font-size: 42px; }
-    .refresh-table { display: grid; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; margin-top: var(--space-5); }
-    .refresh-row { display: grid; grid-template-columns: 1fr 1.2fr 1fr 0.8fr; gap: var(--space-3); padding: var(--space-3); border-bottom: 1px solid var(--border); background: var(--bg-card); }
+    .refresh-shell { max-width: 1100px; margin: 0 auto; padding: var(--space-6) var(--space-5); }
+    .refresh-frame .slide-body { padding: clamp(28px, 3.6vw, 56px); gap: 24px; }
+    .refresh-table {
+      display: grid;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+    .refresh-row {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr 1fr 0.7fr;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
     .refresh-row:last-child { border-bottom: 0; }
-    .refresh-head { background: var(--bg-tint); font-weight: 800; color: var(--text-primary); }
-    .refresh-row span, .refresh-row a { font-size: 13px; color: var(--text-secondary); }
-    .refresh-row a { color: var(--accent-strong); }
-    .badge { justify-self: start; border-radius: 999px; padding: 3px 8px; background: var(--accent-soft); color: var(--accent-strong); font-weight: 800; font-size: 11px; }
+    .refresh-head {
+      background: var(--bg-tint);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      font-weight: 700;
+    }
+    .refresh-row span, .refresh-row a { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+    .refresh-row a { color: var(--cobalt); text-decoration: none; }
+    .refresh-row a:hover { text-decoration: underline; }
+    .refresh-slide-id {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .refresh-badge {
+      justify-self: start;
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+    }
     @media (max-width: 760px) {
-      .refresh-page { padding: var(--space-5); }
       .refresh-row { grid-template-columns: 1fr; }
       .refresh-head { display: none; }
     }
   </style>
 </head>
-<body>
+<body data-layout="scroll">
   <header class="app-header">
-    <div class="app-title"><a href="index.html">← Zurück zur Präsentation</a></div>
+    <div class="app-brand-id app-title"><a href="index.html" style="color:inherit;text-decoration:none;">LLM 101 · Wartung</a></div>
   </header>
-  <main class="refresh-page">
-    <div class="panel-eyebrow">Wartung</div>
-    <h1>Quellen- und Faktencheck</h1>
-    <p class="lead">Diese Folien enthalten Aussagen, die vor Workshops kurz geprüft werden sollten.</p>
-    <section class="refresh-table" aria-label="Volatile Folien und Quellen">
-      <div class="refresh-row refresh-head"><span>Folie</span><span>Was prüfen?</span><span>Quelle</span><span>Stand</span></div>
-      <div class="refresh-row"><span><strong>verwaltung-1</strong></span><span>KI-Anlaufstelle, Kompetenznetzwerk, Projektdatenbank</span><a href="https://www.bk.admin.ch/bk/de/home/digitale-transformation-ikt-lenkung/kuenstliche_intelligenz/kinetzwerk.html">BK Kompetenznetzwerk KI</a><span class="badge">16.05.2026</span></div>
-      <div class="refresh-row"><span><strong>verwaltung-2</strong></span><span>Merkblätter, FAQs, KI-Teilstrategie</span><a href="https://www.bk.admin.ch/bk/de/home/digitale-transformation-ikt-lenkung/vorgaben/sb021-strategie-einsatz-von-ki-systemen-in-der-bundesverwaltung.html">SB021 KI-Teilstrategie</a><span class="badge">16.05.2026</span></div>
-      <div class="refresh-row"><span><strong>claude-1</strong></span><span>Modellfamilien, Plan-Namen, Preislogik</span><a href="https://support.claude.com/en/articles/11049762-choosing-a-claude-plan">Claude Plans</a><span class="badge">16.05.2026</span></div>
-      <div class="refresh-row"><span><strong>claude-5</strong></span><span>Tool-Features: Projects, GPTs, Gemini, Skills</span><a href="https://chatgpt.com/pricing/">ChatGPT Pricing</a><span class="badge">16.05.2026</span></div>
-      <div class="refresh-row"><span><strong>next-3</strong></span><span>Desktop-Apps, CLI-Namen, Mobile-Features</span><a href="https://gemini.google/subscriptions/">Gemini Subscriptions</a><span class="badge">16.05.2026</span></div>
+  <main class="refresh-shell">
+    <section class="slide codex refresh-frame">
+      <div class="slide-head">
+        <div class="slide-crumb">
+          <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-alert-triangle"/></svg></span>
+          <span class="slide-crumb-chap">Wartung · Quellencheck</span>
+          <span class="slide-crumb-sep"><svg class="ic sm"><use href="#i-chevron-right"/></svg></span>
+          <span class="slide-crumb-topic">Volatile Folien · zu prüfen</span>
+        </div>
+        <span class="slide-stand" data-volatile="true">
+          <svg class="ic sm"><use href="#i-alert-triangle"/></svg>
+          Stand 16.05.26 · zu prüfen
+        </span>
+      </div>
+      <div class="slide-body">
+        <div class="title-row">
+          <span class="kicker"><svg class="ic sm"><use href="#i-alert-triangle"/></svg> Volatile · 5 Folien</span>
+          <h2 class="lede">Quellen- und Faktencheck — <em>vor jedem Workshop</em></h2>
+        </div>
+
+        <p style="color: var(--text-secondary); line-height: 1.55; margin: 0; max-width: 72ch;">Diese Folien enthalten Aussagen, die vor Workshops kurz geprüft werden sollten. Alle Folien tragen <code>data-volatile="true"</code> im Markup.</p>
+
+        <section class="refresh-table" aria-label="Volatile Folien und Quellen">
+          <div class="refresh-row refresh-head">
+            <span>Folie</span><span>Was prüfen?</span><span>Quelle</span><span>Stand</span>
+          </div>
+          <div class="refresh-row">
+            <span class="refresh-slide-id">verwaltung-1</span>
+            <span>KI-Anlaufstelle, Kompetenznetzwerk, Projektdatenbank</span>
+            <a href="https://www.bk.admin.ch/bk/de/home/digitale-transformation-ikt-lenkung/kuenstliche_intelligenz/kinetzwerk.html">BK Kompetenznetzwerk KI</a>
+            <span class="refresh-badge">16.05.2026</span>
+          </div>
+          <div class="refresh-row">
+            <span class="refresh-slide-id">verwaltung-2</span>
+            <span>Merkblätter, FAQs, KI-Teilstrategie</span>
+            <a href="https://www.bk.admin.ch/bk/de/home/digitale-transformation-ikt-lenkung/vorgaben/sb021-strategie-einsatz-von-ki-systemen-in-der-bundesverwaltung.html">SB021 KI-Teilstrategie</a>
+            <span class="refresh-badge">16.05.2026</span>
+          </div>
+          <div class="refresh-row">
+            <span class="refresh-slide-id">claude-1</span>
+            <span>Modellfamilien, Plan-Namen, Preislogik</span>
+            <a href="https://support.claude.com/en/articles/11049762-choosing-a-claude-plan">Claude Plans</a>
+            <span class="refresh-badge">16.05.2026</span>
+          </div>
+          <div class="refresh-row">
+            <span class="refresh-slide-id">claude-5</span>
+            <span>Tool-Features: Projects, GPTs, Gemini, Skills</span>
+            <a href="https://chatgpt.com/pricing/">ChatGPT Pricing</a>
+            <span class="refresh-badge">16.05.2026</span>
+          </div>
+          <div class="refresh-row">
+            <span class="refresh-slide-id">next-3</span>
+            <span>Desktop-Apps, CLI-Namen, Mobile-Features</span>
+            <a href="https://gemini.google/subscriptions/">Gemini Subscriptions</a>
+            <span class="refresh-badge">16.05.2026</span>
+          </div>
+        </section>
+
+        <aside class="callout">
+          <span class="callout-icon"><svg class="ic lg"><use href="#i-quote"/></svg></span>
+          <p><b>Faustregel — </b>Wenn eine Quelle ein neueres Datum trägt als das Stand-Datum hier: Folie öffnen, Stand-Stamp aktualisieren, <code>data-checked</code> in <code>index.html</code> setzen.</p>
+        </aside>
+      </div>
+      <div class="slide-foot">
+        <a class="slide-nav prev" href="index.html">
+          <svg class="ic"><use href="#i-arrow-left"/></svg> zurück zur Präsentation
+        </a>
+        <div class="slide-progress">
+          <span class="slide-folio"><svg class="ic"><use href="#i-alert-triangle"/></svg> Wartung <b>· Quellencheck</b></span>
+        </div>
+        <span class="slide-nav" aria-hidden="true" style="visibility:hidden">platz</span>
+      </div>
     </section>
   </main>
+  <script type="module">
+    import { initSprite } from './lib/icons-sprite.js?v=2026-05-16ab';
+    initSprite();
+  </script>
 </body>
 </html>

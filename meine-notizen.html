@@ -6,66 +6,167 @@
   <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="theme-color" content="#C45A43">
+  <meta name="theme-color" content="#c5e818">
   <title>Meine Notizen — LLM 101</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="tokens.css?v=2026-05-16ab">
   <link rel="stylesheet" href="app.css?v=2026-05-16ab">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-16ab">
   <style>
-    .notes-page { max-width: 760px; margin: 0 auto; padding: var(--space-7); }
-    .note-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-5); margin-bottom: var(--space-4); }
-    .note-meta { font-size: 11px; color: var(--text-tertiary); margin-bottom: var(--space-2); text-transform: uppercase; letter-spacing: 1px; }
+    .notes-shell { max-width: 920px; margin: 0 auto; padding: var(--space-6) var(--space-5); }
+    .notes-frame .slide-body { padding: clamp(28px, 3.6vw, 56px); gap: 20px; }
+    .notes-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .notes-count {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+    .notes-count strong { color: var(--text-primary); font-weight: 700; font-size: 14px; letter-spacing: 0; }
+    .note-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-4) var(--space-5);
+      margin-bottom: var(--space-3);
+    }
+    .note-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-bottom: var(--space-2);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
     .note-answer { color: var(--text-secondary); white-space: pre-wrap; line-height: 1.6; }
     .note-actions { display: flex; gap: var(--space-2); margin-top: var(--space-3); }
-    .notes-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 1px solid var(--border); }
-    .notes-count { font-size: 14px; color: var(--text-secondary); }
-    .notes-empty { color: var(--text-tertiary); text-align: center; padding: var(--space-7); font-style: italic; }
-    .notes-footer { font-size: 11px; color: var(--text-tertiary); margin-top: var(--space-6); border-top: 1px solid var(--border); padding-top: var(--space-3); }
-    .analysis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); margin: var(--space-5) 0; }
-    .analysis-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-4); }
-    .analysis-card h2 { font-size: 16px; margin-bottom: var(--space-2); }
-    .analysis-card ul { padding-left: 1rem; color: var(--text-secondary); font-size: 13px; line-height: 1.45; }
+    .notes-empty {
+      color: var(--text-tertiary);
+      text-align: center;
+      padding: var(--space-7);
+      font-style: italic;
+      background: var(--bg-tint);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-md);
+    }
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+    }
+    .analysis-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+    .analysis-card h2 {
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0 0 var(--space-2);
+      color: var(--text-primary);
+      letter-spacing: -0.008em;
+    }
+    .analysis-card ul {
+      padding-left: 1rem;
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 0;
+    }
     .analysis-card li { margin-bottom: 6px; }
     .analysis-card.is-empty { opacity: 0.65; }
-    .app-title a { color: inherit; text-decoration: none; }
-    .app-title a:hover { color: var(--accent); }
     @media (max-width: 760px) { .analysis-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
-<body>
+<body data-layout="scroll">
   <header class="app-header">
-    <div class="app-title"><a href="index.html">← Zurück zur Präsentation</a></div>
+    <div class="app-brand-id app-title"><a href="index.html" style="color:inherit;text-decoration:none;">LLM 101 · Notizen</a></div>
     <div class="app-toggles" role="toolbar" aria-label="Darstellungsmodus">
       <button class="toggle" data-mode="theme" data-value="light" title="Hell" aria-label="Helles Theme" aria-pressed="false"></button>
       <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel" aria-label="Dunkles Theme" aria-pressed="false"></button>
       <button class="toggle" data-mode="theme" data-value="auto" title="OS-Präferenz" aria-pressed="false">Auto</button>
     </div>
   </header>
-  <main class="notes-page">
-    <h1>Meine Notizen</h1>
-    <div class="notes-toolbar">
-      <span class="notes-count"><span id="count">0</span> Reflexionen</span>
-      <button id="export-md" class="btn btn-primary">Als Markdown herunterladen</button>
-    </div>
-    <section class="analysis-grid" id="analysis-grid" aria-label="Reflexionsmuster"></section>
-    <div id="notes-list"></div>
-    <p class="notes-footer">
-      Diese Notizen liegen ausschließlich in deinem Browser (LocalStorage).
-      Browser-Cache leeren oder anderes Gerät = Notizen weg.
-      Lade sie regelmäßig als Markdown herunter, wenn du sie behalten willst.
-    </p>
+  <main class="notes-shell">
+    <section class="slide codex notes-frame">
+      <div class="slide-head">
+        <div class="slide-crumb">
+          <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-edit"/></svg></span>
+          <span class="slide-crumb-chap">Werkzeug · Notizen</span>
+          <span class="slide-crumb-sep"><svg class="ic sm"><use href="#i-chevron-right"/></svg></span>
+          <span class="slide-crumb-topic" id="notes-topic">Reflexions-Sammlung</span>
+        </div>
+        <span class="slide-stand">
+          <svg class="ic sm"><use href="#i-bookmark"/></svg>
+          Stand 16.05.26
+        </span>
+      </div>
+      <div class="slide-body">
+        <div class="title-row">
+          <span class="kicker"><svg class="ic sm"><use href="#i-edit"/></svg> LocalStorage · nur dein Browser</span>
+          <h2 class="lede">Meine Notizen — <em>Reflexionen aus der Präsentation</em></h2>
+        </div>
+
+        <div class="notes-toolbar">
+          <span class="notes-count"><strong id="count">0</strong> Reflexionen</span>
+          <button id="export-md" class="slide-nav" type="button">
+            <svg class="ic"><use href="#i-arrow-right"/></svg>
+            Als Markdown herunterladen
+          </button>
+        </div>
+
+        <section class="analysis-grid" id="analysis-grid" aria-label="Reflexionsmuster"></section>
+
+        <div id="notes-list"></div>
+
+        <aside class="callout">
+          <span class="callout-icon"><svg class="ic lg"><use href="#i-alert-triangle"/></svg></span>
+          <p><b>Faustregel — </b>Diese Notizen liegen ausschließlich in deinem Browser (LocalStorage). Browser-Cache leeren oder anderes Gerät = Notizen weg. Lade sie regelmäßig als Markdown herunter, wenn du sie behalten willst.</p>
+        </aside>
+      </div>
+      <div class="slide-foot">
+        <a class="slide-nav prev" href="index.html" id="back-link-bottom">
+          <svg class="ic"><use href="#i-arrow-left"/></svg> zurück zur Präsentation
+        </a>
+        <div class="slide-progress">
+          <span class="slide-folio"><svg class="ic"><use href="#i-edit"/></svg> Werkzeug <b>· Notizen</b></span>
+        </div>
+        <span class="slide-nav" aria-hidden="true" style="visibility:hidden">platz</span>
+      </div>
+    </section>
   </main>
   <script type="module">
+    import { initSprite } from './lib/icons-sprite.js?v=2026-05-16ab';
     import { Storage } from './lib/storage.js?v=2026-05-16ab';
     import { ModeManager } from './lib/mode.js?v=2026-05-16ab';
     import { Exercises } from './lib/exercises.js?v=2026-05-16ab';
     import { icon } from './lib/icons.js?v=2026-05-16ab';
     import { analyzeReflections, renderNotesMarkdown, downloadMarkdown } from './lib/notes-export.js?v=2026-05-16ab';
 
+    await initSprite();
+
     const storage = new Storage('llm-101-v1');
     const mode = new ModeManager(storage);
     const exercises = new Exercises(storage);
+
+    // Rückweg ergänzen (z.B. ?back=next-4)
+    const backParam = new URLSearchParams(window.location.search).get('back');
+    if (backParam) {
+      const targetHref = `index.html#${backParam}`;
+      const bottomLink = document.getElementById('back-link-bottom');
+      if (bottomLink) bottomLink.href = targetHref;
+      const topic = document.getElementById('notes-topic');
+      if (topic) topic.innerHTML = `Reflexions-Sammlung <span class="explainer-back-hint">· zurück zu <b>${backParam}</b></span>`;
+    }
 
     // Theme-Buttons mit Icons befüllen
     document.querySelector('[data-mode="theme"][data-value="light"]').innerHTML = icon('sun');

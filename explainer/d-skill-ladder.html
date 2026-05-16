@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="Cache-Control" content="no-store">
-  <title>Skill-Ladder Selbsttest — Concept-Explainer D</title>
+  <title>Skill-Ladder Selbsttest — Explainer D</title>
   <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../tokens.css?v=2026-05-16ab">
   <link rel="stylesheet" href="../app.css?v=2026-05-16ab">
+  <link rel="stylesheet" href="../presentation.css?v=2026-05-16ab">
   <link rel="stylesheet" href="explainer.css?v=2026-05-16ab">
 </head>
-<body>
+<body data-layout="scroll">
   <header class="app-header">
-    <div class="app-title"><a href="../index.html" id="back-link-top" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
+    <div class="app-brand-id app-title">
+      <a href="../index.html" id="back-link-top" style="color:inherit;text-decoration:none;">LLM 101 · Explainer</a>
+    </div>
     <div class="app-toggles" role="toolbar" aria-label="Darstellungsmodus">
       <button class="toggle" data-mode="theme" data-value="light" title="Hell" aria-label="Helles Theme" aria-pressed="false"></button>
       <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel" aria-label="Dunkles Theme" aria-pressed="false"></button>
@@ -19,27 +22,58 @@
     </div>
   </header>
 
-  <main class="explainer-page">
-    <div class="chapter-label">Concept-Explainer D</div>
-    <h2>Skill-Ladder — Wo stehst du?</h2>
-    <p class="lead">Sieben Fragen über deine aktuelle Nutzung. Am Ende erfährst du, auf welchem Level du bist — und was der nächste konkrete Schritt wäre.</p>
+  <main class="explainer-main">
+    <section class="slide codex explainer-frame" data-explainer="d" data-chapter="skills">
+      <div class="slide-head">
+        <div class="slide-crumb">
+          <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-target"/></svg></span>
+          <span class="slide-crumb-chap">Explainer · D</span>
+          <span class="slide-crumb-sep"><svg class="ic sm"><use href="#i-chevron-right"/></svg></span>
+          <span class="slide-crumb-topic">Skill-Ladder Selbsttest</span>
+        </div>
+        <span class="slide-stand">
+          <svg class="ic sm"><use href="#i-bookmark"/></svg>
+          Stand 16.05.26
+        </span>
+      </div>
 
-    <div class="quiz-progress">
-      <div class="quiz-progress-fill" id="quiz-progress-fill" style="width: 0%;"></div>
-    </div>
-    <div class="quiz-progress-label"><span id="quiz-q-current">1</span> / <span id="quiz-q-total">7</span></div>
+      <div class="slide-body">
+        <div class="title-row">
+          <span class="kicker"><svg class="ic sm"><use href="#i-target"/></svg> Skill-Ladder · Selbsttest</span>
+          <h2 class="lede">Wo stehst du — <em>und was wäre der nächste Schritt?</em></h2>
+        </div>
 
-    <div class="ladder-quiz" id="ladder-quiz"></div>
+        <p class="explainer-lead">Sieben Fragen über deine aktuelle Nutzung. Am Ende erfährst du, auf welchem Level du bist — und was der nächste konkrete Schritt wäre.</p>
 
-    <div class="ladder-result" id="ladder-result" hidden></div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-fill" id="quiz-progress-fill" style="width: 0%;"></div>
+        </div>
+        <div class="quiz-progress-label"><span id="quiz-q-current">1</span> / <span id="quiz-q-total">7</span></div>
 
-    <p class="back-link">→ <a href="../index.html" id="back-link-bottom">Zurück zur Präsentation</a></p>
+        <div class="ladder-quiz" id="ladder-quiz"></div>
+
+        <div class="ladder-result" id="ladder-result" hidden></div>
+      </div>
+
+      <div class="slide-foot">
+        <a class="slide-nav prev" href="../index.html" id="back-link-bottom">
+          <svg class="ic"><use href="#i-arrow-left"/></svg> zurück zur Präsentation
+        </a>
+        <div class="slide-progress">
+          <span class="slide-folio"><svg class="ic"><use href="#i-target"/></svg> Explainer <b>D · Skill-Ladder</b></span>
+        </div>
+        <span class="slide-nav" aria-hidden="true" style="visibility:hidden">platz</span>
+      </div>
+    </section>
   </main>
 
   <script type="module">
+    import { initSprite } from '../lib/icons-sprite.js?v=2026-05-16ab';
     import { ModeManager } from '../lib/mode.js?v=2026-05-16ab';
     import { Storage } from '../lib/storage.js?v=2026-05-16ab';
     import { icon } from '../lib/icons.js?v=2026-05-16ab';
+
+    await initSprite();
 
     const storage = new Storage('llm-101-v1');
     const mode = new ModeManager(storage);
@@ -52,6 +86,8 @@
       const bottomLink = document.getElementById('back-link-bottom');
       if (topLink) topLink.href = targetHref;
       if (bottomLink) bottomLink.href = targetHref;
+      const topic = document.querySelector('.slide-crumb-topic');
+      if (topic) topic.innerHTML += ` <span class="explainer-back-hint">· zurück zu <b>${backParam}</b></span>`;
     }
 
     document.querySelector('[data-mode="theme"][data-value="light"]').innerHTML = icon('sun');

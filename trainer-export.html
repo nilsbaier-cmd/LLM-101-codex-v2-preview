@@ -3,45 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#C45A43">
+  <meta name="theme-color" content="#c5e818">
   <title>LLM 101 — Trainer-Export</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="tokens.css?v=2026-05-16ab">
   <link rel="stylesheet" href="app.css?v=2026-05-16ab">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-16ab">
   <style>
-    .trainer-sheet { max-width: 1040px; margin: 0 auto; padding: var(--space-7); }
-    .trainer-sheet h1 { font-size: 42px; }
-    .variant-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin: var(--space-5) 0; }
-    .variant-card, .note-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-4); }
-    .variant-card h2, .note-card h2 { font-size: 20px; margin-bottom: var(--space-3); }
-    .variant-card ol, .variant-card ul, .note-card ul { color: var(--text-secondary); padding-left: 1.2rem; line-height: 1.5; }
+    .trainer-shell { max-width: 1100px; margin: 0 auto; padding: var(--space-6) var(--space-5); }
+    .trainer-frame .slide-body { padding: clamp(28px, 3.6vw, 56px); gap: 24px; }
+    .trainer-section h3 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin: var(--space-4) 0 var(--space-2);
+    }
+    .variant-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+    .variant-card, .note-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+    .variant-card h2, .note-card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.012em;
+      margin: 0 0 var(--space-3);
+      color: var(--text-primary);
+    }
+    .variant-card ol, .variant-card ul, .note-card ul {
+      color: var(--text-secondary);
+      padding-left: 1.2rem;
+      line-height: 1.5;
+      margin: 0 0 var(--space-3);
+    }
+    .variant-card li, .note-card li { margin-bottom: 4px; }
     .notes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
-    .note-meta { color: var(--text-tertiary); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--space-2); }
-    .prompt-box { margin-top: var(--space-3); padding: var(--space-3); border-left: 3px solid var(--accent); background: var(--bg-tint); color: var(--text-secondary); font-size: 12px; }
+    .note-meta {
+      font-family: var(--font-mono);
+      color: var(--text-tertiary);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: var(--space-2);
+    }
+    .prompt-box {
+      margin-top: var(--space-3);
+      padding: var(--space-3);
+      border-left: 3px solid var(--accent);
+      background: var(--bg-tint);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.5;
+    }
     @media print {
       .app-header { display: none; }
-      .trainer-sheet { padding: 10mm; max-width: none; }
+      .trainer-shell { padding: 8mm; max-width: none; }
       .variant-card, .note-card { break-inside: avoid; }
     }
-    @media (max-width: 820px) {
-      .trainer-sheet { padding: var(--space-5); }
+    @media (max-width: 880px) {
       .variant-grid, .notes-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body>
+<body data-layout="scroll">
   <header class="app-header">
-    <div class="app-title"><a href="index.html?trainer=1">← Zurück zum Cockpit</a></div>
+    <div class="app-brand-id app-title"><a href="index.html?trainer=1" style="color:inherit;text-decoration:none;">LLM 101 · Trainer-Cockpit</a></div>
   </header>
-  <main class="trainer-sheet">
-    <div class="panel-eyebrow">Trainer</div>
-    <h1>Moderationsblatt</h1>
-    <p class="lead">Abläufe, Fallbacks, Demo-Checklisten und Kernnotizen für die Workshop-Varianten.</p>
-    <section class="variant-grid" id="variants"></section>
-    <section class="notes-grid" id="notes"></section>
+  <main class="trainer-shell">
+    <section class="slide codex trainer-frame">
+      <div class="slide-head">
+        <div class="slide-crumb">
+          <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-target"/></svg></span>
+          <span class="slide-crumb-chap">Trainer · Export</span>
+          <span class="slide-crumb-sep"><svg class="ic sm"><use href="#i-chevron-right"/></svg></span>
+          <span class="slide-crumb-topic">Moderationsblatt</span>
+        </div>
+        <span class="slide-stand">
+          <svg class="ic sm"><use href="#i-bookmark"/></svg>
+          Stand 16.05.26
+        </span>
+      </div>
+      <div class="slide-body">
+        <div class="title-row">
+          <span class="kicker"><svg class="ic sm"><use href="#i-target"/></svg> Trainer · Workshop-Varianten</span>
+          <h2 class="lede">Moderationsblatt — <em>Abläufe, Fallbacks, Demo-Checklisten</em></h2>
+        </div>
+
+        <p style="color: var(--text-secondary); line-height: 1.55; margin: 0; max-width: 72ch;">Daten aus <code>TRAINER_VARIANTS</code> und <code>TRAINER_NOTES</code> in <code>lib/learning-paths.js</code>.</p>
+
+        <section class="trainer-section">
+          <h3>Varianten</h3>
+          <div class="variant-grid" id="variants"></div>
+        </section>
+
+        <section class="trainer-section">
+          <h3>Trainer-Notizen pro Slide</h3>
+          <div class="notes-grid" id="notes"></div>
+        </section>
+
+        <aside class="callout">
+          <span class="callout-icon"><svg class="ic lg"><use href="#i-quote"/></svg></span>
+          <p><b>Faustregel — </b>Vor jedem Workshop: Variante festlegen, Demo-Checkliste durchgehen, Fallback einmal probieren. Live ist immer härter als Probe.</p>
+        </aside>
+      </div>
+      <div class="slide-foot">
+        <a class="slide-nav prev" href="index.html?trainer=1">
+          <svg class="ic"><use href="#i-arrow-left"/></svg> zurück zum Cockpit
+        </a>
+        <div class="slide-progress">
+          <span class="slide-folio"><svg class="ic"><use href="#i-target"/></svg> Trainer <b>· Export</b></span>
+        </div>
+        <span class="slide-nav" aria-hidden="true" style="visibility:hidden">platz</span>
+      </div>
+    </section>
   </main>
   <script type="module">
+    import { initSprite } from './lib/icons-sprite.js?v=2026-05-16ab';
     import { TRAINER_NOTES, TRAINER_VARIANTS } from './lib/learning-paths.js?v=2026-05-16ab';
+
+    initSprite();
 
     const escapeHtml = (value) => String(value)
       .replaceAll('&', '&amp;')
@@ -53,6 +139,7 @@
     document.getElementById('variants').innerHTML = TRAINER_VARIANTS.map(variant => `
       <article class="variant-card">
         <h2>${escapeHtml(variant.label)}</h2>
+        <h3>Checkpoints</h3>
         <ol>${variant.checkpoints.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ol>
         <h3>Demo-Checkliste</h3>
         <ul>${variant.demoChecklist.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>

@@ -5,15 +5,18 @@
   <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>Context Window & Pflege — Concept-Explainer A</title>
+  <title>Context Window & Pflege — Explainer A</title>
   <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../tokens.css?v=2026-05-16ab">
   <link rel="stylesheet" href="../app.css?v=2026-05-16ab">
+  <link rel="stylesheet" href="../presentation.css?v=2026-05-16ab">
   <link rel="stylesheet" href="explainer.css?v=2026-05-16ab">
 </head>
-<body>
+<body data-layout="scroll">
   <header class="app-header">
-    <div class="app-title"><a href="../index.html" id="back-link-top" style="color:inherit;text-decoration:none;">← Zurück zur Präsentation</a></div>
+    <div class="app-brand-id app-title">
+      <a href="../index.html" id="back-link-top" style="color:inherit;text-decoration:none;">LLM 101 · Explainer</a>
+    </div>
     <div class="app-toggles" role="toolbar" aria-label="Darstellungsmodus">
       <button class="toggle" data-mode="theme" data-value="light" title="Hell" aria-label="Helles Theme" aria-pressed="false"></button>
       <button class="toggle" data-mode="theme" data-value="dark" title="Dunkel" aria-label="Dunkles Theme" aria-pressed="false"></button>
@@ -21,78 +24,114 @@
     </div>
   </header>
 
-  <main class="explainer-page">
-    <div class="chapter-label">Concept-Explainer A</div>
-    <h2>Context Window & Pflege-Strategien</h2>
-    <p class="lead">Tipp Nachrichten ein und beobachte den Balken füllen. Probier dann die drei Pflege-Strategien — jede verändert, wie Claude den Kontext sieht.</p>
-
-    <section class="sim-section">
-      <input class="sim-input" id="sim-input" placeholder="Tippe eine Nachricht und drück Enter ...">
-      <div class="sim-draft-info" id="draft-tokens" aria-live="polite"></div>
-      <div class="sim-stats">
-        <span><strong id="msg-count">0</strong> Nachrichten</span>
-        <span><strong id="token-used">0</strong> / <span id="token-max">12000</span> Tokens</span>
-        <span id="dropped-info"></span>
-      </div>
-      <div class="sim-bar" id="sim-bar" aria-label="Token-Budget"></div>
-
-      <div class="sim-buttons">
-        <button class="btn" id="btn-reset">↺ Reset</button>
-        <button class="btn" id="btn-summarize">∑ Summarize (älteste 3 zusammenfassen)</button>
-        <button class="btn btn-primary" id="btn-progressive">⤴ Progressive (nur Relevantes laden)</button>
+  <main class="explainer-main">
+    <section class="slide codex explainer-frame" data-explainer="a" data-chapter="context">
+      <div class="slide-head">
+        <div class="slide-crumb">
+          <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-eye"/></svg></span>
+          <span class="slide-crumb-chap">Explainer · A</span>
+          <span class="slide-crumb-sep"><svg class="ic sm"><use href="#i-chevron-right"/></svg></span>
+          <span class="slide-crumb-topic">Context Window &amp; Pflege</span>
+        </div>
+        <span class="slide-stand">
+          <svg class="ic sm"><use href="#i-bookmark"/></svg>
+          Stand 16.05.26
+        </span>
       </div>
 
-      <div class="sim-msglist" id="sim-msglist"></div>
-    </section>
-
-    <section class="progressive-section" id="progressive-section" hidden>
-      <h3>Progressive Disclosure — ein Pfad zum Wissen</h3>
-      <p class="lead">Anstatt alles auf einmal zu laden, wählt Claude den effizientesten Pfad durch die verfügbaren Inhalte. Nur das, was die aktuelle Frage braucht, kommt ins Context Window.</p>
-
-      <div class="path-viz">
-        <div class="path-source">
-          <div class="path-source-label">Verfügbares Wissen</div>
-          <div class="path-blocks">
-            <div class="path-block">Skill: humanizer</div>
-            <div class="path-block">Skill: rechtsakt-analyse</div>
-            <div class="path-block path-block-active">Projektdatei: hausstil.md</div>
-            <div class="path-block">PDF: Bericht 2024</div>
-            <div class="path-block">PDF: Bericht 2023</div>
-            <div class="path-block path-block-active">Letzte 5 Chat-Nachrichten</div>
-            <div class="path-block">Custom Instructions</div>
-            <div class="path-block">Memory: alte Notizen</div>
-          </div>
+      <div class="slide-body">
+        <div class="title-row">
+          <span class="kicker"><svg class="ic sm"><use href="#i-eye"/></svg> Context · Simulator</span>
+          <h2 class="lede">Token-Budget live beobachten — <em>drei Pflege-Strategien testen</em></h2>
         </div>
 
-        <svg class="path-arrow" viewBox="0 0 100 100" aria-hidden="true">
-          <path d="M 10 50 Q 50 30, 90 50" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 4"/>
-          <path d="M 80 42 L 90 50 L 80 58" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <p class="explainer-lead">Tipp Nachrichten ein und beobachte den Balken füllen. Probier dann die drei Pflege-Strategien — jede verändert, wie Claude den Kontext sieht.</p>
 
-        <div class="path-target">
-          <div class="path-target-label">Context Window (geladen)</div>
-          <div class="path-blocks">
-            <div class="path-block path-block-loaded">Projektdatei: hausstil.md</div>
-            <div class="path-block path-block-loaded">Letzte 5 Chat-Nachrichten</div>
+        <section class="sim-section">
+          <input class="sim-input" id="sim-input" placeholder="Tippe eine Nachricht und drück Enter ...">
+          <div class="sim-draft-info" id="draft-tokens" aria-live="polite"></div>
+          <div class="sim-stats">
+            <span><strong id="msg-count">0</strong> Nachrichten</span>
+            <span><strong id="token-used">0</strong> / <span id="token-max">12000</span> Tokens</span>
+            <span id="dropped-info"></span>
           </div>
-          <div class="path-saving">
-            <strong>~70% weniger Tokens</strong> als „alles auf einmal".
+          <div class="sim-bar" id="sim-bar" aria-label="Token-Budget"></div>
+
+          <div class="sim-buttons">
+            <button class="btn" id="btn-reset">↺ Reset</button>
+            <button class="btn" id="btn-summarize">∑ Summarize (älteste 3 zusammenfassen)</button>
+            <button class="btn btn-primary" id="btn-progressive">⤴ Progressive (nur Relevantes laden)</button>
           </div>
-        </div>
+
+          <div class="sim-msglist" id="sim-msglist"></div>
+        </section>
+
+        <section class="progressive-section" id="progressive-section" hidden>
+          <h3>Progressive Disclosure — ein Pfad zum Wissen</h3>
+          <p class="explainer-lead">Anstatt alles auf einmal zu laden, wählt Claude den effizientesten Pfad durch die verfügbaren Inhalte. Nur das, was die aktuelle Frage braucht, kommt ins Context Window.</p>
+
+          <div class="path-viz">
+            <div class="path-source">
+              <div class="path-source-label">Verfügbares Wissen</div>
+              <div class="path-blocks">
+                <div class="path-block">Skill: humanizer</div>
+                <div class="path-block">Skill: rechtsakt-analyse</div>
+                <div class="path-block path-block-active">Projektdatei: hausstil.md</div>
+                <div class="path-block">PDF: Bericht 2024</div>
+                <div class="path-block">PDF: Bericht 2023</div>
+                <div class="path-block path-block-active">Letzte 5 Chat-Nachrichten</div>
+                <div class="path-block">Custom Instructions</div>
+                <div class="path-block">Memory: alte Notizen</div>
+              </div>
+            </div>
+
+            <svg class="path-arrow" viewBox="0 0 100 100" aria-hidden="true">
+              <path d="M 10 50 Q 50 30, 90 50" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 4"/>
+              <path d="M 80 42 L 90 50 L 80 58" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <div class="path-target">
+              <div class="path-target-label">Context Window (geladen)</div>
+              <div class="path-blocks">
+                <div class="path-block path-block-loaded">Projektdatei: hausstil.md</div>
+                <div class="path-block path-block-loaded">Letzte 5 Chat-Nachrichten</div>
+              </div>
+              <div class="path-saving">
+                <strong>~70% weniger Tokens</strong> als „alles auf einmal".
+              </div>
+            </div>
+          </div>
+
+          <p class="path-note">
+            <strong>Der Trick:</strong> Claude nutzt die <code>description</code> aus Skill-YAML-Frontmatter und Datei-Namen als Wegweiser — wie ein Index in einem Buch. Es muss nicht jedes Kapitel lesen, um zu wissen, welches Kapitel die Antwort enthält.
+          </p>
+        </section>
+
+        <aside class="callout">
+          <span class="callout-icon"><svg class="ic lg"><use href="#i-quote"/></svg></span>
+          <p><b>Faustregel — </b>Context-Pflege ist Strategie, nicht Aufräumen. Wer früh entscheidet, was rein darf, behält die Qualität auch nach Nachricht 50.</p>
+        </aside>
       </div>
 
-      <p class="path-note">
-        <strong>Der Trick:</strong> Claude nutzt die <code>description</code> aus Skill-YAML-Frontmatter und Datei-Namen als Wegweiser — wie ein Index in einem Buch. Es muss nicht jedes Kapitel lesen, um zu wissen, welches Kapitel die Antwort enthält.
-      </p>
+      <div class="slide-foot">
+        <a class="slide-nav prev" href="../index.html" id="back-link-bottom">
+          <svg class="ic"><use href="#i-arrow-left"/></svg> zurück zur Präsentation
+        </a>
+        <div class="slide-progress">
+          <span class="slide-folio"><svg class="ic"><use href="#i-eye"/></svg> Explainer <b>A · Context</b></span>
+        </div>
+        <span class="slide-nav" aria-hidden="true" style="visibility:hidden">platz</span>
+      </div>
     </section>
-
-    <p class="back-link">→ <a href="../index.html" id="back-link-bottom">Zurück zur Präsentation</a></p>
   </main>
 
   <script type="module">
+    import { initSprite } from '../lib/icons-sprite.js?v=2026-05-16ab';
     import { ModeManager } from '../lib/mode.js?v=2026-05-16ab';
     import { Storage } from '../lib/storage.js?v=2026-05-16ab';
     import { icon } from '../lib/icons.js?v=2026-05-16ab';
+
+    await initSprite();
 
     const storage = new Storage('llm-101-v1');
     const mode = new ModeManager(storage);
@@ -105,6 +144,8 @@
       const bottomLink = document.getElementById('back-link-bottom');
       if (topLink) topLink.href = targetHref;
       if (bottomLink) bottomLink.href = targetHref;
+      const topic = document.querySelector('.slide-crumb-topic');
+      if (topic) topic.innerHTML += ` <span class="explainer-back-hint">· zurück zu <b>${backParam}</b></span>`;
     }
 
     document.querySelector('[data-mode="theme"][data-value="light"]').innerHTML = icon('sun');
