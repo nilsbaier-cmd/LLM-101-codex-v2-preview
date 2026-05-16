@@ -1155,4 +1155,18 @@ Layout-Slide-Zuordnung Mockup → Schulungs-Folien:
 
 ---
 
+## Anhang D · Decision Log (wird im Verlauf gepflegt)
+
+Resolutionen aus den Implementations-Paketen, die für Folgepakete relevant sind.
+
+### Aus Paket A (Commit `07a8204`)
+
+- **Icon-API: zwei Funktionen koexistieren.** `renderIcon(name, attrs)` (neu, sprite-basiert, §4.5-Vertrag) und `icon(name)` (Legacy, mask-image-basiert) leben parallel in `lib/icons.js`. Begründung: `tests/icons.test.js` validiert die alte API; ein hartes Replace hätte 7 Explainer-HTML + `app.js`-Theme-Buttons + den Test selbst gebrochen.
+  - **Konsequenz für Paket B/C:** Verwende ausschließlich `renderIcon()` für neue Aufrufer. Bestehende `[data-icon]`-Markup-Stellen bleiben unangetastet, bis sie im Zuge der jeweiligen Folien-/Komponenten-Migration ohnehin neu geschrieben werden.
+  - **Konsequenz für Paket D1–D3:** Beim Slide-Refactor `[data-icon]` durch `<svg class="ic"><use href="#i-NAME"/></svg>` ersetzen. Wenn alle Aufrufer migriert sind: in Paket H die Legacy-`icon()`/`ICONS`-Map entfernen (separater Cleanup-Commit).
+- **`renderIcon()` setzt `xlink:href` zusätzlich zu `href`** für jsdom-Kompatibilität (ältere Versionen kennen nur `xlink:href`). Tests, die `<use>.href` strict prüfen, müssen `getAttribute('href')` und/oder `getAttributeNS(XLINK, 'href')` akzeptieren.
+- **`initSprite()` ist async/fire-and-forget** in `app.js`. Race-Window: `<use href="#i-NAME"/>`-Verweise vor Sprite-Load resultieren in leerem SVG (kein Error). Für Komponenten, die direkt nach Modul-Boot rendern: `await initSprite()` vor erstem `renderIcon`-Burst empfohlen.
+
+---
+
 **Ende der Spec.**
