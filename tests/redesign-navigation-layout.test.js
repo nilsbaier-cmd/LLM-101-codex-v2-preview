@@ -34,6 +34,16 @@ describe('codex v2 slide navigation and layout safeguards', () => {
     expect(app).toContain('queueSlideBodyFit');
   });
 
+  it('isolates preview browser state from the main course URL', () => {
+    const notes = read('meine-notizen.html');
+    const explainer = read('explainer/a-context-window.html');
+    const sw = read('sw.js');
+    expect(app).toContain("const NS = 'llm-101-codex-v2-preview'");
+    expect(notes).toContain("new Storage('llm-101-codex-v2-preview')");
+    expect(explainer).toContain("new Storage('llm-101-codex-v2-preview')");
+    expect(sw).toContain("const CACHE_PREFIX = 'llm-101-codex-v2-preview-offline-'");
+  });
+
   it('exposes a reproducible browser QA command for the redesign branch', () => {
     expect(pkg.scripts['qa:redesign']).toBe('node scripts/redesign-qa.mjs');
   });

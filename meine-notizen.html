@@ -10,9 +10,9 @@
   <title>Meine Notizen — LLM 101</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="tokens.css?v=2026-05-17-codex-v2b">
-  <link rel="stylesheet" href="app.css?v=2026-05-17-codex-v2b">
-  <link rel="stylesheet" href="presentation.css?v=2026-05-17-codex-v2b">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-17-codex-v2c">
+  <link rel="stylesheet" href="app.css?v=2026-05-17-codex-v2c">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-17-codex-v2c">
   <style>
     .notes-shell { max-width: 920px; margin: 0 auto; padding: var(--space-6) var(--space-5); }
     .notes-frame .slide-body { padding: clamp(28px, 3.6vw, 56px); gap: 20px; }
@@ -145,16 +145,16 @@
     </section>
   </main>
   <script type="module">
-    import { initSprite } from './lib/icons-sprite.js?v=2026-05-17-codex-v2b';
-    import { Storage } from './lib/storage.js?v=2026-05-17-codex-v2b';
-    import { ModeManager } from './lib/mode.js?v=2026-05-17-codex-v2b';
-    import { Exercises } from './lib/exercises.js?v=2026-05-17-codex-v2b';
-    import { icon } from './lib/icons.js?v=2026-05-17-codex-v2b';
-    import { analyzeReflections, renderNotesMarkdown, downloadMarkdown } from './lib/notes-export.js?v=2026-05-17-codex-v2b';
+    import { initSprite } from './lib/icons-sprite.js?v=2026-05-17-codex-v2c';
+    import { Storage } from './lib/storage.js?v=2026-05-17-codex-v2c';
+    import { ModeManager } from './lib/mode.js?v=2026-05-17-codex-v2c';
+    import { Exercises } from './lib/exercises.js?v=2026-05-17-codex-v2c';
+    import { icon } from './lib/icons.js?v=2026-05-17-codex-v2c';
+    import { analyzeReflections, renderNotesMarkdown, downloadMarkdown } from './lib/notes-export.js?v=2026-05-17-codex-v2c';
 
     await initSprite();
 
-    const storage = new Storage('llm-101-v1');
+    const storage = new Storage('llm-101-codex-v2-preview');
     const mode = new ModeManager(storage);
     const exercises = new Exercises(storage);
 
