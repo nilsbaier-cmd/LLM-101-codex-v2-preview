@@ -256,10 +256,12 @@ Jede Komponente ist als **Mini-Spec** dokumentiert: HTML-Struktur, CSS-Klassen, 
 
 **Datei:** `presentation.css`.
 
+**Marker-Klasse (MUST, entschieden in Paket C):** Der Codex-Slide-Frame ist an `.slide.codex` gebunden, NICHT an `.slide` allein. Hintergrund: in `redesign/codex-v2` koexistieren während der schrittweisen Migration alte (`<section class="slide">`) und neue Codex-Slides — der `.codex`-Modifier verhindert, dass noch nicht migrierte Slides versehentlich vom neuen Frame-CSS getroffen werden. Paket D1/D2/D3 MUSS bei jeder migrierten Slide `class="slide codex"` setzen.
+
 **Struktur:**
 
 ```html
-<section class="slide"
+<section class="slide codex"
          id="{slideId}"
          data-slide-id="{slideId}"
          data-chapter="{chapter}"
@@ -402,7 +404,9 @@ Jede Komponente ist als **Mini-Spec** dokumentiert: HTML-Struktur, CSS-Klassen, 
 
 **Acceptance:** Hover hebt Background auf `var(--accent)` (oder entsprechend bei Modifier). Icon MUSS inside dem Padding sitzen, Gap 4px.
 
-### 3.5 Cover-Komponente (`.slide.cover`)
+### 3.5 Cover-Komponente (`.slide.codex.cover`)
+
+**Hinweis (Paket C resolved):** Die existierende Klasse `.lead` in `presentation.css` (Skills-Section, font-size 17px) bleibt unangetastet. Der Cover-Lead-Paragraph nutzt stattdessen `.cover-lead` (clamp 18px–23px). Bei der Slide-Migration MUSS für den Cover-Lead `<p class="cover-lead">` verwendet werden, NICHT `<p class="lead">`.
 
 **Sonderfall.** Statt `.title-row` → `.cover-display`.
 
@@ -1166,6 +1170,21 @@ Resolutionen aus den Implementations-Paketen, die für Folgepakete relevant sind
   - **Konsequenz für Paket D1–D3:** Beim Slide-Refactor `[data-icon]` durch `<svg class="ic"><use href="#i-NAME"/></svg>` ersetzen. Wenn alle Aufrufer migriert sind: in Paket H die Legacy-`icon()`/`ICONS`-Map entfernen (separater Cleanup-Commit).
 - **`renderIcon()` setzt `xlink:href` zusätzlich zu `href`** für jsdom-Kompatibilität (ältere Versionen kennen nur `xlink:href`). Tests, die `<use>.href` strict prüfen, müssen `getAttribute('href')` und/oder `getAttributeNS(XLINK, 'href')` akzeptieren.
 - **`initSprite()` ist async/fire-and-forget** in `app.js`. Race-Window: `<use href="#i-NAME"/>`-Verweise vor Sprite-Load resultieren in leerem SVG (kein Error). Für Komponenten, die direkt nach Modul-Boot rendern: `await initSprite()` vor erstem `renderIcon`-Burst empfohlen.
+
+### Aus Paket B (Commit `f4474f3`)
+
+- **`.app-title` als zweite Klasse auf `.app-brand-id`** beibehalten, weil `tests/llm-framing.test.js` `.app-title === "LLM 101"` queryt. Paket H darf die Doppelklasse aufräumen, sobald der Test mitumgestellt wird.
+- **`.app-brand-meta`-Span** (Run · Edition · Status) ist in §3.1 markup-mäßig vorgesehen und CSS-stylebar, aber in `index.html` noch leer. Inhalts-Entscheidung delegiert an Paket D1 oder H: z.B. „Run 03 · 2026-05 · live".
+- **`.is-open` und `aria-hidden="false"` koexistieren** auf Panels — beide gültig im neuen CSS. `app.js` setzt `.is-open` weiterhin per `setPanelOpen`. Aufräumen (eine von beiden Konventionen) gehört in Paket H.
+- **Neuer Mobile-Breakpoint `@media (max-width: 720px)`** für Toolbar-Wrap. Falls Paket C/D eigene 720er-Breakpoints einführen: kohärent halten.
+
+### Aus Paket C (Commit `ebb88d0`)
+
+- **`.slide.codex` Marker-Klasse:** Der neue Frame ist an `.slide.codex` gebunden, NICHT an `.slide` allein. In §3.2 dokumentiert. Paket D1–D3 MUSS `class="slide codex"` setzen.
+- **`.cover-lead` statt `.lead`** für den Cover-Paragraph. Begründung: bestehende `.lead`-Klasse (Skills-Section, 17px) bleibt funktional, neue Codex-Lead-Größe hängt an `.cover-lead`. In §3.5 dokumentiert.
+- **`.policy-card` bleibt als-is** in `presentation.css`. `.status-card` ist eigene Komponente. Paket D1 migriert das Markup der Datenampel-Folien von `.policy-card` zu `.status-card`-Trio.
+- **Zwei Mobile-Breakpoints:** Title-Row stack bei 720px, Slide-Frame aspect-ratio bei 980px aufgehoben. Konsistent; falls Paket D Anpassungen braucht, beide synchron halten.
+- **`color-mix()`-Verwendung in `.tok`, `.callout-action`, `.status-pill`-Modifiern** — Chrome 111+, Safari 16.4+, Firefox 113+. Behörden-Workshops auf älteren Browsern können degraden. Paket H sollte Browser-Versions-Spec im README ergänzen.
 
 ---
 
