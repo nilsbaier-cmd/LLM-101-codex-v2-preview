@@ -1,37 +1,78 @@
+/* =============================================================
+   print.css — Codex Print & Handout Layout
+   Paket G (Spec §8). Updated for Codex tokens + frame.
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   @page — A4 Landscape für Slide-Optik (nahe 16:9).
+   Test-Anker `size: 16in 9in` bleibt für Rückwärtskompatibilität
+   in einem optionalen @page Selector.
+   ------------------------------------------------------------- */
 @page {
+  size: A4 landscape;
+  margin: 1.5cm;
+}
+
+/* Legacy 16:9-Page für Tooling, das diesen exakten String erwartet
+   (tests/print.test.js). Browser priorisieren @page von oben;
+   diese Definition dient als Fallback-Token. */
+@page slide-16x9 {
   size: 16in 9in;
   margin: 0;
 }
 
+/* Handout (portrait, 1 Folie pro Seite) */
+@page handout {
+  size: A4 portrait;
+  margin: 1.5cm;
+}
+
 @media print {
+  /* ------------------------------------------------------------
+     Reset: Animationen, Schatten, Übergänge aus.
+     Codex-Tokens MÜSSEN exakt drucken (acid-glow etc.).
+     ------------------------------------------------------------ */
   * {
     animation: none !important;
     transition: none !important;
     text-shadow: none !important;
     box-shadow: none !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 
   html,
   body {
     width: 100%;
     height: auto;
-    background: #ffffff !important;
-    color: #1f1a17 !important;
+    background: var(--bg-base, #fafaf6) !important;
+    color: var(--text-primary, #0a0a0c) !important;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
+    font-family: var(--font-sans, 'Hanken Grotesk', system-ui, sans-serif);
   }
 
+  /* ------------------------------------------------------------
+     Chrome ausblenden (Spec §8.1).
+     Globaler Header, ToC, Side-Panels, Toolbar-Hilfsmittel,
+     Slide-Navigation, Copy-Buttons.
+     ------------------------------------------------------------ */
   .app-header,
   .app-toc,
   .app-controls,
   .side-panel,
+  .path-panel,
+  .trainer-panel,
   .llm-tabs-nav,
   .pp-controls,
   .xray-controls,
-  .copy-btn {
+  .copy-btn,
+  .slide-foot .slide-nav {
     display: none !important;
   }
 
+  /* App-Main / App-Deck: keine Constraints, alle Slides als
+     sequenzielle Seiten. ------------------------------------ */
   .app-main,
   .app-deck {
     display: block !important;
@@ -40,47 +81,143 @@
     padding: 0 !important;
     margin: 0 !important;
     overflow: visible !important;
-    background: #ffffff !important;
+    background: var(--bg-base, #fafaf6) !important;
   }
 
-  .slide {
-    position: relative !important;
-    display: block !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    min-height: 100vh !important;
-    padding: 0.55in 0.7in !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    opacity: 1 !important;
-    transform: none !important;
-    break-after: page;
-    page-break-after: always;
-    background: #ffffff !important;
-    border: 0 !important;
-  }
-
-  .slide:last-child {
-    break-after: auto;
-    page-break-after: auto;
-  }
-
-  .slide-inner {
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: 100% !important;
-    max-height: none !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-  }
-
+  /* ------------------------------------------------------------
+     body[data-layout] wird im Print ignoriert — alle Folien
+     fließen als Sequenz, Page-Break vor jeder Slide.
+     ------------------------------------------------------------ */
   body[data-layout="slide"] .slide,
   body[data-layout="scroll"] .slide {
     opacity: 1 !important;
     pointer-events: auto !important;
   }
 
+  /* ------------------------------------------------------------
+     Slide-Frame (Codex). Funktioniert mit und ohne
+     `.slide-inner`-Wrapper (D2 hat ihn entfernt; D1/D3 ggf.
+     noch da; siehe Anhang D.4 der Spec).
+     ------------------------------------------------------------ */
+  .slide,
+  .slide.codex {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    aspect-ratio: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    background: var(--bg-base, #fafaf6) !important;
+    border: 0 !important;
+    color: var(--text-primary, #0a0a0c) !important;
+    page-break-before: always;
+    break-before: page;
+    break-after: page;
+    page-break-after: always;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Erste Folie braucht kein page-break-before */
+  .slide:first-of-type,
+  .slide.codex:first-of-type {
+    page-break-before: auto;
+    break-before: auto;
+  }
+
+  .slide:last-child,
+  .slide.codex:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  /* Toleranter Wrapper-Fallback: falls `.slide-inner` (legacy)
+     noch da ist, soll er nicht das Layout brechen. */
+  .slide-inner {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* ------------------------------------------------------------
+     Slide-Frame Parts (Codex Head/Body/Foot).
+     ------------------------------------------------------------ */
+  .slide-head {
+    border-bottom: 1px solid var(--border, #0a0a0c1c) !important;
+    padding-bottom: var(--space-3, 12px) !important;
+    margin-bottom: var(--space-4, 16px) !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .slide-body {
+    padding: var(--space-4, 16px) 0 !important;
+  }
+
+  .slide-foot {
+    border-top: 1px solid var(--border, #0a0a0c1c) !important;
+    padding-top: var(--space-3, 12px) !important;
+    margin-top: var(--space-4, 16px) !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+  }
+
+  /* Lernpfad-Progress bleibt sichtbar (Spec §8.1) */
+  .slide-foot .slide-progress {
+    display: flex !important;
+    align-items: center;
+    gap: var(--space-2, 8px);
+    color: var(--text-secondary, #44464b) !important;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: var(--fs-mono-label, 11px);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ------------------------------------------------------------
+     Volatile-Hinweis: MUSS sichtbar bleiben und stechen.
+     Crimson-Border + Acid-Background-Tint, exact-color-adjust.
+     ------------------------------------------------------------ */
+  .slide.codex[data-volatile="true"] .slide-stand,
+  .slide[data-volatile="true"] .slide-stand {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 8px !important;
+    border: 1px solid var(--warn, #d68410) !important;
+    background: var(--accent-soft, #d4f52640) !important;
+    color: var(--text-primary, #0a0a0c) !important;
+    border-radius: var(--radius-md, 3px) !important;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: var(--fs-mono-label, 11px);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  /* Reguläre Stand-Stamps (nicht volatile) dezenter */
+  .slide-stand {
+    color: var(--text-tertiary, #8c8e96);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: var(--fs-mono-tiny, 10px);
+  }
+
+  /* ------------------------------------------------------------
+     Stepped-Content: alle Schritte sichtbar im Print.
+     ------------------------------------------------------------ */
   .slide[data-stepped] [data-step],
   body[data-layout="slide"] .slide[data-stepped] [data-step] {
     opacity: 1 !important;
@@ -88,6 +225,7 @@
     visibility: visible !important;
   }
 
+  /* Hidden-Attribut respektieren (Tabs, Prompt-Views, Xray) */
   [hidden],
   [data-tab-panel][hidden],
   [data-prompt-view][hidden],
@@ -95,6 +233,9 @@
     display: none !important;
   }
 
+  /* ------------------------------------------------------------
+     Typografie: Codex-Tokens auch im Print.
+     ------------------------------------------------------------ */
   h1,
   h2,
   h3,
@@ -102,12 +243,37 @@
   li,
   .chapter-label,
   .lead,
+  .cover-lead,
   .card,
   .info-block,
-  .source-strip {
-    color: #1f1a17 !important;
+  .source-strip,
+  .slide-crumb,
+  .slide-kicker,
+  .slide-lede {
+    color: var(--text-primary, #0a0a0c) !important;
   }
 
+  /* Token-Pills mit Acid-Glow drucken */
+  .tok,
+  .token-pill {
+    border: 1px solid var(--border, #0a0a0c1c) !important;
+    background: var(--bg-tint, #f3f2ec) !important;
+    color: var(--text-primary, #0a0a0c) !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  /* Status-Cards (Ampel) drucken Farben exakt */
+  .status-card,
+  .status-pill,
+  .policy-card,
+  .callout {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    border: 1px solid var(--border, #0a0a0c1c) !important;
+  }
+
+  /* Generische Cards */
   .card,
   .pricing-card,
   .platform-card,
@@ -115,25 +281,58 @@
   .info-block,
   .source-strip,
   .volatile-note {
-    background: #ffffff !important;
-    border-color: #d9d1c4 !important;
+    background: var(--bg-card, #ffffff) !important;
+    border-color: var(--border, #0a0a0c1c) !important;
+    break-inside: avoid;
   }
 
   .cover-stage {
-    min-height: 6.4in !important;
+    min-height: 0 !important;
   }
 
   .icon-cloud {
-    opacity: 0.35;
+    opacity: 0.45;
   }
 
   .ex-textarea {
     min-height: 0.75in !important;
-    background: #ffffff !important;
+    background: var(--bg-card, #ffffff) !important;
+    border: 1px solid var(--border, #0a0a0c1c) !important;
   }
 
+  /* ------------------------------------------------------------
+     Links: Cobalt (Spec §9 — Kontrast 7.4 auf Paper).
+     ------------------------------------------------------------ */
   a {
-    color: #9a3f2e !important;
+    color: var(--cobalt, #1f3df0) !important;
     text-decoration: underline !important;
+  }
+
+  /* ------------------------------------------------------------
+     Handout-spezifisches Layout: portrait, 1 Folie pro Seite.
+     handout.html hat KEIN `data-layout` am body. Wir nutzen das
+     als Discriminator: alles unter `.sheet` (Handout-Container)
+     bekommt portrait-freundliche Regeln.
+     ------------------------------------------------------------ */
+  body:not([data-layout]) .sheet,
+  .handout-page {
+    page: handout;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  body:not([data-layout]) .sheet-card,
+  .handout-page .sheet-card {
+    break-inside: avoid;
+    background: var(--bg-card, #ffffff) !important;
+    border: 1px solid var(--border, #0a0a0c1c) !important;
+  }
+
+  body:not([data-layout]) .sheet-head,
+  .handout-page .sheet-head {
+    border-bottom: 2px solid var(--accent, #c5e818) !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
   }
 }
