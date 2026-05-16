@@ -95,9 +95,8 @@
   }
 
   /* ------------------------------------------------------------
-     Slide-Frame (Codex). Funktioniert mit und ohne
-     `.slide-inner`-Wrapper (D2 hat ihn entfernt; D1/D3 ggf.
-     noch da; siehe Anhang D.4 der Spec).
+     Slide-Frame (Codex). `.slide-inner`-Wrapper ist im Codex-Refactor
+     komplett entfallen (Anhang D.4); siehe Cleanup in Paket H.
      ------------------------------------------------------------ */
   .slide,
   .slide.codex {
@@ -134,19 +133,6 @@
   .slide.codex:last-child {
     break-after: auto;
     page-break-after: auto;
-  }
-
-  /* Toleranter Wrapper-Fallback: falls `.slide-inner` (legacy)
-     noch da ist, soll er nicht das Layout brechen. */
-  .slide-inner {
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: auto !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: visible !important;
   }
 
   /* ------------------------------------------------------------
