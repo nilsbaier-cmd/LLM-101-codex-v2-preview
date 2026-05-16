@@ -10,10 +10,10 @@
   <title>LLM 101</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="tokens.css?v=2026-05-16v">
-  <link rel="stylesheet" href="app.css?v=2026-05-16v">
-  <link rel="stylesheet" href="presentation.css?v=2026-05-16v">
-  <link rel="stylesheet" href="print.css?v=2026-05-16v" media="print">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-16w">
+  <link rel="stylesheet" href="app.css?v=2026-05-16w">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-16w">
+  <link rel="stylesheet" href="print.css?v=2026-05-16w" media="print">
 </head>
 <body data-layout="slide">
   <header class="app-header">
@@ -1356,6 +1356,11 @@ Freundliche Grüße</div>
                 <div class="uc-section-label">Chat-Kontext</div>
 
                 <div class="xray-stack is-active" data-xray-stack="clean">
+                  <div class="xray-diagnostic is-clean">
+                    <span>Signal 86%</span>
+                    <strong>3 relevante Bausteine</strong>
+                    <span>kaum Rauschen</span>
+                  </div>
                   <div class="xray-message is-active">
                     <span class="xray-state">aktiv</span>
                     <strong>Ziel</strong>
@@ -1374,10 +1379,20 @@ Freundliche Grüße</div>
                 </div>
 
                 <div class="xray-stack" data-xray-stack="noisy" hidden>
+                  <div class="xray-diagnostic is-noisy">
+                    <span>Signal 28%</span>
+                    <strong>11 lose Fragmente</strong>
+                    <span>viel Rauschen</span>
+                  </div>
                   <div class="xray-message is-active">
                     <span class="xray-state">aktiv</span>
                     <strong>Letzte Frage</strong>
                     <span>Kannst du daraus bitte schnell eine Empfehlung machen?</span>
+                  </div>
+                  <div class="xray-message is-noise">
+                    <span class="xray-state">Rauschen</span>
+                    <strong>Nebenpfad</strong>
+                    <span>Alte Budgetfrage, Formatwunsch, nicht mehr gültige Stakeholder-Variante.</span>
                   </div>
                   <div class="xray-message is-muted">
                     <span class="xray-state">matt</span>
@@ -1394,15 +1409,37 @@ Freundliche Grüße</div>
 
               <div class="xray-card xray-scan-card">
                 <div class="uc-section-label">X-Ray-Scan</div>
-                <div class="xray-window" aria-hidden="true">
+                <div class="xray-window is-active" data-xray-window="clean" aria-hidden="true">
+                  <div class="xray-focus-beam"></div>
+                  <div class="xray-layer xray-hot xray-layer-strong">
+                    <span>sichtbar: Ziel + Rolle</span>
+                  </div>
                   <div class="xray-layer xray-hot">
-                    <span>sichtbar</span>
+                    <span>sichtbar: Grenzen</span>
                   </div>
                   <div class="xray-layer xray-warm">
-                    <span>noch brauchbar</span>
+                    <span>brauchbar: Optionen</span>
                   </div>
-                  <div class="xray-layer xray-cold">
-                    <span>fällt raus</span>
+                  <div class="xray-layer xray-cold xray-layer-small">
+                    <span>wenig Rauschen</span>
+                  </div>
+                </div>
+                <div class="xray-window xray-window-noisy" data-xray-window="noisy" aria-hidden="true" hidden>
+                  <div class="xray-noise-dot dot-a"></div>
+                  <div class="xray-noise-dot dot-b"></div>
+                  <div class="xray-noise-dot dot-c"></div>
+                  <div class="xray-noise-dot dot-d"></div>
+                  <div class="xray-layer xray-hot xray-layer-small">
+                    <span>nur letzte Frage</span>
+                  </div>
+                  <div class="xray-layer xray-noise">
+                    <span>Rauschen: alte Varianten</span>
+                  </div>
+                  <div class="xray-layer xray-noise">
+                    <span>Rauschen: Nebenfragen</span>
+                  </div>
+                  <div class="xray-layer xray-cold xray-layer-buried">
+                    <span>wichtig, aber verdrängt</span>
                   </div>
                 </div>
                 <div class="xray-result"
@@ -2171,6 +2208,6 @@ VERBOTEN
     <div class="side-panel-body" id="trainer-panel-body"></div>
   </aside>
 
-  <script type="module" src="app.js?v=2026-05-16v"></script>
+  <script type="module" src="app.js?v=2026-05-16w"></script>
 </body>
 </html>

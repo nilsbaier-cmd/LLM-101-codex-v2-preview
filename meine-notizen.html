@@ -10,8 +10,8 @@
   <title>Meine Notizen — LLM 101</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="tokens.css?v=2026-05-16v">
-  <link rel="stylesheet" href="app.css?v=2026-05-16v">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-16w">
+  <link rel="stylesheet" href="app.css?v=2026-05-16w">
   <style>
     .notes-page { max-width: 760px; margin: 0 auto; padding: var(--space-7); }
     .note-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-5); margin-bottom: var(--space-4); }
@@ -49,11 +49,11 @@
     </p>
   </main>
   <script type="module">
-    import { Storage } from './lib/storage.js?v=2026-05-16v';
-    import { ModeManager } from './lib/mode.js?v=2026-05-16v';
-    import { Exercises } from './lib/exercises.js?v=2026-05-16v';
-    import { icon } from './lib/icons.js?v=2026-05-16v';
-    import { renderNotesMarkdown, downloadMarkdown } from './lib/notes-export.js?v=2026-05-16v';
+    import { Storage } from './lib/storage.js?v=2026-05-16w';
+    import { ModeManager } from './lib/mode.js?v=2026-05-16w';
+    import { Exercises } from './lib/exercises.js?v=2026-05-16w';
+    import { icon } from './lib/icons.js?v=2026-05-16w';
+    import { renderNotesMarkdown, downloadMarkdown } from './lib/notes-export.js?v=2026-05-16w';
 
     const storage = new Storage('llm-101-v1');
     const mode = new ModeManager(storage);

@@ -22,15 +22,20 @@ describe('context window x-ray demo', () => {
     const slide = document.querySelector('[data-slide-id="usecase-5"]');
     const states = [...slide.querySelectorAll('.xray-state')].map(el => el.textContent.trim());
 
-    expect(states).toEqual(expect.arrayContaining(['aktiv', 'matt', 'verdrängt']));
+    expect(states).toEqual(expect.arrayContaining(['aktiv', 'matt', 'verdrängt', 'Rauschen']));
     expect(slide?.querySelectorAll('[data-context-xray-mode]').length).toBe(2);
     expect(slide?.querySelector('[data-xray-result]')).toBeTruthy();
+    expect(slide?.textContent).toContain('Signal 86%');
+    expect(slide?.textContent).toContain('Signal 28%');
+    expect(slide?.querySelectorAll('[data-xray-window]').length).toBe(2);
   });
 
   it('initializes the context x-ray interaction in app.js', () => {
     expect(app).toContain('initContextXray');
     expect(app).toContain('data-context-xray-mode');
     expect(app).toContain('data-result-noisy');
+    expect(app).toContain('data-xray-window');
     expect(css).toContain('.xray-stack[hidden]');
+    expect(css).toContain('.xray-window-noisy');
   });
 });

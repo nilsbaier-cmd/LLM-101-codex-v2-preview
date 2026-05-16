@@ -1,10 +1,10 @@
 // app.js — Haupteinstieg
-import { Storage } from './lib/storage.js?v=2026-05-16v';
-import { ModeManager } from './lib/mode.js?v=2026-05-16v';
-import { icon } from './lib/icons.js?v=2026-05-16v';
-import { initTabs } from './lib/tabs.js?v=2026-05-16v';
-import { Exercises } from './lib/exercises.js?v=2026-05-16v';
-import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS } from './lib/learning-paths.js?v=2026-05-16v';
+import { Storage } from './lib/storage.js?v=2026-05-16w';
+import { ModeManager } from './lib/mode.js?v=2026-05-16w';
+import { icon } from './lib/icons.js?v=2026-05-16w';
+import { initTabs } from './lib/tabs.js?v=2026-05-16w';
+import { Exercises } from './lib/exercises.js?v=2026-05-16w';
+import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS } from './lib/learning-paths.js?v=2026-05-16w';
 
 const NS = 'llm-101-v1';
 const storage = new Storage(NS);
@@ -137,8 +137,10 @@ function initContextXray(root = document) {
   root.querySelectorAll('[data-context-xray]').forEach(demo => {
     const result = demo.querySelector('[data-xray-result]');
     const stacks = demo.querySelectorAll('[data-xray-stack]');
+    const windows = demo.querySelectorAll('[data-xray-window]');
 
     function setMode(modeName) {
+      demo.dataset.xrayMode = modeName;
       demo.querySelectorAll('[data-context-xray-mode]').forEach(btn => {
         const active = btn.dataset.contextXrayMode === modeName;
         btn.classList.toggle('active', active);
@@ -148,6 +150,11 @@ function initContextXray(root = document) {
         const active = stack.dataset.xrayStack === modeName;
         stack.hidden = !active;
         stack.classList.toggle('is-active', active);
+      });
+      windows.forEach(windowEl => {
+        const active = windowEl.dataset.xrayWindow === modeName;
+        windowEl.hidden = !active;
+        windowEl.classList.toggle('is-active', active);
       });
       const resultAttr = modeName === 'noisy' ? 'data-result-noisy' : 'data-result-clean';
       if (result) result.textContent = result.getAttribute(resultAttr) || '';

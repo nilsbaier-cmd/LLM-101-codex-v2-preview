@@ -891,6 +891,40 @@ body[data-layout="scroll"] .app-controls { display: none; }
 .xray-stack[hidden] {
   display: none;
 }
+.xray-diagnostic {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-2);
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.xray-diagnostic strong {
+  font-size: 13px;
+}
+.xray-diagnostic span:first-child {
+  font-weight: 800;
+}
+.xray-diagnostic span:last-child {
+  color: var(--text-tertiary);
+}
+.xray-diagnostic.is-clean {
+  border-color: color-mix(in srgb, var(--success) 50%, var(--border));
+  background: var(--success-soft);
+}
+.xray-diagnostic.is-clean span:first-child {
+  color: var(--success);
+}
+.xray-diagnostic.is-noisy {
+  border-color: rgba(210, 70, 70, 0.45);
+  background: rgba(210, 70, 70, 0.08);
+}
+.xray-diagnostic.is-noisy span:first-child {
+  color: #b73333;
+}
 .xray-message {
   display: grid;
   grid-template-columns: 82px 1fr;
@@ -943,9 +977,20 @@ body[data-layout="scroll"] .app-controls { display: none; }
   background: rgba(210, 70, 70, 0.12);
   color: #9b2f2f;
 }
+.xray-message.is-noise {
+  border-left-color: rgba(210, 70, 70, 0.8);
+  background:
+    repeating-linear-gradient(-45deg, rgba(210, 70, 70, 0.06) 0 8px, transparent 8px 16px),
+    var(--bg-card);
+}
+.xray-message.is-noise .xray-state {
+  background: rgba(210, 70, 70, 0.14);
+  color: #9b2f2f;
+}
 .xray-window {
+  position: relative;
   display: grid;
-  gap: var(--space-3);
+  gap: var(--space-2);
   min-height: 268px;
   margin-top: var(--space-2);
   padding: var(--space-4);
@@ -957,6 +1002,10 @@ body[data-layout="scroll"] .app-controls { display: none; }
   border: 1px solid rgba(255,255,255,0.14);
   border-radius: var(--radius-lg);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+.xray-window[hidden] {
+  display: none;
 }
 .xray-layer {
   position: relative;
@@ -969,6 +1018,7 @@ body[data-layout="scroll"] .app-controls { display: none; }
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
+  z-index: 1;
 }
 .xray-layer:before {
   content: '';
@@ -984,7 +1034,51 @@ body[data-layout="scroll"] .app-controls { display: none; }
 .xray-hot { background: rgba(91, 180, 139, 0.24); color: #8df1bd; }
 .xray-warm { background: rgba(237, 178, 84, 0.2); color: #ffd18b; }
 .xray-cold { background: rgba(220, 82, 82, 0.18); color: #ff9a9a; }
+.xray-noise { background: rgba(220, 82, 82, 0.28); color: #ffb0b0; }
+.xray-layer-strong {
+  min-height: 72px;
+}
+.xray-layer-small {
+  opacity: 0.72;
+}
+.xray-layer-buried {
+  filter: blur(0.7px) saturate(0.7);
+  opacity: 0.5;
+}
 .xray-cold:before { right: 68%; opacity: 0.38; }
+.xray-noise:before {
+  right: 24%;
+  opacity: 0.85;
+}
+.xray-focus-beam {
+  position: absolute;
+  inset: -20% 34% -20% 8%;
+  background: linear-gradient(90deg, transparent, rgba(141, 241, 189, 0.18), transparent);
+  transform: rotate(8deg);
+  filter: blur(1px);
+}
+.xray-window-noisy {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(220, 82, 82, 0.18), transparent 28%),
+    radial-gradient(circle at 78% 46%, rgba(237, 178, 84, 0.16), transparent 30%),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+    #1b2026;
+  background-size: auto, auto, 22px 22px, 22px 22px, auto;
+}
+.xray-noise-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff9a9a;
+  box-shadow: 0 0 18px #ff9a9a;
+  opacity: 0.74;
+}
+.dot-a { top: 18%; left: 18%; }
+.dot-b { top: 34%; right: 22%; }
+.dot-c { bottom: 22%; left: 34%; }
+.dot-d { bottom: 14%; right: 16%; }
 .xray-result {
   margin-top: var(--space-3);
   padding: var(--space-3);
