@@ -100,6 +100,7 @@ async function inspectState(page) {
     return {
       id: slide?.dataset.slideId,
       step: slide?.dataset.stepCurrent || '0',
+      visualViewportHeight: window.visualViewport?.height || window.innerHeight,
       nextDisabled: next?.getAttribute('aria-disabled'),
       bodyRect: rect(body),
       fitRect: rect(fit),
@@ -148,13 +149,14 @@ try {
       if (state.horizontalOffenders?.length) {
         issues.push({ issue: 'horizontal overflow', id: state.id, step: state.step, offenders: state.horizontalOffenders });
       }
-      if (state.footerRect && state.footerRect.bottom > viewport.height + 1) {
+      const visibleViewportHeight = Math.min(viewport.height, state.visualViewportHeight || viewport.height);
+      if (state.footerRect && state.footerRect.bottom > visibleViewportHeight + 1) {
         issues.push({
           issue: 'slide footer below viewport',
           id: state.id,
           step: state.step,
           bottom: Number(state.footerRect.bottom.toFixed(1)),
-          viewport: viewport.height
+          viewport: Number(visibleViewportHeight.toFixed(1))
         });
       }
       const allowsBodyScroll = viewport.width <= 820 && state.slideBodyOverflowY === 'auto';

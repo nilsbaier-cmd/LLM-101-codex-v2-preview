@@ -40,11 +40,16 @@ describe('codex v2 slide navigation and layout safeguards', () => {
   });
 
   it('sizes the slide stage from the measured header height on wrapped phone toolbars', () => {
+    expect(css).toContain('var(--app-viewport-height, 100vh)');
+    expect(css).toContain('var(--app-viewport-height, 100svh)');
     expect(css).toContain('var(--app-header-height, 60px)');
     expect(css).toContain('var(--app-header-height, 96px)');
     expect(css).toContain('var(--app-header-height, 118px)');
     expect(app).toContain('function updateAppShellMetrics()');
     expect(app).toContain('--app-header-height');
+    expect(app).toContain('--app-viewport-height');
+    expect(app).toContain('window.visualViewport?.height');
+    expect(app).toContain("window.visualViewport?.addEventListener('resize', refreshViewportFit)");
     expect(app).toContain('new ResizeObserver');
     expect(app).toContain('updateAppShellMetrics();\nif (!jumpToHash()) showSlide(0);');
   });

@@ -1,11 +1,11 @@
 // app.js — Haupteinstieg
-import { Storage } from './lib/storage.js?v=2026-05-17-codex-v2g';
-import { ModeManager } from './lib/mode.js?v=2026-05-17-codex-v2g';
-import { icon } from './lib/icons.js?v=2026-05-17-codex-v2g';
-import { initSprite } from './lib/icons-sprite.js?v=2026-05-17-codex-v2g';
-import { initTabs } from './lib/tabs.js?v=2026-05-17-codex-v2g';
-import { Exercises } from './lib/exercises.js?v=2026-05-17-codex-v2g';
-import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS, getPathProgress } from './lib/learning-paths.js?v=2026-05-17-codex-v2g';
+import { Storage } from './lib/storage.js?v=2026-05-17-codex-v2h';
+import { ModeManager } from './lib/mode.js?v=2026-05-17-codex-v2h';
+import { icon } from './lib/icons.js?v=2026-05-17-codex-v2h';
+import { initSprite } from './lib/icons-sprite.js?v=2026-05-17-codex-v2h';
+import { initTabs } from './lib/tabs.js?v=2026-05-17-codex-v2h';
+import { Exercises } from './lib/exercises.js?v=2026-05-17-codex-v2h';
+import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS, getPathProgress } from './lib/learning-paths.js?v=2026-05-17-codex-v2h';
 
 // Codex-Sprite so früh wie möglich inlined, damit nachgelagerte renderIcon()-
 // Aufrufe und <use href="#i-NAME"/>-Referenzen sofort auflösen. Fire-and-forget:
@@ -285,16 +285,24 @@ let currentIdx = 0;
 const appHeader = document.querySelector('.app-header');
 
 function updateAppShellMetrics() {
-  if (!appHeader) return;
-  const height = Math.ceil(appHeader.getBoundingClientRect().height);
-  document.documentElement.style.setProperty('--app-header-height', `${height}px`);
+  const viewportHeight = Math.floor(
+    window.visualViewport?.height || window.innerHeight || document.documentElement.clientHeight
+  );
+  document.documentElement.style.setProperty('--app-viewport-height', `${viewportHeight}px`);
+
+  if (appHeader) {
+    const height = Math.ceil(appHeader.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--app-header-height', `${height}px`);
+  }
+}
+
+function refreshViewportFit() {
+  updateAppShellMetrics();
+  fitVisibleSlide();
 }
 
 if ('ResizeObserver' in window && appHeader) {
-  const headerObserver = new ResizeObserver(() => {
-    updateAppShellMetrics();
-    fitVisibleSlide();
-  });
+  const headerObserver = new ResizeObserver(refreshViewportFit);
   headerObserver.observe(appHeader);
 }
 
@@ -764,10 +772,9 @@ mode.on('change', ({ key }) => {
   if (key === 'layout') showSlide(currentIdx);
 });
 
-window.addEventListener('resize', () => {
-  updateAppShellMetrics();
-  fitVisibleSlide();
-});
+window.addEventListener('resize', refreshViewportFit);
+window.visualViewport?.addEventListener('resize', refreshViewportFit);
+window.visualViewport?.addEventListener('scroll', refreshViewportFit);
 
 // Hash-Navigation: bei Page-Load oder Hash-Wechsel zur Folie mit data-slide-id springen
 function jumpToHash() {
