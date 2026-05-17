@@ -100,9 +100,12 @@ p, li { font-size: 15px; line-height: 1.6; }
 .btn.btn-primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: var(--text-on-accent);
 }
-.btn.btn-primary:hover { background: var(--accent-strong); }
+.btn.btn-primary:hover {
+  background: color-mix(in srgb, var(--accent) 82%, var(--text-primary));
+  color: var(--text-on-accent);
+}
 .btn.btn-ghost { background: transparent; border-color: transparent; color: var(--text-secondary); }
 
 /* Focus-States — Tastatur-Accessibility */
@@ -134,7 +137,7 @@ p, li { font-size: 15px; line-height: 1.6; }
   font-size: 10px;
   padding: 3px 9px;
   background: var(--accent);
-  color: #fff;
+  color: var(--text-on-accent);
   border: none;
   border-radius: var(--radius-sm);
   cursor: pointer;

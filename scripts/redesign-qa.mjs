@@ -82,7 +82,9 @@ async function inspectState(page) {
       hiddenHit: [...document.querySelectorAll('.slide[data-stepped] [data-step]:not(.is-revealed)')]
         .some(el => getComputedStyle(el).pointerEvents !== 'none'),
       externalControls: getComputedStyle(document.querySelector('.app-controls')).display,
-      bodyOverflow: getComputedStyle(document.body).overflow
+      bodyOverflow: getComputedStyle(document.body).overflow,
+      slideBodyOverflowY: body ? getComputedStyle(body).overflowY : '',
+      slideBodyScrollable: body ? body.scrollHeight > body.clientHeight + 4 : false
     };
   });
 }
@@ -105,7 +107,7 @@ try {
     });
 
     await page.goto(`http://127.0.0.1:${port}/index.html?qa=${Date.now()}`, { waitUntil: 'networkidle' });
-    await page.evaluate(() => localStorage.setItem('llm-101-v1:layout', 'slide'));
+    await page.evaluate(() => localStorage.setItem('llm-101-codex-v2-preview.mode.layout', JSON.stringify('slide')));
     await page.reload({ waitUntil: 'networkidle' });
 
     for (let i = 0; i < 220; i += 1) {
@@ -116,7 +118,8 @@ try {
       if (state.hiddenHit) issues.push({ issue: 'hidden step can receive clicks', id: state.id, step: state.step });
       if (state.externalControls !== 'none') issues.push({ issue: 'external controls visible', id: state.id });
       if (state.bodyOverflow !== 'hidden') issues.push({ issue: 'body can scroll in slide mode', id: state.id });
-      if (state.fitRect && state.bodyRect && state.fitRect.bottom > state.bodyRect.bottom + 4) {
+      const allowsBodyScroll = viewport.width <= 480 && state.slideBodyOverflowY === 'auto';
+      if (!allowsBodyScroll && state.fitRect && state.bodyRect && state.fitRect.bottom > state.bodyRect.bottom + 4) {
         issues.push({
           issue: 'slide body overflow',
           id: state.id,

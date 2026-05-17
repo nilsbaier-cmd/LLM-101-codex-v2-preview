@@ -159,7 +159,8 @@
   --text-tertiary: #8c8e96;
   --accent: #c5e818;            /* Acid-Lime (war Clay #cc785c) */
   --accent-soft: #d4f52640;
-  --accent-strong: #758c00;     /* Acid-Deep für Text auf hell */
+  --accent-strong: #526300;     /* Acid-Deep für Text auf hell */
+  --text-on-accent: #111400;
   --cobalt: #1f3df0;
   --cobalt-soft: #1f3df012;
   --crimson: #c4304a;
@@ -221,6 +222,7 @@
   --accent: #d4f526;
   --accent-soft: #d4f5263a;
   --accent-strong: #b8d800;
+  --text-on-accent: #111400;
   --cobalt: #7f95ff;
   --cobalt-soft: #7f95ff18;
   --crimson: #e8627c;
@@ -248,6 +250,7 @@
     --accent: #d4f526;
     --accent-soft: #d4f5263a;
     --accent-strong: #b8d800;
+    --text-on-accent: #111400;
     --cobalt: #7f95ff;
     --cobalt-soft: #7f95ff18;
     --crimson: #e8627c;

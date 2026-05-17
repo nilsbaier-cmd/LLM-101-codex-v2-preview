@@ -74,9 +74,9 @@ try {
   for (const target of VISUAL_QA_TARGETS) {
     const context = await browser.newContext({ viewport: target.viewport });
     await context.addInitScript(({ theme }) => {
-      localStorage.setItem('llm-101-v1.mode.theme', JSON.stringify(theme));
-      localStorage.setItem('llm-101-v1.mode.exercises', JSON.stringify(true));
-      localStorage.setItem('llm-101-v1.mode.llm', JSON.stringify(true));
+      localStorage.setItem('llm-101-codex-v2-preview.mode.theme', JSON.stringify(theme));
+      localStorage.setItem('llm-101-codex-v2-preview.mode.exercises', JSON.stringify(true));
+      localStorage.setItem('llm-101-codex-v2-preview.mode.llm', JSON.stringify(true));
     }, { theme: target.theme });
     const page = await context.newPage();
     await page.goto(`http://127.0.0.1:${port}/${target.url}`, { waitUntil: 'networkidle' });
