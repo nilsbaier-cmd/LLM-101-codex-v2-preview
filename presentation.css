@@ -3778,30 +3778,88 @@ h1.display em,
 }
 
 @media (max-width: 480px) {
+  body[data-layout="slide"] .title-row {
+    min-width: 0;
+  }
+
+  body[data-layout="slide"] .kicker {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    letter-spacing: 0.16em;
+  }
+
+  body[data-layout="slide"] .lede {
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  body[data-layout="slide"] .skill-anatomy,
+  body[data-layout="slide"] .repo-sub-grid,
+  body[data-layout="slide"] .platforms-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-item {
+    grid-template-columns: 26px 54px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-divider {
+    grid-column: auto;
+  }
+
+  body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-name,
+  body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-desc {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
   body[data-layout="slide"] .slide-foot {
-    grid-template-columns: auto auto;
-    gap: 8px 12px;
-    padding: 8px 12px 10px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 7px 10px max(7px, env(safe-area-inset-bottom));
   }
 
   body[data-layout="slide"] .slide-nav {
-    padding: 7px 10px;
+    padding: 7px 9px;
+  }
+
+  body[data-layout="slide"] .slide-nav.prev {
+    grid-column: 1;
   }
 
   body[data-layout="slide"] .slide-nav.next {
+    grid-column: 3;
     justify-self: end;
   }
 
   body[data-layout="slide"] .slide-progress {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    gap: 8px;
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    gap: 0;
     font-size: 10px;
     line-height: 1.25;
   }
 
+  body[data-layout="slide"] .slide-path,
+  body[data-layout="slide"] .slide-step,
   body[data-layout="slide"] .slide-progress-sep {
     display: none;
+  }
+
+  body[data-layout="slide"] .slide-folio {
+    min-width: 0;
+    gap: 5px;
+    white-space: nowrap;
   }
 
   body[data-layout="slide"] .path-dots i {

@@ -642,6 +642,58 @@ body[data-trainer="on"] .side-panel.trainer-only {
   }
 }
 
+@media (max-width: 480px) {
+  body[data-layout="slide"] .app-header {
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  body[data-layout="slide"] .app-brand {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  body[data-layout="slide"] .app-brand-id {
+    padding: 4px 7px;
+    font-size: 10px;
+    letter-spacing: 0.13em;
+  }
+
+  body[data-layout="slide"] .app-toggles {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    flex-wrap: nowrap;
+    gap: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body[data-layout="slide"] .app-toggles::-webkit-scrollbar {
+    display: none;
+  }
+
+  body[data-layout="slide"] .toggle-group {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+  }
+
+  body[data-layout="slide"] .toggle {
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  body[data-layout="slide"] .toggle-icon {
+    padding: 4px 7px;
+  }
+}
+
 @media (max-width: 700px) {
   .app-header {
     padding: var(--space-3);

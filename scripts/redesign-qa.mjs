@@ -70,8 +70,31 @@ async function inspectState(page) {
     const next = slide?.querySelector('.slide-nav.next');
     const rect = (el) => {
       const r = el?.getBoundingClientRect();
-      return r ? { top: r.top, bottom: r.bottom, height: r.height } : null;
+      return r ? { top: r.top, bottom: r.bottom, left: r.left, right: r.right, height: r.height, width: r.width } : null;
     };
+    const visibleHorizontalOffenders = (() => {
+      const bodyRect = body?.getBoundingClientRect();
+      if (!slide || !bodyRect) return [];
+      return [...slide.querySelectorAll('.slide-body *, .slide-foot *')]
+        .filter(el => {
+          const style = getComputedStyle(el);
+          if (style.display === 'none' || style.visibility === 'hidden') return false;
+          if (el.closest('.app-toggles')) return false;
+          const r = el.getBoundingClientRect();
+          if (r.width < 2 || r.height < 2) return false;
+          return r.left < bodyRect.left - 4 || r.right > bodyRect.right + 4;
+        })
+        .slice(0, 3)
+        .map(el => {
+          const r = el.getBoundingClientRect();
+          return {
+            tag: el.tagName.toLowerCase(),
+            cls: el.className ? String(el.className).slice(0, 80) : '',
+            left: Number(r.left.toFixed(1)),
+            right: Number(r.right.toFixed(1))
+          };
+        });
+    })();
 
     return {
       id: slide?.dataset.slideId,
@@ -86,7 +109,8 @@ async function inspectState(page) {
       externalControls: getComputedStyle(document.querySelector('.app-controls')).display,
       bodyOverflow: getComputedStyle(document.body).overflow,
       slideBodyOverflowY: body ? getComputedStyle(body).overflowY : '',
-      slideBodyScrollable: body ? body.scrollHeight > body.clientHeight + 4 : false
+      slideBodyScrollable: body ? body.scrollHeight > body.clientHeight + 4 : false,
+      horizontalOffenders: visibleHorizontalOffenders
     };
   });
 }
@@ -120,6 +144,9 @@ try {
       if (state.hiddenHit) issues.push({ issue: 'hidden step can receive clicks', id: state.id, step: state.step });
       if (state.externalControls !== 'none') issues.push({ issue: 'external controls visible', id: state.id });
       if (state.bodyOverflow !== 'hidden') issues.push({ issue: 'body can scroll in slide mode', id: state.id });
+      if (state.horizontalOffenders?.length) {
+        issues.push({ issue: 'horizontal overflow', id: state.id, step: state.step, offenders: state.horizontalOffenders });
+      }
       if (state.footerRect && state.footerRect.bottom > viewport.height + 1) {
         issues.push({
           issue: 'slide footer below viewport',

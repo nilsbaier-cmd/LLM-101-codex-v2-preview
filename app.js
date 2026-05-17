@@ -1,11 +1,11 @@
 // app.js — Haupteinstieg
-import { Storage } from './lib/storage.js?v=2026-05-17-codex-v2e';
-import { ModeManager } from './lib/mode.js?v=2026-05-17-codex-v2e';
-import { icon } from './lib/icons.js?v=2026-05-17-codex-v2e';
-import { initSprite } from './lib/icons-sprite.js?v=2026-05-17-codex-v2e';
-import { initTabs } from './lib/tabs.js?v=2026-05-17-codex-v2e';
-import { Exercises } from './lib/exercises.js?v=2026-05-17-codex-v2e';
-import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS, getPathProgress } from './lib/learning-paths.js?v=2026-05-17-codex-v2e';
+import { Storage } from './lib/storage.js?v=2026-05-17-codex-v2f';
+import { ModeManager } from './lib/mode.js?v=2026-05-17-codex-v2f';
+import { icon } from './lib/icons.js?v=2026-05-17-codex-v2f';
+import { initSprite } from './lib/icons-sprite.js?v=2026-05-17-codex-v2f';
+import { initTabs } from './lib/tabs.js?v=2026-05-17-codex-v2f';
+import { Exercises } from './lib/exercises.js?v=2026-05-17-codex-v2f';
+import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS, getPathProgress } from './lib/learning-paths.js?v=2026-05-17-codex-v2f';
 
 // Codex-Sprite so früh wie möglich inlined, damit nachgelagerte renderIcon()-
 // Aufrufe und <use href="#i-NAME"/>-Referenzen sofort auflösen. Fire-and-forget:
