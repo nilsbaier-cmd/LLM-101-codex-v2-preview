@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const read = (path) => readFileSync(join(process.cwd(), path), 'utf8');
@@ -30,5 +30,16 @@ describe('responsive css', () => {
     expect(explainerCss).toContain('.explainer-page');
     expect(explainerCss).toContain('.path-viz');
     expect(explainerCss).toContain('.timeline-track');
+    expect(explainerCss).toContain('.slide.codex.explainer-frame .slide-body');
+    expect(explainerCss).toContain('font-size: 17px');
+    expect(explainerCss).toContain('font-size: 28px');
+  });
+
+  it('gives every standalone explainer a real mobile viewport', () => {
+    readdirSync(join(process.cwd(), 'explainer'))
+      .filter(file => file.endsWith('.html'))
+      .forEach(file => {
+        expect(read(`explainer/${file}`)).toContain('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+      });
   });
 });

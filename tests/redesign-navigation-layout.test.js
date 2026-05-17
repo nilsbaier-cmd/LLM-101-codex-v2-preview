@@ -62,6 +62,12 @@ describe('codex v2 slide navigation and layout safeguards', () => {
     expect(css).toMatch(/\.xray-mode\.active\s*{[^}]*color:\s*var\(--text-on-accent\)/s);
   });
 
+  it('removes permanent stand stamps and keeps exercise durations inside mobile cards', () => {
+    expect(css).toMatch(/\.slide-stand\s*{[^}]*display:\s*none;/s);
+    expect(css).toMatch(/@media \(max-width: 820px\)\s*{[\s\S]*body\[data-layout="slide"\] \.ex-header[\s\S]*grid-template-columns:\s*1fr;/s);
+    expect(css).toMatch(/body\[data-layout="slide"\] \.ex-duration\s*{[^}]*justify-self:\s*start;[^}]*max-width:\s*100%;/s);
+  });
+
   it('keeps phone slide mode readable with a local body scroller instead of page scroll', () => {
     expect(css).toMatch(/@media \(max-width: 820px\)\s*{[\s\S]*body\[data-layout="slide"\] \.slide\.codex \.slide-body\s*{[^}]*overflow-y:\s*auto;/s);
     expect(css).toMatch(/@media \(max-width: 820px\)\s*{[\s\S]*body\[data-layout="slide"\] \.slide-body\.is-fit-scaled \.slide-body-fit\s*{[^}]*transform:\s*none;/s);
