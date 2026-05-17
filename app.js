@@ -1,11 +1,11 @@
 // app.js — Haupteinstieg
-import { Storage } from './lib/storage.js?v=2026-05-17-codex-v2i';
-import { ModeManager } from './lib/mode.js?v=2026-05-17-codex-v2i';
-import { icon } from './lib/icons.js?v=2026-05-17-codex-v2i';
-import { initSprite } from './lib/icons-sprite.js?v=2026-05-17-codex-v2i';
-import { initTabs } from './lib/tabs.js?v=2026-05-17-codex-v2i';
-import { Exercises } from './lib/exercises.js?v=2026-05-17-codex-v2i';
-import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS, getPathProgress } from './lib/learning-paths.js?v=2026-05-17-codex-v2i';
+import { Storage } from './lib/storage.js?v=2026-05-17-codex-v2j';
+import { ModeManager } from './lib/mode.js?v=2026-05-17-codex-v2j';
+import { icon } from './lib/icons.js?v=2026-05-17-codex-v2j';
+import { initSprite } from './lib/icons-sprite.js?v=2026-05-17-codex-v2j';
+import { initTabs } from './lib/tabs.js?v=2026-05-17-codex-v2j';
+import { Exercises } from './lib/exercises.js?v=2026-05-17-codex-v2j';
+import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS, getPathProgress } from './lib/learning-paths.js?v=2026-05-17-codex-v2j';
 
 // Codex-Sprite so früh wie möglich inlined, damit nachgelagerte renderIcon()-
 // Aufrufe und <use href="#i-NAME"/>-Referenzen sofort auflösen. Fire-and-forget:
@@ -316,6 +316,9 @@ const trainerToggle = document.getElementById('trainer-toggle');
 const trainerClose = document.getElementById('trainer-close');
 const trainerPanelBody = document.getElementById('trainer-panel-body');
 const chapterProgress = document.getElementById('chapter-progress');
+const quickNavPopover = document.getElementById('quick-nav-popover');
+const quickNavList = document.getElementById('quick-nav-list');
+const quickNavClose = document.getElementById('quick-nav-close');
 
 function normalizePathState(raw) {
   const state = raw && typeof raw === 'object' ? raw : {};
@@ -532,7 +535,7 @@ function updatePathStatus() {
 // Spec §6.3 — Slide-Footer-Rendering.
 // Setzt `.slide-progress` einer Slide komplett neu (robust gegen variierende Stubs
 // aus den D-Paketen). Markup-Pattern:
-//   <span class="slide-folio"><svg.ic><use #i-bookmark/></svg> Folie <b>{folio} / 30</b></span>
+//   <button class="slide-folio quick-nav-trigger"><svg.ic><use #i-bookmark/></svg> Folie <b>{folio} / 30</b></button>
 //   <span class="slide-progress-sep" aria-hidden="true"></span>
 //   <span class="slide-path"><svg.ic><use #i-route/></svg> Lernpfad <b>{pathLabel}</b></span>
 //   <span class="slide-step">
@@ -576,7 +579,7 @@ function renderSlideFooter(slideId) {
   }
 
   progress.innerHTML =
-    `<span class="slide-folio"><svg class="ic" aria-hidden="true"><use href="#i-bookmark"/></svg> Folie <b>${escapeHtml(folio)} / 30</b></span>` +
+    `<button class="slide-folio quick-nav-trigger" type="button" aria-haspopup="dialog" aria-expanded="${quickNavPopover?.getAttribute('aria-hidden') === 'false' ? 'true' : 'false'}"><svg class="ic" aria-hidden="true"><use href="#i-bookmark"/></svg> Folie <b>${escapeHtml(folio)} / 30</b></button>` +
     `<span class="slide-progress-sep" aria-hidden="true"></span>` +
     `<span class="slide-path"><svg class="ic" aria-hidden="true"><use href="#i-route"/></svg> Lernpfad <b>${escapeHtml(pathLabel)}</b></span>` +
     stepHtml;
@@ -584,6 +587,47 @@ function renderSlideFooter(slideId) {
 
 function refreshAllSlideFooters() {
   slides().forEach(slide => renderSlideFooter(slide.dataset.slideId));
+}
+
+function renderQuickNav() {
+  if (!quickNavList) return;
+  quickNavList.innerHTML = slides().map((slide, idx) => {
+    const id = slide.dataset.slideId || '';
+    const folio = slide.dataset.folio || String(idx + 1).padStart(2, '0');
+    const title = slideTitle(id);
+    const current = idx === currentIdx;
+    return `<button class="quick-nav-item${current ? ' is-current' : ''}" type="button" data-quick-slide="${escapeHtml(id)}" ${current ? 'aria-current="page"' : ''}>` +
+      `<span>${escapeHtml(folio)}</span>` +
+      `<b>${escapeHtml(title)}</b>` +
+    `</button>`;
+  }).join('');
+}
+
+function setQuickNavOpen(open) {
+  if (!quickNavPopover) return;
+  quickNavPopover.setAttribute('aria-hidden', open ? 'false' : 'true');
+  document.querySelectorAll('.quick-nav-trigger').forEach(trigger => {
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  if (open) {
+    renderQuickNav();
+    requestAnimationFrame(() => {
+      quickNavList?.querySelector('.quick-nav-item.is-current')?.scrollIntoView({ block: 'nearest' });
+    });
+  }
+}
+
+function updateQuickNavCurrent() {
+  if (!quickNavList) return;
+  quickNavList.querySelectorAll('[data-quick-slide]').forEach(item => {
+    const current = item.dataset.quickSlide === slides()[currentIdx]?.dataset.slideId;
+    item.classList.toggle('is-current', current);
+    if (current) item.setAttribute('aria-current', 'page');
+    else item.removeAttribute('aria-current');
+  });
+  document.querySelectorAll('.quick-nav-trigger').forEach(trigger => {
+    trigger.setAttribute('aria-expanded', quickNavPopover?.getAttribute('aria-hidden') === 'false' ? 'true' : 'false');
+  });
 }
 
 function updateChapterProgress(slide) {
@@ -716,6 +760,7 @@ function showSlide(idx) {
   renderPathPanel();
   updatePathStatus();
   renderTrainerPanel(newSlide);
+  updateQuickNavCurrent();
   queueSlideBodyFit(newSlide);
 }
 
@@ -746,6 +791,34 @@ document.getElementById('prev-slide').addEventListener('click', goPrev);
 document.getElementById('next-slide').addEventListener('click', goNext);
 
 document.addEventListener('click', (e) => {
+  const quickTrigger = e.target.closest('.quick-nav-trigger');
+  if (quickTrigger && mode.get('layout') === 'slide') {
+    e.preventDefault();
+    const open = quickNavPopover?.getAttribute('aria-hidden') !== 'false';
+    setQuickNavOpen(open);
+    return;
+  }
+
+  const quickItem = e.target.closest('[data-quick-slide]');
+  if (quickItem) {
+    e.preventDefault();
+    const idx = slides().findIndex(slide => slide.dataset.slideId === quickItem.dataset.quickSlide);
+    if (idx >= 0) showSlide(idx);
+    setQuickNavOpen(false);
+    return;
+  }
+
+  if (e.target.closest('#quick-nav-close')) {
+    e.preventDefault();
+    setQuickNavOpen(false);
+    return;
+  }
+
+  const quickCard = e.target.closest('.quick-nav-card');
+  if (quickNavPopover?.getAttribute('aria-hidden') === 'false' && !quickCard) {
+    setQuickNavOpen(false);
+  }
+
   const nav = e.target.closest('.slide-nav.prev, .slide-nav.next');
   if (!nav || mode.get('layout') !== 'slide') return;
   e.preventDefault();
@@ -764,12 +837,16 @@ document.addEventListener('keydown', (e) => {
 
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
+  setQuickNavOpen(false);
   setPanelOpen(pathPanel, pathToggle, false);
   setPanelOpen(trainerPanel, trainerToggle, false);
 });
 
 mode.on('change', ({ key }) => {
-  if (key === 'layout') showSlide(currentIdx);
+  if (key === 'layout') {
+    setQuickNavOpen(false);
+    showSlide(currentIdx);
+  }
 });
 
 window.addEventListener('resize', refreshViewportFit);

@@ -10,10 +10,10 @@
   <title>LLM 101</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="tokens.css?v=2026-05-17-codex-v2i">
-  <link rel="stylesheet" href="app.css?v=2026-05-17-codex-v2i">
-  <link rel="stylesheet" href="presentation.css?v=2026-05-17-codex-v2i">
-  <link rel="stylesheet" href="print.css?v=2026-05-17-codex-v2i" media="print">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-17-codex-v2j">
+  <link rel="stylesheet" href="app.css?v=2026-05-17-codex-v2j">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-17-codex-v2j">
+  <link rel="stylesheet" href="print.css?v=2026-05-17-codex-v2j" media="print">
 </head>
 <body data-layout="slide">
   <header class="app-header" role="banner">
@@ -3224,6 +3224,16 @@ VERBOTEN
     </div>
   </main>
 
+  <div class="quick-nav-popover" id="quick-nav-popover" aria-hidden="true">
+    <div class="quick-nav-card" role="dialog" aria-modal="false" aria-label="Inhaltsverzeichnis">
+      <div class="quick-nav-head">
+        <span>Inhaltsverzeichnis</span>
+        <button class="quick-nav-close" id="quick-nav-close" type="button" aria-label="Inhaltsverzeichnis schließen">×</button>
+      </div>
+      <div class="quick-nav-list" id="quick-nav-list"></div>
+    </div>
+  </div>
+
   <aside class="side-panel path-panel" id="path-panel" aria-label="Lernpfad-Kompass" aria-hidden="true">
     <div class="side-panel-header">
       <div>
@@ -3246,6 +3256,6 @@ VERBOTEN
     <div class="side-panel-body" id="trainer-panel-body"></div>
   </aside>
 
-  <script type="module" src="app.js?v=2026-05-17-codex-v2i"></script>
+  <script type="module" src="app.js?v=2026-05-17-codex-v2j"></script>
 </body>
 </html>

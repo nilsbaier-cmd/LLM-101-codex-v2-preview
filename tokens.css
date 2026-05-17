@@ -157,8 +157,8 @@
   --text-primary: #0a0a0c;
   --text-secondary: #44464b;
   --text-tertiary: #8c8e96;
-  --accent: #c5e818;            /* Acid-Lime (war Clay #cc785c) */
-  --accent-soft: #d4f52640;
+  --accent: #8ea500;            /* Acid-Lime, abgedunkelt für Text auf Weiss */
+  --accent-soft: #d4f52638;
   --accent-strong: #526300;     /* Acid-Deep für Text auf hell */
   --text-on-accent: #111400;
   --cobalt: #1f3df0;

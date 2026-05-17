@@ -44,19 +44,22 @@ body[data-layout="slide"] .slide-inner {
 
 /* SCROLL-MODUS */
 body[data-layout="scroll"] .app-main {
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: minmax(0, 1fr) 260px;
   grid-template-rows: 1fr;
+  grid-template-areas: "deck toc";
 }
 body[data-layout="scroll"] .app-toc {
+  grid-area: toc;
   display: block;
   position: sticky;
   top: 0;
   padding: var(--space-5);
-  border-right: 1px solid var(--border);
+  border-left: 1px solid var(--border);
   overflow-y: auto;
   height: calc(100vh - var(--app-header-height, 60px));
 }
 body[data-layout="scroll"] .app-deck {
+  grid-area: deck;
   overflow-y: auto;
   padding: var(--space-5) var(--space-7);
   scroll-behavior: smooth;
@@ -100,6 +103,117 @@ body[data-layout="slide"] .app-controls {
 .app-toc a.is-current {
   color: var(--accent);
   border-left-color: var(--accent);
+}
+
+/* QUICK NAV — Slide-Counter als Inhaltsverzeichnis */
+.quick-nav-popover[aria-hidden="true"] {
+  display: none;
+}
+
+.quick-nav-popover {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: auto;
+}
+
+.quick-nav-card {
+  position: absolute;
+  left: 50%;
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(560px, calc(100vw - 32px));
+  max-height: min(68vh, 540px);
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-page);
+  pointer-events: auto;
+}
+
+.quick-nav-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-label);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.quick-nav-close {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-base);
+  color: var(--text-secondary);
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.quick-nav-close:hover,
+.quick-nav-close:focus-visible {
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+.quick-nav-list {
+  max-height: calc(min(68vh, 540px) - 64px);
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.quick-nav-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.quick-nav-item span {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-tiny);
+  letter-spacing: 0.14em;
+  color: var(--text-tertiary);
+}
+
+.quick-nav-item b {
+  min-width: 0;
+  color: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quick-nav-item:hover,
+.quick-nav-item:focus-visible {
+  color: var(--text-primary);
+  background: var(--bg-tint);
+  outline: none;
+}
+
+.quick-nav-item.is-current {
+  color: var(--text-primary);
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--border));
+  background: var(--accent-soft);
 }
 
 .toggle-divider {
@@ -3297,6 +3411,31 @@ body[data-layout="slide"] .slide.codex .slide-body {
   align-items: center;
   gap: 8px;
 }
+
+.slide-folio {
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: inherit;
+  padding: 5px 8px;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
+.slide-folio:hover,
+.slide-folio:focus-visible,
+.slide-folio[aria-expanded="true"] {
+  color: var(--text-primary);
+  background: var(--bg-tint);
+  border-color: var(--border);
+  outline: none;
+}
+
+.slide-folio[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--accent) 48%, var(--border));
+}
+
 .slide-folio .ic,
 .slide-path .ic,
 .slide-step .ic { color: var(--text-tertiary); }

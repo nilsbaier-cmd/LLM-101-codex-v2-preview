@@ -15,6 +15,8 @@ describe('responsive css', () => {
     expect(presentationCss).toMatch(/@media\s*\(max-width:\s*900px\)/);
     expect(presentationCss).toContain('body[data-layout="scroll"] .app-main');
     expect(presentationCss).toContain('body[data-layout="scroll"] .app-toc');
+    expect(presentationCss).toContain('grid-template-areas: "deck toc"');
+    expect(presentationCss).toContain('border-left: 1px solid var(--border)');
   });
 
   it('collapses dense slide grids and learning stations on mobile', () => {

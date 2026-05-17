@@ -32,6 +32,17 @@ describe('codex v2 slide navigation and layout safeguards', () => {
     expect(app).toMatch(/else goPrev\(\)/);
   });
 
+  it('turns the slide folio into a quick table-of-contents menu', () => {
+    const html = read('index.html');
+    expect(html).toContain('id="quick-nav-popover"');
+    expect(app).toContain('quick-nav-trigger');
+    expect(app).toContain('function renderQuickNav()');
+    expect(app).toContain('data-quick-slide');
+    expect(app).toContain('setQuickNavOpen(open)');
+    expect(css).toContain('.quick-nav-popover');
+    expect(css).toContain('.quick-nav-item.is-current');
+  });
+
   it('keeps slide-mode controls singular and applies body fitting', () => {
     expect(css).toMatch(/body\[data-layout="slide"\] \.app-controls\s*{[^}]*display:\s*none;/s);
     expect(css).toContain('.slide-body-fit');
@@ -55,6 +66,7 @@ describe('codex v2 slide navigation and layout safeguards', () => {
   });
 
   it('keeps lime actions readable in light and dark mode', () => {
+    expect(tokens).toContain('--accent: #8ea500');
     expect(tokens).toContain('--text-on-accent: #111400');
     expect(appCss).toMatch(/\.btn\.btn-primary\s*{[^}]*color:\s*var\(--text-on-accent\)/s);
     expect(appCss).toMatch(/\.code-block \.copy-btn\s*{[^}]*color:\s*var\(--text-on-accent\)/s);
