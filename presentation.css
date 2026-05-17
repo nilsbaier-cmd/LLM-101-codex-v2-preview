@@ -3777,8 +3777,10 @@ h1.display em,
   .slide-crumb-topic { font-size: 14px; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 820px) {
   body[data-layout="slide"] .title-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
     min-width: 0;
   }
 

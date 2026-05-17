@@ -23,6 +23,7 @@ describe('offline delivery shell', () => {
 
   it('registers the service worker without blocking normal use', () => {
     expect(app).toContain('navigator.serviceWorker.register');
+    expect(app).toContain("updateViaCache: 'none'");
     expect(app).toContain("window.location.protocol === 'file:'");
     expect(app).toContain('Offline-Support ist optional');
     expect(index).toContain('id="update-banner"');

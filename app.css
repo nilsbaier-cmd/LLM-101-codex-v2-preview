@@ -642,7 +642,7 @@ body[data-trainer="on"] .side-panel.trainer-only {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 820px) {
   body[data-layout="slide"] .app-header {
     align-items: center;
     flex-wrap: nowrap;

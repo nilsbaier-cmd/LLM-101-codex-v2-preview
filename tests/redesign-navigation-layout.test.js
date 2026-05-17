@@ -58,15 +58,15 @@ describe('codex v2 slide navigation and layout safeguards', () => {
   });
 
   it('keeps phone slide mode readable with a local body scroller instead of page scroll', () => {
-    expect(css).toMatch(/@media \(max-width: 480px\)\s*{[\s\S]*body\[data-layout="slide"\] \.slide\.codex \.slide-body\s*{[^}]*overflow-y:\s*auto;/s);
-    expect(css).toMatch(/@media \(max-width: 480px\)\s*{[\s\S]*body\[data-layout="slide"\] \.slide-body\.is-fit-scaled \.slide-body-fit\s*{[^}]*transform:\s*none;/s);
+    expect(css).toMatch(/@media \(max-width: 820px\)\s*{[\s\S]*body\[data-layout="slide"\] \.slide\.codex \.slide-body\s*{[^}]*overflow-y:\s*auto;/s);
+    expect(css).toMatch(/@media \(max-width: 820px\)\s*{[\s\S]*body\[data-layout="slide"\] \.slide-body\.is-fit-scaled \.slide-body-fit\s*{[^}]*transform:\s*none;/s);
   });
 
   it('uses compact iPhone slide chrome without clipped ladder or hidden footer metadata', () => {
-    expect(appCss).toMatch(/@media \(max-width: 480px\)\s*{[\s\S]*body\[data-layout="slide"\] \.app-header\s*{[^}]*flex-wrap:\s*nowrap;/s);
-    expect(appCss).toMatch(/@media \(max-width: 480px\)\s*{[\s\S]*body\[data-layout="slide"\] \.app-toggles\s*{[^}]*overflow-x:\s*auto;/s);
-    expect(css).toMatch(/@media \(max-width: 480px\)\s*{[\s\S]*body\[data-layout="slide"\] \[data-slide-id="einstieg-3"\] \.ladder-list\s*{[^}]*display:\s*flex;/s);
-    expect(css).toMatch(/@media \(max-width: 480px\)\s*{[\s\S]*body\[data-layout="slide"\] \.slide-foot\s*{[^}]*grid-template-columns:\s*auto minmax\(0,\s*1fr\) auto;/s);
+    expect(appCss).toMatch(/@media \(max-width: 820px\)\s*{[\s\S]*body\[data-layout="slide"\] \.app-header\s*{[^}]*flex-wrap:\s*nowrap;/s);
+    expect(appCss).toMatch(/@media \(max-width: 820px\)\s*{[\s\S]*body\[data-layout="slide"\] \.app-toggles\s*{[^}]*overflow-x:\s*auto;/s);
+    expect(css).toMatch(/@media \(max-width: 820px\)\s*{[\s\S]*body\[data-layout="slide"\] \[data-slide-id="einstieg-3"\] \.ladder-list\s*{[^}]*display:\s*flex;/s);
+    expect(css).toMatch(/@media \(max-width: 820px\)\s*{[\s\S]*body\[data-layout="slide"\] \.slide-foot\s*{[^}]*grid-template-columns:\s*auto minmax\(0,\s*1fr\) auto;/s);
     expect(css).toMatch(/body\[data-layout="slide"\] \.slide-path,\s*body\[data-layout="slide"\] \.slide-step,\s*body\[data-layout="slide"\] \.slide-progress-sep\s*{[^}]*display:\s*none;/s);
     expect(qa).toContain('horizontalOffenders');
   });

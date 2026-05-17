@@ -7,6 +7,7 @@ const port = Number(process.env.PORT || 8781);
 const viewports = [
   { name: 'desktop-720', width: 1280, height: 720 },
   { name: 'desktop-768', width: 1366, height: 768 },
+  { name: 'wide-phone', width: 753, height: 980 },
   { name: 'phone', width: 390, height: 844 }
 ];
 
@@ -156,7 +157,7 @@ try {
           viewport: viewport.height
         });
       }
-      const allowsBodyScroll = viewport.width <= 480 && state.slideBodyOverflowY === 'auto';
+      const allowsBodyScroll = viewport.width <= 820 && state.slideBodyOverflowY === 'auto';
       if (!allowsBodyScroll && state.fitRect && state.bodyRect && state.fitRect.bottom > state.bodyRect.bottom + 4) {
         issues.push({
           issue: 'slide body overflow',

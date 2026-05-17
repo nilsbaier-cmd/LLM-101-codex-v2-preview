@@ -1,11 +1,11 @@
 // app.js — Haupteinstieg
-import { Storage } from './lib/storage.js?v=2026-05-17-codex-v2f';
-import { ModeManager } from './lib/mode.js?v=2026-05-17-codex-v2f';
-import { icon } from './lib/icons.js?v=2026-05-17-codex-v2f';
-import { initSprite } from './lib/icons-sprite.js?v=2026-05-17-codex-v2f';
-import { initTabs } from './lib/tabs.js?v=2026-05-17-codex-v2f';
-import { Exercises } from './lib/exercises.js?v=2026-05-17-codex-v2f';
-import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS, getPathProgress } from './lib/learning-paths.js?v=2026-05-17-codex-v2f';
+import { Storage } from './lib/storage.js?v=2026-05-17-codex-v2g';
+import { ModeManager } from './lib/mode.js?v=2026-05-17-codex-v2g';
+import { icon } from './lib/icons.js?v=2026-05-17-codex-v2g';
+import { initSprite } from './lib/icons-sprite.js?v=2026-05-17-codex-v2g';
+import { initTabs } from './lib/tabs.js?v=2026-05-17-codex-v2g';
+import { Exercises } from './lib/exercises.js?v=2026-05-17-codex-v2g';
+import { LEARNING_PATHS, TRAINER_NOTES, TRAINER_VARIANTS, getPathProgress } from './lib/learning-paths.js?v=2026-05-17-codex-v2g';
 
 // Codex-Sprite so früh wie möglich inlined, damit nachgelagerte renderIcon()-
 // Aufrufe und <use href="#i-NAME"/>-Referenzen sofort auflösen. Fire-and-forget:
@@ -40,7 +40,7 @@ function registerServiceWorker() {
   });
   window.addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('./sw.js');
+      const registration = await navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' });
       if (registration.waiting && navigator.serviceWorker.controller) showUpdateBanner();
       registration.addEventListener('updatefound', () => {
         const worker = registration.installing;
