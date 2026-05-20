@@ -1566,26 +1566,61 @@
             <h2 class="lede">Ghostwriter — <em>Erstentwurf in deinem Ton, statt leeres Blatt.</em></h2>
           </div>
 
-          <div class="uc-tabs-header">
-            <div class="uc-tab active">E-Mails</div>
-            <div class="uc-tab">Berichte</div>
-            <div class="uc-tab">Protokolle</div>
-            <div class="uc-tab">Präsentationen</div>
-          </div>
+          <div class="uc-tabs" data-uc-tabs>
+            <div class="uc-tabs-header">
+              <button class="uc-tab active" data-uc-tab="mail" type="button">E-Mails</button>
+              <button class="uc-tab" data-uc-tab="report" type="button">Berichte</button>
+              <button class="uc-tab" data-uc-tab="minutes" type="button">Protokolle</button>
+              <button class="uc-tab" data-uc-tab="slides" type="button">Präsentationen</button>
+            </div>
 
-          <div class="uc-chat">
-            <div class="uc-bubble user">Schreib eine E-Mail an unsere Partner: Pilot war erfolgreich, Dank ans Team, nächste Schritte bis Q1.</div>
-            <div class="uc-bubble ai">Hier ein Entwurf in diplomatischem Ton mit drei Abschnitten: Erfolg, Dank, Ausblick. Soll ich formeller oder die persönliche Note stärker machen?</div>
-            <div class="uc-bubble user">Etwas persönlicher, und füge die konkreten Zahlen vom Go-Live ein.</div>
-            <div class="uc-bubble ai">Überarbeitete Version mit persönlicher Ansprache und eingebetteten KPIs. Bereit zum Versenden.</div>
-          </div>
+            <div class="uc-example-panel" data-uc-panel="mail">
+              <div class="uc-chat">
+                <div class="uc-bubble user">Schreib eine Entscheidungs-E-Mail an unsere Partner: Pilot war erfolgreich, Dank ans Team, nächste Schritte bis Q1.</div>
+                <div class="uc-bubble ai">Hier ein Entwurf in diplomatischem Ton mit drei Abschnitten: Erfolg, Dank, Ausblick. Soll ich formeller oder persönlicher schreiben?</div>
+              </div>
+              <div class="uc-section-label">Beispiel-Prompts zum Ausprobieren</div>
+              <div class="uc-prompts">
+                <div class="uc-prompt-btn">Entscheidungs-E-Mail mit klarer Bitte um Rückmeldung</div>
+                <div class="uc-prompt-btn">Stakeholder-Update bei Verzögerung</div>
+              </div>
+            </div>
 
-          <div class="uc-section-label">Beispiel-Prompts zum Ausprobieren</div>
-          <div class="uc-prompts">
-            <div class="uc-prompt-btn">Stakeholder-Update bei Verzögerung</div>
-            <div class="uc-prompt-btn">Stichpunkte zu Sitzungsprotokoll</div>
-            <div class="uc-prompt-btn">Management-Statusbericht</div>
-            <div class="uc-prompt-btn">Text straffen und optimieren</div>
+            <div class="uc-example-panel" data-uc-panel="report" hidden>
+              <div class="uc-chat">
+                <div class="uc-bubble user">Erstelle aus diesen Stichworten einen Management-Bericht: Stand, Risiken, Entscheide, nächster Meilenstein.</div>
+                <div class="uc-bubble ai">Ich strukturiere den Bericht als Management Summary, Lagebild, offene Punkte und Entscheidbedarf.</div>
+              </div>
+              <div class="uc-section-label">Beispiel-Prompts zum Ausprobieren</div>
+              <div class="uc-prompts">
+                <div class="uc-prompt-btn">Management Summary aus Projektnotizen</div>
+                <div class="uc-prompt-btn">Statusbericht mit Risiken und Entscheidpunkten</div>
+              </div>
+            </div>
+
+            <div class="uc-example-panel" data-uc-panel="minutes" hidden>
+              <div class="uc-chat">
+                <div class="uc-bubble user">Verdichte diese Sitzungsnotizen zu einem Ergebnisprotokoll: Entscheide, Aufträge, Fristen, offene Fragen.</div>
+                <div class="uc-bubble ai">Ich trenne Beschlüsse, Pendenzen und Diskussionspunkte, damit das Protokoll direkt prüfbar wird.</div>
+              </div>
+              <div class="uc-section-label">Beispiel-Prompts zum Ausprobieren</div>
+              <div class="uc-prompts">
+                <div class="uc-prompt-btn">Ergebnisprotokoll aus Stichworten</div>
+                <div class="uc-prompt-btn">Pendenzenliste mit Verantwortlichkeiten</div>
+              </div>
+            </div>
+
+            <div class="uc-example-panel" data-uc-panel="slides" hidden>
+              <div class="uc-chat">
+                <div class="uc-bubble user">Baue aus diesem Bericht eine Folienstruktur für 8 Minuten: Kernaussage, drei Belege, Abschlussfrage.</div>
+                <div class="uc-bubble ai">Ich schlage eine Dramaturgie mit Titeln, Sprechpunkten und einer klaren Schlussfolie vor.</div>
+              </div>
+              <div class="uc-section-label">Beispiel-Prompts zum Ausprobieren</div>
+              <div class="uc-prompts">
+                <div class="uc-prompt-btn">Folienstruktur aus Bericht</div>
+                <div class="uc-prompt-btn">Sprechtext für kurze Präsentation</div>
+              </div>
+            </div>
           </div>
 
           <div class="uc-section-label">Interaktionsmuster</div>
@@ -1630,26 +1665,61 @@
             <h2 class="lede">Data Analyst — <em>Muster sichtbar machen, statt im Sheet suchen.</em></h2>
           </div>
 
-          <div class="uc-tabs-header">
-            <div class="uc-tab active">Excel/CSV</div>
-            <div class="uc-tab">Dashboards</div>
-            <div class="uc-tab">Trends</div>
-            <div class="uc-tab">Berichte</div>
-          </div>
+          <div class="uc-tabs" data-uc-tabs>
+            <div class="uc-tabs-header">
+              <button class="uc-tab active" data-uc-tab="csv" type="button">Excel/CSV</button>
+              <button class="uc-tab" data-uc-tab="dashboard" type="button">Dashboards</button>
+              <button class="uc-tab" data-uc-tab="trends" type="button">Trends</button>
+              <button class="uc-tab" data-uc-tab="report" type="button">Berichte</button>
+            </div>
 
-          <div class="uc-chat">
-            <div class="uc-bubble user">Hier sind unsere Lieferanten-Daten der letzten 6 Monate [CSV-Upload]. Was fällt auf?</div>
-            <div class="uc-bubble ai">Drei Auffälligkeiten: Lieferant X hat 40 % mehr Verspätungen als der Durchschnitt, Donnerstage zeigen Spitzen, und Route Y-Z ist überproportional betroffen. Soll ich das als Dashboard visualisieren?</div>
-            <div class="uc-bubble user">Ja, und vergleiche mit dem Vorjahr.</div>
-            <div class="uc-bubble ai">Dashboard erstellt mit Monatsvergleich, Lieferanten-Ranking und Routen-Heatmap. Der Trend zeigt einen Anstieg von 12 % gegenüber Vorjahr.</div>
-          </div>
+            <div class="uc-example-panel" data-uc-panel="csv">
+              <div class="uc-chat">
+                <div class="uc-bubble user">Hier sind unsere Lieferanten-Daten der letzten 6 Monate [CSV-Upload]. Was fällt auf?</div>
+                <div class="uc-bubble ai">Ich prüfe Datenqualität, Ausreisser und wiederkehrende Muster, bevor ich Schlüsse ziehe.</div>
+              </div>
+              <div class="uc-section-label">Beispiel-Prompts zum Ausprobieren</div>
+              <div class="uc-prompts">
+                <div class="uc-prompt-btn">Datenqualität prüfen: fehlende Werte, Dubletten, Ausreisser</div>
+                <div class="uc-prompt-btn">Excel-Datei: Auffälligkeiten finden</div>
+              </div>
+            </div>
 
-          <div class="uc-section-label">Beispiel-Prompts zum Ausprobieren</div>
-          <div class="uc-prompts">
-            <div class="uc-prompt-btn">Excel-Datei: Auffälligkeiten finden</div>
-            <div class="uc-prompt-btn">Quartalszahlen visualisieren</div>
-            <div class="uc-prompt-btn">Zwei Datensätze vergleichen</div>
-            <div class="uc-prompt-btn">Umfrage auswerten mit Empfehlungen</div>
+            <div class="uc-example-panel" data-uc-panel="dashboard" hidden>
+              <div class="uc-chat">
+                <div class="uc-bubble user">Visualisiere die wichtigsten Kennzahlen: Monatsvergleich, Ranking, Abweichungen.</div>
+                <div class="uc-bubble ai">Ich erstelle eine Dashboard-Logik mit drei Ansichten: Überblick, Drilldown und offene Datenfragen.</div>
+              </div>
+              <div class="uc-section-label">Beispiel-Prompts zum Ausprobieren</div>
+              <div class="uc-prompts">
+                <div class="uc-prompt-btn">Quartalszahlen visualisieren</div>
+                <div class="uc-prompt-btn">Dashboard-Layout für Führungssitzung</div>
+              </div>
+            </div>
+
+            <div class="uc-example-panel" data-uc-panel="trends" hidden>
+              <div class="uc-chat">
+                <div class="uc-bubble user">Vergleiche dieses Jahr mit dem Vorjahr und zeige die stärksten Veränderungen.</div>
+                <div class="uc-bubble ai">Ich trenne Trend, saisonale Effekte und mögliche Datenartefakte, damit die Interpretation vorsichtig bleibt.</div>
+              </div>
+              <div class="uc-section-label">Beispiel-Prompts zum Ausprobieren</div>
+              <div class="uc-prompts">
+                <div class="uc-prompt-btn">Zwei Datensätze vergleichen</div>
+                <div class="uc-prompt-btn">Trend mit Unsicherheiten erklären</div>
+              </div>
+            </div>
+
+            <div class="uc-example-panel" data-uc-panel="report" hidden>
+              <div class="uc-chat">
+                <div class="uc-bubble user">Fasse die Analyse als Management Summary zusammen: Kernaussage, Evidenz, Risiken, nächste Frage.</div>
+                <div class="uc-bubble ai">Ich formuliere eine kurze Summary mit klarer Trennung zwischen Datenbefund und Interpretation.</div>
+              </div>
+              <div class="uc-section-label">Beispiel-Prompts zum Ausprobieren</div>
+              <div class="uc-prompts">
+                <div class="uc-prompt-btn">Management Summary aus Analyse</div>
+                <div class="uc-prompt-btn">Umfrage auswerten mit Empfehlungen</div>
+              </div>
+            </div>
           </div>
 
           <div class="uc-section-label">Interaktionsmuster</div>
@@ -2039,37 +2109,37 @@ Freundliche Grüsse</div>
               <span class="case-status is-green">geeignet</span>
               <h3>Sitzung vorbereiten</h3>
               <p>Agenda, Entscheidfragen und offene Punkte aus öffentlichen oder internen, freigegebenen Notizen strukturieren.</p>
-              <strong>Prüffrage:</strong> Fehlen heikle Namen, Daten oder Entscheide?
+              <div class="case-check"><span>Prüffrage</span><strong>Fehlen heikle Namen, Daten oder Entscheide?</strong></div>
             </article>
             <article class="case-card">
               <span class="case-status is-green">geeignet</span>
               <h3>Text vereinfachen</h3>
               <p>Bestehenden Entwurf für eine breitere Zielgruppe kürzen, glätten oder in Varianten umformulieren.</p>
-              <strong>Prüffrage:</strong> Bleibt die Aussage rechtlich und fachlich gleich?
+              <div class="case-check"><span>Prüffrage</span><strong>Bleibt die Aussage rechtlich und fachlich gleich?</strong></div>
             </article>
             <article class="case-card">
               <span class="case-status is-amber">bedingt</span>
               <h3>Risiken sammeln</h3>
               <p>Blinde Flecken, Gegenargumente oder offene Abhängigkeiten als Sparring vorbereiten.</p>
-              <strong>Prüffrage:</strong> Ist klar, dass die Bewertung beim Menschen bleibt?
+              <div class="case-check"><span>Prüffrage</span><strong>Ist klar, dass die Bewertung beim Menschen bleibt?</strong></div>
             </article>
             <article class="case-card">
               <span class="case-status is-amber">bedingt</span>
               <h3>Tabellenlogik erklären</h3>
               <p>Formeln, CSV-Strukturen oder Ausreisser beschreiben lassen, wenn Datenfreigabe und Anonymisierung passen.</p>
-              <strong>Prüffrage:</strong> Sind Personen- oder Falldaten entfernt?
+              <div class="case-check"><span>Prüffrage</span><strong>Sind Personen- oder Falldaten entfernt?</strong></div>
             </article>
             <article class="case-card">
               <span class="case-status is-amber">bedingt</span>
               <h3>Status verdichten</h3>
               <p>Aus freigegebenen Stichworten ein kurzes Projektupdate mit Risiken und nächstem Entscheidpunkt bauen.</p>
-              <strong>Prüffrage:</strong> Sind Annahmen und Fakten trennbar?
+              <div class="case-check"><span>Prüffrage</span><strong>Sind Annahmen und Fakten trennbar?</strong></div>
             </article>
             <article class="case-card">
               <span class="case-status is-red">ungeeignet</span>
               <h3>Personalfall beurteilen</h3>
               <p>Bewertung, Empfehlung oder vertrauliche Analyse zu Personen, Dossiers oder klassifizierten Inhalten.</p>
-              <strong>Prüffrage:</strong> Würde ich diese Daten auch extern teilen dürfen?
+              <div class="case-check"><span>Prüffrage</span><strong>Würde ich diese Daten auch extern teilen dürfen?</strong></div>
             </article>
           </div>
         </div>
@@ -2113,6 +2183,7 @@ Freundliche Grüsse</div>
                 <span>Vorher</span>
                 <p>„Mach mir eine gute Zusammenfassung.“</p>
               </div>
+              <div class="ba-flow-arrow" aria-hidden="true">↓</div>
               <div class="ba-side is-after">
                 <span>Nachher</span>
                 <p>„Fasse diese Notizen für eine Projektleitung in 5 Bulletpoints zusammen. Trenne Fakten, Risiken und offene Entscheide.“</p>
@@ -2123,6 +2194,7 @@ Freundliche Grüsse</div>
                 <span>Vorher</span>
                 <p>„Ist das eine gute Idee?“</p>
               </div>
+              <div class="ba-flow-arrow" aria-hidden="true">↓</div>
               <div class="ba-side is-after">
                 <span>Nachher</span>
                 <p>„Prüfe diese Idee als kritischer Sparringpartner. Nenne 3 Annahmen, 3 Risiken und einen kleinen Test ohne Personendaten.“</p>
@@ -2133,12 +2205,14 @@ Freundliche Grüsse</div>
                 <span>Vorher</span>
                 <p>„Schreib das professioneller.“</p>
               </div>
+              <div class="ba-flow-arrow" aria-hidden="true">↓</div>
               <div class="ba-side is-after">
                 <span>Nachher</span>
                 <p>„Überarbeite den Text verwaltungstauglich: klar, knapp, freundlich. Inhalt nicht verändern, Unsicherheiten markieren.“</p>
               </div>
             </article>
           </div>
+          <p class="read-direction">Von oben nach unten lesen: schwacher Prompt → präziser Arbeitsauftrag.</p>
         </div>
         <div class="slide-foot">
           <a class="slide-nav prev" href="#usecase-7">
