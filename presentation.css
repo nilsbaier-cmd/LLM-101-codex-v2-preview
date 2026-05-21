@@ -471,6 +471,10 @@ body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-desc {
 .volatile-note strong {
   color: var(--text-secondary);
 }
+.source-strip.volatile-note,
+.source-strip.volatile-note strong {
+  color: #fff;
+}
 [data-theme="dark"] .source-strip.volatile-note,
 [data-theme="dark"] .source-strip.volatile-note strong,
 :root[data-theme="dark"] .source-strip.volatile-note,
@@ -1875,7 +1879,7 @@ body[data-layout="slide"] [data-slide-id="usecase-7"] .case-card {
   font-size: 12px;
 }
 .bridge-rule p {
-  color: var(--text-secondary);
+  color: #fff;
 }
 
 /* Transfer-Folie */
@@ -1925,7 +1929,10 @@ body[data-layout="slide"] [data-slide-id="usecase-7"] .case-card {
 }
 .transfer-commitment p {
   max-width: 780px;
-  color: var(--text-secondary);
+  color: #fff;
+}
+.transfer-commitment p strong {
+  color: #fff;
 }
 .resource-strip {
   display: flex;

@@ -49,6 +49,12 @@ describe('transfer close and visual QA targets', () => {
     expect(appCss).toContain('.trainer-demo-checklist ul');
   });
 
+  it('keeps green transfer and volatile note text high contrast', () => {
+    expect(presentationCss).toMatch(/\.bridge-rule p\s*{[^}]*color:\s*#fff;/s);
+    expect(presentationCss).toMatch(/\.transfer-commitment p\s*{[^}]*color:\s*#fff;/s);
+    expect(presentationCss).toMatch(/\.source-strip\.volatile-note,\s*\.source-strip\.volatile-note strong\s*{[^}]*color:\s*#fff;/s);
+  });
+
   it('defines stable visual QA targets for high-risk states', () => {
     expect(VISUAL_QA_TARGETS.length).toBeGreaterThanOrEqual(12);
     expect(new Set(VISUAL_QA_TARGETS.map(target => target.id)).size).toBe(VISUAL_QA_TARGETS.length);
