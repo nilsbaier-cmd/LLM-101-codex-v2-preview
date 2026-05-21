@@ -3900,6 +3900,10 @@ body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-desc {
 body[data-layout="slide"] [data-slide-id="einstieg-3"] .see-more {
   margin-top: var(--space-3) !important;
 }
+body[data-layout="slide"] [data-slide-id="einstieg-2"] .see-more {
+  margin-top: auto !important;
+  padding-top: var(--space-4);
+}
 body[data-layout="slide"] [data-slide-id="verwaltung-2"] .myth-row {
   font-size: 18px;
   line-height: 1.42;

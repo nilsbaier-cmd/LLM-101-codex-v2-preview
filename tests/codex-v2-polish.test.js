@@ -26,6 +26,8 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(css).toContain('.slide-body-fit');
     expect(css).toContain('--slide-fit-scale');
     expect(css).toContain('.slide-body.is-fit-scaled .slide-body-fit');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="einstieg-2"] .see-more');
+    expect(css).toContain('margin-top: auto !important');
   });
 
   it('shows an icon on the regenerate settings card', () => {
