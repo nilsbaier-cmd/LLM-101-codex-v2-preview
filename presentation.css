@@ -4014,7 +4014,7 @@ body[data-layout="slide"] [data-slide-id="claude-4"] .letter-content p,
 body[data-layout="slide"] [data-slide-id="claude-4"] .settings-card p,
 body[data-layout="slide"] [data-slide-id="claude-5"] .pricing-card li,
 body[data-layout="slide"] [data-slide-id="context-1"] .window-stat p,
-body[data-layout="slide"] [data-slide-id="context-2"] .exercise p,
+body[data-layout="slide"] [data-slide-id="context-quiz"] .exercise p,
 body[data-layout="slide"] [data-slide-id="usecase-lab"] .exercise p,
 body[data-layout="slide"] [data-slide-id="usecase-6"] .exercise p,
 body[data-layout="slide"] [data-slide-id="skills-1"] .lead,
@@ -4070,6 +4070,25 @@ body[data-layout="slide"] [data-slide-id="context-2"] .strategy-grid {
 }
 body[data-layout="slide"] [data-slide-id="context-2"] .strategy-card {
   padding: var(--space-5);
+}
+body[data-layout="slide"] [data-slide-id="context-quiz"] .context-quiz-card {
+  max-width: 980px;
+  margin: var(--space-4) auto 0;
+  padding: var(--space-4) var(--space-5);
+}
+body[data-layout="slide"] [data-slide-id="context-quiz"] .ex-objective,
+body[data-layout="slide"] [data-slide-id="context-quiz"] .ex-steps,
+body[data-layout="slide"] [data-slide-id="context-quiz"] .quiz-choice,
+body[data-layout="slide"] [data-slide-id="context-quiz"] .ex-expected,
+body[data-layout="slide"] [data-slide-id="context-quiz"] .ex-reflection {
+  font-size: 17px;
+  line-height: 1.35;
+}
+body[data-layout="slide"] [data-slide-id="context-quiz"] .quiz-choices {
+  gap: var(--space-2);
+}
+body[data-layout="slide"] [data-slide-id="context-quiz"] .quiz-choice {
+  padding: var(--space-2) var(--space-4);
 }
 body[data-layout="slide"] [data-slide-id="usecase-6"] .quality-answer p,
 body[data-layout="slide"] [data-slide-id="usecase-6"] .quality-verdict,

@@ -21,6 +21,17 @@ describe('transfer close and visual QA targets', () => {
     expect(link?.getAttribute('href')).toBe('explainer/a-context-window.html?back=context-2');
   });
 
+  it('splits the context-window mini quiz onto its own readable slide', () => {
+    const strategySlide = document.querySelector('[data-slide-id="context-2"]');
+    const quizSlide = document.querySelector('[data-slide-id="context-quiz"]');
+
+    expect(strategySlide?.querySelector('.exercise')).toBeNull();
+    expect(strategySlide?.querySelector('.slide-nav.next')?.getAttribute('href')).toBe('#context-quiz');
+    expect(quizSlide?.querySelector('.exercise.quiz')).toBeTruthy();
+    expect(quizSlide?.querySelector('.slide-nav.prev')?.getAttribute('href')).toBe('#context-2');
+    expect(quizSlide?.querySelector('.slide-nav.next')?.getAttribute('href')).toBe('#usecase-1');
+  });
+
   it('adds a compact final transfer slide and resource links', () => {
     const transferSlide = document.querySelector('[data-slide-id="next-4"]');
     expect(transferSlide).toBeTruthy();

@@ -286,6 +286,7 @@ refreshToggleStates();
 
 // Slide-Navigation
 const slides = () => Array.from(document.querySelectorAll('.app-deck .slide'));
+const slideTotal = () => slides().length;
 let currentIdx = 0;
 const appHeader = document.querySelector('.app-header');
 
@@ -561,7 +562,7 @@ function updatePathStatus() {
 // Spec §6.3 — Slide-Footer-Rendering.
 // Setzt `.slide-progress` einer Slide komplett neu (robust gegen variierende Stubs
 // aus den D-Paketen). Markup-Pattern:
-//   <button class="slide-status slide-folio quick-nav-trigger">Folie <b>{folio} / 30</b></button>
+//   <button class="slide-status slide-folio quick-nav-trigger">Folie <b>{folio} / {total}</b></button>
 //   <span class="slide-status slide-path">Lernpfad <b>{pathLabel}</b></span>
 //   <span class="slide-status slide-step">Schnitt <b>{n} von {m}</b> + Mini-Bar</span>
 // Cover (`einstieg-1`) → Lernpfad „Übersicht", kein Schritt.
@@ -597,8 +598,9 @@ function renderSlideFooter(slideId) {
     pathHtml = `<span class="slide-status slide-path"><svg class="ic" aria-hidden="true"><use href="#i-route"/></svg><span>Lernpfad</span> <b>${escapeHtml(pathLabel)}</b></span>`;
   }
 
+  const total = slideTotal();
   progress.innerHTML =
-    `<button class="slide-status slide-folio quick-nav-trigger" type="button" aria-haspopup="dialog" aria-expanded="${quickNavPopover?.getAttribute('aria-hidden') === 'false' ? 'true' : 'false'}"><svg class="ic" aria-hidden="true"><use href="#i-bookmark"/></svg><span>Folie</span> <b>${escapeHtml(folio)} / 30</b></button>` +
+    `<button class="slide-status slide-folio quick-nav-trigger" type="button" aria-haspopup="dialog" aria-expanded="${quickNavPopover?.getAttribute('aria-hidden') === 'false' ? 'true' : 'false'}"><svg class="ic" aria-hidden="true"><use href="#i-bookmark"/></svg><span>Folie</span> <b>${escapeHtml(folio)} / ${total}</b></button>` +
     pathHtml +
     stepHtml;
 }
@@ -918,7 +920,7 @@ window.addEventListener('hashchange', jumpToHash);
 
 updateAppShellMetrics();
 if (!jumpToHash()) showSlide(0);
-// Initial alle 30 Slide-Footer normieren (D-Pakete hinterliessen variierende Stubs).
+// Initial alle Slide-Footer normieren (D-Pakete hinterliessen variierende Stubs).
 refreshAllSlideFooters();
 
 pathToggle?.addEventListener('click', () => {

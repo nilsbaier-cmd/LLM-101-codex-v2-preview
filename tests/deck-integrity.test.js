@@ -43,7 +43,7 @@ describe('deck integrity', () => {
   const slideIds = slides.map(slide => slide.dataset.slideId);
 
   it('keeps slide ids unique, navigable and titled', () => {
-    expect(slides).toHaveLength(30);
+    expect(slides).toHaveLength(31);
     expect(new Set(slideIds).size).toBe(slideIds.length);
 
     slides.forEach(slide => {

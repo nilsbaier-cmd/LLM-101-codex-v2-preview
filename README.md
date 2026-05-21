@@ -4,7 +4,7 @@ Hybrid Slide/Scroll-Präsentation als Einführung in Large Language Models mit k
 
 ## Inhalt
 
-- `index.html` — Hauptpräsentation, 30 Folien in 7 Kapiteln, Vortrags- und Lesemodus, Hell/Dunkel/Auto-Theme, optional LLM-agnostische Tabs (Claude, ChatGPT und Gemini) und Übungen
+- `index.html` — Hauptpräsentation, 31 Folien in 7 Kapiteln, Vortrags- und Lesemodus, Hell/Dunkel/Auto-Theme, optional LLM-agnostische Tabs (Claude, ChatGPT und Gemini) und Übungen
 - `meine-notizen.html` — Sammelseite für eigene Reflexionsantworten mit Markdown-Export
 - `handout.html` — druckbarer One-Pager für Teilnehmende
 - `trainer-export.html` — Moderationsblatt mit Abläufen, Fallbacks, Demo-Checklisten und Prompts

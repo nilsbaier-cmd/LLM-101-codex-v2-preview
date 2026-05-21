@@ -17,12 +17,12 @@ describe('getPathProgress() · Pfad-Position', () => {
       inPath: true
     });
 
-    // Praxis · 12 Stationen, usecase-lab ist Position 7.
+    // Praxis · 13 Stationen, usecase-lab ist Position 8.
     const praxis = getPathProgress('usecase-lab', 'praxis');
     expect(praxis.pathId).toBe('praxis');
     expect(praxis.pathLabel).toBe('Praxis');
-    expect(praxis.step).toBe(7);
-    expect(praxis.total).toBe(12);
+    expect(praxis.step).toBe(8);
+    expect(praxis.total).toBe(13);
     expect(praxis.inPath).toBe(true);
 
     // Power User · skills-2 ist Position 5.
