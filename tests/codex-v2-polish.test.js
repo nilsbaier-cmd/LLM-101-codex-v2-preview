@@ -56,6 +56,18 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(css).toContain('font-size: 17px');
   });
 
+  it('raises the persistence settings tab text across all providers', () => {
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-3"] .llm-tabs-nav button');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-3"] .settings-section-label');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-3"] .settings-card h4');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-3"] .settings-card p');
+    expect(css).toContain('font-size: 17px');
+
+    const slide = document.querySelector('[data-slide-id="claude-3"]');
+    expect(slide?.querySelectorAll('[data-tab-panel]')).toHaveLength(3);
+    expect(slide?.querySelectorAll('.settings-card').length).toBeGreaterThan(12);
+  });
+
   it('shows an icon on the regenerate settings card', () => {
     const card = Array.from(document.querySelectorAll('[data-slide-id="claude-4"] .settings-card'))
       .find(el => el.textContent?.includes('Regenerieren'));

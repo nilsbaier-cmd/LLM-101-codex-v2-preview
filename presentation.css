@@ -3097,7 +3097,7 @@ body[data-llm="off"] [data-tab-panel="claude"] {
 /* Workshop-Mode (Übungen aus): alle Übungen verstecken */
 body[data-exercises="off"] .exercise { display: none; }
 
-/* Folie 9 (claude-3) — kompakteres Settings-Grid, damit Inhalt nicht unten abgeschnitten wird */
+/* Folie 9 (claude-3) — kompakteres, aber lesbares Settings-Grid */
 [data-slide-id="claude-3"] .settings-grid {
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-3);
@@ -3105,8 +3105,8 @@ body[data-exercises="off"] .exercise { display: none; }
 [data-slide-id="claude-3"] .settings-card {
   padding: var(--space-3) var(--space-4);
 }
-[data-slide-id="claude-3"] .settings-card h4 { font-size: 14px; }
-[data-slide-id="claude-3"] .settings-card p { font-size: 13px; line-height: 1.4; }
+[data-slide-id="claude-3"] .settings-card h4 { font-size: 16px; }
+[data-slide-id="claude-3"] .settings-card p { font-size: 15px; line-height: 1.45; }
 [data-slide-id="claude-3"] .settings-section { margin-top: var(--space-3); }
 
 /* Folie 16 (usecase-3) — kompaktere Schritte/Bubbles, damit Reflexion noch reinpasst */
@@ -4022,6 +4022,24 @@ body[data-layout="slide"] [data-slide-id="next-1"] .repo-workflow li,
 body[data-layout="slide"] [data-slide-id="next-3"] .platform-desc {
   font-size: 18px;
   line-height: 1.45;
+}
+body[data-layout="slide"] [data-slide-id="claude-3"] .llm-tabs-nav {
+  margin-bottom: var(--space-4);
+}
+body[data-layout="slide"] [data-slide-id="claude-3"] .llm-tabs-nav button {
+  font-size: 15px;
+  padding: var(--space-2) var(--space-4);
+}
+body[data-layout="slide"] [data-slide-id="claude-3"] .settings-section-label {
+  font-size: 12px;
+  margin-bottom: var(--space-3);
+}
+body[data-layout="slide"] [data-slide-id="claude-3"] .settings-card h4 {
+  font-size: 17px;
+}
+body[data-layout="slide"] [data-slide-id="claude-3"] .settings-card p {
+  font-size: 17px;
+  line-height: 1.48;
 }
 body[data-layout="slide"] [data-slide-id="claude-1"] .model-card h3,
 body[data-layout="slide"] [data-slide-id="claude-2"] .letter-content strong,
