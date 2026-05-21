@@ -4182,9 +4182,31 @@ body[data-layout="slide"] [data-slide-id="skills-3"] .exercise {
   margin-top: 0;
   padding: var(--space-4);
 }
+body[data-layout="slide"] [data-slide-id="skills-3"] .ex-objective,
+body[data-layout="slide"] [data-slide-id="skills-3"] .ex-prompt,
+body[data-layout="slide"] [data-slide-id="skills-3"] .ex-steps,
+body[data-layout="slide"] [data-slide-id="skills-3"] .ex-steps li,
+body[data-layout="slide"] [data-slide-id="skills-3"] .ex-expected,
+body[data-layout="slide"] [data-slide-id="skills-3"] .ex-reflection {
+  font-size: 17px;
+  line-height: 1.45;
+}
+body[data-layout="slide"] [data-slide-id="skills-3"] .ex-outcome-grid {
+  gap: var(--space-2);
+}
+body[data-layout="slide"] [data-slide-id="skills-3"] .ex-outcome-grid .ex-expected,
+body[data-layout="slide"] [data-slide-id="skills-3"] .ex-outcome-grid .ex-reflection {
+  margin-top: var(--space-2);
+  padding: var(--space-3);
+}
 body[data-layout="slide"] [data-slide-id="skills-3"] .code-block {
   max-height: 150px;
   overflow: auto;
+}
+body[data-layout="slide"] [data-slide-id="skills-3"] .code-block .copy-btn {
+  min-height: 30px;
+  padding: 5px 14px;
+  font-size: 15px;
 }
 body[data-layout="slide"] [data-slide-id="next-3"] .platforms-grid {
   min-height: 330px;

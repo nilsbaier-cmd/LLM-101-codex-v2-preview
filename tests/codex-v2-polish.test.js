@@ -75,6 +75,20 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(card?.querySelector('svg use')?.getAttribute('href')).toBe('#i-rotate-ccw');
   });
 
+  it('keeps the live skill demo exercise readable with larger copy buttons', () => {
+    const slide = document.querySelector('[data-slide-id="skills-3"]');
+
+    expect(slide?.querySelector('.exercise .ex-outcome-grid')).toBeTruthy();
+    expect(slide?.querySelectorAll('.code-block .copy-btn')).toHaveLength(2);
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="skills-3"] .ex-objective');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="skills-3"] .ex-steps li');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="skills-3"] .ex-reflection');
+    expect(css).toContain('font-size: 17px');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="skills-3"] .code-block .copy-btn');
+    expect(css).toContain('min-height: 30px');
+    expect(css).toContain('font-size: 15px');
+  });
+
   it('adds interactive text-form and data-form examples to the use-case slides', () => {
     const ghostwriter = document.querySelector('[data-slide-id="usecase-2"]');
     const analyst = document.querySelector('[data-slide-id="usecase-3"]');
