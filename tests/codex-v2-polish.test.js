@@ -88,6 +88,19 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(analyst?.querySelectorAll('[data-uc-tab]')).toHaveLength(4);
     expect(analyst?.textContent).toContain('Datenqualität prüfen');
     expect(analyst?.textContent).toContain('Management Summary');
+    expect(css).toContain('.uc-example-panel[hidden]');
+    expect(css).toContain('display: none');
+  });
+
+  it('keeps the first three use-case slides readable in slide mode', () => {
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="usecase-1"] .uc-bubble');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="usecase-2"] .uc-bubble');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="usecase-3"] .uc-bubble');
+    expect(css).toContain('font-size: 17px');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="usecase-1"] .uc-prompt-btn');
+    expect(css).toContain('font-size: 16px');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="usecase-1"] .uc-steps li');
+    expect(css).toContain('font-size: 15px');
   });
 
   it('clarifies the context simulator without binding the method to Claude', () => {
