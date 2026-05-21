@@ -42,6 +42,8 @@ describe('Codex v2 Safari and readability polish', () => {
   });
 
   it('keeps revealed skill ladder levels in the same icon/text grid', () => {
+    expect(css).toContain('body[data-layout="slide"] .slide.codex[data-slide-id="einstieg-3"] .slide-body');
+    expect(css).toContain('padding-block: clamp(12px, 1.3vw, 18px)');
     expect(css).toContain('body[data-layout="slide"] .slide[data-slide-id="einstieg-3"][data-stepped] .ladder-item[data-step].is-revealed');
     expect(css).toContain('display: grid');
     expect(css).toContain('grid-template-columns: 36px 64px minmax(0, 1fr)');

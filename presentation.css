@@ -3977,6 +3977,10 @@ body[data-layout="slide"] .title-row {
 body[data-layout="slide"] .caret {
   display: none;
 }
+body[data-layout="slide"] .slide.codex[data-slide-id="einstieg-3"] .slide-body {
+  gap: 10px;
+  padding-block: clamp(12px, 1.3vw, 18px);
+}
 body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-list {
   gap: 5px 16px;
   margin-top: 4px;
