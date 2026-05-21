@@ -46,6 +46,13 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(css).toContain('display: none');
   });
 
+  it('keeps the policy slide readable after all reveal steps', () => {
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="verwaltung-1"] .policy-card li');
+    expect(css).toContain('font-size: 18px');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="verwaltung-1"] .merkblatt-section li');
+    expect(css).toContain('font-size: 17px');
+  });
+
   it('shows an icon on the regenerate settings card', () => {
     const card = Array.from(document.querySelectorAll('[data-slide-id="claude-4"] .settings-card'))
       .find(el => el.textContent?.includes('Regenerieren'));
