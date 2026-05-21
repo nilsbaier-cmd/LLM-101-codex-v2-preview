@@ -3935,6 +3935,10 @@ body[data-layout="slide"] [data-slide-id="einstieg-2"] .see-more {
   margin-top: auto !important;
   padding-top: var(--space-4);
 }
+body[data-layout="slide"] [data-slide-id="verwaltung-1"] .see-more {
+  margin-top: auto !important;
+  padding-top: var(--space-4);
+}
 body[data-layout="slide"] [data-slide-id="verwaltung-2"] .myth-row {
   font-size: 18px;
   line-height: 1.42;
