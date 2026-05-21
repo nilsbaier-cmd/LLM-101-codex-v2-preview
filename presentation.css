@@ -3767,6 +3767,9 @@ body[data-layout="slide"] .slide.codex .slide-body {
   background: color-mix(in srgb, var(--bg-card) 82%, transparent);
   box-shadow: 0 1px 0 color-mix(in srgb, var(--text-primary) 5%, transparent);
 }
+.slide-progress .slide-status {
+  transform: translateY(-3px);
+}
 
 .slide-folio {
   color: inherit;

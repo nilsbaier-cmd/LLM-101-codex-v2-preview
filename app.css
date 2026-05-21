@@ -424,7 +424,7 @@ body[data-trainer="on"] .side-panel.trainer-only {
 .chapter-progress {
   position: fixed;
   left: 50%;
-  bottom: 7px;
+  bottom: 3px;
   z-index: 20;
   display: grid;
   grid-template-columns: repeat(7, 32px);
@@ -620,7 +620,7 @@ body[data-trainer="on"] .side-panel.trainer-only {
 
   .chapter-progress {
     grid-template-columns: repeat(7, 22px);
-    bottom: 7px;
+    bottom: 3px;
   }
 
   h1 { font-size: 42px; }

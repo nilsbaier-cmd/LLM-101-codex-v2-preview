@@ -14,7 +14,9 @@ describe('Codex v2 Safari and readability polish', () => {
   it('keeps the slide footer status on one non-colliding row', () => {
     expect(css).toContain('.slide-progress');
     expect(css).toContain('grid-auto-flow: column');
-    expect(appCss).toContain('bottom: 7px');
+    expect(css).toContain('.slide-progress .slide-status');
+    expect(css).toContain('translateY(-3px)');
+    expect(appCss).toContain('bottom: 3px');
     expect(appCss).toContain('z-index: 20');
   });
 
