@@ -3990,6 +3990,9 @@ body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-item {
 body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-item.is-revealed {
   display: grid;
 }
+body[data-layout="slide"] .slide[data-slide-id="einstieg-3"][data-stepped] .ladder-item[data-step].is-revealed {
+  display: grid;
+}
 body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-divider {
   display: none;
 }
