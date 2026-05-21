@@ -53,6 +53,22 @@ describe('codex v2 slide navigation and layout safeguards', () => {
     expect(app).toContain('queueSlideBodyFit');
   });
 
+  it('preserves the current slide when switching between presentation and reading mode', () => {
+    expect(app).toContain('function scrollActiveSlideIntoReadingView(idx = currentIdx)');
+    expect(app).toContain('const targetIdx = currentIdx');
+    expect(app).toContain("deck.scrollTo({ top: Math.max(0, top), behavior: 'auto' })");
+    expect(app).toMatch(/if \(idx >= 0\) currentIdx = idx;/);
+    expect(app).toMatch(/if \(key === 'layout'\)[\s\S]*requestAnimationFrame\(\(\) => {[\s\S]*showSlide\(targetIdx\);[\s\S]*scrollActiveSlideIntoReadingView\(targetIdx\);/);
+  });
+
+  it('keeps reading mode slides inside the deck column instead of clipping under the toc', () => {
+    expect(css).toMatch(/body\[data-layout="scroll"\] \.app-main\s*{[^}]*min-width:\s*0;/s);
+    expect(css).toMatch(/body\[data-layout="scroll"\] \.app-deck\s*{[^}]*min-width:\s*0;/s);
+    expect(css).toMatch(/body\[data-layout="scroll"\] \.slide\s*{[^}]*width:\s*100%;/s);
+    expect(css).toMatch(/body\[data-layout="scroll"\] \.slide\s*{[^}]*max-width:\s*min\(960px,\s*100%\);/s);
+    expect(css).toMatch(/body\[data-layout="scroll"\] \.slide\.codex,\s*\.slide\.codex\[data-layout="scroll"\]\s*{[^}]*width:\s*100%;/s);
+  });
+
   it('sizes the slide stage from the measured header height on wrapped phone toolbars', () => {
     expect(css).toContain('var(--app-viewport-height, 100vh)');
     expect(css).toContain('var(--app-viewport-height, 100svh)');

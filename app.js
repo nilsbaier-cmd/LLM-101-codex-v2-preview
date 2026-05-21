@@ -811,6 +811,28 @@ function showSlide(idx) {
   queueSlideBodyFit(newSlide);
 }
 
+function scrollActiveSlideIntoReadingView(idx = currentIdx) {
+  if (mode.get('layout') !== 'scroll') return;
+  const slide = slides()[idx];
+  if (!slide) return;
+  const deck = document.querySelector('.app-deck');
+  if (!deck) return;
+  const alignSlide = (attempt = 0) => {
+    const slideRect = slide.getBoundingClientRect();
+    const deckRect = deck.getBoundingClientRect();
+    const top = slideRect.top - deckRect.top + deck.scrollTop;
+    deck.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+    if (attempt < 20 && Math.abs(slideRect.top - deckRect.top) > 2) {
+      setTimeout(() => alignSlide(attempt + 1), 50);
+    }
+  };
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      alignSlide();
+    });
+  });
+}
+
 function goNext() {
   if (mode.get('layout') === 'slide') {
     const cur = slides()[currentIdx];
@@ -897,8 +919,12 @@ document.addEventListener('keydown', (e) => {
 
 mode.on('change', ({ key }) => {
   if (key === 'layout') {
+    const targetIdx = currentIdx;
     setQuickNavOpen(false);
-    showSlide(currentIdx);
+    requestAnimationFrame(() => {
+      showSlide(targetIdx);
+      scrollActiveSlideIntoReadingView(targetIdx);
+    });
   }
 });
 
@@ -981,6 +1007,8 @@ function setupScrollSpy() {
     for (const entry of entries) {
       if (entry.isIntersecting) {
         const id = entry.target.dataset.slideId;
+        const idx = slides().findIndex(slide => slide.dataset.slideId === id);
+        if (idx >= 0) currentIdx = idx;
         updateTOCCurrent(id);
       }
     }

@@ -47,6 +47,7 @@ body[data-layout="scroll"] .app-main {
   grid-template-columns: minmax(0, 1fr) 260px;
   grid-template-rows: 1fr;
   grid-template-areas: "deck toc";
+  min-width: 0;
 }
 body[data-layout="scroll"] .app-toc {
   grid-area: toc;
@@ -61,11 +62,14 @@ body[data-layout="scroll"] .app-toc {
 body[data-layout="scroll"] .app-deck {
   grid-area: deck;
   overflow-y: auto;
-  padding: var(--space-5) var(--space-7);
+  min-width: 0;
+  padding: var(--space-5) clamp(var(--space-4), 3vw, var(--space-6));
   scroll-behavior: smooth;
 }
 body[data-layout="scroll"] .slide {
-  max-width: 960px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(960px, 100%);
   margin: 0 auto var(--space-7) auto;
   padding-bottom: var(--space-7);
   border-bottom: 1px solid var(--border);
@@ -3643,6 +3647,8 @@ body[data-layout="scroll"] .slide.codex,
 .slide.codex[data-layout="scroll"] {
   aspect-ratio: auto;
   min-height: 0;
+  max-width: min(960px, 100%);
+  width: 100%;
   margin: 0 auto var(--space-6);
 }
 
