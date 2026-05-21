@@ -3872,6 +3872,14 @@ body[data-layout="slide"] .slide.codex .slide-body {
 body[data-layout="slide"] .lede {
   max-width: min(100%, 58ch);
 }
+body[data-layout="slide"] .pull-quote,
+body[data-layout="slide"] .lead,
+body[data-layout="slide"] .ex-prompt {
+  max-width: min(100%, 86ch);
+}
+body[data-layout="slide"] .pull-quote {
+  line-height: 1.35;
+}
 body[data-layout="slide"] .title-row {
   grid-template-columns: minmax(180px, auto) minmax(0, 1fr);
 }

@@ -30,6 +30,13 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(css).toContain('margin-top: auto !important');
   });
 
+  it('lets long slide callouts use the available horizontal space', () => {
+    expect(css).toContain('body[data-layout="slide"] .pull-quote');
+    expect(css).toContain('body[data-layout="slide"] .lead');
+    expect(css).toContain('body[data-layout="slide"] .ex-prompt');
+    expect(css).toContain('max-width: min(100%, 86ch)');
+  });
+
   it('shows an icon on the regenerate settings card', () => {
     const card = Array.from(document.querySelectorAll('[data-slide-id="claude-4"] .settings-card'))
       .find(el => el.textContent?.includes('Regenerieren'));
