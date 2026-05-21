@@ -1977,7 +1977,7 @@ Freundliche Grüsse</div>
             <div class="rot-chart" aria-label="Context Rot: Verlässlichkeit sinkt bei wachsendem Kontext">
               <div class="rot-axis y">Verlässlichkeit</div>
               <div class="rot-axis x">Kontextlänge</div>
-              <svg viewBox="0 0 620 300" role="img" aria-label="Kurven zeigen sinkende Verlässlichkeit bei mehr Kontext und Kontext-Rauschen">
+              <svg viewBox="0 0 620 300" role="img" aria-label="Sauberer Kontext bleibt länger verlässlich, überfüllter Kontext fällt früher in die Gefahrenzone von Context Rot">
                 <defs>
                   <linearGradient id="rotClean" x1="0" x2="1">
                     <stop offset="0" stop-color="var(--signal)"/>
@@ -1986,33 +1986,49 @@ Freundliche Grüsse</div>
                 </defs>
                 <line x1="52" y1="250" x2="585" y2="250" class="rot-grid-line"/>
                 <line x1="52" y1="48" x2="52" y2="250" class="rot-grid-line"/>
-                <path class="rot-curve rot-curve-clean" d="M70 80 C170 82 260 94 350 126 C440 158 510 190 565 226"/>
-                <path class="rot-curve rot-curve-noisy" d="M70 92 C160 116 240 152 330 186 C420 220 500 238 565 246"/>
                 <g class="rot-band">
-                  <rect x="362" y="58" width="178" height="182" rx="10"/>
-                  <text x="382" y="86">Kontext-Rauschen</text>
+                  <rect x="306" y="152" width="246" height="92" rx="10"/>
+                  <text x="326" y="180">Gefahrenzone</text>
+                  <text x="326" y="202">Context Rot</text>
                 </g>
-                <circle cx="150" cy="84" r="7" class="rot-dot clean"/>
-                <circle cx="455" cy="178" r="7" class="rot-dot clean"/>
-                <circle cx="455" cy="225" r="7" class="rot-dot noisy"/>
+                <path class="rot-curve rot-curve-clean" d="M70 80 C180 80 280 90 368 118 C458 146 520 178 565 212"/>
+                <path class="rot-curve rot-curve-noisy" d="M70 98 C150 126 218 164 286 196 C370 236 470 248 565 250"/>
+                <path class="rot-link rot-link-1" d="M206 86 C260 68 336 58 392 70"/>
+                <path class="rot-link rot-link-2" d="M286 196 C342 202 392 212 438 224"/>
+                <path class="rot-link rot-link-3" d="M492 162 C526 140 548 116 566 90"/>
+                <circle cx="206" cy="86" r="7" class="rot-dot clean"/>
+                <circle cx="286" cy="196" r="7" class="rot-dot noisy"/>
+                <circle cx="492" cy="162" r="7" class="rot-dot clean"/>
+                <g class="rot-marker rot-marker-1" transform="translate(392 56)">
+                  <circle r="16"/>
+                  <text y="5">1</text>
+                </g>
+                <g class="rot-marker rot-marker-2" transform="translate(438 224)">
+                  <circle r="16"/>
+                  <text y="5">2</text>
+                </g>
+                <g class="rot-marker rot-marker-3" transform="translate(566 88)">
+                  <circle r="16"/>
+                  <text y="5">3</text>
+                </g>
               </svg>
               <div class="rot-legend">
                 <span><i class="clean"></i>sauberer, relevanter Kontext</span>
-                <span><i class="noisy"></i>überfüllt mit Nebenpfaden</span>
+                <span><i class="noisy"></i>überfüllt: Rauschen verdrängt Relevanz früher</span>
               </div>
             </div>
             <div class="rot-explain">
-              <article>
+              <article class="rot-note-1">
                 <span>1</span>
                 <strong>Signal verdünnt</strong>
                 <p>Die entscheidenden Fakten liegen zwischen vielen alten Varianten, Zwischenfragen und Stilwechseln.</p>
               </article>
-              <article>
+              <article class="rot-note-2">
                 <span>2</span>
-                <strong>Rauschen zieht Fokus ab</strong>
-                <p>Irrelevante Details wirken wie scheinbar nützliche Hinweise und können die Antwort umlenken.</p>
+                <strong>Rauschen kippt früher</strong>
+                <p>Irrelevante Details ziehen Fokus ab: Die überfüllte Linie fällt viel schneller in die Gefahrenzone.</p>
               </article>
-              <article>
+              <article class="rot-note-3">
                 <span>3</span>
                 <strong>Gegenmittel</strong>
                 <p>Vor wichtigen Outputs Ziel, aktuelle Annahmen und Tabus neu bündeln; alte Chats lieber zusammenfassen.</p>

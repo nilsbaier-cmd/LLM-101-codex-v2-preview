@@ -24,8 +24,10 @@ describe('context window x-ray demo', () => {
     expect(slide?.querySelector('.context-rot')).toBeTruthy();
     expect(slide?.querySelector('.rot-curve-clean')).toBeTruthy();
     expect(slide?.querySelector('.rot-curve-noisy')).toBeTruthy();
-    expect(slide?.textContent).toContain('Kontext-Rauschen');
-    expect(slide?.textContent).toContain('Rauschen zieht Fokus ab');
+    expect(slide?.querySelectorAll('.rot-marker')).toHaveLength(3);
+    expect(slide?.textContent).toContain('Gefahrenzone');
+    expect(slide?.textContent).toContain('Context Rot');
+    expect(slide?.textContent).toContain('Rauschen kippt früher');
     expect(slide?.textContent).toContain('Signal verdünnt');
     expect(slide?.textContent).toContain('Gegenmittel');
   });
@@ -35,5 +37,7 @@ describe('context window x-ray demo', () => {
     expect(css).toContain('.rot-chart');
     expect(css).toContain('.rot-explain');
     expect(css).toContain('.rot-curve-noisy');
+    expect(css).toContain('.rot-link-2');
+    expect(css).toContain('.rot-note-2');
   });
 });

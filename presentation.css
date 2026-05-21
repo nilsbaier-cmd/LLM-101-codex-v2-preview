@@ -1209,12 +1209,13 @@ body[data-layout="slide"] [data-slide-id="usecase-3"] .uc-steps li::before {
 .rot-curve-clean { stroke: url(#rotClean); }
 .rot-curve-noisy {
   stroke: var(--crimson);
-  stroke-dasharray: 12 12;
-  opacity: 0.9;
+  stroke-width: 7;
+  stroke-dasharray: 14 10;
+  opacity: 0.98;
 }
 .rot-band rect {
-  fill: color-mix(in srgb, var(--crimson) 10%, transparent);
-  stroke: color-mix(in srgb, var(--crimson) 40%, transparent);
+  fill: color-mix(in srgb, var(--crimson) 14%, transparent);
+  stroke: color-mix(in srgb, var(--crimson) 58%, transparent);
 }
 .rot-band text {
   fill: var(--crimson);
@@ -1223,6 +1224,34 @@ body[data-layout="slide"] [data-slide-id="usecase-3"] .uc-steps li::before {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+.rot-band text + text {
+  font-size: 18px;
+  letter-spacing: 0.1em;
+}
+.rot-link {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 72%, transparent);
+  stroke-width: 2;
+  stroke-dasharray: 5 5;
+}
+.rot-link-2 {
+  stroke: color-mix(in srgb, var(--crimson) 78%, transparent);
+}
+.rot-marker circle {
+  fill: var(--bg-card);
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.rot-marker text {
+  fill: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 900;
+  text-anchor: middle;
+}
+.rot-marker-2 circle {
+  stroke: var(--crimson);
 }
 .rot-dot { stroke: var(--bg-card); stroke-width: 3; }
 .rot-dot.clean { fill: var(--accent); }
@@ -1268,6 +1297,13 @@ body[data-layout="slide"] [data-slide-id="usecase-3"] .uc-steps li::before {
   background: var(--accent-soft);
   color: var(--accent-strong);
   font-weight: 800;
+}
+.rot-note-2 span {
+  background: color-mix(in srgb, var(--crimson) 18%, transparent);
+  color: var(--crimson);
+}
+.rot-note-2 {
+  border-color: color-mix(in srgb, var(--crimson) 38%, var(--border));
 }
 .rot-explain strong {
   font-size: 18px;
