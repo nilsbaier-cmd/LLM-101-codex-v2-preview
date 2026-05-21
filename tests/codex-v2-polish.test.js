@@ -68,6 +68,15 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(slide?.querySelectorAll('.settings-card').length).toBeGreaterThan(12);
   });
 
+  it('keeps chat option body copy consistent across all provider tabs', () => {
+    const slide = document.querySelector('[data-slide-id="claude-2"]');
+
+    expect(slide?.querySelectorAll('[data-tab-panel]')).toHaveLength(3);
+    expect(slide?.querySelectorAll('.letter-content p').length).toBeGreaterThan(20);
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-2"] .letter-content p');
+    expect(css).toMatch(/body\[data-layout="slide"\] \[data-slide-id="claude-2"\] \.letter-content p\s*{[^}]*font-size:\s*16px;/s);
+  });
+
   it('shows an icon on the regenerate settings card', () => {
     const card = Array.from(document.querySelectorAll('[data-slide-id="claude-4"] .settings-card'))
       .find(el => el.textContent?.includes('Regenerieren'));

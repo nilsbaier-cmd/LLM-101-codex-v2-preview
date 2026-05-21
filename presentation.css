@@ -4082,7 +4082,6 @@ body[data-layout="slide"] [data-slide-id="verwaltung-2"] .closing-message {
 body[data-layout="slide"] [data-slide-id="claude-1"] .model-card p,
 body[data-layout="slide"] [data-slide-id="claude-2"] .option-row,
 body[data-layout="slide"] [data-slide-id="claude-3"] .settings-card p,
-body[data-layout="slide"] [data-slide-id="claude-2"] .letter-content p,
 body[data-layout="slide"] [data-slide-id="context-2"] .strategy-card p,
 body[data-layout="slide"] [data-slide-id="claude-4"] .letter-content p,
 body[data-layout="slide"] [data-slide-id="claude-4"] .settings-card p,
@@ -4095,6 +4094,10 @@ body[data-layout="slide"] [data-slide-id="skills-1"] .lead,
 body[data-layout="slide"] [data-slide-id="next-1"] .repo-workflow li,
 body[data-layout="slide"] [data-slide-id="next-3"] .platform-desc {
   font-size: 18px;
+  line-height: 1.45;
+}
+body[data-layout="slide"] [data-slide-id="claude-2"] .letter-content p {
+  font-size: 16px;
   line-height: 1.45;
 }
 body[data-layout="slide"] [data-slide-id="claude-3"] .llm-tabs-nav {
