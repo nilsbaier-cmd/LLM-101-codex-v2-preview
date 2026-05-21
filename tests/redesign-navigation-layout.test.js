@@ -67,6 +67,9 @@ describe('codex v2 slide navigation and layout safeguards', () => {
     expect(css).toMatch(/body\[data-layout="scroll"\] \.slide\s*{[^}]*width:\s*100%;/s);
     expect(css).toMatch(/body\[data-layout="scroll"\] \.slide\s*{[^}]*max-width:\s*min\(960px,\s*100%\);/s);
     expect(css).toMatch(/body\[data-layout="scroll"\] \.slide\.codex,\s*\.slide\.codex\[data-layout="scroll"\]\s*{[^}]*width:\s*100%;/s);
+    expect(css).toMatch(/\.slide\.codex,\s*body\[data-layout="scroll"\] \.slide\.codex\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\);/s);
+    expect(css).toMatch(/\.slide-body\s*{[^}]*box-sizing:\s*border-box;[^}]*width:\s*100%;[^}]*max-width:\s*100%;/s);
+    expect(css).toMatch(/\.slide-body-fit\s*{[^}]*box-sizing:\s*border-box;[^}]*width:\s*100%;[^}]*max-width:\s*100%;/s);
   });
 
   it('sizes the slide stage from the measured header height on wrapped phone toolbars', () => {
