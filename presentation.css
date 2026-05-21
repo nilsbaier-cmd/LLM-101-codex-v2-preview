@@ -3890,9 +3890,13 @@ body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-list {
   gap: 8px;
 }
 body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-item {
+  display: grid;
   grid-template-columns: 46px 70px minmax(0, 1fr);
   gap: 12px;
   padding: 10px 12px;
+}
+body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-item.is-revealed {
+  display: grid;
 }
 body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-icon {
   width: 38px;

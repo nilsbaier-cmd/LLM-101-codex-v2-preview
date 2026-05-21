@@ -37,6 +37,12 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(css).toContain('max-width: min(100%, 86ch)');
   });
 
+  it('keeps revealed skill ladder levels in the same icon/text grid', () => {
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="einstieg-3"] .ladder-item.is-revealed');
+    expect(css).toContain('display: grid');
+    expect(css).toContain('grid-template-columns: 46px 70px minmax(0, 1fr)');
+  });
+
   it('shows an icon on the regenerate settings card', () => {
     const card = Array.from(document.querySelectorAll('[data-slide-id="claude-4"] .settings-card'))
       .find(el => el.textContent?.includes('Regenerieren'));
