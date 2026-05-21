@@ -21,6 +21,9 @@ describe('output quality check and case library', () => {
     expect(exercise?.querySelectorAll('.quality-verdict')).toHaveLength(0);
     expect(exercise?.textContent).not.toContain('Risiko: klingt');
     expect(exercise?.textContent).not.toContain('Brauchbar: macht');
+    expect(exercise?.querySelector('.ex-outcome-grid')).toBeNull();
+    expect(exercise?.textContent).not.toContain('Erwartbar:');
+    expect(exercise?.textContent).not.toContain('Reflexion:');
     expect(exercise?.querySelectorAll('.quality-checklist span').length).toBe(5);
     expect(exercise?.textContent).toContain('Fakten');
     expect(exercise?.textContent).toContain('Verantwortung');
