@@ -17,6 +17,10 @@ describe('output quality check and case library', () => {
     expect(slide?.querySelector('h2')?.textContent).toBe('Output prüfen');
     expect(exercise?.dataset.learningStation).toBe('');
     expect(exercise?.querySelectorAll('.quality-answer').length).toBe(2);
+    expect(exercise?.querySelector('.quality-answer.is-smooth')).toBeTruthy();
+    expect(exercise?.querySelectorAll('.quality-verdict')).toHaveLength(0);
+    expect(exercise?.textContent).not.toContain('Risiko: klingt');
+    expect(exercise?.textContent).not.toContain('Brauchbar: macht');
     expect(exercise?.querySelectorAll('.quality-checklist span').length).toBe(5);
     expect(exercise?.textContent).toContain('Fakten');
     expect(exercise?.textContent).toContain('Verantwortung');
@@ -36,6 +40,9 @@ describe('output quality check and case library', () => {
 
   it('ships responsive styles and note labels for the new use-case station', () => {
     expect(css).toContain('.quality-answer-grid');
+    expect(css).toContain('.quality-answer.is-smooth');
+    expect(css).not.toContain('.quality-answer.is-risky');
+    expect(css).not.toContain('.quality-verdict');
     expect(css).toContain('.case-library-grid');
     expect(css).toContain('[data-slide-id="usecase-6"] .ex-steps');
     expect(notesPage).toContain("usecases: 'Use Cases'");

@@ -1628,25 +1628,17 @@ body[data-layout="slide"] [data-slide-id="usecase-5"] .xray-result {
   text-transform: uppercase;
   margin-bottom: var(--space-2);
 }
-.quality-answer.is-risky {
-  border-color: rgba(210, 70, 70, 0.32);
+.quality-answer.is-smooth {
+  border-color: color-mix(in srgb, var(--cobalt) 45%, var(--border));
 }
-.quality-answer.is-risky .quality-label {
-  color: #a63a2f;
+.quality-answer.is-smooth .quality-label {
+  color: var(--cobalt);
 }
 .quality-answer.is-usable {
   border-color: color-mix(in srgb, var(--success) 42%, var(--border));
 }
 .quality-answer.is-usable .quality-label {
   color: var(--success);
-}
-.quality-verdict {
-  margin-top: var(--space-2);
-  padding-top: var(--space-2);
-  border-top: 1px solid var(--border);
-  color: var(--text-primary);
-  font-size: 12px;
-  font-weight: 700;
 }
 .quality-checklist {
   display: flex;
@@ -3405,10 +3397,6 @@ body[data-exercises="off"] .exercise { display: none; }
     margin-bottom: 4px;
   }
 
-  [data-slide-id="usecase-6"] .quality-verdict {
-    display: none;
-  }
-
   [data-slide-id="usecase-6"] .quality-checklist span {
     padding: 3px 8px;
     font-size: 11px;
@@ -4164,7 +4152,6 @@ body[data-layout="slide"] [data-slide-id="context-quiz"] .quiz-choice {
   padding: var(--space-2) var(--space-4);
 }
 body[data-layout="slide"] [data-slide-id="usecase-6"] .quality-answer p,
-body[data-layout="slide"] [data-slide-id="usecase-6"] .quality-verdict,
 body[data-layout="slide"] [data-slide-id="skills-3"] .demo-step p,
 body[data-layout="slide"] [data-slide-id="skills-3"] .code-block {
   font-size: 17px;
