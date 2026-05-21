@@ -3685,9 +3685,19 @@ body[data-layout="slide"] .slide.codex .slide-body {
   transform-origin: top left;
 }
 
+.slide-body.is-overflowing {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.slide-body.is-overflowing .slide-body-fit {
+  padding-bottom: var(--space-4);
+}
+
 .slide-body.is-fit-scaled .slide-body-fit {
-  width: calc(100% / var(--slide-fit-scale));
-  transform: scale(var(--slide-fit-scale));
+  width: auto;
+  transform: none;
 }
 
 /* Slide-Foot — Navigation + Progress */

@@ -7,6 +7,7 @@ const read = (path) => readFileSync(join(process.cwd(), path), 'utf8');
 
 describe('Codex v2 Safari and readability polish', () => {
   const index = read('index.html');
+  const app = read('app.js');
   const appCss = read('app.css');
   const css = read('presentation.css');
   const document = new JSDOM(index).window.document;
@@ -24,8 +25,10 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(css).toContain('body[data-layout="slide"] .slide.codex {');
     expect(css).toContain('max-height: 100%');
     expect(css).toContain('.slide-body-fit');
-    expect(css).toContain('--slide-fit-scale');
-    expect(css).toContain('.slide-body.is-fit-scaled .slide-body-fit');
+    expect(css).toContain('.slide-body.is-overflowing');
+    expect(css).toContain('overflow-y: auto');
+    expect(app).toContain("body.classList.add('is-overflowing')");
+    expect(app).not.toContain('Math.min(0.98');
     expect(css).toContain('body[data-layout="slide"] [data-slide-id="einstieg-2"] .see-more');
     expect(css).toContain('body[data-layout="slide"] [data-slide-id="verwaltung-1"] .see-more');
     expect(css).toContain('margin-top: auto !important');

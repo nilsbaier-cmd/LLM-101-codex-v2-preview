@@ -83,11 +83,13 @@ function initSlideBodyFitWrappers(root = document) {
 function fitSlideBody(slide) {
   const body = slide?.querySelector('.slide-body');
   const wrapper = body?.querySelector(':scope > .slide-body-fit');
-  if (!body || !wrapper || mode.get('layout') !== 'slide') return;
+  if (!body || !wrapper) return;
 
   body.classList.remove('is-fit-scaled');
+  body.classList.remove('is-overflowing');
   body.style.removeProperty('--slide-fit-scale');
   wrapper.style.removeProperty('width');
+  if (mode.get('layout') !== 'slide') return;
 
   const style = getComputedStyle(body);
   const paddingY = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
@@ -104,17 +106,7 @@ function fitSlideBody(slide) {
   const needed = Math.max(visibleBottom, wrapper.firstElementChild ? 1 : wrapper.scrollHeight);
   if (!available || !needed || needed <= available) return;
 
-  const minScale = window.matchMedia('(max-width: 700px)').matches ? 0.3 : 0.46;
-  let scale = Math.max(minScale, Math.min(0.98, (available - 2) / needed));
-  body.style.setProperty('--slide-fit-scale', scale.toFixed(3));
-  body.classList.add('is-fit-scaled');
-
-  for (let i = 0; i < 3; i += 1) {
-    const visualHeight = wrapper.getBoundingClientRect().height;
-    if (!visualHeight || visualHeight <= available) break;
-    scale = Math.max(minScale, scale * ((available - 2) / visualHeight));
-    body.style.setProperty('--slide-fit-scale', scale.toFixed(3));
-  }
+  body.classList.add('is-overflowing');
 }
 
 function fitVisibleSlide() {
@@ -272,6 +264,7 @@ document.querySelectorAll('.toggle[data-mode]').forEach(btn => {
       mode.set(modeKey, btn.dataset.value);
     }
     refreshToggleStates();
+    requestAnimationFrame(fitVisibleSlide);
   });
 });
 

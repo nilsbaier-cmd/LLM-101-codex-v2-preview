@@ -85,7 +85,8 @@ describe('codex v2 slide navigation and layout safeguards', () => {
 
   it('keeps phone slide mode readable with a local body scroller instead of page scroll', () => {
     expect(css).toMatch(/@media \(max-width: 820px\)\s*{[\s\S]*body\[data-layout="slide"\] \.slide\.codex \.slide-body\s*{[^}]*overflow-y:\s*auto;/s);
-    expect(css).toMatch(/@media \(max-width: 820px\)\s*{[\s\S]*body\[data-layout="slide"\] \.slide-body\.is-fit-scaled \.slide-body-fit\s*{[^}]*transform:\s*none;/s);
+    expect(css).toContain('.slide-body.is-overflowing');
+    expect(css).toContain('overscroll-behavior: contain');
   });
 
   it('uses compact iPhone slide chrome without clipped ladder or hidden footer metadata', () => {
