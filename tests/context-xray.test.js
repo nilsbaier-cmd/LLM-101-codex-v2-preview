@@ -40,4 +40,24 @@ describe('context window x-ray demo', () => {
     expect(css).toContain('.rot-link-2');
     expect(css).toContain('.rot-note-2');
   });
+
+  it('keeps the noisy-context marker and note visually linked without overlapping the danger label', () => {
+    const slide = document.querySelector('[data-slide-id="usecase-5"]');
+    const marker = slide?.querySelector('.rot-marker-2');
+    const link = slide?.querySelector('.rot-link-2');
+    const noteNumber = slide?.querySelector('.rot-note-2 span');
+
+    expect(marker?.getAttribute('transform')).toBe('translate(274 224)');
+    expect(link?.getAttribute('d')).toContain('274 224');
+    expect(noteNumber?.textContent).toBe('2');
+    expect(css).toContain('.rot-explain article.rot-note-2 > span');
+    expect(css).toContain('background: color-mix(in srgb, var(--crimson) 18%, transparent)');
+    expect(css).toContain('color: var(--crimson)');
+  });
+
+  it('centers the context rot legend with a wider desktop gap', () => {
+    expect(css).toMatch(/\.rot-legend\s*{[^}]*gap:\s*16px 29px;/s);
+    expect(css).toMatch(/\.rot-legend\s*{[^}]*margin-top:\s*20px;/s);
+    expect(css).toMatch(/\.rot-legend\s*{[^}]*justify-content:\s*center;/s);
+  });
 });

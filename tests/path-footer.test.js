@@ -17,12 +17,12 @@ describe('getPathProgress() · Pfad-Position', () => {
       inPath: true
     });
 
-    // Praxis · 13 Stationen, usecase-lab ist Position 8.
+    // Praxis · 14 Stationen, usecase-lab ist Position 9.
     const praxis = getPathProgress('usecase-lab', 'praxis');
     expect(praxis.pathId).toBe('praxis');
     expect(praxis.pathLabel).toBe('Praxis');
-    expect(praxis.step).toBe(8);
-    expect(praxis.total).toBe(13);
+    expect(praxis.step).toBe(9);
+    expect(praxis.total).toBe(14);
     expect(praxis.inPath).toBe(true);
 
     // Power User · skills-2 ist Position 5.
@@ -33,12 +33,12 @@ describe('getPathProgress() · Pfad-Position', () => {
     expect(power.total).toBe(10);
     expect(power.inPath).toBe(true);
 
-    // Governance · context-1 ist Position 4.
+    // Governance · context-1 ist Position 5.
     const gov = getPathProgress('context-1', 'governance');
     expect(gov.pathId).toBe('governance');
     expect(gov.pathLabel).toBe('Führung & Governance');
-    expect(gov.step).toBe(4);
-    expect(gov.total).toBe(11);
+    expect(gov.step).toBe(5);
+    expect(gov.total).toBe(12);
     expect(gov.inPath).toBe(true);
   });
 

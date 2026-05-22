@@ -25,12 +25,27 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(css).toContain('body[data-layout="slide"] .slide.codex {');
     expect(css).toContain('max-height: 100%');
     expect(css).toContain('.slide-body-fit');
+    expect(css).toContain('transform: scale(var(--slide-fit-scale))');
+    expect(app).toContain("window.matchMedia('(min-width: 821px)').matches");
+    expect(app).toContain("body.dataset.fitBuffer || '24'");
+    expect(app).toContain("body.classList.add('is-fit-scaled')");
     expect(css).toContain('.slide-body.is-overflowing');
     expect(css).toContain('overflow-y: auto');
     expect(app).toContain("body.classList.add('is-overflowing')");
-    expect(app).not.toContain('Math.min(0.98');
+    expect(app).toContain("body.dataset.minFitScale || '0.88'");
     expect(css).toContain('body[data-layout="slide"] [data-slide-id="einstieg-2"] .see-more');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="einstieg-2"] .phases-grid [data-step]');
+    expect(css).toContain('display: flex !important');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="einstieg-2"] .timeline [data-step]');
+    expect(css).toContain('display: block !important');
     expect(css).toContain('body[data-layout="slide"] [data-slide-id="verwaltung-1"] .see-more');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="verwaltung-1"] .policy-grid [data-step]');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="verwaltung-1"] .source-strip[data-step]');
+    expect(index).toContain('data-fit-full="true"');
+    expect(app).toContain("body.dataset.fitFull === 'true'");
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="verwaltung-2"] .myth-table [data-step]');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="verwaltung-2"] .closing-message[data-step]');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="verwaltung-2"] .source-strip[data-step]');
     expect(css).toContain('margin-top: auto !important');
   });
 
@@ -58,11 +73,27 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(css).toContain('font-size: 17px');
   });
 
+  it('keeps the governance reflection exercise broad and tool-neutral', () => {
+    const slide = document.querySelector('[data-slide-id="verwaltung-3"]');
+    expect(slide?.querySelector('.ex-prompt')?.textContent).toContain('einer KI erlauben');
+    expect(slide?.querySelector('.ex-prompt')?.textContent).not.toContain('Claude erlauben');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="verwaltung-3"] .governance-reflection');
+    expect(css).toContain('body[data-layout="slide"] .slide.codex[data-slide-id="verwaltung-3"] .slide-body');
+    expect(css).toContain('padding: 20px 12px');
+    expect(css).toContain('width: min(100%, 1000px)');
+    expect(css).toContain('min-height: clamp(520px, 65vh, 540px)');
+    expect(css).toContain('margin: 0 auto');
+  });
+
   it('raises the persistence settings tab text across all providers', () => {
     expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-3"] .llm-tabs-nav button');
     expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-3"] .settings-section-label');
     expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-3"] .settings-card h4');
     expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-3"] .settings-card p');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-3"] [data-tab-panel]');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-3"] .settings-section');
+    expect(css).toContain('display: contents');
+    expect(css).toContain('body[data-layout="slide"] [data-slide-id="claude-3"] .settings-section + .settings-section .settings-section-label');
     expect(css).toContain('font-size: 17px');
 
     const slide = document.querySelector('[data-slide-id="claude-3"]');

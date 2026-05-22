@@ -32,6 +32,14 @@ describe('learning path compass', () => {
     });
   });
 
+  it('keeps the governance reflection in the practice and governance learning paths', () => {
+    const praxis = LEARNING_PATHS.find(path => path.id === 'praxis');
+    const governance = LEARNING_PATHS.find(path => path.id === 'governance');
+
+    expect(praxis?.stations).toContain('verwaltung-3');
+    expect(governance?.stations).toContain('verwaltung-3');
+  });
+
   it('stores progress locally and lets learners switch paths', () => {
     expect(app).toContain("storage.get('learningPaths')");
     expect(app).toContain("storage.set('learningPaths'");

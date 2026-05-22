@@ -38,12 +38,12 @@ function resolveLocal(fromFile, raw) {
 
 describe('deck integrity', () => {
   const index = read('index.html');
-  const document = new JSDOM(index).window.document;
+  const document = new JSDOM(index, { url: 'https://example.test/' }).window.document;
   const slides = Array.from(document.querySelectorAll('.slide'));
   const slideIds = slides.map(slide => slide.dataset.slideId);
 
   it('keeps slide ids unique, navigable and titled', () => {
-    expect(slides).toHaveLength(31);
+    expect(slides).toHaveLength(32);
     expect(new Set(slideIds).size).toBe(slideIds.length);
 
     slides.forEach(slide => {
@@ -51,6 +51,21 @@ describe('deck integrity', () => {
       expect(slide.dataset.chapter).toBeTruthy();
       expect(slide.querySelector('h1, h2, h3')?.textContent?.trim()).toBeTruthy();
     });
+  });
+
+  it('splits the governance reflection exercise onto its own slide', () => {
+    const mythSlide = document.querySelector('section[data-slide-id="verwaltung-2"]');
+    const reflectionSlide = document.querySelector('section[data-slide-id="verwaltung-3"]');
+
+    expect(mythSlide).toBeTruthy();
+    expect(reflectionSlide).toBeTruthy();
+    expect(mythSlide?.querySelector('.myth-table')).toBeTruthy();
+    expect(mythSlide?.querySelector('.exercise')).toBeNull();
+    expect(reflectionSlide?.querySelector('.exercise.reflection[data-exercise="r1"]')).toBeTruthy();
+    expect(reflectionSlide?.querySelector('.myth-table')).toBeNull();
+    expect(mythSlide?.querySelector('.slide-nav.next')?.getAttribute('href')).toBe('#verwaltung-3');
+    expect(reflectionSlide?.querySelector('.slide-nav.prev')?.getAttribute('href')).toBe('#verwaltung-2');
+    expect(reflectionSlide?.querySelector('.slide-nav.next')?.getAttribute('href')).toBe('#claude-1');
   });
 
   it('keeps explainer backlinks pointed at existing slides', () => {

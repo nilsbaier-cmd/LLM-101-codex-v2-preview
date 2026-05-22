@@ -18,12 +18,16 @@ describe('prompt lab learning station', () => {
     expect(lab?.textContent).toContain('Prompt-Labor');
     expect(lab?.querySelectorAll('.prompt-lab-step').length).toBe(3);
     expect(lab?.querySelector('[data-copy-source]')).toBeTruthy();
+    expect(lab?.querySelector('.prompt-lab-template .copy-btn')).toBeTruthy();
     expect(lab?.textContent).toContain('Musterbeobachtung');
   });
 
   it('has responsive styles for the prompt lab', () => {
     expect(css).toContain('.prompt-lab-grid');
     expect(css).toContain('.prompt-lab-grid');
+    expect(css).toContain('[data-slide-id="usecase-lab"] .prompt-lab-template .copy-btn');
+    expect(css).toContain('position: sticky');
+    expect(css).toContain('float: right');
     expect(css).toContain('grid-template-columns: 1fr');
   });
 });

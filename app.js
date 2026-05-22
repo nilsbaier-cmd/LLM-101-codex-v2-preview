@@ -103,8 +103,22 @@ function fitSlideBody(slide) {
     if (rect.width < 1 || rect.height < 1) return bottom;
     return Math.max(bottom, rect.bottom - wrapperTop);
   }, 0);
-  const needed = Math.max(visibleBottom, wrapper.firstElementChild ? 1 : wrapper.scrollHeight);
+  const fullStepLayout = body.dataset.fitFull === 'true';
+  const needed = fullStepLayout
+    ? Math.max(visibleBottom, wrapper.scrollHeight)
+    : Math.max(visibleBottom, wrapper.firstElementChild ? 1 : wrapper.scrollHeight);
   if (!available || !needed || needed <= available) return;
+
+  const canScale = window.matchMedia('(min-width: 821px)').matches;
+  const minScale = parseFloat(body.dataset.minFitScale || '0.88');
+  const fitBuffer = parseFloat(body.dataset.fitBuffer || '24');
+  const scale = Math.max(minScale, Math.min(1, (available - fitBuffer) / needed));
+  if (canScale && scale < 1 && needed * scale <= available + 1) {
+    body.style.setProperty('--slide-fit-scale', scale.toFixed(3));
+    wrapper.style.width = `${100 / scale}%`;
+    body.classList.add('is-fit-scaled');
+    return;
+  }
 
   body.classList.add('is-overflowing');
 }
