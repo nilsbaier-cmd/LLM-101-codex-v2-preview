@@ -264,6 +264,114 @@
   }
 }
 
+/* ===================== PALETTE · COBALT (Enterprise / neutral-seriös) ===================== */
+:root[data-palette="cobalt"] {
+  --bg-base: #f7f8fb;
+  --bg-card: #ffffff;
+  --bg-tint: #eef1f7;
+  --border: #0a0e1a1c;
+  --border-soft: #0a0e1a0e;
+  --text-primary: #0b1020;
+  --text-secondary: #3c4356;
+  --text-tertiary: #818796;
+  --accent: #1f3df0;
+  --accent-soft: #1f3df014;
+  --accent-strong: #1733c0;
+  --text-on-accent: #ffffff;
+  --cobalt: #0c7d7d;
+  --cobalt-soft: #0c7d7d14;
+}
+
+:root[data-palette="cobalt"][data-theme="dark"] {
+  --bg-base: #0a0c12;
+  --bg-card: #14171f;
+  --bg-tint: #11141b;
+  --border: #dfe6f51c;
+  --border-soft: #dfe6f510;
+  --text-primary: #eef1f8;
+  --text-secondary: #aab2c4;
+  --text-tertiary: #6b7282;
+  --accent: #6f86ff;
+  --accent-soft: #6f86ff22;
+  --accent-strong: #93a6ff;
+  --text-on-accent: #08101f;
+  --cobalt: #4fd0c4;
+  --cobalt-soft: #4fd0c418;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-palette="cobalt"]:not([data-theme="light"]) {
+    --bg-base: #0a0c12;
+    --bg-card: #14171f;
+    --bg-tint: #11141b;
+    --border: #dfe6f51c;
+    --border-soft: #dfe6f510;
+    --text-primary: #eef1f8;
+    --text-secondary: #aab2c4;
+    --text-tertiary: #6b7282;
+    --accent: #6f86ff;
+    --accent-soft: #6f86ff22;
+    --accent-strong: #93a6ff;
+    --text-on-accent: #08101f;
+    --cobalt: #4fd0c4;
+    --cobalt-soft: #4fd0c418;
+  }
+}
+
+/* ===================== PALETTE · CLAY (KMU / AI-Fluency, warm-editorial) ===================== */
+:root[data-palette="clay"] {
+  --bg-base: #f7f3ee;
+  --bg-card: #fffdfa;
+  --bg-tint: #efe8df;
+  --border: #2a201a1c;
+  --border-soft: #2a201a0e;
+  --text-primary: #1d150f;
+  --text-secondary: #5a4f45;
+  --text-tertiary: #948578;
+  --accent: #cc785c;
+  --accent-soft: #cc785c1f;
+  --accent-strong: #a85638;
+  --text-on-accent: #2b1409;
+  --cobalt: #2a7d6d;
+  --cobalt-soft: #2a7d6d14;
+}
+
+:root[data-palette="clay"][data-theme="dark"] {
+  --bg-base: #16110d;
+  --bg-card: #221b15;
+  --bg-tint: #1c1610;
+  --border: #f4ece21c;
+  --border-soft: #f4ece210;
+  --text-primary: #f4ece2;
+  --text-secondary: #c0b1a2;
+  --text-tertiary: #7f7163;
+  --accent: #e0926f;
+  --accent-soft: #e0926f22;
+  --accent-strong: #ecaa8b;
+  --text-on-accent: #1d0f08;
+  --cobalt: #5fc0ac;
+  --cobalt-soft: #5fc0ac18;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-palette="clay"]:not([data-theme="light"]) {
+    --bg-base: #16110d;
+    --bg-card: #221b15;
+    --bg-tint: #1c1610;
+    --border: #f4ece21c;
+    --border-soft: #f4ece210;
+    --text-primary: #f4ece2;
+    --text-secondary: #c0b1a2;
+    --text-tertiary: #7f7163;
+    --accent: #e0926f;
+    --accent-soft: #e0926f22;
+    --accent-strong: #ecaa8b;
+    --text-on-accent: #1d0f08;
+    --cobalt: #5fc0ac;
+    --cobalt-soft: #5fc0ac18;
+  }
+}
+
 /* Reduced-Motion-Hook (Spec §2.6) — Animationen lähmen, nicht entfernen. */
 @media (prefers-reduced-motion: reduce) {
   :root {

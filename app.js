@@ -1,6 +1,6 @@
 // app.js — Haupteinstieg
 import { Storage } from './lib/storage.js?v=2026-05-18-codex-v2l';
-import { ModeManager } from './lib/mode.js?v=2026-05-18-codex-v2l';
+import { ModeManager } from './lib/mode.js?v=2026-05-23-palette-variants';
 import { icon } from './lib/icons.js?v=2026-05-18-codex-v2l';
 import { initSprite } from './lib/icons-sprite.js?v=2026-05-18-codex-v2l';
 import { initTabs } from './lib/tabs.js?v=2026-05-18-codex-v2l';

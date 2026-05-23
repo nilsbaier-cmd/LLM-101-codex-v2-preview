@@ -314,6 +314,24 @@ html:not([data-theme="light"]):not([data-theme="dark"]) .toggle[data-mode="theme
   vertical-align: -2px;
 }
 
+.palette-toggle {
+  min-width: 34px;
+}
+
+.palette-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid color-mix(in srgb, var(--text-primary) 18%, transparent);
+  border-radius: 50%;
+  background: var(--palette-dot-color);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+
+.palette-dot-lime { --palette-dot-color: #8ea500; }
+.palette-dot-clay { --palette-dot-color: #cc785c; }
+.palette-dot-cobalt { --palette-dot-color: #1f3df0; }
+
 .utility-toggle {
   border: 1px solid transparent;
 }

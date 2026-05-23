@@ -9,14 +9,17 @@ describe('ModeManager', () => {
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.dataset.theme = '';
+    document.documentElement.removeAttribute('data-palette');
     mode = new ModeManager(new Storage('llm-101-test'));
   });
 
-  it('default-zustand: slide-mode, theme auto, llm off, exercises off', () => {
+  it('default-zustand: slide-mode, theme auto, palette codex, llm off, exercises off', () => {
     expect(mode.get('layout')).toBe('slide');
     expect(mode.get('theme')).toBe('auto');
+    expect(mode.get('palette')).toBe('codex');
     expect(mode.get('llm')).toBe(false);
     expect(mode.get('exercises')).toBe(false);
+    expect(document.documentElement.hasAttribute('data-palette')).toBe(false);
   });
 
   it('setzt einen mode und persistiert', () => {
@@ -33,6 +36,26 @@ describe('ModeManager', () => {
     expect(document.documentElement.dataset.theme).toBe('light');
     mode.set('theme', 'auto');
     expect(document.documentElement.dataset.theme).toBe('');
+  });
+
+  it('setzt und entfernt data-palette auf root bei palette-änderung', () => {
+    mode.set('palette', 'cobalt');
+    expect(mode.get('palette')).toBe('cobalt');
+    expect(document.documentElement.dataset.palette).toBe('cobalt');
+    mode.set('palette', 'clay');
+    expect(document.documentElement.dataset.palette).toBe('clay');
+    mode.set('palette', 'codex');
+    expect(document.documentElement.hasAttribute('data-palette')).toBe(false);
+  });
+
+  it('persistiert die palette unabhängig vom theme', () => {
+    mode.set('theme', 'dark');
+    mode.set('palette', 'clay');
+    const mode2 = new ModeManager(new Storage('llm-101-test'));
+    expect(mode2.get('theme')).toBe('dark');
+    expect(mode2.get('palette')).toBe('clay');
+    expect(document.documentElement.dataset.theme).toBe('dark');
+    expect(document.documentElement.dataset.palette).toBe('clay');
   });
 
   it('emittet change-event mit mode-key und neuem wert', () => {
@@ -67,6 +90,8 @@ describe('ModeManager', () => {
       const result = mode.set('theme', 'darkk');
       expect(result).toBe(false);
       expect(mode.get('theme')).toBe('dark');
+      expect(mode.set('palette', 'purple')).toBe(false);
+      expect(mode.get('palette')).toBe('codex');
       expect(mode.set('llm', 'nope')).toBe(false);
       expect(mode.get('llm')).toBe(false);
       expect(mode.set('unbekannt', 'irgendwas')).toBe(false);
@@ -78,7 +103,9 @@ describe('ModeManager', () => {
   it('beim laden: ungültiger stored-value fällt auf default zurück', () => {
     const storage = new Storage('llm-101-test');
     storage.set('mode.theme', 'cyberpunk');
+    storage.set('mode.palette', 'neon');
     const m = new ModeManager(storage);
     expect(m.get('theme')).toBe('auto');
+    expect(m.get('palette')).toBe('codex');
   });
 });
