@@ -10,7 +10,7 @@ describe('learning stations', () => {
   it('keeps every exercise structured for self-study', () => {
     const exercises = [...document.querySelectorAll('.exercise')];
 
-    expect(exercises).toHaveLength(6);
+    expect(exercises).toHaveLength(7);
     exercises.forEach((exercise) => {
       expect(exercise.hasAttribute('data-learning-station')).toBe(true);
       expect(exercise.querySelector('.ex-objective')?.textContent?.trim().length).toBeGreaterThan(20);

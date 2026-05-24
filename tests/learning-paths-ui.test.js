@@ -32,12 +32,21 @@ describe('learning path compass', () => {
     });
   });
 
-  it('keeps the governance reflection in the practice and governance learning paths', () => {
+  it('keeps the governance reflection and AI-Bridge stations in meaningful learning paths', () => {
     const praxis = LEARNING_PATHS.find(path => path.id === 'praxis');
     const governance = LEARNING_PATHS.find(path => path.id === 'governance');
+    const einsteiger = LEARNING_PATHS.find(path => path.id === 'einsteiger');
+    const powerUser = LEARNING_PATHS.find(path => path.id === 'power-user');
 
     expect(praxis?.stations).toContain('verwaltung-3');
+    expect(praxis?.stations).toContain('verwaltung-4');
+    expect(praxis?.stations).toContain('claude-3b');
+    expect(einsteiger?.stations).toContain('grundlagen-1');
+    expect(einsteiger?.stations).toContain('verwaltung-4');
+    expect(powerUser?.stations).toContain('claude-3b');
+    expect(governance?.stations).toContain('grundlagen-1');
     expect(governance?.stations).toContain('verwaltung-3');
+    expect(governance?.stations).toContain('verwaltung-4');
   });
 
   it('stores progress locally and lets learners switch paths', () => {

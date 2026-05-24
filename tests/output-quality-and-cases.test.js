@@ -14,7 +14,8 @@ describe('output quality check and case library', () => {
     const slide = document.querySelector('[data-slide-id="usecase-6"]');
     const exercise = slide?.querySelector('.exercise[data-exercise="r3"]');
 
-    expect(slide?.querySelector('h2')?.textContent).toBe('Output prüfen');
+    expect(slide?.querySelector('h2')?.textContent).toContain('Output prüfen');
+    expect(slide?.querySelector('h2')?.textContent).toContain('Annahmen markieren');
     expect(exercise?.dataset.learningStation).toBe('');
     expect(exercise?.querySelectorAll('.quality-answer').length).toBe(2);
     expect(exercise?.querySelector('.quality-answer.is-smooth')).toBeTruthy();
@@ -26,27 +27,37 @@ describe('output quality check and case library', () => {
     expect(exercise?.textContent).not.toContain('Reflexion:');
     expect(exercise?.querySelectorAll('.quality-checklist span').length).toBe(5);
     expect(exercise?.textContent).toContain('Fakten');
+    expect(exercise?.textContent).toContain('Annahmen');
+    expect(exercise?.querySelectorAll('.assumption-chip').length).toBe(4);
     expect(exercise?.textContent).toContain('Verantwortung');
   });
 
-  it('adds a compact mini case library with useful risk labels', () => {
+  it('adds a compact public-sector case bank with tool and risk labels', () => {
     const slide = document.querySelector('[data-slide-id="usecase-7"]');
     const cards = Array.from(slide?.querySelectorAll('.case-card') || []);
 
-    expect(slide?.querySelector('h2')?.textContent).toBe('Mini-Fallbibliothek');
-    expect(cards).toHaveLength(6);
+    expect(slide?.querySelector('h2')?.textContent).toBe('Behörden-Use-Case-Bank');
+    expect(cards).toHaveLength(12);
     expect(slide?.textContent).toContain('Sitzung vorbereiten');
+    expect(slide?.textContent).toContain('Folien-QA');
+    expect(slide?.textContent).toContain('Operative Details');
     expect(slide?.textContent).toContain('Personalfall beurteilen');
-    expect(slide?.querySelectorAll('.case-status.is-green').length).toBeGreaterThanOrEqual(2);
-    expect(slide?.querySelectorAll('.case-status.is-red').length).toBe(1);
+    expect(slide?.querySelectorAll('.case-tool').length).toBe(12);
+    expect(slide?.textContent).toContain('Chat');
+    expect(slide?.textContent).toContain('Project');
+    expect(slide?.textContent).toContain('Codex');
+    expect(slide?.querySelectorAll('.case-status.is-green').length).toBeGreaterThanOrEqual(3);
+    expect(slide?.querySelectorAll('.case-status.is-red').length).toBe(2);
   });
 
   it('ships responsive styles and note labels for the new use-case station', () => {
     expect(css).toContain('.quality-answer-grid');
     expect(css).toContain('.quality-answer.is-smooth');
+    expect(css).toContain('.assumption-strip');
     expect(css).not.toContain('.quality-answer.is-risky');
     expect(css).not.toContain('.quality-verdict');
     expect(css).toContain('.case-library-grid');
+    expect(css).toContain('.case-tool');
     expect(css).toContain('[data-slide-id="usecase-6"] .ex-steps');
     expect(notesPage).toContain("usecases: 'Use Cases'");
   });

@@ -172,7 +172,7 @@ describe('Codex v2 Safari and readability polish', () => {
     expect(css).toContain('.case-check');
     expect(css).toContain('.ba-flow-arrow');
     expect(index).toContain('Von oben nach unten lesen');
-    expect(index).toContain('Prüffrage');
+    expect(index).toContain('Prüfpflicht');
   });
 
 });

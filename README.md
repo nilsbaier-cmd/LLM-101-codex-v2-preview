@@ -4,7 +4,7 @@ Hybrid Slide/Scroll-Präsentation als Einführung in Large Language Models mit k
 
 ## Inhalt
 
-- `index.html` — Hauptpräsentation, 31 Folien in 7 Kapiteln, Vortrags- und Lesemodus, Hell/Dunkel/Auto-Theme, optional LLM-agnostische Tabs (Claude, ChatGPT und Gemini) und Übungen
+- `index.html` — Hauptpräsentation, 35 Folien in 7 Kapiteln, Vortrags- und Lesemodus, Hell/Dunkel/Auto-Theme, optional LLM-agnostische Tabs (Claude, ChatGPT und Gemini) und Übungen
 - `meine-notizen.html` — Sammelseite für eigene Reflexionsantworten mit Markdown-Export
 - `handout.html` — druckbarer One-Pager für Teilnehmende
 - `trainer-export.html` — Moderationsblatt mit Abläufen, Fallbacks, Demo-Checklisten und Prompts
@@ -12,6 +12,7 @@ Hybrid Slide/Scroll-Präsentation als Einführung in Large Language Models mit k
 - `design-variants.html` — zwei isolierte Look-&-Feel-Studien mit je fünf Beispiel-Folien, Light/Dark und bestehenden Fonts
 - Lernpfad-Kompass — direkt in `index.html`, lokal gespeicherter Fortschritt für Einsteiger-, Praxis-, Power-User- und Governance-Pfad
 - Trainer-Cockpit — aktivierbar über `index.html?trainer=1`, mit Ablaufvarianten, Sprecherhinweisen, Fallbacks und Demo-Prompts
+- AI-Bridge-Integration — gezielt über Mentalmodell, Promptathon Mini, Kontextarchitektur, Annahmenprüfung, Use-Case-Bank und Monday Morning Kit integriert. LLM 101 bleibt kein generischer Promptathon, sondern ein verwaltungsnahes Workflow-Lernsystem.
 - `explainer/*.html` — Sieben standalone Concept-Explainer (A–G):
   - A — Context Window Simulator
   - B — Chat vs. Project

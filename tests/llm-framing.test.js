@@ -37,7 +37,8 @@ describe('llm-agnostic framing', () => {
 
   it('keeps README slide count and framing current', () => {
     expect(readme).toContain('LLM 101');
-    expect(readme).toContain('31 Folien');
+    expect(readme).toContain('35 Folien');
     expect(readme).toContain('Claude, ChatGPT und Gemini');
+    expect(readme).toContain('verwaltungsnahes Workflow-Lernsystem');
   });
 });

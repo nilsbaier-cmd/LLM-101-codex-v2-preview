@@ -6,10 +6,10 @@
   <meta name="theme-color" content="#c5e818">
   <title>LLM 101 — Handout</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="tokens.css?v=2026-05-18-codex-v2l">
-  <link rel="stylesheet" href="app.css?v=2026-05-18-codex-v2l">
-  <link rel="stylesheet" href="presentation.css?v=2026-05-18-codex-v2l">
-  <link rel="stylesheet" href="print.css?v=2026-05-18-codex-v2l" media="print">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-25-ai-bridge-v1">
+  <link rel="stylesheet" href="app.css?v=2026-05-25-ai-bridge-v1">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-25-ai-bridge-v1">
+  <link rel="stylesheet" href="print.css?v=2026-05-25-ai-bridge-v1" media="print">
   <style>
     body { background: var(--bg-base); color: var(--text-primary); }
     .handout-shell { max-width: 1040px; margin: 0 auto; padding: var(--space-6) var(--space-5); }
@@ -105,7 +105,7 @@
         </div>
         <span class="slide-stand">
           <svg class="ic sm"><use href="#i-bookmark"/></svg>
-          Stand 16.05.26
+          Stand 25.05.26
         </span>
       </div>
       <div class="slide-body">
@@ -122,21 +122,38 @@
             </div>
           </article>
           <article class="handout-card">
+            <h2>Memory vs. Project</h2>
+            <ul>
+              <li><strong>Memory:</strong> stabile persönliche Präferenzen, keine Einzelfälle.</li>
+              <li><strong>Project:</strong> arbeitsbezogener Kontext mit Zweck und Grenzen.</li>
+              <li><strong>Nicht speichern:</strong> Personendaten, Dossiers, operative Details.</li>
+            </ul>
+          </article>
+          <article class="handout-card">
+            <h2>Annahmen prüfen</h2>
+            <ul>
+              <li>Welche Datenbasis setzt die Antwort voraus?</li>
+              <li>Welchen Rechtsstand oder welche Regel nimmt sie an?</li>
+              <li>Ist klar, ob es Entwurf, Empfehlung oder Entscheid ist?</li>
+              <li>Wer trägt die Verantwortung für Weiterverwendung?</li>
+            </ul>
+          </article>
+          <article class="handout-card">
             <h2>Output prüfen</h2>
             <ul>
-              <li>Welche Fakten muss ich verifizieren?</li>
-              <li>Welche Daten oder Annahmen sind heikel?</li>
-              <li>Passt der Ton zur Zielgruppe?</li>
-              <li>Bleibt die Verantwortung beim Menschen?</li>
+              <li>Fakten und Quellen verifizieren.</li>
+              <li>Annahmen sichtbar markieren.</li>
+              <li>Datenrisiko und Tonalität prüfen.</li>
+              <li>Nächsten Schritt bewusst festlegen.</li>
             </ul>
           </article>
           <article class="handout-card">
             <h2>7-Tage-Experiment</h2>
             <ol>
-              <li>Eine kleine echte Aufgabe wählen.</li>
-              <li>Prompt als Arbeitsauftrag formulieren.</li>
-              <li>Ergebnis bewusst prüfen.</li>
-              <li>Notieren: schneller, besser, riskanter?</li>
+              <li>Montag eine risikoarme Startaufgabe wählen.</li>
+              <li>Prompt-Check: Ziel, Kontext, Grenze, Stil, Output.</li>
+              <li>Output prüfen: Fakten, Annahmen, Datenrisiko.</li>
+              <li>Notieren: schneller, besser, was bleibt tabu?</li>
             </ol>
           </article>
           <article class="handout-card wide">
@@ -150,10 +167,9 @@
           <article class="handout-card">
             <h2>Gute Startfälle</h2>
             <ul>
-              <li>Sitzung vorbereiten</li>
-              <li>Text vereinfachen</li>
-              <li>Risiken sammeln</li>
-              <li>Status verdichten</li>
+              <li><strong>Chat:</strong> Text kürzen, Sitzung vorbereiten.</li>
+              <li><strong>Project:</strong> Glossar, FAQ, Status verdichten.</li>
+              <li><strong>Codex:</strong> Folien-QA, Handout, Skill-Entwurf.</li>
             </ul>
           </article>
         </section>
@@ -163,15 +179,15 @@
           <p><b>Faustregel — </b>Dieses Handout ersetzt keine internen Vorgaben zur Datenklassifikation oder Toolfreigabe. Im Zweifel: nachfragen.</p>
         </aside>
 
-        <p class="handout-foot">Stand 16.05.2026 · LLM 101 · Handout-Druck</p>
+        <p class="handout-foot">Stand 25.05.2026 · LLM 101 · Handout-Druck</p>
       </div>
     </section>
 
   </main>
   <script type="module">
-    import { initSprite } from './lib/icons-sprite.js?v=2026-05-18-codex-v2l';
-    import { Storage } from './lib/storage.js?v=2026-05-18-codex-v2l';
-    import { ModeManager } from './lib/mode.js?v=2026-05-18-codex-v2l';
+    import { initSprite } from './lib/icons-sprite.js?v=2026-05-25-ai-bridge-v1';
+    import { Storage } from './lib/storage.js?v=2026-05-25-ai-bridge-v1';
+    import { ModeManager } from './lib/mode.js?v=2026-05-25-ai-bridge-v1';
     initSprite();
     new ModeManager(new Storage('llm-101-codex-v2-preview'));
   </script>

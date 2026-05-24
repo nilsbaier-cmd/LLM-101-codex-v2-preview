@@ -21,7 +21,7 @@ describe('palette variants', () => {
     expect(index).toContain('aria-label="Palette Lime"');
     expect(index).toContain('data-mode="palette" data-value="clay"');
     expect(index).toContain('data-mode="palette" data-value="cobalt"');
-    expect(index).toContain('app.js?v=2026-05-23-palette-variants');
+    expect(index).toContain('app.js?v=2026-05-25-ai-bridge-v1');
     expect(index).not.toMatch(/style=["'][^"']*background/i);
     expect(appCss).toContain('.palette-dot-lime');
     expect(appCss).toContain('.palette-dot-clay');

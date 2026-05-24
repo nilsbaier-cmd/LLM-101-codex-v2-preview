@@ -24,8 +24,11 @@ describe('trainer cockpit', () => {
   it('covers the key live-workshop slides with notes and fallbacks', () => {
     [
       'einstieg-1',
+      'grundlagen-1',
       'verwaltung-1',
+      'verwaltung-4',
       'claude-1',
+      'claude-3b',
       'context-1',
       'usecase-4',
       'usecase-5',

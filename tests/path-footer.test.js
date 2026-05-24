@@ -7,38 +7,38 @@ import { LEARNING_PATHS, getPathProgress } from '../lib/learning-paths.js';
 
 describe('getPathProgress() · Pfad-Position', () => {
   it('liefert step/total/pathLabel für eine Slide aus jedem der 4 Pfade', () => {
-    // Einsteiger · 10 Stationen, einstieg-3 ist Position 3.
+    // Einsteiger · 13 Stationen, einstieg-3 ist Position 3.
     const einsteiger = getPathProgress('einstieg-3', 'einsteiger');
     expect(einsteiger).toEqual({
       pathId: 'einsteiger',
       pathLabel: 'Einsteiger',
       step: 3,
-      total: 10,
+      total: 13,
       inPath: true
     });
 
-    // Praxis · 14 Stationen, usecase-lab ist Position 9.
+    // Praxis · 16 Stationen, usecase-lab ist Position 11.
     const praxis = getPathProgress('usecase-lab', 'praxis');
     expect(praxis.pathId).toBe('praxis');
     expect(praxis.pathLabel).toBe('Praxis');
-    expect(praxis.step).toBe(9);
-    expect(praxis.total).toBe(14);
+    expect(praxis.step).toBe(11);
+    expect(praxis.total).toBe(16);
     expect(praxis.inPath).toBe(true);
 
-    // Power User · skills-2 ist Position 5.
+    // Power User · skills-2 ist Position 6.
     const power = getPathProgress('skills-2', 'power-user');
     expect(power.pathId).toBe('power-user');
     expect(power.pathLabel).toBe('Power User');
-    expect(power.step).toBe(5);
-    expect(power.total).toBe(10);
+    expect(power.step).toBe(6);
+    expect(power.total).toBe(11);
     expect(power.inPath).toBe(true);
 
-    // Governance · context-1 ist Position 5.
+    // Governance · context-1 ist Position 7.
     const gov = getPathProgress('context-1', 'governance');
     expect(gov.pathId).toBe('governance');
     expect(gov.pathLabel).toBe('Führung & Governance');
-    expect(gov.step).toBe(5);
-    expect(gov.total).toBe(12);
+    expect(gov.step).toBe(7);
+    expect(gov.total).toBe(14);
     expect(gov.inPath).toBe(true);
   });
 
@@ -56,7 +56,7 @@ describe('getPathProgress() · Pfad-Position', () => {
     const einsteiger = getPathProgress('einstieg-1', 'einsteiger');
     expect(einsteiger.inPath).toBe(true);
     expect(einsteiger.step).toBe(1);
-    expect(einsteiger.total).toBe(10);
+    expect(einsteiger.total).toBe(13);
 
     // Cover ist NICHT im Praxis-Pfad → inPath=false.
     const praxis = getPathProgress('einstieg-1', 'praxis');

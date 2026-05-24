@@ -10,10 +10,10 @@
   <title>LLM 101</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="tokens.css?v=2026-05-23-palette-variants">
-  <link rel="stylesheet" href="app.css?v=2026-05-23-palette-variants">
-  <link rel="stylesheet" href="presentation.css?v=2026-05-23-volatile-note-black">
-  <link rel="stylesheet" href="print.css?v=2026-05-22-ladder-fit" media="print">
+  <link rel="stylesheet" href="tokens.css?v=2026-05-25-ai-bridge-v1">
+  <link rel="stylesheet" href="app.css?v=2026-05-25-ai-bridge-v1">
+  <link rel="stylesheet" href="presentation.css?v=2026-05-25-ai-bridge-v1">
+  <link rel="stylesheet" href="print.css?v=2026-05-25-ai-bridge-v1" media="print">
 </head>
 <body data-layout="slide">
   <header class="app-header" role="banner">
@@ -110,7 +110,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>01 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>01 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -210,7 +210,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>02 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>02 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -308,7 +308,74 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>03 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>03 / 35</b></span>
+            <span class="slide-progress-sep" aria-hidden="true"></span>
+            <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
+          </div>
+          <a class="slide-nav next" href="#grundlagen-1">
+            weiter <svg class="ic"><use href="#i-arrow-right"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <section class="slide codex" data-slide-id="grundlagen-1" data-chapter="grundlagen" data-folio="04">
+        <div class="slide-head">
+          <div class="slide-crumb">
+            <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-layers"/></svg></span>
+            <span class="slide-crumb-chap">Grundlagen</span>
+            <span class="slide-crumb-sep"><svg class="ic sm"><use href="#i-chevron-right"/></svg></span>
+            <span class="slide-crumb-topic">Prediction, Temperatur, Annahmen</span>
+          </div>
+          <span class="slide-stand">
+            <svg class="ic sm"><use href="#i-bookmark"/></svg>
+            Stand 25.05.26
+          </span>
+        </div>
+        <div class="slide-body">
+          <div class="title-row">
+            <span class="kicker"><svg class="ic sm"><use href="#i-brain"/></svg> Grundlagen · Mentalmodell</span>
+            <h2 class="lede">Ein LLM berechnet Fortsetzung, nicht <em>Wahrheit</em></h2>
+          </div>
+          <p class="lead">Das Modell wählt die plausibelste nächste Fortsetzung. Aufgabe, Kontext, Beispiele und Prüfkriterien entscheiden, ob daraus ein nützlicher Arbeitsentwurf wird.</p>
+
+          <div class="foundation-grid">
+            <article class="foundation-card prediction-card">
+              <span class="foundation-label">Prediction</span>
+              <h3>Wahrscheinliche Fortsetzung</h3>
+              <p>Auf „Der Bericht ist …” folgen viele mögliche Wörter. Das Modell rechnet mit Mustern, nicht mit eigener Einsicht in die Aktenlage.</p>
+              <div class="prediction-bars" aria-label="Beispielhafte Wahrscheinlichkeiten">
+                <span style="--bar: 78%"><b>vollständig</b><em>78%</em></span>
+                <span style="--bar: 54%"><b>plausibel</b><em>54%</em></span>
+                <span style="--bar: 31%"><b>kritisch</b><em>31%</em></span>
+              </div>
+            </article>
+            <article class="foundation-card">
+              <span class="foundation-label">Temperatur</span>
+              <h3>Wie viel Variantenraum?</h3>
+              <div class="temperature-lane">
+                <div><strong>Niedrig</strong><span>Prüfen, kürzen, strukturieren</span></div>
+                <div><strong>Mittel</strong><span>Entwürfe, Alternativen, Sprachvarianten</span></div>
+                <div><strong>Hoch</strong><span>Ideenraum, Perspektiven, Kreativphase</span></div>
+              </div>
+            </article>
+            <article class="foundation-card">
+              <span class="foundation-label">Kontextlücken</span>
+              <h3>Fehlendes wird ergänzt</h3>
+              <p>Wenn Zielgruppe, Rechtsstand oder Datenbasis fehlen, füllt das Modell Lücken mit plausiblen Defaults. Genau dort beginnt die Prüfpflicht.</p>
+              <div class="assumption-mini-table">
+                <span>Datenbasis?</span><strong>Welche Quelle?</strong>
+                <span>Adressat?</span><strong>Welche Sprache?</strong>
+                <span>Verbindlichkeit?</span><strong>Entwurf oder Entscheid?</strong>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="slide-foot">
+          <a class="slide-nav prev" href="#einstieg-3">
+            <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
+          </a>
+          <div class="slide-progress">
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>04 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -318,7 +385,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="einstieg-4" data-chapter="einstieg" data-folio="04">
+      <section class="slide codex" data-slide-id="einstieg-4" data-chapter="einstieg" data-folio="05">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-bookmark"/></svg></span>
@@ -334,26 +401,29 @@
         <div class="slide-body">
           <div class="title-row">
             <span class="kicker"><svg class="ic sm"><use href="#i-list"/></svg> Einstieg · Agenda</span>
-            <h2 class="lede">Neun Stationen — <em>von Governance bis Agentik</em></h2>
+            <h2 class="lede">Zwölf Stationen — <em>von mentalem Modell bis Agentik</em></h2>
           </div>
           <ol class="agenda-list">
+            <li>Standort &amp; Skill-Ladder</li>
+            <li>Wie LLMs Antworten erzeugen</li>
             <li>KI in der Verwaltung</li>
+            <li>Promptathon: sicherer Startfall</li>
             <li>LLM-Tools &amp; Modellwahl</li>
-            <li>Chat vs. Projekte</li>
+            <li>Memory, Project &amp; Kontextarchitektur</li>
             <li>Context Window</li>
-            <li>Use Cases</li>
+            <li>Use Cases &amp; Prompt-Labor</li>
+            <li>Output prüfen &amp; Fallbibliothek</li>
             <li>Skills</li>
-            <li>Demo: Skills + Projekte</li>
-            <li>Next Level: Gemeinsames Repository?</li>
-            <li>Next Level: Agentic Coding</li>
+            <li>Team-Repo &amp; Agentic Coding</li>
+            <li>Transfer: Monday Morning Kit</li>
           </ol>
         </div>
         <div class="slide-foot">
-          <a class="slide-nav prev" href="#einstieg-3">
+          <a class="slide-nav prev" href="#grundlagen-1">
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>04 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>05 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -364,7 +434,7 @@
       </section>
 
       <!-- Kapitel 2 — Verwaltung & KI -->
-      <section class="slide codex" data-slide-id="verwaltung-1" data-chapter="verwaltung" data-folio="05" data-stepped data-volatile="true" data-checked="2026-05-16">
+      <section class="slide codex" data-slide-id="verwaltung-1" data-chapter="verwaltung" data-folio="06" data-stepped data-volatile="true" data-checked="2026-05-16">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-shield-check"/></svg></span>
@@ -444,7 +514,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>05 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>06 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -454,7 +524,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="verwaltung-2" data-chapter="verwaltung" data-folio="06" data-stepped data-volatile="true" data-checked="2026-05-16">
+      <section class="slide codex" data-slide-id="verwaltung-2" data-chapter="verwaltung" data-folio="07" data-stepped data-volatile="true" data-checked="2026-05-16">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-shield-check"/></svg></span>
@@ -501,7 +571,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>06 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>07 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -511,7 +581,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="verwaltung-3" data-chapter="verwaltung" data-folio="07">
+      <section class="slide codex" data-slide-id="verwaltung-3" data-chapter="verwaltung" data-folio="08">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-shield-check"/></svg></span>
@@ -558,7 +628,82 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>07 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>08 / 35</b></span>
+            <span class="slide-progress-sep" aria-hidden="true"></span>
+            <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
+          </div>
+          <a class="slide-nav next" href="#verwaltung-4">
+            weiter <svg class="ic"><use href="#i-arrow-right"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <section class="slide codex" data-slide-id="verwaltung-4" data-chapter="verwaltung" data-folio="09">
+        <div class="slide-head">
+          <div class="slide-crumb">
+            <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-shield-check"/></svg></span>
+            <span class="slide-crumb-chap">Verwaltung &amp; KI</span>
+            <span class="slide-crumb-sep"><svg class="ic sm"><use href="#i-chevron-right"/></svg></span>
+            <span class="slide-crumb-topic">Promptathon Mini</span>
+          </div>
+          <span class="slide-stand">
+            <svg class="ic sm"><use href="#i-bookmark"/></svg>
+            Stand 25.05.26
+          </span>
+        </div>
+        <div class="slide-body">
+          <div class="title-row">
+            <span class="kicker"><svg class="ic sm"><use href="#i-target"/></svg> Verwaltung &amp; KI · sichere Startaufgabe</span>
+            <h2 class="lede">Eine sichere Aufgabe wählen, bevor der erste <em>Prompt</em> entsteht</h2>
+          </div>
+
+          <div class="exercise reflection promptathon-mini" data-learning-station data-chapter="verwaltung" data-exercise="r4">
+            <div class="ex-header">
+              <div>
+                <div class="ex-tag">Promptathon Mini</div>
+                <p class="ex-objective">Du übersetzt eine risikoarme Aufgabe in einen klar begrenzten KI-Arbeitsauftrag.</p>
+              </div>
+              <div class="ex-duration">10 min</div>
+            </div>
+            <p class="ex-prompt">Wähle eine Aufgabe, bei der Daten- und Verantwortungsgrenzen vor dem Prompt geklärt sind.</p>
+            <ol class="ex-steps">
+              <li>Notiere den AI-Moment: Was soll schneller, klarer oder vollständiger werden?</li>
+              <li>Prüfe die Grenze: öffentlich, intern freigegeben, personenbezogen oder klassifiziert?</li>
+              <li>Formuliere Ziel, Kontext, Grenze und gewünschtes Outputformat in einem Prompt.</li>
+              <li>Markiere, was das Modell plausibel erfinden könnte und deshalb geprüft werden muss.</li>
+            </ol>
+            <div class="safe-task-grid">
+              <article>
+                <span>Chat</span>
+                <strong>Text kürzen</strong>
+                <p>Entwurf verdichten, Ton anpassen, Aussage fachlich gleich halten.</p>
+              </article>
+              <article>
+                <span>Chat</span>
+                <strong>Sitzung vorbereiten</strong>
+                <p>Agenda, Entscheidfragen und offene Punkte aus freigegebenen Notizen.</p>
+              </article>
+              <article>
+                <span>Project</span>
+                <strong>Risiken sammeln</strong>
+                <p>Sparring für blinde Flecken, ohne Entscheid an das Modell abzugeben.</p>
+              </article>
+            </div>
+            <textarea class="ex-textarea" placeholder="Meine sichere Startaufgabe: Ziel … Kontext … Grenze … Output …"></textarea>
+            <p class="ex-expected"><strong>Erwartbar:</strong> Ein kurzer Prompt, der Aufgabe, erlaubten Kontext, klare Grenze und gewünschtes Format sichtbar trennt.</p>
+            <p class="ex-reflection"><strong>Reflexion:</strong> Welche Information muss bewusst draussen bleiben, damit die Aufgabe vertretbar bleibt?</p>
+            <div class="ex-meta">
+              <span class="ex-save-hint">✓ Lokal gespeichert — kein Server.</span>
+              <a class="ex-notes-link" href="meine-notizen.html?back=verwaltung-4">→ Meine Notizen (<span class="ex-notes-count">0</span>)</a>
+            </div>
+          </div>
+        </div>
+        <div class="slide-foot">
+          <a class="slide-nav prev" href="#verwaltung-3">
+            <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
+          </a>
+          <div class="slide-progress">
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>09 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -569,7 +714,7 @@
       </section>
 
       <!-- Kapitel 3 — LLM-Tools 101 -->
-      <section class="slide codex" data-slide-id="claude-1" data-chapter="claude" data-folio="08" data-volatile="true" data-checked="2026-05-16">
+      <section class="slide codex" data-slide-id="claude-1" data-chapter="claude" data-folio="10" data-volatile="true" data-checked="2026-05-16">
         <!-- LLM-Mode-Refs: volatile Produktbeispiele, aktuelle Quellen in der Quellenleiste prüfen. -->
         <div class="slide-head">
           <div class="slide-crumb">
@@ -702,11 +847,11 @@
           </p>
         </div>
         <div class="slide-foot">
-          <a class="slide-nav prev" href="#verwaltung-2">
+          <a class="slide-nav prev" href="#verwaltung-4">
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>08 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>10 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -716,7 +861,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="claude-2" data-chapter="claude" data-folio="09">
+      <section class="slide codex" data-slide-id="claude-2" data-chapter="claude" data-folio="11">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-message-square"/></svg></span>
@@ -931,7 +1076,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>09 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>11 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -941,7 +1086,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="claude-3" data-chapter="claude" data-folio="10">
+      <section class="slide codex" data-slide-id="claude-3" data-chapter="claude" data-folio="12">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-message-square"/></svg></span>
@@ -1102,7 +1247,79 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>10 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>12 / 35</b></span>
+            <span class="slide-progress-sep" aria-hidden="true"></span>
+            <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
+          </div>
+          <a class="slide-nav next" href="#claude-3b">
+            weiter <svg class="ic"><use href="#i-arrow-right"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <section class="slide codex" data-slide-id="claude-3b" data-chapter="claude" data-folio="13">
+        <div class="slide-head">
+          <div class="slide-crumb">
+            <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-message-square"/></svg></span>
+            <span class="slide-crumb-chap">LLM-Tools 101</span>
+            <span class="slide-crumb-sep"><svg class="ic sm"><use href="#i-chevron-right"/></svg></span>
+            <span class="slide-crumb-topic">Kontextarchitektur</span>
+          </div>
+          <span class="slide-stand">
+            <svg class="ic sm"><use href="#i-bookmark"/></svg>
+            Stand 25.05.26
+          </span>
+        </div>
+        <div class="slide-body">
+          <div class="title-row">
+            <span class="kicker"><svg class="ic sm"><use href="#i-layers"/></svg> LLM-Tools 101 · wiederverwendbarer Kontext</span>
+            <h2 class="lede">Prompt, Instructions, Memory, Project oder <em>Skill?</em></h2>
+          </div>
+          <p class="lead">Gute Personalisierung ist kein Sammelbecken. Jede Ebene hat einen Zweck, eine Lebensdauer und eine andere Datenschutzfrage.</p>
+
+          <div class="context-architecture">
+            <article>
+              <span>flüchtig</span>
+              <h3>Prompt</h3>
+              <p>Einmaliger Auftrag: Ziel, Kontext, Grenze, Stil und Outputformat.</p>
+            </article>
+            <article>
+              <span>global</span>
+              <h3>Instructions</h3>
+              <p>Dauerhafte Präferenzen für Sprache, Format und Arbeitsweise.</p>
+            </article>
+            <article>
+              <span>persönlich</span>
+              <h3>Memory</h3>
+              <p>Stabile Angaben über dich. Gut für Vorlieben, riskant für Einzelfälle.</p>
+            </article>
+            <article>
+              <span>arbeitsbezogen</span>
+              <h3>Project</h3>
+              <p>Material, Ziele und Regeln für einen klar abgegrenzten Arbeitskontext.</p>
+            </article>
+            <article>
+              <span>prozessbezogen</span>
+              <h3>Skill / Codex</h3>
+              <p>Wiederholbare Abläufe, Dateien, Tests und technische Arbeitsschritte.</p>
+            </article>
+          </div>
+
+          <div class="do-not-store">
+            <strong>Nicht speichern:</strong>
+            <span>Personendaten</span>
+            <span>Dossiers</span>
+            <span>operative Details</span>
+            <span>klassifizierte Inhalte</span>
+            <em>ohne freigegebenes Tool, klare Zweckbindung und passende Governance.</em>
+          </div>
+        </div>
+        <div class="slide-foot">
+          <a class="slide-nav prev" href="#claude-3">
+            <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
+          </a>
+          <div class="slide-progress">
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>13 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -1112,7 +1329,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="claude-4" data-chapter="claude" data-folio="11">
+      <section class="slide codex" data-slide-id="claude-4" data-chapter="claude" data-folio="14">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-message-square"/></svg></span>
@@ -1186,11 +1403,11 @@
           </div>
         </div>
         <div class="slide-foot">
-          <a class="slide-nav prev" href="#claude-3">
+          <a class="slide-nav prev" href="#claude-3b">
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>11 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>14 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -1200,7 +1417,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="claude-5" data-chapter="claude" data-folio="12" data-volatile="true" data-checked="2026-05-16">
+      <section class="slide codex" data-slide-id="claude-5" data-chapter="claude" data-folio="15" data-volatile="true" data-checked="2026-05-16">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-message-square"/></svg></span>
@@ -1361,7 +1578,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>12 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>15 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad <b>—</b></span>
           </div>
@@ -1372,7 +1589,7 @@
       </section>
 
       <!-- Kapitel 4 — Context & Pflege -->
-      <section class="slide codex" data-slide-id="context-1" data-chapter="context" data-folio="13">
+      <section class="slide codex" data-slide-id="context-1" data-chapter="context" data-folio="16">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-eye"/></svg></span>
@@ -1428,7 +1645,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>13 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>16 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -1438,7 +1655,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="context-2" data-chapter="context" data-folio="14">
+      <section class="slide codex" data-slide-id="context-2" data-chapter="context" data-folio="17">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-eye"/></svg></span>
@@ -1489,7 +1706,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>14 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>17 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -1499,7 +1716,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="context-quiz" data-chapter="context" data-folio="15">
+      <section class="slide codex" data-slide-id="context-quiz" data-chapter="context" data-folio="18">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-eye"/></svg></span>
@@ -1546,7 +1763,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>15 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>18 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -1556,7 +1773,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="usecase-1" data-chapter="usecases" data-folio="16">
+      <section class="slide codex" data-slide-id="usecase-1" data-chapter="usecases" data-folio="19">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-sparkles"/></svg></span>
@@ -1603,7 +1820,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>16 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>19 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -1613,7 +1830,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="usecase-2" data-chapter="usecases" data-folio="17">
+      <section class="slide codex" data-slide-id="usecase-2" data-chapter="usecases" data-folio="20">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-sparkles"/></svg></span>
@@ -1702,7 +1919,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>17 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>20 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -1712,7 +1929,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="usecase-3" data-chapter="usecases" data-folio="18">
+      <section class="slide codex" data-slide-id="usecase-3" data-chapter="usecases" data-folio="21">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-sparkles"/></svg></span>
@@ -1801,7 +2018,7 @@
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>18 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>21 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -1811,7 +2028,7 @@
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="usecase-lab" data-chapter="usecases" data-folio="19">
+      <section class="slide codex" data-slide-id="usecase-lab" data-chapter="usecases" data-folio="22">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-sparkles"/></svg></span>
@@ -1889,7 +2106,7 @@ Mache Unsicherheiten sichtbar und nenne den nächsten kleinen Test.</div>
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>19 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>22 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -1899,7 +2116,7 @@ Mache Unsicherheiten sichtbar und nenne den nächsten kleinen Test.</div>
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="usecase-4" data-chapter="usecases" data-folio="20">
+      <section class="slide codex" data-slide-id="usecase-4" data-chapter="usecases" data-folio="23">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-sparkles"/></svg></span>
@@ -1976,7 +2193,7 @@ Freundliche Grüsse</div>
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>20 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>23 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -1986,7 +2203,7 @@ Freundliche Grüsse</div>
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="usecase-5" data-chapter="usecases" data-folio="21">
+      <section class="slide codex" data-slide-id="usecase-5" data-chapter="usecases" data-folio="24">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-sparkles"/></svg></span>
@@ -2074,7 +2291,7 @@ Freundliche Grüsse</div>
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>21 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>24 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -2084,7 +2301,7 @@ Freundliche Grüsse</div>
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="usecase-6" data-chapter="usecases" data-folio="22">
+      <section class="slide codex" data-slide-id="usecase-6" data-chapter="usecases" data-folio="25">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-sparkles"/></svg></span>
@@ -2099,8 +2316,8 @@ Freundliche Grüsse</div>
         </div>
         <div class="slide-body">
           <div class="title-row">
-            <span class="kicker"><svg class="ic sm"><use href="#i-shield-check"/></svg> Qualitätscheck — was klingt gut, was ist wirklich prüfbar?</span>
-            <h2 class="lede">Output prüfen</h2>
+            <span class="kicker"><svg class="ic sm"><use href="#i-shield-check"/></svg> Qualitätscheck — erst Annahmen sichtbar machen, dann verwerten</span>
+            <h2 class="lede">Output prüfen: <em>Annahmen markieren</em></h2>
           </div>
           <p class="pull-quote">Gute KI-Nutzung endet nicht beim Prompt. Sie endet bei der bewussten Entscheidung: Was davon ist brauchbar?</p>
 
@@ -2108,16 +2325,22 @@ Freundliche Grüsse</div>
             <div class="ex-header">
               <div>
                 <div class="ex-tag">Qualitätscheck</div>
-                <p class="ex-objective">Du lernst, KI-Antworten nicht nur nach Stil, sondern nach Prüfbarkeit und Verantwortung zu bewerten.</p>
+                <p class="ex-objective">Du lernst, KI-Antworten nach Prüfbarkeit, sichtbaren Annahmen und Verantwortung zu bewerten.</p>
               </div>
               <div class="ex-duration">7 min</div>
             </div>
             <p class="ex-prompt">Welche Antwort würdest du weiterverwenden — und was müsstest du vorher prüfen?</p>
             <ol class="ex-steps">
-              <li>Vergleiche die beiden Antworten: Welche klingt besser, welche ist besser prüfbar?</li>
-              <li>Markiere mindestens zwei Prüfstellen: Fakten, Datenfreigabe, Ton, Verantwortung.</li>
-              <li>Formuliere eine kurze Freigabe- oder Nacharbeitsnotiz.</li>
+              <li>Markiere jede Aussage, die eine nicht genannte Datenbasis voraussetzt.</li>
+              <li>Vergleiche die Antworten: Welche klingt besser, welche ist besser prüfbar?</li>
+              <li>Formuliere eine kurze Freigabe-, Rückfrage- oder Nacharbeitsnotiz.</li>
             </ol>
+            <div class="assumption-strip" aria-label="Typische Annahmen">
+              <span class="assumption-chip">Datenbasis</span>
+              <span class="assumption-chip">Rechtsstand</span>
+              <span class="assumption-chip">Verbindlichkeit</span>
+              <span class="assumption-chip">Verantwortung</span>
+            </div>
 
             <div class="quality-review">
               <div class="quality-answer-grid">
@@ -2132,8 +2355,8 @@ Freundliche Grüsse</div>
               </div>
               <div class="quality-checklist" aria-label="Prüfkriterien">
                 <span>Fakten</span>
+                <span>Annahmen</span>
                 <span>Daten</span>
-                <span>Ton</span>
                 <span>Risiken</span>
                 <span>Verantwortung</span>
               </div>
@@ -2151,7 +2374,7 @@ Freundliche Grüsse</div>
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>22 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>25 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -2161,13 +2384,13 @@ Freundliche Grüsse</div>
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="usecase-7" data-chapter="usecases" data-folio="23">
+      <section class="slide codex" data-slide-id="usecase-7" data-chapter="usecases" data-folio="26">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-sparkles"/></svg></span>
             <span class="slide-crumb-chap">Use Cases &amp; Prompt-Labor</span>
             <span class="slide-crumb-sep"><svg class="ic sm"><use href="#i-chevron-right"/></svg></span>
-            <span class="slide-crumb-topic">Mini-Fallbibliothek</span>
+            <span class="slide-crumb-topic">Behörden-Use-Case-Bank</span>
           </div>
           <span class="slide-stand">
             <svg class="ic sm"><use href="#i-bookmark"/></svg>
@@ -2176,46 +2399,82 @@ Freundliche Grüsse</div>
         </div>
         <div class="slide-body">
           <div class="title-row">
-            <span class="kicker"><svg class="ic sm"><use href="#i-book-open"/></svg> Sechs Einstiege — klein genug zum Üben, konkret für den Alltag</span>
-            <h2 class="lede">Mini-Fallbibliothek</h2>
+            <span class="kicker"><svg class="ic sm"><use href="#i-book-open"/></svg> Zwölf Startfälle — mit Tool-Level, Risikoampel und Prüfpflicht</span>
+            <h2 class="lede">Behörden-Use-Case-Bank</h2>
           </div>
 
           <div class="case-library-grid">
             <article class="case-card">
-              <span class="case-status is-green">geeignet</span>
+              <div class="case-meta"><span class="case-tool">Chat</span><span class="case-status is-green">grün</span></div>
+              <h3>Text kürzen</h3>
+              <p>Entwurf verdichten, Ton anpassen, Aussage fachlich gleich halten.</p>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Bleibt die Aussage unverändert?</strong></div>
+            </article>
+            <article class="case-card">
+              <div class="case-meta"><span class="case-tool">Chat</span><span class="case-status is-green">grün</span></div>
               <h3>Sitzung vorbereiten</h3>
-              <p>Agenda, Entscheidfragen und offene Punkte aus öffentlichen oder internen, freigegebenen Notizen strukturieren.</p>
-              <div class="case-check"><span>Prüffrage</span><strong>Fehlen heikle Namen, Daten oder Entscheide?</strong></div>
+              <p>Agenda, Entscheidfragen und offene Punkte aus freigegebenen Notizen.</p>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Sind heikle Details entfernt?</strong></div>
             </article>
             <article class="case-card">
-              <span class="case-status is-green">geeignet</span>
-              <h3>Text vereinfachen</h3>
-              <p>Bestehenden Entwurf für eine breitere Zielgruppe kürzen, glätten oder in Varianten umformulieren.</p>
-              <div class="case-check"><span>Prüffrage</span><strong>Bleibt die Aussage rechtlich und fachlich gleich?</strong></div>
-            </article>
-            <article class="case-card">
-              <span class="case-status is-amber">bedingt</span>
+              <div class="case-meta"><span class="case-tool">Chat</span><span class="case-status is-amber">gelb</span></div>
               <h3>Risiken sammeln</h3>
               <p>Blinde Flecken, Gegenargumente oder offene Abhängigkeiten als Sparring vorbereiten.</p>
-              <div class="case-check"><span>Prüffrage</span><strong>Ist klar, dass die Bewertung beim Menschen bleibt?</strong></div>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Bleibt Bewertung beim Menschen?</strong></div>
             </article>
             <article class="case-card">
-              <span class="case-status is-amber">bedingt</span>
-              <h3>Tabellenlogik erklären</h3>
-              <p>Formeln, CSV-Strukturen oder Ausreisser beschreiben lassen, wenn Datenfreigabe und Anonymisierung passen.</p>
-              <div class="case-check"><span>Prüffrage</span><strong>Sind Personen- oder Falldaten entfernt?</strong></div>
+              <div class="case-meta"><span class="case-tool">Project</span><span class="case-status is-amber">gelb</span></div>
+              <h3>Glossar pflegen</h3>
+              <p>Begriffe, Abkürzungen und Schreibregeln in einem Arbeitskontext sammeln.</p>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Ist die Quelle freigegeben?</strong></div>
             </article>
             <article class="case-card">
-              <span class="case-status is-amber">bedingt</span>
+              <div class="case-meta"><span class="case-tool">Project</span><span class="case-status is-amber">gelb</span></div>
+              <h3>FAQ-Entwurf</h3>
+              <p>Wiederkehrende Fragen aus freigegebenem Material strukturieren.</p>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Keine neue Rechtsauskunft erfinden.</strong></div>
+            </article>
+            <article class="case-card">
+              <div class="case-meta"><span class="case-tool">Project</span><span class="case-status is-amber">gelb</span></div>
               <h3>Status verdichten</h3>
               <p>Aus freigegebenen Stichworten ein kurzes Projektupdate mit Risiken und nächstem Entscheidpunkt bauen.</p>
-              <div class="case-check"><span>Prüffrage</span><strong>Sind Annahmen und Fakten trennbar?</strong></div>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Fakten und Annahmen trennen.</strong></div>
             </article>
             <article class="case-card">
-              <span class="case-status is-red">ungeeignet</span>
+              <div class="case-meta"><span class="case-tool">Project</span><span class="case-status is-amber">gelb</span></div>
+              <h3>Schulung adaptieren</h3>
+              <p>Beispiele, Übungen und Handouts auf Zielgruppe und Dauer zuschneiden.</p>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Keine internen Details nach aussen ziehen.</strong></div>
+            </article>
+            <article class="case-card">
+              <div class="case-meta"><span class="case-tool">Codex</span><span class="case-status is-green">grün</span></div>
+              <h3>Folien-QA</h3>
+              <p>Navigation, Tests, Links und mobile Darstellung einer Schulung prüfen.</p>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Visuellen Smoke-Test machen.</strong></div>
+            </article>
+            <article class="case-card">
+              <div class="case-meta"><span class="case-tool">Codex</span><span class="case-status is-amber">gelb</span></div>
+              <h3>Handout bauen</h3>
+              <p>Transfermaterial aus Kursstruktur und geprüften Inhalten erzeugen.</p>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Ton, Quellen und Kürze prüfen.</strong></div>
+            </article>
+            <article class="case-card">
+              <div class="case-meta"><span class="case-tool">Codex</span><span class="case-status is-amber">gelb</span></div>
+              <h3>Skill entwerfen</h3>
+              <p>Wiederholbaren Ablauf als lokale Anleitung, Tests oder Vorlage fassen.</p>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Grenzen und Eingabedaten klären.</strong></div>
+            </article>
+            <article class="case-card">
+              <div class="case-meta"><span class="case-tool">Chat</span><span class="case-status is-red">rot</span></div>
               <h3>Personalfall beurteilen</h3>
               <p>Bewertung, Empfehlung oder vertrauliche Analyse zu Personen, Dossiers oder klassifizierten Inhalten.</p>
-              <div class="case-check"><span>Prüffrage</span><strong>Würde ich diese Daten auch extern teilen dürfen?</strong></div>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Nicht in öffentliche Tools eingeben.</strong></div>
+            </article>
+            <article class="case-card">
+              <div class="case-meta"><span class="case-tool">Project</span><span class="case-status is-red">rot</span></div>
+              <h3>Operative Details</h3>
+              <p>Interne Dossiers, Einzelfälle, klassifizierte Informationen oder nicht freigegebene Prozessdetails.</p>
+              <div class="case-check"><span>Prüfpflicht</span><strong>Nur in freigegebenem Rahmen.</strong></div>
             </article>
           </div>
         </div>
@@ -2224,7 +2483,7 @@ Freundliche Grüsse</div>
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>23 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>26 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -2234,7 +2493,7 @@ Freundliche Grüsse</div>
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="usecase-8" data-chapter="usecases" data-folio="24">
+      <section class="slide codex" data-slide-id="usecase-8" data-chapter="usecases" data-folio="27">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-sparkles"/></svg></span>
@@ -2295,7 +2554,7 @@ Freundliche Grüsse</div>
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>24 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>27 / 35</b></span>
             <span class="slide-progress-sep" aria-hidden="true"></span>
             <span class="slide-path"><svg class="ic"><use href="#i-route"/></svg> Lernpfad —</span>
           </div>
@@ -2305,7 +2564,7 @@ Freundliche Grüsse</div>
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="skills-1" data-chapter="skills" data-folio="25">
+      <section class="slide codex" data-slide-id="skills-1" data-chapter="skills" data-folio="28">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-layers"/></svg></span>
@@ -2637,7 +2896,7 @@ Freundliche Grüsse</div>
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>25 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>28 / 35</b></span>
           </div>
           <a class="slide-nav next" href="#skills-2">
             weiter <svg class="ic"><use href="#i-arrow-right"/></svg>
@@ -2645,7 +2904,7 @@ Freundliche Grüsse</div>
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="skills-2" data-chapter="skills" data-folio="26">
+      <section class="slide codex" data-slide-id="skills-2" data-chapter="skills" data-folio="29">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-layers"/></svg></span>
@@ -2701,7 +2960,7 @@ Freundliche Grüsse</div>
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>26 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>29 / 35</b></span>
           </div>
           <a class="slide-nav next" href="#skills-3">
             weiter <svg class="ic"><use href="#i-arrow-right"/></svg>
@@ -2709,7 +2968,7 @@ Freundliche Grüsse</div>
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="skills-3" data-chapter="skills" data-folio="27">
+      <section class="slide codex" data-slide-id="skills-3" data-chapter="skills" data-folio="30">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-layers"/></svg></span>
@@ -2795,7 +3054,7 @@ VERBOTEN
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>27 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>30 / 35</b></span>
           </div>
           <a class="slide-nav next" href="#next-1">
             weiter <svg class="ic"><use href="#i-arrow-right"/></svg>
@@ -2803,7 +3062,7 @@ VERBOTEN
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="next-1" data-chapter="next-level" data-folio="28">
+      <section class="slide codex" data-slide-id="next-1" data-chapter="next-level" data-folio="31">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-route"/></svg></span>
@@ -2875,7 +3134,7 @@ VERBOTEN
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>28 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>31 / 35</b></span>
           </div>
           <a class="slide-nav next" href="#next-2">
             weiter <svg class="ic"><use href="#i-arrow-right"/></svg>
@@ -2883,7 +3142,7 @@ VERBOTEN
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="next-2" data-chapter="next-level" data-folio="29" data-stepped>
+      <section class="slide codex" data-slide-id="next-2" data-chapter="next-level" data-folio="32" data-stepped>
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-route"/></svg></span>
@@ -2910,7 +3169,7 @@ VERBOTEN
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>29 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>32 / 35</b></span>
           </div>
           <a class="slide-nav next" href="#next-3">
             weiter <svg class="ic"><use href="#i-arrow-right"/></svg>
@@ -2918,7 +3177,7 @@ VERBOTEN
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="next-3" data-chapter="next-level" data-folio="30" data-stepped data-volatile="true" data-checked="2026-05-16">
+      <section class="slide codex" data-slide-id="next-3" data-chapter="next-level" data-folio="33" data-stepped data-volatile="true" data-checked="2026-05-16">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-route"/></svg></span>
@@ -3065,7 +3324,7 @@ VERBOTEN
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>30 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>33 / 35</b></span>
           </div>
           <a class="slide-nav next" href="#next-5">
             weiter <svg class="ic"><use href="#i-arrow-right"/></svg>
@@ -3073,7 +3332,7 @@ VERBOTEN
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="next-5" data-chapter="next-level" data-folio="31">
+      <section class="slide codex" data-slide-id="next-5" data-chapter="next-level" data-folio="34">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-route"/></svg></span>
@@ -3124,7 +3383,7 @@ VERBOTEN
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>31 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>34 / 35</b></span>
           </div>
           <a class="slide-nav next" href="#next-4">
             weiter <svg class="ic"><use href="#i-arrow-right"/></svg>
@@ -3132,7 +3391,7 @@ VERBOTEN
         </div>
       </section>
 
-      <section class="slide codex" data-slide-id="next-4" data-chapter="next-level" data-folio="32">
+      <section class="slide codex" data-slide-id="next-4" data-chapter="next-level" data-folio="35">
         <div class="slide-head">
           <div class="slide-crumb">
             <span class="slide-crumb-icon"><svg class="ic lg"><use href="#i-route"/></svg></span>
@@ -3148,37 +3407,38 @@ VERBOTEN
         <div class="slide-body">
           <div class="title-row">
             <span class="kicker"><svg class="ic sm"><use href="#i-target"/></svg> Kapitel 7 &middot; Transfer</span>
-            <h2 class="lede">Dein nächster Schritt</h2>
+            <h2 class="lede">Monday Morning Kit</h2>
           </div>
-          <p class="lead">Nicht alles übernehmen. Eine echte Aufgabe wählen, klein testen, sauber reflektieren.</p>
+          <p class="lead">Der beste Transfer ist eine kleine Aufgabe am nächsten Arbeitstag: klar begrenzt, gut prüfbar, sofort nützlich.</p>
 
           <div class="transfer-grid">
             <div class="transfer-card">
               <span class="transfer-step">1</span>
-              <h3>Eine Aufgabe wählen</h3>
-              <p>Wiederkehrend, ungefährlich, aber nützlich. Keine Personendaten, keine klassifizierten Inhalte.</p>
+              <h3>Startaufgabe wählen</h3>
+              <p>Text kürzen, Sitzung vorbereiten oder Risiken sammeln. Keine Personendaten, keine klassifizierten Inhalte.</p>
             </div>
             <div class="transfer-card">
               <span class="transfer-step">2</span>
-              <h3>Als Arbeitsauftrag formulieren</h3>
-              <p>Ziel, Kontext, Rolle, Grenzen, Stil und Outputformat explizit machen.</p>
+              <h3>Prompt-Check</h3>
+              <p>Ziel, Kontext, Grenze, Stil und Outputformat explizit machen. Fehlenden Kontext nicht erraten lassen.</p>
             </div>
             <div class="transfer-card">
               <span class="transfer-step">3</span>
-              <h3>Ergebnis prüfen</h3>
-              <p>Fakten, Tonalität, Datenfreigabe und Entscheidverantwortung bewusst kontrollieren.</p>
+              <h3>Output prüfen</h3>
+              <p>Fakten, Annahmen, Datenrisiko und nächsten Schritt kontrollieren, bevor etwas weiterverwendet wird.</p>
             </div>
           </div>
 
           <div class="transfer-commitment">
             <div>
               <div class="code-label">7-Tage-Experiment</div>
-              <p>„Ich teste LLMs nächste Woche für <strong>eine</strong> klar begrenzte Aufgabe und notiere: Was wurde schneller, was musste ich prüfen, was bleibt tabu?"</p>
+              <p>„Ich teste am Montag eine risikoarme Startaufgabe und notiere: Welcher Prompt half, welche Annahmen musste ich prüfen, was bleibt tabu?"</p>
             </div>
             <a class="btn btn-primary" href="meine-notizen.html?back=next-4">Meine Notizen öffnen</a>
           </div>
           <div class="resource-strip">
             <a href="handout.html">Handout</a>
+            <a href="meine-notizen.html?back=next-4">Notizen</a>
             <a href="quellen-refresh.html">Quellencheck</a>
           </div>
         </div>
@@ -3187,7 +3447,7 @@ VERBOTEN
             <svg class="ic"><use href="#i-arrow-left"/></svg> zurück
           </a>
           <div class="slide-progress">
-            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>32 / 32</b></span>
+            <span class="slide-folio"><svg class="ic"><use href="#i-bookmark"/></svg> Folie <b>35 / 35</b></span>
           </div>
           <a class="slide-nav next" href="meine-notizen.html?back=next-4">
             Notizen-Export <svg class="ic"><use href="#i-arrow-right"/></svg>
@@ -3236,6 +3496,6 @@ VERBOTEN
     <div class="side-panel-body" id="trainer-panel-body"></div>
   </aside>
 
-  <script type="module" src="app.js?v=2026-05-23-palette-variants"></script>
+  <script type="module" src="app.js?v=2026-05-25-ai-bridge-v1"></script>
 </body>
 </html>

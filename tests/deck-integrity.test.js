@@ -43,7 +43,7 @@ describe('deck integrity', () => {
   const slideIds = slides.map(slide => slide.dataset.slideId);
 
   it('keeps slide ids unique, navigable and titled', () => {
-    expect(slides).toHaveLength(32);
+    expect(slides).toHaveLength(35);
     expect(new Set(slideIds).size).toBe(slideIds.length);
 
     slides.forEach(slide => {
@@ -65,7 +65,8 @@ describe('deck integrity', () => {
     expect(reflectionSlide?.querySelector('.myth-table')).toBeNull();
     expect(mythSlide?.querySelector('.slide-nav.next')?.getAttribute('href')).toBe('#verwaltung-3');
     expect(reflectionSlide?.querySelector('.slide-nav.prev')?.getAttribute('href')).toBe('#verwaltung-2');
-    expect(reflectionSlide?.querySelector('.slide-nav.next')?.getAttribute('href')).toBe('#claude-1');
+    expect(reflectionSlide?.querySelector('.slide-nav.next')?.getAttribute('href')).toBe('#verwaltung-4');
+    expect(document.querySelector('section[data-slide-id="verwaltung-4"] .slide-nav.next')?.getAttribute('href')).toBe('#claude-1');
   });
 
   it('keeps explainer backlinks pointed at existing slides', () => {
