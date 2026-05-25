@@ -67,4 +67,26 @@ describe('trainer cockpit', () => {
     expect(app).toContain('trainer-probe-cues');
     expect(css).toContain('.trainer-demo-checklist ul');
   });
+
+  it('uses current Context Rot language instead of stale X-Ray trainer notes', () => {
+    const notes = JSON.stringify(TRAINER_NOTES);
+    const variants = JSON.stringify(TRAINER_VARIANTS);
+    expect(notes).not.toContain('X-Ray');
+    expect(variants).not.toContain('X-Ray');
+    expect(notes).toContain('Context Rot');
+  });
+
+  it('provides trainer notes for key 35-slide additions and dense slides', () => {
+    [
+      'einstieg-2',
+      'einstieg-3',
+      'context-quiz',
+      'skills-2',
+      'next-1',
+      'next-2'
+    ].forEach(id => {
+      expect(TRAINER_NOTES[id], id).toBeTruthy();
+      expect(TRAINER_NOTES[id].focus.length).toBeGreaterThan(20);
+    });
+  });
 });
