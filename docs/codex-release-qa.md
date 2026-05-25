@@ -3,7 +3,7 @@
 **Branch:** `redesign/codex-v2`  
 **Reviewed commit:** `b51f7ea` oder neuer  
 **Deck-Stand:** 35 Folien in 7 Kapiteln  
-**Automatisierte Testbasis:** Review-Baseline 31 Test-Files / 145 Tests; aktueller Stand 31 Test-Files / 155 Tests.  
+**Automatisierte Testbasis:** Review-Baseline 31 Test-Files / 145 Tests; aktueller Stand 31 Test-Files / 156 Tests.  
 **Stand:** 2026-05-25
 
 Diese Datei ist der aktuelle Release-Gate-Überblick für den Codex-v2-Preview. Sie ersetzt ältere Paket-H-Notizen mit 30er-Zählung.
@@ -12,7 +12,7 @@ Diese Datei ist der aktuelle Release-Gate-Überblick für den Codex-v2-Preview. 
 
 | Gate | Erwartung | Aktueller Status |
 | --- | --- | --- |
-| `npm test` | Vollständige Vitest-Suite läuft grün. | PASS, 31 Test-Files / 155 Tests. |
+| `npm test` | Vollständige Vitest-Suite läuft grün. | PASS, 31 Test-Files / 156 Tests. |
 | `npm run qa:redesign` | Redesign-, Layout- und Transfer-Checks laufen ohne neue Regressionen. | PASS, 5 Viewports mit je 58 geprüften Zuständen. |
 | `npm run visual:qa` | Playwright-Screenshots werden erzeugt und die Zielzustände stimmen visuell. | PASS, alle Visual-QA-Targets erzeugt und stichprobenweise geprüft. |
 | `npm audit --audit-level=moderate` | Keine undokumentierten moderaten Findings. | FAIL mit dokumentiertem dev-only Vitest/Vite/esbuild-Residual. |
@@ -21,10 +21,11 @@ Diese Datei ist der aktuelle Release-Gate-Überblick für den Codex-v2-Preview. 
 
 ## Finaler Lauf vom 25.05.2026
 
-- `npm test`: PASS, 31 Test-Files / 155 Tests.
+- `npm test`: PASS, 31 Test-Files / 156 Tests.
 - `npm run qa:redesign`: PASS für `desktop-720`, `desktop-768`, `wide-phone`, `phone-390`, `phone-375`.
 - `npm run visual:qa`: PASS; Screenshots für Cover, Timeline final, Governance final, Settings, Prompt Product, Context Rot, Skill Anatomy, LLM überall final, Ghostwriter 375px, Lernpfad-Panel, Trainer-Cockpit und Dark Models erzeugt.
 - `npm audit --audit-level=moderate`: FAIL; verbleibende Findings betreffen dev-only Tooling (`vitest`/`vite`/`esbuild`) und brauchen ein separates Force-Upgrade.
+- GitHub-Pages-Workflow: installiert Chromium mit Playwright und führt `npm test`, `npm run qa:redesign` und `npm run visual:qa` vor dem Artifact-Upload aus.
 
 ## Manuelle Checks
 
