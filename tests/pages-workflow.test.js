@@ -12,6 +12,14 @@ describe('GitHub Pages workflow', () => {
     expect(workflow.indexOf('Run tests')).toBeLessThan(workflow.indexOf('Upload Pages artifact'));
   });
 
+  it('runs browser QA gates before uploading the Pages artifact', () => {
+    expect(workflow).toContain('npx playwright install --with-deps chromium');
+    expect(workflow).toContain('run: npm run qa:redesign');
+    expect(workflow).toContain('run: npm run visual:qa');
+    expect(workflow.indexOf('Run redesign browser QA')).toBeLessThan(workflow.indexOf('Upload Pages artifact'));
+    expect(workflow.indexOf('Run visual QA')).toBeLessThan(workflow.indexOf('Upload Pages artifact'));
+  });
+
   it('uses Node 24 compatible first-party actions', () => {
     expect(workflow).toContain('actions/checkout@v6.0.2');
     expect(workflow).toContain('actions/setup-node@v6.4.0');

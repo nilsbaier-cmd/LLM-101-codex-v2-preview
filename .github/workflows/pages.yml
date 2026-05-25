@@ -34,8 +34,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
       - name: Run tests
         run: npm test
+
+      - name: Run redesign browser QA
+        run: npm run qa:redesign
+
+      - name: Run visual QA
+        run: npm run visual:qa
 
       - name: Configure Pages
         uses: actions/configure-pages@v6.0.0
