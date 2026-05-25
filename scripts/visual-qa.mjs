@@ -90,7 +90,7 @@ const browser = await chromium.launch();
 
 try {
   for (const target of VISUAL_QA_TARGETS) {
-    const context = await browser.newContext({ viewport: target.viewport });
+    const context = await browser.newContext({ viewport: target.viewport, serviceWorkers: 'block' });
     try {
       await context.addInitScript(({ theme }) => {
         localStorage.setItem('llm-101-codex-v2-preview.mode.theme', JSON.stringify(theme));
