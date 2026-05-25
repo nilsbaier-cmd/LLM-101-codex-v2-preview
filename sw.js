@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'llm-101-codex-v2-preview-offline-';
-const CACHE_NAME = `${CACHE_PREFIX}2026-05-25-ai-bridge-v1`;
+const CACHE_NAME = `${CACHE_PREFIX}2026-05-25-truth-refresh-v1`;
 
 const CORE_ASSETS = [
   './',
