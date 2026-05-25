@@ -63,4 +63,11 @@ describe('offline delivery shell', () => {
     expect(sw).toContain('cacheFirst');
     expect(sw).toContain("url.searchParams.has('v')");
   });
+
+  it('keeps the update banner as an overlay that does not alter slide layout', () => {
+    const css = read('app.css');
+    expect(css).toMatch(/\.update-banner\s*{[^}]*position:\s*fixed;/s);
+    expect(css).toMatch(/\.update-banner\s*{[^}]*pointer-events:\s*auto;/s);
+    expect(css).toContain('max-width: calc(100vw - 32px)');
+  });
 });

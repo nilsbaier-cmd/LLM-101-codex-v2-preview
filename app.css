@@ -431,6 +431,8 @@ body[data-trainer="on"] .side-panel.trainer-only {
   padding: 8px 10px 8px 16px;
   color: var(--text-primary);
   font-size: 13px;
+  max-width: calc(100vw - 32px);
+  pointer-events: auto;
 }
 .update-banner[hidden] {
   display: none;
@@ -631,9 +633,10 @@ body[data-trainer="on"] .side-panel.trainer-only {
   }
 
   .update-banner {
-    top: 124px;
+    top: calc(var(--app-header-height, 60px) + 8px);
     width: calc(100% - 32px);
     justify-content: space-between;
+    font-size: 12px;
   }
 
   .chapter-progress {
