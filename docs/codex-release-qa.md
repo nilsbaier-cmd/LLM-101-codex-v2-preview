@@ -3,7 +3,7 @@
 **Branch:** `redesign/codex-v2`  
 **Reviewed commit:** `b51f7ea` oder neuer  
 **Deck-Stand:** 35 Folien in 7 Kapiteln  
-**Automatisierte Testbasis:** 31 Test-Files / 145 Tests  
+**Automatisierte Testbasis:** Review-Baseline 31 Test-Files / 145 Tests; aktuelle Suite wächst mit den Truth-Refresh-Regressionstests.  
 **Stand:** 2026-05-25
 
 Diese Datei ist der aktuelle Release-Gate-Überblick für den Codex-v2-Preview. Sie ersetzt ältere Paket-H-Notizen mit 30er-Zählung.
@@ -34,7 +34,7 @@ Wenn `qa:redesign` oder `visual:qa` wegen bekannter Baseline-Probleme fallen, is
 ## Bekannte Restpunkte
 
 - `qa:redesign` und `visual:qa` sind Release-Gates, aber derzeit ehrlich als baseline-failing zu behandeln, bis die separaten Layout- und Target-Aufgaben gelöst sind.
-- Dependency-Audit bleibt als Residual zu bewerten, falls `npm audit` im Release-Prozess Findings meldet. Keine Dependency-Änderung ist Teil dieses Truth-Refresh-Tasks.
+- `npm audit fix` aktualisiert `ws` auf `8.21.0`. `npm audit --audit-level=moderate` meldet danach weiterhin moderate Findings in dev-only Tooling (`vitest`/`vite`/`esbuild`). Der ausgelieferte GitHub-Pages-Preview ist statisches HTML/CSS/JS und enthält keinen Dev-Server; ein Force-Upgrade auf Vitest/Vite 4.x bleibt separat zu planen.
 - `docs/codex-mockup-reference.html` enthält weiterhin historische Mockup-Zustände und ist nur visuelle Referenz, nicht Live-Inventar.
 
 ## Release-Empfehlung
