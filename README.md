@@ -4,7 +4,7 @@ Hybrid Slide/Scroll-Präsentation als Einführung in Large Language Models mit k
 
 ## Inhalt
 
-- `index.html` — Hauptpräsentation, 35 Folien in 7 Kapiteln, Vortrags- und Lesemodus, Hell/Dunkel/Auto-Theme, optional LLM-agnostische Tabs (Claude, ChatGPT und Gemini) und Übungen
+- `index.html` — Hauptpräsentation, 35 Folien in 7 Kapiteln, Vortrags- und Lesemodus, Hell/Dunkel/Auto-Theme, optional LLM-agnostische Tabs (Claude, ChatGPT und Gemini), Übungen und Palette-Switcher für Design-Exploration
 - `meine-notizen.html` — Sammelseite für eigene Reflexionsantworten mit Markdown-Export
 - `handout.html` — druckbarer One-Pager für Teilnehmende
 - `trainer-export.html` — Moderationsblatt mit Abläufen, Fallbacks, Demo-Checklisten und Prompts
@@ -52,20 +52,21 @@ http://localhost:8765/index.html?trainer=1
 ```bash
 npm install   # Dev-Tools installieren (Vitest + Playwright)
 npm test      # Tests laufen lassen
+npm run qa:redesign  # Redesign-Layout-/Transfer-Gates prüfen
 npm run visual:qa  # QA-Screenshots in .visual-qa/ erzeugen
 ```
 
-Auslieferung bleibt build-frei. `node_modules/` und `tests/` sind Dev-Artefakte.
+Auslieferung bleibt build-frei. `node_modules/` und `tests/` sind Dev-Artefakte. Der Preview-Stand nutzt den LocalStorage-Namespace `llm-101-codex-v2-preview`; kurs- oder kundenspezifische Exporte dürfen den Palette-Switcher ausblenden, ohne die Preview-Funktion zu entfernen.
 
 ## Deployment
 
 - GitHub Pages wird über `.github/workflows/pages.yml` ausgeliefert, nicht mehr über den Legacy-Branch-Build.
 - Der Workflow nutzt Node 24 (`FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true`, `node-version: 24`) und aktuelle first-party Actions.
-- Vor dem Upload läuft `npm test`; veröffentlicht wird nur das statische Paket in `_site/` mit HTML, CSS, JS, `assets/`, `lib/`, `explainer/`, Manifest und README.
+- Release-Gate vor dem Upload: `npm test`, `npm run qa:redesign` und `npm run visual:qa`. Veröffentlicht wird nur das statische Paket in `_site/` mit HTML, CSS, JS, `assets/`, `lib/`, `explainer/`, Manifest und README.
 
 ## Visuelle QA
 
-- `lib/visual-qa-targets.js` definiert die wichtigsten Prüfansichten für manuelle oder browsergestützte Sichtkontrolle: Cover, X-Ray, Prompt-Labor auf Phone, Output-Qualitätscheck, Mini-Fallbibliothek, Vorher/Nachher, Codex-Brücke, Handout, Quellencheck, Trainer-Cockpit, Lernpfad-Panel und Dark Mode.
+- `lib/visual-qa-targets.js` definiert die wichtigsten Prüfansichten für manuelle oder browsergestützte Sichtkontrolle: Cover, Context Rot, Prompt-Labor auf Phone, Output-Qualitätscheck, Mini-Fallbibliothek, Vorher/Nachher, Codex-Brücke, Handout, Quellencheck, Trainer-Cockpit, Lernpfad-Panel und Dark Mode.
 - `npm run visual:qa` startet lokal einen Server, öffnet alle Targets mit Playwright und schreibt Screenshots nach `.visual-qa/`. Beim ersten Mal ggf. `npx playwright install chromium` ausführen.
 - Vor wichtigen Workshops: lokalen Server starten, die Targets nacheinander öffnen und auf Überlappungen, Lesbarkeit, Kontrast und den jeweils erwarteten Interaktionszustand prüfen.
 - Safari/iPad-Härtung ist im CSS berücksichtigt (`100svh`, `-webkit-fill-available`, Text-Size-Adjust). Vor produktiven iPad-Workshops trotzdem einmal auf dem Zielgerät testen.
@@ -75,7 +76,7 @@ Auslieferung bleibt build-frei. `node_modules/` und `tests/` sind Dev-Artefakte.
 - **Vanilla JS, ES-Module** — kein Bundler
 - **Design-Tokens** in `tokens.css`, Komponenten in `app.css` + `presentation.css`
 - **Lib-Module** unter `lib/` (Storage, ModeManager, Icons, Tabs, Exercises, Notes-Export)
-- **LocalStorage-Namespace** `llm-101-v1.*`
+- **LocalStorage-Namespace** `llm-101-codex-v2-preview`
 - **Hash-Routing** für direkte Folien-Verlinkung (`#einstieg-3`)
 - **Self-hosted Fonts** in `assets/fonts/` (Hanken Grotesk, JetBrains Mono — latin + latin-ext)
 

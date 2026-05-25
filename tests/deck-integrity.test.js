@@ -38,6 +38,10 @@ function resolveLocal(fromFile, raw) {
 
 describe('deck integrity', () => {
   const index = read('index.html');
+  const appJs = read('app.js');
+  const readme = read('README.md');
+  const designSpec = read('docs/codex-design-spec.md');
+  const releaseQa = read('docs/codex-release-qa.md');
   const document = new JSDOM(index, { url: 'https://example.test/' }).window.document;
   const slides = Array.from(document.querySelectorAll('.slide'));
   const slideIds = slides.map(slide => slide.dataset.slideId);
@@ -51,6 +55,34 @@ describe('deck integrity', () => {
       expect(slide.dataset.chapter).toBeTruthy();
       expect(slide.querySelector('h1, h2, h3')?.textContent?.trim()).toBeTruthy();
     });
+  });
+
+  it('keeps visible slide totals aligned with the actual slide count', () => {
+    const visibleFooterTotals = Array.from(document.querySelectorAll('.slide-folio b'))
+      .map(el => el.textContent?.trim())
+      .filter(Boolean);
+    const rendersGlobalCounterFromDeck = appJs.includes("document.getElementById('total').textContent = list.length");
+
+    expect(visibleFooterTotals.length).toBe(slides.length);
+    expect(
+      rendersGlobalCounterFromDeck
+        || visibleFooterTotals.every(total => total.endsWith(`/ ${slides.length}`))
+    ).toBe(true);
+  });
+
+  it('keeps source-of-truth docs aligned with the Codex v2 deck facts', () => {
+    expect(readme).toContain('35 Folien');
+    expect(readme).toContain('llm-101-codex-v2-preview');
+    expect(readme).toContain('Context Rot');
+
+    expect(designSpec).toContain('35 Folien');
+    expect(designSpec).not.toContain('Alle 30 Folien in `index.html`');
+    expect(designSpec).not.toContain('[data-context-xray-mode="noisy"] greifen weiterhin');
+
+    expect(releaseQa).toContain('35 Folien');
+    expect(releaseQa).toContain('145 Tests');
+
+    expect(`${designSpec}\n${releaseQa}`).not.toMatch(/(?:alle|all)\s+30\s+(?:Folien|slides)/i);
   });
 
   it('splits the governance reflection exercise onto its own slide', () => {
