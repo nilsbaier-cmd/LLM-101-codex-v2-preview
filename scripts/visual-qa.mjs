@@ -64,6 +64,24 @@ function fileName(target) {
   return `${target.id}-${target.viewport.width}x${target.viewport.height}.png`;
 }
 
+async function runTargetAction(page, target) {
+  if (target.action?.startsWith('click:')) {
+    const selector = target.action.slice('click:'.length);
+    await page.click(selector, { timeout: target.actionTimeoutMs || 5000 });
+  }
+
+  if (Number.isInteger(target.steps) && target.steps > 0) {
+    for (let i = 0; i < target.steps; i += 1) {
+      await page.click('.slide.is-active .slide-nav.next', { timeout: target.actionTimeoutMs || 5000 });
+      await page.waitForTimeout(target.stepDelayMs || 80);
+    }
+  }
+
+  if (target.waitAfterActionMs) {
+    await page.waitForTimeout(target.waitAfterActionMs);
+  }
+}
+
 await mkdir(outDir, { recursive: true });
 await listen();
 
@@ -73,20 +91,24 @@ const browser = await chromium.launch();
 try {
   for (const target of VISUAL_QA_TARGETS) {
     const context = await browser.newContext({ viewport: target.viewport });
-    await context.addInitScript(({ theme }) => {
-      localStorage.setItem('llm-101-codex-v2-preview.mode.theme', JSON.stringify(theme));
-      localStorage.setItem('llm-101-codex-v2-preview.mode.exercises', JSON.stringify(true));
-      localStorage.setItem('llm-101-codex-v2-preview.mode.llm', JSON.stringify(true));
-    }, { theme: target.theme });
-    const page = await context.newPage();
-    await page.goto(`http://127.0.0.1:${port}/${target.url}`, { waitUntil: 'networkidle' });
-    if (target.action?.startsWith('click:')) {
-      await page.click(target.action.slice('click:'.length));
+    try {
+      await context.addInitScript(({ theme }) => {
+        localStorage.setItem('llm-101-codex-v2-preview.mode.theme', JSON.stringify(theme));
+        localStorage.setItem('llm-101-codex-v2-preview.mode.exercises', JSON.stringify(true));
+        localStorage.setItem('llm-101-codex-v2-preview.mode.llm', JSON.stringify(true));
+      }, { theme: target.theme });
+      const page = await context.newPage();
+      await page.goto(`http://127.0.0.1:${port}/${target.url}`, { waitUntil: 'networkidle' });
+      await runTargetAction(page, target);
+      const screenshotPath = join(outDir, fileName(target));
+      await page.screenshot({ path: screenshotPath, fullPage: false });
+      console.log(`✓ ${target.id}: ${pathToFileURL(screenshotPath).href}`);
+    } catch (error) {
+      console.error(`x ${target.id}: ${error.message}`);
+      throw error;
+    } finally {
+      await context.close();
     }
-    const screenshotPath = join(outDir, fileName(target));
-    await page.screenshot({ path: screenshotPath, fullPage: false });
-    await context.close();
-    console.log(`✓ ${target.id}: ${pathToFileURL(screenshotPath).href}`);
   }
 } finally {
   await browser.close();

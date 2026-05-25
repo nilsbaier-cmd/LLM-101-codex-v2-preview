@@ -85,4 +85,22 @@ describe('transfer close and visual QA targets', () => {
       }
     });
   });
+
+  it('does not reference removed x-ray controls in visual QA targets', () => {
+    const actions = VISUAL_QA_TARGETS.map(target => target.action || '').join('\n');
+    expect(actions).not.toContain('data-context-xray-mode');
+    expect(VISUAL_QA_TARGETS.map(target => target.id)).toContain('context-rot-desktop');
+  });
+
+  it('includes measured high-risk overflow states as visual QA targets', () => {
+    expect(VISUAL_QA_TARGETS.map(target => target.id)).toEqual(expect.arrayContaining([
+      'timeline-final-desktop',
+      'governance-traffic-light-desktop',
+      'settings-desktop',
+      'prompt-product-desktop',
+      'skill-anatomy-desktop',
+      'llm-everywhere-final-desktop',
+      'ghostwriter-phone-375'
+    ]));
+  });
 });

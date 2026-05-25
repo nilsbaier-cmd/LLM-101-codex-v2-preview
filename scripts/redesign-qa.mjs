@@ -8,7 +8,8 @@ const viewports = [
   { name: 'desktop-720', width: 1280, height: 720 },
   { name: 'desktop-768', width: 1366, height: 768 },
   { name: 'wide-phone', width: 753, height: 980 },
-  { name: 'phone', width: 390, height: 844 }
+  { name: 'phone-390', width: 390, height: 844 },
+  { name: 'phone-375', width: 375, height: 667 }
 ];
 
 const types = {
@@ -60,6 +61,16 @@ const close = () => new Promise(resolve => server.close(resolve));
 
 function compactIssue(issue) {
   return Object.fromEntries(Object.entries(issue).filter(([, value]) => value !== undefined));
+}
+
+function issueSummary(issues) {
+  const byKey = new Map();
+  for (const issue of issues) {
+    const key = `${issue.issue}:${issue.id || 'global'}:${issue.step || 'all'}`;
+    if (!byKey.has(key)) byKey.set(key, { ...issue, count: 0 });
+    byKey.get(key).count += 1;
+  }
+  return [...byKey.values()].map(compactIssue);
 }
 
 async function inspectState(page) {
@@ -187,7 +198,7 @@ try {
     if (issues.length) {
       failed = true;
       console.error(`x ${viewport.name}: ${issues.length} issue(s), ${seen.size} states checked`);
-      console.error(JSON.stringify(issues.slice(0, 12).map(compactIssue), null, 2));
+      console.error(JSON.stringify(issueSummary(issues), null, 2));
     } else {
       console.log(`ok ${viewport.name}: ${seen.size} states checked`);
     }

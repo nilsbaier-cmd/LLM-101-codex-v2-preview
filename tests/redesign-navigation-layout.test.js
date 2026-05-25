@@ -136,4 +136,22 @@ describe('codex v2 slide navigation and layout safeguards', () => {
     expect(qa).toContain('nextHref');
     expect(qa).toContain("!state.nextHref.startsWith('#')");
   });
+
+  it('supports stepped and delayed visual QA targets', () => {
+    const visualQa = read('scripts/visual-qa.mjs');
+    const targets = read('lib/visual-qa-targets.js');
+    expect(visualQa).toContain('target.steps');
+    expect(visualQa).toContain('target.waitAfterActionMs');
+    expect(targets).toContain('steps: 6');
+    expect(targets).toContain('width: 375');
+  });
+
+  it('checks a 375px phone viewport in redesign QA', () => {
+    expect(qa).toContain("{ name: 'phone-375', width: 375, height: 667 }");
+  });
+
+  it('prints actionable redesign QA failures without hiding most slide ids', () => {
+    expect(qa).toContain('issueSummary');
+    expect(qa).toContain('JSON.stringify(issueSummary');
+  });
 });
